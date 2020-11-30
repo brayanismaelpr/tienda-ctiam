@@ -50,9 +50,8 @@
                 <br>
                 <div class="flex">
                     <a class="mr-4 flex items-center justify-center w-44 h-10 bg-gray-300 rounded" href="/user/favorites/{{product.dataValues.id}}">
-                    Agregar Favoritos
-                    </a>
-                    <br>
+                        Agregar Favoritos
+                    </a><br>
                     <a class="text-white flex items-center justify-center w-44 h-10 bg-pink-800 rounded" href="/user/cart/{{product.dataValues.id}}">
                         Agregar Carrito
                     </a>
@@ -64,7 +63,7 @@
 
 <section class="c-details-product">
     <article class="c-details-product__content">
-        <div class="c-details-product__info">
+        {{!-- <div class="c-details-product__info">
             <div class="c-details-product__info__content">
                 <p class="c-details-product__info--p">{{product.dataValues.detalle}}</p>
                 <button class="c-details-product__info--button" onclick="">
@@ -77,26 +76,24 @@
                 <p class="c-details-product__info--p">{{product.dataValues.descripcion}}</p>
                 <button class="c-details-product__info--button" onclick=""><i class="fas fa-plus"></i></button>
             </div>
-        </div>
+        </div> --}}
         <div class="c-details-product__comments">
-            <div class="c-details-product__comments__content">
-                <p class="c-details-product--p">Comentarios</p>
+            <div class="w-9/12 mx-auto">
+                <p class="font-bold pt-14 pb-8 text-xl">Comentarios</p>
                 {{#each comments}}
                 {{> product/comments comment=this}}
                 {{/each}}
             </div>
         </div>
-        <div class="bg-white rounded-bl-lg rounded-br-lg">        
+        <div class="w-full bg-white rounded-bl-lg rounded-br-lg py-16">        
             {{#unless isown}}
             {{#if isAuthenticated}}
-                <div class="m-login__c__content mb-5">
-                    <form action="/product/make-question" method="POST">
-                        <input class="w-full border-gray-600 rounded py-2 px-4 border-4 border-black border-opacity-25"
-                            name="pregunta" placeholder="Haz una pregunta!">
-                        <input type="hidden" value="{{product.dataValues.id}}" name="id_producto">
-                        <button class="c-user-questions--btn" type="submit">Preguntar</button>
-                    </form>
-                </div>
+                <form class="w-9/12 mx-auto flex items-center justify-between mb-5" action="/product/make-question" method="POST">
+                    <input class="w-10/12 border-gray-600 rounded py-2 px-4 border-4 border-black border-opacity-25"
+                        name="pregunta" placeholder="Haz una pregunta!">
+                    <input type="hidden" value="{{product.dataValues.id}}" name="id_producto">
+                    <button class="rounded flex items-center justify-center text-white w-1/6 h-12 duration-300 bg-pink-500 hover:bg-pink-800" type="submit">Preguntar</button>
+                </form>
                 {{else}}
                 <h2>Regístrate para hacer una pregunta!</h2>
             {{/if}}

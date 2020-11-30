@@ -515,7 +515,7 @@ input[type=number]::-webkit-outer-spin-button {
     border-radius: 8px;
     border: 1px solid gray;
     margin-top: 30px;
-    padding: calc(1440px * (1 / 48));
+    padding: calc(1440px * (0.5 / 48));
     width: 100%;
 }
 .c-user-shopping__box-content {
