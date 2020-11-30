@@ -9,10 +9,7 @@ const seller = require("./seller");
 const store = require("./store");
 const user = require("./user");
 
-const {
-    City,
-    Product,
-} = require("../repository/database").models;
+const { City, Product } = require("../repository/database").models;
 
 const {
     categoryController,
@@ -66,13 +63,6 @@ router.get("/reportes", (req, res) => {
     });
 });
 
-router.get("/preguntas-vendedor", (req, res) => {
-    res.render("preguntas-vendedor", {
-        title: "Preguntas vendedor | Mujeres CTIAM",
-        isAuthenticated: req.user != undefined,
-    });
-});
-
 router.get("/profile-store", (req, res) => {
     res.render("profile-store", {
         title: "Perfil tienda | Mujeres CTIAM",
@@ -84,8 +74,9 @@ router.get("/questions", async (req, res) => {
     const frequentQuestions = await frequentQuestionController.getFrequentQuestions();
     console.log(frequentQuestions);
     res.render("questions", {
+        user: req.user,
         title: "Preguntas frecuentes | Mujeres CTIAM",
-        isAuthenticated: true,
+        isAuthenticated: req.user != undefined,
         frequentQuestions,
     });
 });
@@ -111,24 +102,24 @@ router.get("/marks", async (req, res) => {
     });
 });
 
-router.get("/cities" , async (req, res) =>{
+router.get("/cities", async (req, res) => {
     const cities = await City.findAll();
     return res.json({
-        cities
-    })
+        cities,
+    });
 });
 
-router.post("/getProductoByLastVisit", async (req, res)=>{
-    const {idCategory} = req.body;
+router.post("/getProductoByLastVisit", async (req, res) => {
+    const { idCategory } = req.body;
     const products = await Product.findAll({
-        where:{
-            id_categoria:idCategory,
+        where: {
+            id_categoria: idCategory,
         },
-        limit: 4
+        limit: 4,
     });
     if (products) {
         return res.json({
-            products
+            products,
         });
     }
 });

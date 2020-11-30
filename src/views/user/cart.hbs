@@ -8,9 +8,13 @@
                 <p class="c-shopping-cart__title--p" id="totalvaluecart">{{cart.dataValues.valor_total}}</p>
                 <button class="c-shopping-cart__title--button" type="submit">Comprar todo</button>
             </div>
+            {{#if itemsCart}}
             {{#each itemsCart}}
                 {{> user/product_cart item=this}}
             {{/each}}
+            {{else}}
+            <img src="{{URL}}/images/vacio.png" alt="No se encontraron productos">
+            {{/if}}
         </div>
     </article>
 </section>

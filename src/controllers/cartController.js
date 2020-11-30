@@ -3,8 +3,11 @@ const { ItemCart, Product, Cart } = require("../repository/database").models;
 module.exports = {
     deleteAItem: async (req, res) => {
         const item = await ItemCart.findByPk(req.params.id);
+        const cart = await Cart.findByPk(req.user.id);
         if (item) {
-            item.destroy();
+            cart.valor_total -= item.precio;
+            await cart.save();
+            await item.destroy();
             return res.redirect("/user/cart");
         }
         return res.redirect("/user/cart");
@@ -31,6 +34,14 @@ module.exports = {
                         },
                         attributes: ["precio"],
                     });
+                    if (items.length === 1) {
+                        cart.valor_total = items[0].dataValues.precio;
+                        await cart.save();
+                        return res.json({
+                            precio: itemCart.precio,
+                            total: cart.valor_total,
+                        });
+                    }
                     cart.valor_total = items.reduce((acc, current) => {
                         if (acc.dataValues) {
                             return (
