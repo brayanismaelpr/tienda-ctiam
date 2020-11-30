@@ -68,7 +68,7 @@ module.exports = {
         if (question) {
             question["respuesta"] = respuesta;
             await question.save();
-            res.redirect(`/product/${question.id_producto}`);
+            res.redirect(`/store/questions`);
         }
         res.redirect(`/product/${id_producto}`);
     },
