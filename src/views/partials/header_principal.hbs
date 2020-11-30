@@ -18,6 +18,29 @@
 </head>
 
 <body>
+    <div class="header-responsive p-8">
+        <figure class="flex items-center justify-between pb-8">
+            <img class="w-36" src="../images/logo.png">
+            <i onclick="menuToggle()" class="p-4 text-xl fas fa-times"></i>
+        </figure>
+        <form class="w-full" action="">
+            <label class="mb-10 bg-white w-full flex items-center justify-between rounded p-2" for="">
+                <input type="text" required>
+                <i class="fas fa-search"></i>
+            </label>
+        </form> 
+        <ul class="w-full">
+            <li class="pb-2"><a class="opacity-75 font-semibold" href="">¿Necesitas ayuda?</a></li>
+            <li class="pb-2"><a class="opacity-75 font-semibold" href="">Preguntas frecuentes</a></li>
+            <li class="pb-2"><a class="opacity-75 font-semibold" href="">Como comprar</a></li>
+            <li class="pb-4"><a class="opacity-75 font-semibold" href="">Carrito</a></li>
+        </ul>
+        <ol class="w-full grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <li class="p-2 rounded"><a class="items-center justify-start flex text-white font-semibold" href="">Categorias</a></li>
+            <li class="p-2 rounded"><a class="items-center justify-start flex text-white font-semibold" href="">Tiendas</a></li>
+            <li class="p-2 rounded"><a class="items-center justify-start flex text-white font-semibold" href="">Ingresar</a></li>
+        </ol>
+    </div>
     <div id="ventana-cuenta" style="display: none;">
         {{> modals/items-perfil}}
     </div>
@@ -33,7 +56,7 @@
             <div class="h-list__logo-search">
                 <div class="flex w-full items-center">
                     <a class="h__menu__a-img" href="/"><img class="h__content--img" src="{{URL}}/images/logo.png"></a>
-                    <div class="h__search">
+                        <div class="h__search">
                         <form class="h__search__c">
                             <input class="h__search--input" type="text" placeholder="Buscar">
                         </form>
@@ -44,7 +67,7 @@
                         </a>
                     </div>
                 </div>
-                <i class="fas fa-bars"></i>
+                <i onclick="menuToggle()" class="fas fa-bars"></i>
             </div>
             <ul class="h-list__ul">
                 <li class="h-list__li"><a class="h-list__li--a" href="/contact">¿Necesitas ayuda?</a></li>
