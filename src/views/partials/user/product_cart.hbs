@@ -1,0 +1,29 @@
+<div class="c-shopping-cart__product" id="hbs-{{item.id_producto}}">
+    <figure class="c-shopping-cart__fig">
+        <a href="/product/{{item.id_producto}}">
+        <img class="c-shopping-cart__fig--img" src="{{item.imagen}}">
+        </a>
+    </figure>
+    <div class="c-shopping-cart__p-info">
+        <div class="c-shopping-cart__p-info--content">
+            <p class="c-shopping-cart--description">
+                {{item.titulo}}
+            </p>
+            <div class="c-shopping-count-text">
+                <p class="c-shopping-text">Cantidad:</p>
+                <div class="c-shopping-count" data-id-product="{{item.id_producto}}" data-id-item="{{item.id_item}}">
+                    <i class="fas fa-minus" id="minus"></i>
+                    <p class="c-shopping-count--p" id="countProduct">{{item.cantidad}}</p>
+                    <i class="fas fa-plus" id="plus"></i>
+                </div>
+            </div>
+            <p class="c-shopping-cart--brand">{{item.marca}}</p>
+            <p class="c-shopping-cart--price" id="itemcartId{{item.id_item}}">Precio: $ <span>{{item.precio}}</span></p>
+            <div class="c-shopping-cart__options">
+                <button class="c-shopping-cart--buy" type="submit">Comprar</button>
+                <a class="c-shopping-cart--delete" href="/user/cart/delete/{{item.id_item}}">Eliminar</a>
+                <a class="c-shopping-cart--favourite" href="/user/favorites/{{item.id_producto}}">Guardar en favoritos</a>
+            </div>
+        </div>
+    </div>
+</div>

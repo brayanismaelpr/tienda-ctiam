@@ -1,0 +1,17 @@
+<div class="m">
+    <div class="m__content">
+        <button onclick="deletemcategoria()" class="m__cerrar"><i class="fas fa-times" aria-hidden="true"></i></button>
+        <div class="m-login">
+            <form class="m-login__content" action="/admin/categorys" method="POST">
+                <p class="m-login--p">Registrar categoría</p>
+                <label class="m-login__c-fist">
+                    <input type="text" class="m-login__c--input no-icon-input" id="name" placeholder="Nombre" name="nombre" required="">
+                </label>
+                <label class="m-login__c-last textarea-modal">
+                    <textarea  class="m-login__c--input no-icon-input" name="descripcion" placeholder="Description" id="description"></textarea>
+                </label>
+                <button type="submit" class="m-login--send">Guardar</button>
+            </form>
+        </div>
+    </div>
+</div>

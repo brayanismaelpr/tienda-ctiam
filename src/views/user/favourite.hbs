@@ -1,0 +1,42 @@
+{{> header_principal}}
+<div id="modal"></div>
+
+<section class="c-profile">
+    <article class="c-profile__content">
+        {{> user/options_user }}
+        <div class="c-profile__info">
+
+            <form class="c-favorito__grid" action="" method="">
+                <p class="c-profile-seller__form--title">Favoritos</p>
+                <div class="favoritos-grid">
+                    {{#each favourites}}
+                        <div class="c-profile-store__product">
+                            <a style="background-color: #f00; height: 30px; width: 30px; display: flex; align-items: center; justify-content: center" href="/user/deleteFavorites/{{this.id_favorito}}">
+                                <i style="color: #ffffff" class="fas fa-times"></i>
+                            </a>
+                            <a style="border:1px solid #f00; height: 300px; width: 100%; display: flex;" href="/product/{{this.id}}">
+                                <img class="c-profile-store__product--img" src="{{this.imagen}}">
+                                <div class="c-profile-store__info-product">
+                                    <p class="c-profile-store__info-product--p">{{this.titulo}}</p>
+                                    <p class="c-profile-store__info-product--price">$ {{this.precio}}</p>
+                                </div>
+                            </a>
+                        </div>
+                    {{/each}}
+                </div>
+            </form>
+        </div>
+        </div>
+    </article>
+</section>
+
+<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-storage.js"></script>
+
+<script src="../js/dragImage.js"></script>
+<script src="../js/uploadImage.js"></script>
+<script src="../perfil_new.hbs"></script>
+<script src="../list-product.hbs"></script>
+<script src="../contact.hbs"></script>
+
+{{> footer }}

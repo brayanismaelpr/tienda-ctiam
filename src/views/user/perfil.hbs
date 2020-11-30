@@ -1,0 +1,87 @@
+{{> header_principal}}
+<link rel="stylesheet" href="../css/dragImage/index.css">
+<div id="modal"></div>
+
+<section class="c-profile" id="body">
+    <article class="container mx-auto sm:flex">
+        {{> user/options_user }}
+        <div class="div-profile mx-auto w-full">
+            <figure class="div-profile__slider">
+                <img src="../images/slide.jpg">
+            </figure>
+            <img class="div-profile--img" src="{{avatar user.avatar}}">
+            <div class="container">
+                <form class="div-profile__info-content pb-10" action="/user/update" method="POST">
+                    <h1 class="div-profile__info--h1 font-bold">Información personal</h1>
+                    <div class="div-profile__label md:flex">
+                        <label class="flex mb-3 items-center justify-between" for="nombres">
+                            <span>Nombres</span>
+                            <input class="" type="text" id="nombres" value="{{user.nombres}}" readonly required>
+                        </label>
+                        <label class="flex mb-3 items-center justify-between" for="apellidos">
+                            <span>Apellidos</span>
+                            <input class="" type="text" id="apellidos" value="{{user.apellidos}}" readonly required>
+                        </label>
+                        <label class="flex mb-3 items-center justify-between" for="dni">
+                            <span>Número de documento</span>
+                            <input class="" id="dni" type="text" value="{{user.dni}}" readonly required>
+                        </label>
+                        <label class="flex mb-3 items-center justify-between" for="correo">
+                            <span>Correo</span>
+                            <input class="" id="correo" type="text" value="{{user.email}}" name="email" required>
+                        </label>
+                        <label class="flex mb-3 items-center justify-between" for="telefono">
+                            <span>Télefono</span>
+                            <input class="" id="telefono" type="number" value="{{user.telefono}}" name="telefono"
+                                required>
+                        </label>
+                        <label class="flex mb-3 items-center justify-between" for="telefono">
+                            <span>Télefono alternativo</span>
+                            <input class="" id="telefono" type="number" value="{{user.telefono_alternativo}}"
+                                name="telefono_alternativo">
+                        </label>
+                        <label class="flex mb-3 items-center justify-between" for="" style="align-items: flex-start;">
+                            <span>Foto de perfil</span>
+                            <div class="sc-ui-image-uploader sc-ui-image-uploader--default" aria-disabled="false"
+                                id="areafile">
+                                <div class="sc-ui-image-uploader__container" role="button" tabindex="0">
+                                    {{> svgs/icon-dragImage}}
+                                    <a class="sc-ui-image-uploader__link">Agrega o arrastra tus fotos aquí</a>
+                                </div>
+                                <input
+                                    accept="image/jpg, image/jpeg, image/png, image/webp, image/JPG, image/JPEG, image/PNG, image/WEBP"
+                                    type="file" multiple="" autocomplete="off" style="display: none;">
+                            </div>
+                        </label>
+                        <label class="flex mb-3 items-center justify-between" for="direccion">
+                            <a class="flex text-white bg-red-600 hover:bg-red-800 items-center rounded justify-center px-4 py-2"
+                                onclick="addresModal()">Agregar dirección</a>
+                        </label>
+                        {{#each directions}}
+                        <label class="flex mb-3 items-center justify-between">
+                            <span>Direccion</span>
+                            <input class="" id="dni" type="text"
+                                value="{{this.city}} {{this.dataValues.barrio}} Calle {{this.dataValues.calle}} Av {{this.dataValues.avenida}}-{{this.dataValues.numero}}"
+                                readonly required>
+                        </label>
+                        {{/each}}
+                        <input id="avatarUser" type="text" style="display: none;" name="avatar" value="{{user.avatar}}">
+                    </div>
+                    <input class="div-profile__info--input rounded" type="submit" value="Guardar">
+                </form>
+            </div>
+        </div>
+    </article>
+</section>
+<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-storage.js"></script>
+
+<script src="{{URL}}/js/home.js"></script>
+<script src="../js/dragImage.js"></script>
+<script src="../js/uploadImage.js"></script>
+
+{{> footer }}
+<div id="modalAdress" style="display: {{showModal modal}};">
+    {{> modals/add-adress}}
+</div>
+

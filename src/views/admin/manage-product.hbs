@@ -1,0 +1,36 @@
+{{> header_principal}}
+<h2 style="padding-top: 30px">Gestionar producto</h2>
+<section class="c-list-admin c-container">
+    <div>
+        {{#each pictures}}
+        <figure class="c-profile-admin__figure">
+                <img class="c-profile-admin__figure--ctiam" src="{{this.dataValues.url}}" alt="imgctiam">
+        </figure>
+        {{/each}}
+    </div>
+    <div>
+        <h3>{{product.dataValues.titulo}}</h3>
+    </div>
+    <div>
+        <p>{{product.dataValues.descripcion}}</p>
+    </div>
+    <div>
+        <p>{{product.dataValues.detalle}}</p>
+    </div>
+    <div>
+        <h6>{{product.dataValues.precio}}</h6>
+    </div>
+    <div>
+        <form action="/admin/change-state-product" method="post">
+            <input type="hidden" value="{{product.dataValues.id}}" name="id_producto">
+            <select name="estado">
+            {{#each states}}
+                <option value="{{this.dataValues.id}}">{{this.dataValues.estado}}</option>
+            {{/each}} 
+        </select>
+        <button type="submit">Cambiar estado!</button>
+        </form>
+    </div>
+</section>
+
+{{> footer}}

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="{{URL}}/js/messagesAlerts.js"></script>
+    <meta charset="UTF-8">
+    {{!-- <link rel="stylesheet" href="{{URL}}/css/style.css"> --}}
+    <link rel="stylesheet" href="{{URL}}/css/estilo.css">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/0dc3b1d201.js" crossorigin="anonymous"></script>
+    <link href="{{URL}}/css/responsive.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>...</title>
+</head>
+
+<body>
+    <div id="ventana-cuenta" style="display: none;">
+        {{> modals/items-perfil}}
+    </div>
+    <div id="c-login" style="display: {{showModal modal}};">
+        {{> modals/login-modal}}
+    </div>
+    <div id="c-register" style="display: none;">
+        {{> modals/register-modal}}
+    </div>
+
+    <div class="c-container">
+        <div class="h-list__content container__content">
+            <div class="h-list__logo-search">
+                <div class="flex w-full items-center">
+                    <a class="h__menu__a-img" href="/"><img class="h__content--img" src="{{URL}}/images/logo.png"></a>
+                    <div class="h__search">
+                        <form class="h__search__c">
+                            <input class="h__search--input" type="text" placeholder="Buscar">
+                        </form>
+                        <a href="/list-product">
+                            <button type="submit" onclick="" class="h__search--ico">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </a>
+                    </div>
+                </div>
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="h-list__ul">
+                <li class="h-list__li"><a class="h-list__li--a" href="/contact">¿Necesitas ayuda?</a></li>
+                <li class="h-list__li"><a class="h-list__li--a" href="/questions">Preguntas frecuentes</a></li>
+                <li class="h-list__li"><a class="h-list__li--a" href="">Como comprar</a></li>
+                <li class="h__ico-show">
+                    {{!-- <a href="/user/cart"><i class="fas fa-shopping-cart h__ico-show--i"></i></a> --}}
+                    <a href="/user/cart"><i class="fas fa-shopping-cart h__ico-show--i"></i></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <header class="h c-container">
+        <nav class="h__content container__content">
+            <ul class="h__menu">
+                <li class="h__menu--li">
+                    <button onclick="showCategory()" class="h__menu--a">
+                        Categorias
+                        <i class="fas fa-caret-down"></i>
+                    </button>
+                </li>
+                <li class="h__menu--li">
+                    <a class="h__menu--a" href="/store/all">Tiendas</a>
+                </li>
+                {{#if isAuthenticated}}
+                {{else}}
+                <li class="h__menu--li-btn">
+                    <button onclick="loginModal()" class="h__menu--a">Ingresar</button>
+                </li>
+                {{/if}}
+            </ul>
+            {{#if isAuthenticated}}
+            <ul class="h__menu-account">
+                <figure class="h__menu-account__fig">
+                    <img class="h__menu-account__fig--img" src="{{avatar user.avatar}}">
+                </figure>
+                <p class="h__menu-account--name-user">{{user.nombres}}</p>
+                <button onclick="modal_profile()" class="h__menu-account--ico"><i
+                        class="fas fa-caret-down"></i></button>
+                <div class="h__ico-show">
+                    <i class="fas fa-bell h__ico-show--i2"></i>
+                </div>
+            </ul>
+            {{/if}}
+        </nav>
+    </header>
+
+    <div id="c-category"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    {{#if signingMessage}}
+    <script>
+        signingMessage("{{signingMessage}}")
+    </script>
+    {{/if}}
+
+    {{#if signupMessage}}
+    <script>
+        signupMessage("{{signupMessage}}")
+    </script>
+    {{/if}}
+
+    {{#if success}}
+    <script>
+        success("{{success}}")
+    </script>
+    {{/if}}
+
+    {{#if error}}
+    <script>
+        error("{{error}}")
+    </script>
+    {{/if}}
+    <script src="{{URL}}/js/modal-perfil.js"></script>

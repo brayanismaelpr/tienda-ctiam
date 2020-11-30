@@ -1,0 +1,266 @@
+{{> header_principal}}
+
+<section class="container-sliders">
+    <div class="container-sliders__lines">
+        <div class="container-sliders--line line-active" onclik="posicionSlide(1)"></div>
+        <div class="container-sliders--line" onclik="posicionSlide(2)"></div>
+        <div class="container-sliders--line" onclik="posicionSlide(3)"></div>
+    </div>
+    <div class="container-sliders__btns">
+        <a class="container-sliders--btn" onclik="avanzaSlide(-1)">
+            <i class="fas fa-chevron-circle-left"></i>
+        </a>
+        <a class="container-sliders--btn" onclik="avanzaSlide(1)">
+            <i class="fas fa-chevron-circle-right"></i>
+        </a>
+    </div>
+    <article class="art-sliders">
+        <div class="c-slider fade">
+            <div class="c-slider__txt">
+                <div class="c-slider__txt__content">
+                    <img class="c-slider__logo" src="images/slider/logo.png">
+                    <div class="c-slider__info">
+                        {{!-- Cambiar estos textos --}}
+                        <h1 class="c-slider__info--h1">
+                            Feliz navidad. Att: Brayanranda
+                        </h1>
+                        <p class="c-slider__info--p">
+                            Somos un grupo de mujeres y niñas involucradas con la ciencia, las TIC, la innovación y las
+                            matemáticas.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="c-slider__c-imgs">
+                <img class="flowers-1" src="images/slider/flowers-1.png">
+                <img class="flowers-2" src="images/slider/flowers-2.png">
+                <div class="c-slider-fondo color-slider-one"></div>
+                <figure class="c-slider__c-img">
+                    {{!-- Cambiar esta imagen --}}
+                    <img src="images/productos/2.jpg">
+                </figure>
+            </div>
+        </div>
+        <div class="c-slider fade">
+            <div class="c-slider__txt">
+                <div class="c-slider__txt__content">
+                    <img class="c-slider__logo" src="images/slider/logo.png">
+                    <div class="c-slider__info">
+                        {{!-- Cambiar estos textos --}}
+                        <h1 class="c-slider__info--h1">
+                            {{!-- Producto más <br> vendido del mes. --}}
+                            Feliz año nuevo.
+                        </h1>
+                        <p class="c-slider__info--p">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto porro impedit officia
+                            quibusdam libero
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="c-slider__c-imgs">
+                <img class="flowers-1" src="images/slider/flowers-1.png">
+                <img class="flowers-2" src="images/slider/flowers-2.png">
+                <div class="c-slider-fondo color-slider-two"></div>
+                <figure class="c-slider__c-img">
+                    {{!-- Cambiar esta imagen --}}
+                    <img src="images/search/10.jpg">
+                </figure>
+            </div>
+        </div>
+        <div class="c-slider fade">
+            <div class="c-slider__txt">
+                <div class="c-slider__txt__content">
+                    <img class="c-slider__logo" src="images/slider/logo.png">
+                    <div class="c-slider__info">
+                        {{!-- Cambiar estos textos --}}
+                        <h1 class="c-slider__info--h1">
+                            Feliz navidad
+                        </h1>
+                        <p class="c-slider__info--p">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto porro impedit officia
+                            quibusdam libero
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="c-slider__c-imgs">
+                <img class="flowers-1" src="images/slider/flowers-1.png">
+                <img class="flowers-2" src="images/slider/flowers-2.png">
+                <div class="c-slider-fondo color-slider-three"></div>
+                <figure class="c-slider__c-img">
+                    {{!-- Cambiar esta imagen --}}
+                    <img src="images/search/3.jpg">
+                </figure>
+            </div>
+        </div>
+    </article>
+</section>
+
+<section class="c-1-index c-container">
+    <article class="c-1-index__content container__content">
+        <div class="c-1-index__info">
+            <p class="c-1-index__info--title">Tienda Ctiam</p>
+            <p class="c-1-index__info--p">
+                Seguidamente ofrecemos un breve resumen de los tres <br>
+                pasos que se llevan a cabo en la tienda virtual <b>Ctiam.</b>
+            </p>
+        </div>
+        <div class="c-1-index__cols">
+            <div class="c-1-index__col">
+                <i class="fas fa-shield-alt"></i>
+                <p class="c-1-index__col--title">Compra segura</p>
+                <p class="c-1-index__col--p">
+                    Nuestra comunidad quiere lo mejor para ti
+                    por eso protegemos su compra íntegramente.
+                </p>
+            </div>
+            <div class="c-1-index__col">
+                <i class="fas fa-headset"></i>
+                <p class="c-1-index__col--title">Centro de ayuda</p>
+                <p class="c-1-index__col--p">
+                    Te orientamos para que puedas
+                    comprar nuestros productos sin
+                    el meno incoveniente.
+                </p>
+            </div>
+            <div class="c-1-index__col">
+                <i class="fas fa-shipping-fast"></i>
+                <p class="c-1-index__col--title">Envios nacionales</p>
+                <p class="c-1-index__col--p">
+                    Contamos servicios de entrega
+                    a cualquier parte del pais de manera
+                    agil y segura.
+                </p>
+            </div>
+        </div>
+    </article>
+</section>
+
+<section class="c-product c-container">
+    <article class="c-product__content container__content">
+        <p class="c-product--title">Destacados</p>
+
+        <div class="c-product-cols">
+            <div class="c-product-col">
+                <div class="c-product-col__content">
+                    <figure class="c-product-col__fig">
+                        <img class="w-full h-full object-center object-cover" src="images/productos/1.jpg">
+                    </figure>
+                    <div class="c-product-col__info">
+                        <p class="c-product-col__info--title">Lorem Ipsum</p>
+                        <p class="c-product-col__info--p">
+                            Lorem ipsum es un texto de relleno
+                        </p>
+                        <a class="c-product-cols__btn" href="/view-product">
+                            <p class="c-product-cols__btn--p">Ver más</p>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="c-product-col">
+                <div class="c-product-col__content">
+                    <figure class="c-product-col__fig">
+                        <img class="w-full h-full object-center object-cover" src="images/productos/2.jpg">
+                    </figure>
+                    <div class="c-product-col__info">
+                        <p class="c-product-col__info--title">Lorem Ipsum</p>
+                        <p class="c-product-col__info--p">
+                            Lorem ipsum es un texto de relleno
+                        </p>
+                        <a class="c-product-cols__btn" href="/view-product">
+                            <p class="c-product-cols__btn--p">Ver más</p>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="c-product-col">
+                <div class="c-product-col__content">
+                    <figure class="c-product-col__fig">
+                        <img class="w-full h-full object-center object-cover" src="images/productos/3.jpg">
+                    </figure>
+                    <div class="c-product-col__info">
+                        <p class="c-product-col__info--title">Lorem Ipsum</p>
+                        <p class="c-product-col__info--p">
+                            Lorem ipsum es un texto de relleno
+                        </p>
+                        <a class="c-product-cols__btn" href="/view-product">
+                            <p class="c-product-cols__btn--p">Ver más</p>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+</section>
+
+<section class="c c-container">
+    <article class="c__content container__content">
+        <p class="c--title">Descubre</p>
+        <div class="c-grid-four" id="gridProducts">
+            <a class="c-grid-four__box" href="">
+                <img class="w-full h-full object-center object-cover" src="images/search/3.jpg">
+            </a>
+            <a class="c-grid-four__box" href="">
+                <img class="w-full h-full object-center object-cover" src="images/search/13.jpg">
+            </a>
+            <a class="c-grid-four__box" href="">
+                <img class="w-full h-full object-center object-cover" src="images/search/17.jpg">
+            </a>
+            <a class="c-grid-four__box" href="">
+                <img class="w-full h-full object-center object-cover" src="images/search/7.jpg">
+            </a>
+        </div>
+        <div class="c-promo-index">
+            <div class="c-promo-index__info">
+                <div class="c-promo-index__info__content">
+                    <p class="c-promo-index__info--title">Día de la madre</p>
+                    <p class="c-promo-index__info--description">
+                        50% de descuento en la segunda unidad
+                    </p>
+                    <p class="c-promo-index__info--details">
+                        En bolsos para dama hasta el 9 de Mayo de 2021
+                        <br> ¡Regala moda el día de la madre!
+                    </p>
+                    <div class="c-promo-index__btn">
+                        <a class="c-promo-index__btn--a" href="/store">Ver tiendas</a>
+                    </div>
+                </div>
+            </div>
+            <figure class="c-promo-index__fig">
+                <img class="w-full h-full object-center object-cover" src="images/search/10.jpg">
+            </figure>
+        </div>
+    </article>
+</section>
+<script>
+    window.onload = main;
+    function main() {
+        let idCategory = localStorage.getItem('ultima_visita');
+        fetch(`${location.origin}/getProductoByLastVisit`, {
+            method: "post",
+            body: JSON.stringify({idCategory}),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }).then(res => res.json()).then(products => {
+            let gridProducts = ""
+            products.products.forEach(item =>{
+                gridProducts+=`
+                    <a class="c-grid-four__box" href="/product/${item.id}">
+                        <img class="w-full h-full object-center object-cover" src="${item.imagen}">
+                    </a>
+                `;
+            });
+            document.getElementById("gridProducts").innerHTML = gridProducts;
+        });
+    }
+</script>
+{{!-- <script src="js/main.js"></script> --}}
+{{!-- <script src="js/login-modal.js"></script> --}}
+<script src="js/modal-category.js"></script>
+<script src="js/slider-ctiam.js"></script>
+{{> footer}}

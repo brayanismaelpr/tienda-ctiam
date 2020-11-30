@@ -1,0 +1,52 @@
+{{> header_principal}}
+
+<div class="c-login-admin c-container" id="formLogin">
+    <form class="form-login-admin" action="/login/signin-admin" method="POST">
+        <h4>Iniciar sesión | Administrador</h4>
+        <label for="nombre_usuario">
+            <span>Usuario</span>
+            <input type="text" id="nombre_usuario" name="nombre_usuario" required autocomplete="name">
+        </label>
+        <label for="email">
+            <span>Correo</span>
+            <input type="text" id="email" name="email" required autocomplete="email">
+        </label>
+        <label for="password">
+            <span>Contraseña</span>
+            <input type="password" id="password" name="password" required>
+        </label>
+        <label>
+            <input type="submit" value="Iniciar sesión">
+        </label>
+        <a href="#" onclick="showRegister()">Registrar administrador</a>
+    </form>
+</div>
+
+<div class="c-login-admin c-container" style="display: none;" id="formRegister">
+    <form class="form-login-admin" action="/login/signup-admin" method="POST">
+        <h4>Registrar | Administrador</h4>
+        <label for="nombre_usuario">
+            <span>Usuario</span>
+            <input type="text" id="nombre_usuario" name="nombre_usuario" placeholder="usuario">
+        </label>
+        <label for="email">
+            <span>Email</span>
+            <input type="text" id="email" name="email" placeholder="email">
+        </label>
+        <label for="password">
+            <span>Contraseña</span>
+            <input type="password" id="password" name="password" placeholder="password">
+        </label>
+        <label for="key">
+            <span>Palabra clave</span>
+            <input type="password" id="key" name="key" placeholder="palabra clave">
+        </label>
+        <label>
+            <input type="submit" value="Registrar">
+        </label>
+        <a href="#" onclick="showLogin()">iniciar sesión administrador</a>
+    </form>
+</div>
+<script src="../js/modal-reg_admin.js"></script>
+
+{{> footer}}

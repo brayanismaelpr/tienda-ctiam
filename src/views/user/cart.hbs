@@ -1,0 +1,18 @@
+{{> header_principal}}
+<section class="c-profile">
+    <article class="c-profile__content">
+        {{> user/options_user }}
+        <div class="c-profile__info">
+            <div class="c-shopping-cart__title">
+                <p class="c-shopping-cart__title--p">Carrito</p>
+                <p class="c-shopping-cart__title--p" id="totalvaluecart">{{cart.dataValues.valor_total}}</p>
+                <button class="c-shopping-cart__title--button" type="submit">Comprar todo</button>
+            </div>
+            {{#each itemsCart}}
+                {{> user/product_cart item=this}}
+            {{/each}}
+        </div>
+    </article>
+</section>
+<script src="../js/cart.js"></script>
+{{> footer}}

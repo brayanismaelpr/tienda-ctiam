@@ -1,0 +1,129 @@
+{{> header_principal}}
+
+<section class="c-view-product">
+    <article class="c-view-product__content">
+        <div class="c-view-product__images">
+            <div class="c-view-product__list-images">
+                {{#each photography}}
+                <img class="c-view-product__list-images--img" src="{{this.dataValues.url}}">
+                {{/each}}
+            </div>
+            <div class="c-view-product__image">
+                <img class="c-view-product__image--img" src="{{product.dataValues.imagen}}">
+            </div>
+        </div>
+        <div class="c-view-product__description">
+            <div class="c-view-product__description__content">
+                <p class="c-view-product__description--stock">{{product.dataValues.stock}} disponibles</p>
+                <p class="c-view-product__description--name-produc">{{product.dataValues.titulo}}</p>
+                <p class="c-view-product__description--price">$ {{product.dataValues.precio}}</p>
+                <ul class="c-view-product__details">
+                    <li class="c-view-product__details__li">
+                        <i class="fas fa-store"></i>
+                        <p class="c-view-product__details__li--p">Vendido por 
+                            <a href="/store/{{store.dataValues.id}}"><b>{{store.dataValues.nombre}}</b></a></p>
+                    </li>
+                    <li class="c-view-product__details__li">
+                        <i class="fas fa-truck"></i>
+                        <p class="c-view-product__details__li--p">Precio de envio <b>A calcular</b></p>
+                    </li>
+                    <li class="c-view-product__details__li">
+                        <i class="far fa-check-circle"></i>
+                        <p class="c-view-product__details__li--p">Garantia del producto <b>1 año</b></p>
+                    </li>
+                </ul>
+                <div class="c-view-product__colours">
+                    <p class="c-view-product__colours--p">Color</p>
+                    <div class="flex">
+                        <select class="w-14 h-10 border-2 px-2 border-black rounded mr-4" name="" id="">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="6">Otra</option>
+                        </select>
+                        <button class="flex items-center justify-center w-44 h-10 bg-pink-300 rounded" type="">Comprar</button>
+                    </div>
+                </div>
+                <br>
+                <div class="flex">
+                    <a class="mr-4 flex items-center justify-center w-44 h-10 bg-gray-300 rounded" href="/user/favorites/{{product.dataValues.id}}">
+                    Agregar Favoritos
+                    </a>
+                    <br>
+                    <a class="text-white flex items-center justify-center w-44 h-10 bg-pink-800 rounded" href="/user/cart/{{product.dataValues.id}}">
+                        Agregar Carrito
+                    </a>
+                </div>
+            </div>
+        </div>
+    </article>
+</section>
+
+<section class="c-details-product">
+    <article class="c-details-product__content">
+        <div class="c-details-product__info">
+            <div class="c-details-product__info__content">
+                <p class="c-details-product__info--p">{{product.dataValues.detalle}}</p>
+                <button class="c-details-product__info--button" onclick="">
+                    <i class="fas fa-plus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="c-details-product__info">
+            <div class="c-details-product__info__content">
+                <p class="c-details-product__info--p">{{product.dataValues.descripcion}}</p>
+                <button class="c-details-product__info--button" onclick=""><i class="fas fa-plus"></i></button>
+            </div>
+        </div>
+        <div class="c-details-product__comments">
+            <div class="c-details-product__comments__content">
+                <p class="c-details-product--p">Comentarios</p>
+                {{#each comments}}
+                {{> product/comments comment=this}}
+                {{/each}}
+            </div>
+        </div>
+        <div class="bg-white rounded-bl-lg rounded-br-lg">        
+            {{#unless isown}}
+            {{#if isAuthenticated}}
+                <div class="m-login__c__content mb-5">
+                    <form action="/product/make-question" method="POST">
+                        <input class="w-full border-gray-600 rounded py-2 px-4 border-4 border-black border-opacity-25"
+                            name="pregunta" placeholder="Haz una pregunta!">
+                        <input type="hidden" value="{{product.dataValues.id}}" name="id_producto">
+                        <button class="c-user-questions--btn" type="submit">Preguntar</button>
+                    </form>
+                </div>
+                {{else}}
+                <h2>Regístrate para hacer una pregunta!</h2>
+            {{/if}}
+            {{/unless}}
+            {{#each questions}}
+            {{> product/questions question=this}}
+            {{/each}}
+        </div>
+    </article>
+</section>
+
+<section class="c-products-recommended">
+    <article class="c-products-recommended__content">
+        <p class="c-products-recommended--p">Productos relacionados</p>
+        <div class="c-products-recommended__grid">
+            {{#each categorys}}
+            <a class="c-products-recommended__product" href="{{this.dataValues.id}}">
+                <img class="c-products-recommended__product--img" src="{{this.dataValues.imagen}}">
+            </a>
+            {{/each}}
+        </div>
+    </article>
+</section>
+<script>
+    window.onload = main;
+    function main(){
+        localStorage.setItem('ultima_visita','{{product.dataValues.id_categoria}}');
+    }
+</script>
+{{> footer}}

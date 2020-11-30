@@ -1,0 +1,26 @@
+{{> header_principal}}
+<div class="c-title-questions w-full">
+    <h1>Preguntas Frecuentes CTIAM</h1>
+</div>
+<div class="c-preguntas-frecuentes w-full">
+    <ul class="c-preguntas-frecuentes__ul shadow-xl">
+        {{#each frequentQuestions}}
+        <div class="c-preguntas-frecuentes__box">
+            <li class="c-preguntas-frecuentes__li" data-resp_id="resp_{{@index}}">
+                <span>{{this.dataValues.pregunta}}</span>
+                <i class="ico_resp fas fa-angle-down"></i>
+            </li>
+            <li class="c-preguntas-frecuentes__respuesta" id="resp_{{@index}}">
+                <span id="sp_resp_{{@index}}">
+                    {{this.dataValues.respuesta}}
+                </span>
+            </li>
+        </div>
+        {{/each}}
+    </ul>
+</div>
+
+<!-- Script para controlar la lista de preguntas -->
+<script src="js/questions.js"></script>
+
+{{> footer}}

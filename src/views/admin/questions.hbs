@@ -1,0 +1,44 @@
+{{> header_principal}}
+<div class="c-list-admin c-container">
+    <button class="btn-option-admin" onclick="modalAdd(this)">Agregar Pregunta</button>
+    <table class="c-list-admin__table container__content">
+        <thead>
+            <tr>
+                <th>Pregunta</th>
+                <th>Respuesta</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each frequentQuestions}}
+                <tr>
+                    <td>{{this.dataValues.pregunta}}</td>
+                    <td>{{this.dataValues.respuesta}}</td>
+                    <td>
+                        <a href="#" data-id-question="{{this.dataValues.id}}" onclick="modalEdit(this)">
+                            <i class="far fa-edit"></i>
+                        </a>
+                        <a href="#" data-id-question="{{this.dataValues.id}}" onclick="modalDelete(this)">
+                            <i class="far fa-trash-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+    <div id="modalAdd" style="display: {{showModal modal}};">
+        {{> modals/add-question-modal}}
+    </div>
+    <div id="modalEdit" style="display: {{showModal modal}};">
+        {{> modals/edit-question-modal}}
+    </div>
+    <div id="modalDelete" style="display: {{showModal modal}};">
+        {{> modals/delete-question-modal}}
+    </div>
+    
+</div>
+<script src="../js/questions-admin.js"></script>
+<script src="../js/login-modal.js"></script>
+
+{{> footer}}

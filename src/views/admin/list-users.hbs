@@ -1,0 +1,31 @@
+{{> header_principal}}
+<h2 style="padding-top: 30px">Lista usuarios</h2>
+<section class="c-list-admin c-container">
+    <table class="c-list-admin__table container__content">
+        <thead>
+            <tr>
+                <th>Nombres</th>
+                <th>Apellidos</th>
+                <th>Cédula</th>
+                <th>Email</th>
+                <th>Fecha de registro</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each users}}
+            <tr>
+                <td scope="row">{{this.nombres}}</td>
+                <td>{{this.apellidos}}</td>
+                <td>{{this.dni}}</td>
+                <td>{{this.email}}</td>
+                <td>{{this.createdAt}}</td>
+                <td><a href="/admin/make-seller/{{this.id}}" /><i class="fas fa-store"></i></a></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</section>
+{{!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script> --}}
+{{> footer}}

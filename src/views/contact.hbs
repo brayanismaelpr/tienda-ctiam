@@ -1,0 +1,38 @@
+{{> header_principal}}
+
+<section class="w-full">
+  <article class="container mx-auto md:flex justify-between items-center py-12">
+    <figure class="rounded w-full md:w-2/4 h-auto overflow-hidden">
+      <img class="w-full h-screen object-center object-cover" src="images/contacto.jpg">
+    </figure>
+    <div class="w-full md:w-2/4 pt-14 pl-14 md:pt-0 pr-14">
+      <div class="cont-info-contact__content">
+        <h3 class="cont-info-contact__content--h3">Contacto</h3>
+        <p class="cont-info-contact__content--p">
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi cum inventore quam, quasi quaerat architecto
+        </p>
+        <form class="cont-info-contact__form" action="/contact" method="POST">
+          <div class="form-cmp-x2">
+            <div class="cont-imput">
+              <input class="" type="text" placeholder="Nombre" name="name" required>
+            </div>
+            <div class="cont-imput">
+              <input class="" type="number" placeholder="Número teléfono" name="numberPhone" required>
+            </div>
+          </div>
+          <div class="form-cmp-x1">
+            <input class="" type="text" placeholder="Correo" name="email" required>
+          </div>
+          <div class="form-txtarea">
+            <textarea style="resize: none;" class="" name="message" placeholder="Mensaje" id="" cols="30" rows="10"></textarea>
+          </div>
+          <div class="cont-btn-form">
+            <button class="btn-form">Enviar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </article>
+</section>
+
+{{> footer}}

@@ -1,0 +1,26 @@
+{{> header_principal}}
+<h2 style="padding-top: 30px">Productos en revisión</h2>
+<section class="c-list-admin c-container">
+    <table class="c-list-admin__table container__content">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Tienda</th>
+                <th>Fecha de registro</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each products}}
+            <tr>
+                <td scope="row">{{this.dataValues.titulo}}</td>
+                <td>{{this.nombreTienda}}</td>
+                <td>{{this.dataValues.fecha}}</td>
+                <td><a href="/admin/revision-products/{{this.dataValues.id}}" /><i class="fas fa-eye"></i></a></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</section>
+
+{{> footer}}

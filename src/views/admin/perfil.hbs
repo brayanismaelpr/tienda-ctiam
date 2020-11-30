@@ -1,0 +1,154 @@
+{{> header_principal}}
+
+<div id="modal"></div>
+
+<section class="c-profile">
+    <article class="c-profile__content">
+        <div class="cont-options-profile">
+            <div class="cont-options-profile__content">
+                <li class="li-active">
+                    <a class="a-active" href="">
+                        <i class="fas fa-edit i-active"></i>
+                        <p>Editar Perfil</p>
+                    </a>
+                </li>
+                <li>
+                    <a class="" href="">
+                        <i class="fas fa-lock"></i>
+                        <p>Contraseña</p>
+                    </a>
+                </li>
+                <li>
+                    <a class="" href="">
+                        <i class="fas fa-user-edit"></i>
+                        <p>Reg. persona</p>
+                    </a>
+                </li>
+                <li>
+                    <a class="" href="">
+                        <i class="far fa-image"></i>
+                        <p>Reg. banner</p>
+                    </a>
+                </li>
+                <li>
+                    <a class="" href="/list">
+                        <i class="far fa-list-alt"></i>
+                        <p>Lista persona</p>
+                    </a>
+                </li>
+                <li>
+                    <button onclick="modal()">Hola</button>
+                    {{!-- <a onclick="modal()" class="" href="">
+                        <i class="far fa-window-maximize"></i>
+                        <p>Modal</p>
+                    </a> --}}
+                </li>
+                <li>
+                    <a class="" href="">
+                        <i class="fas fa-box-open"></i>
+                        <p>Servicios</p>
+                    </a>
+                </li>
+                <li>
+                    <a class="" href="">
+                        <i class="far fa-newspaper"></i>
+                        <p>Blog</p>
+                    </a>
+                </li>
+                <li>
+                    <a class="" href="/contact">
+                        <i class="fas fa-phone-square-alt"></i>
+                        <p>Contacto</p>
+                    </a>
+                </li>
+            </div>
+        </div>
+        <div class="c-profile__info">
+            <div class="c-profile__info__content">
+                <div class="c-profile__b1">
+                    <figure class="c-profile__figure">
+                        <img class="img-100 profile-image" src="{{avatar user.avatar}}">
+                    </figure>
+                    <div class="cont-cmp-form padding-b-15"
+                        style="margin-bottom : 15px; flex-direction: column; height: 80px; border: 1px solid #B2B2B2;">
+                        <div id="area-file" class="non-dragging-file cmp-form"
+                            style="border: 0; width: 90%; margin-left: auto; margin-right: auto;">
+                            <div class="sk-folding-cube" id="spinner" style="position: absolute; display: none">
+                                <div class="sk-cube1 sk-cube"></div>
+                                <div class="sk-cube2 sk-cube"></div>
+                                <div class="sk-cube4 sk-cube"></div>
+                                <div class="sk-cube3 sk-cube"></div>
+                            </div>
+                        </div>
+                        <input type="file" class="form-control file-input" name="imagen"
+                            style="height: 40px;width: 90%; margin-left: auto; margin-right: auto;">
+                    </div>
+                </div>
+                <div class="c-profile__b2">
+                    <div class="c-profile__b2__content">
+                        <form action="/user/update" method="POST">
+                            <div class="c-profile__c">
+                                <p class="c-profile__c--p">Nombres</p>
+                                <div class="c-profile__c--input">
+                                    <input id="" type="text" value="{{user.nombres}}" readonly required>
+                                </div>
+                            </div>
+                            <div class="c-profile__c">
+                                <p class="c-profile__c--p">Apellidos</p>
+                                <div class="c-profile__c--input">
+                                    <input id="" type="text" value="{{user.apellidos}}" readonly required>
+                                </div>
+                            </div>
+                            <div class="c-profile__c">
+                                <p class="c-profile__c--p">Número de documento</p>
+                                <div class="c-profile__c--input">
+                                    <input id="" type="text" value="{{user.dni}}" readonly required>
+                                </div>
+                            </div>
+                            <div class="c-profile__c">
+                                <p class="c-profile__c--p">Correo electrónico</p>
+                                <div class="c-profile__c--input">
+                                    <input id="" type="text" value="{{user.email}}" name="email" required>
+                                </div>
+                            </div>
+                            <div class="c-profile__c">
+                                <p class="c-profile__c--p">Teléfono celular</p>
+                                <div class="c-profile__c--input">
+                                    <input id="" type="text" value="{{user.telefono}}" name="telefono" required>
+                                </div>
+                            </div>
+                            <div class="c-profile__c">
+                                <p class="c-profile__c--p">Teléfono alternativo</p>
+                                <div class="c-profile__c--input">
+                                    <input id="" type="text" value="{{user.telefono_alternativo}}" name="telefono_alternativo">
+                                </div>
+                            </div>
+                            <div class="c-profile__c">
+                                <p class="c-profile__c--p">Dirección</p>
+                                <div class="c-profile__c--input">
+                                    <input id="" type="text" value="{{user.direccion}}"  name="direccion">
+                                </div>
+                            </div>
+                            <input id="avatarUser" type="text" style="display: none;" name="avatar" value="{{user.avatar}}">
+                            <div class="c-profile__btn">
+                                <button type="submit">Guardar</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+</section>
+
+<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-storage.js"></script>
+
+<script src="../js/dragImage.js"></script>
+<script src="../js/uploadImage.js"></script>
+<script src="../perfil_new.hbs"></script>
+<script src="../list-product.hbs"></script>
+<script src="../contact.hbs"></script>
+
+{{> footer }}

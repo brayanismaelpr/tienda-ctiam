@@ -1,0 +1,38 @@
+{{> header_principal}}
+
+<section class="c-profile-store">
+    <article class="c-profile-store__content">
+        <div class="c-profile-store__photo-banner">
+            <figure class="c-profile-store__fig">
+                <img class="c-profile-store__fig--img" src="../images/banner-store/2.jpg">
+            </figure>
+            <div class="c-profile-store__photo">
+                <img class="c-profile-store__photo--img" src="{{imageStore store.imagen}}">
+            </div>
+        </div>
+        <div class="c-profile-store__info">
+            <h1 class="c-profile-store__info--h1">
+                {{store.nombre}}
+            </h1>
+            <p class="c-profile-store__info--p">
+                {{store.descripcion}}
+            </p>
+            <a class="c-profile-store__info--a" href="{{store.pagina_web}}">{{store.pagina_web}}</a>
+        </div>
+        <div class="c-profile-store__grid">
+            {{#each products}}
+            <a href="/product/{{this.dataValues.id}}">
+                <div class="c-profile-store__product">
+                    <img class="c-profile-store__product--img" src="{{this.dataValues.imagen}}">
+                    <div class="c-profile-store__info-product">
+                        <p class="c-profile-store__info-product--p">{{this.dataValues.titulo}}</p>
+                        <p class="c-profile-store__info-product--price">{{this.dataValues.precio}}</p>
+                    </div>
+                </div>
+            </a>
+            {{/each}}
+        </div>
+    </article>
+</section>
+
+{{> footer}}

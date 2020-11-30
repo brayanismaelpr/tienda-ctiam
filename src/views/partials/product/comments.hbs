@@ -1,0 +1,14 @@
+<div class="c-details-product__comment">
+    <p class="c-details-product__comment--p">{{comment.nombre_usuario}}</p>
+    <div class="c-details-product__stars">
+        {{#times comment.calificacion}}
+        <i class="fas fa-star"></i>
+        {{/times}}
+        {{#times comment.restante}}
+        <i class="far fa-star"></i>
+        {{/times}}
+    </div>
+    <p class="c-details-product__text">
+        {{comment.descripcion}}
+    </p>
+</div>

@@ -1,0 +1,87 @@
+.sc-ui-image-uploader {
+    cursor: pointer;
+    border: 2px dashed gray;
+    border-radius: 3px;
+    height: 90px;
+    font-size: 12px;
+    width: 60%;
+}
+.sc-ui-image-uploader, .sc-ui-image-uploader__container {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+.sc-pictures-variations .sc-ui-image-uploader--default, .sc-ui-variation-pictures .sc-ui-image-uploader--default, .syi-pictures .sc-ui-image-uploader--default {
+    width: auto;
+    padding: 0;
+    margin-bottom: 60px;
+}
+#specifications_task .sc-pictures-variations .sc-ui-photos-and-validate>.sc-ui-image-uploader, #specifications_task .syi-pictures-new .sc-ui-photos-and-validate>.sc-ui-image-uploader, #variations_task .sc-pictures-variations .sc-ui-photos-and-validate>.sc-ui-image-uploader, #variations_task .syi-pictures-new .sc-ui-photos-and-validate>.sc-ui-image-uploader {
+    margin-bottom: 32px;
+    height: 106px;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.sc-pictures-variations .sc-ui-image-uploader__container, .sc-ui-variation-pictures .sc-ui-image-uploader__container, .syi-pictures .sc-ui-image-uploader__container {
+    width: 100%;
+    height: 100%;
+    outline: none;
+    padding: 21px 0;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.sc-ui-image-uploader__container {
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    text-align: center;
+    height: 150px;
+    width: 100%;
+}
+.sc-ui-image-uploader__link {
+    color: rgba(0, 0, 0, .45);
+    max-width: 130px;
+    padding: 10px 0;
+    font-weight: 400;
+}
+#areafile input {
+    -webkit-writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    color: -internal-light-dark(black, white);
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    appearance: textfield;
+    background-color: -internal-light-dark(rgb(255, 255, 255), rgb(59, 59, 59));
+    -webkit-rtl-ordering: logical;
+    cursor: text;
+    margin: 0em;
+    font: 400 13.3333px Arial;
+    padding: 1px 2px;
+    border-width: 2px;
+    border-style: inset;
+    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+    border-image: initial;
+    border-radius: 2px;
+}
+#areafile input[type="file"i] {
+    appearance: initial;
+    background-color: initial;
+    cursor: default;
+    align-items: baseline;
+    color: inherit;
+    text-overflow: ellipsis;
+    white-space: pre;
+    text-align: start !important;
+    padding: initial;
+    border: initial;
+    border-color: initial;
+    overflow: hidden;
+    border-radius: initial;
+}

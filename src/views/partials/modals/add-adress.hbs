@@ -1,0 +1,35 @@
+<div class="m">
+    <div class="m__content">
+        <button onclick="deletemadress()" class="m__cerrar"><i class="fas fa-times" aria-hidden="true"></i></button>
+        <div class="m-login">
+            <form class="m-login__content" action="/user/create-direction" method="post">
+                <p class="m-login--p">Registrar dirección</p>
+                <label class="m-login__c-fist">
+                    <input list="cities" type="text" class="m-login__c--input no-icon-input" placeholder="Ciudad"
+                        name="ciudad" id="city" required>
+                    <datalist id="cities"></datalist>
+                </label>
+                <label class="m-login__c-fist">
+                    <input type="text" class="m-login__c--input no-icon-input" placeholder="Barrio" name="barrio"
+                        required>
+                </label>
+                <label class="m-login__c-fist">
+                    <input type="text" class="m-login__c--input no-icon-input" placeholder="Calle" name="calle"
+                        required>
+                </label>
+                <label class="m-login__c-fist">
+                    <input type="text" class="m-login__c--input no-icon-input" placeholder="Avenida" name="avenida"
+                        required>
+                </label>
+                <label class="m-login__c-fist">
+                    <input type="text" class="m-login__c--input no-icon-input" placeholder="Número" name="numero"
+                        required>
+                </label>
+                <label class="m-login__c-last textarea-modal">
+                    <textarea class="m-login__c--input no-icon-input" name="descripcion" placeholder="Description"></textarea>
+                </label>
+                <button type="submit" class="m-login--send">Guardar</button>
+            </form>
+        </div>
+    </div>
+</div>

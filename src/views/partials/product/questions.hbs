@@ -1,0 +1,40 @@
+<div class="c-user-questions__question">
+    <div class="c-user-questions__info items-center">
+        {{#if @root.isown}}
+        {{#unless question.respuesta}}
+        <form action="/product/response-question" method="POST">
+            <div class="w-4/5 m-login__c__content">
+                <input class="w-11/12 border-gray-600 rounded py-2 px-4 border-4 border-black border-opacity-25"
+                    name="respuesta">
+                <input type="hidden" value="{{question.id}}" name="id_pregunta">
+            </div>
+            <button class="font-medium flex items-center justify-center h-12 w-1/5 bg-pink-300 rounded" type="submit"
+                href="">Responder</button>
+        </form>
+        {{else}}
+        <div class="c-user-questions__text">
+            <p class="c-user-questions__text--description">
+                {{question.respuesta}}
+            </p>
+        </div>
+        {{/unless}}
+        {{else}}
+        <div class="c-user-questions__text">
+            <p class="c-user-questions__text--description">
+                {{question.respuesta}}
+            </p>
+        </div>
+        {{/if}}
+    </div>
+    <div class="c-user-questions__answer">
+        <div class="c-user-questions__answer-content">
+            <div class="c-user-questions__info-usuario">
+                <img class="c-user-questions__info-usuario--imgs" src="{{question.avatar}}">
+                <p class="c-user-questions__info-usuario--p">{{question.nombres}}</p>
+            </div>
+            <p class="c-user-questions--description">
+                {{question.pregunta}}
+            </p>
+        </div>
+    </div>
+</div>

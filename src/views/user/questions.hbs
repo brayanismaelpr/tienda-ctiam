@@ -1,0 +1,51 @@
+{{> header_principal}}
+<div id="modal"></div>
+
+<section class="c-profile">
+    <article class="c-profile__content">
+        {{> user/options_user }}
+        <div class="c-profile__info">
+            <div class="c-favorito__grid">
+                <h2>Mis preguntas</h2>
+                {{#each questions}}
+                <div class="c-user-shopping__div">
+                    <div class="c-user-shopping__box">
+                        <div class="c-user-shopping__info">
+                            <a href="/product/{{this.id_producto}}">
+                                <img class="c-user-shopping__img" src="{{imagen}}">
+                            </a>
+                            <div class="c-user-shopping__text">
+                                <a href="/product/{{this.id_producto}}"></a>
+                                <p class="c-user-shopping__text--name">{{this.titulo}}</p>
+                                <p class="c-user-shopping__text--description">{{this.descripcion}}</p>
+                                <p class="c-user-shopping__text--price">$ {{this.precio}} x 1 unidad</p>
+                            </div>
+                        </div>
+                        <div class="c-user-question-answer">
+                            <div class="c-user-question-answer__answer">
+                                <p class="c-user-question-answer__answer--p">
+                                    <b>Pregunta</b><br><br>
+                                </p>
+                                <p class="c-user-question-answer__answer--p">{{this.pregunta}}</p>
+                                {{#if this.respuesta}}
+                                <div class="c-user-question-answer__seller">
+                                    <a href="/store/{{this.id_tienda}}">
+                                        <img class="c-user-shopping__img" src="{{imageStore this.imagen_tienda}}">
+                                    </a>
+                                    <p class="c-user-question-answer__seller--p">{{this.respuesta}}</p>
+                                </div>
+                                {{else}}
+                                <h2>Esperando respuesta!</h2>
+                                {{/if}}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </article>
+</section>
+
+{{> footer }}

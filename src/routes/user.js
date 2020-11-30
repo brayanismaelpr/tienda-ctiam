@@ -1,0 +1,74 @@
+const { Router } = require("express");
+const router = Router();
+const { cartController, userController } = require("../controllers");
+const {
+    Address,
+    City,
+} = require("../repository/database").models;
+
+router.get("/", (req, res) => {
+    res.redirect("/user/home");
+});
+
+router.get("/home", async (req, res) => {
+    const user = req.user;
+    const directionsDB = await Address.findAll({
+        where: {
+            id_usuario: user.id
+        }
+    }).then(data => {
+        data.forEach(async item => {
+            cityDB = await City.findOne({
+                where: {
+                    id: item.id_ciudad
+                }
+            });
+            item.city = cityDB.nombre
+        })
+        res.render("user/perfil", {
+            title: "Perfil | Mujeres CTIAM",
+            user,
+            directions: data,
+            isAuthenticated: true,
+        });
+    });
+});
+router.get("/change-password", (req, res) => {
+    res.render("user/password", {
+        title: "Cambiar contraseña | Mujeres CTIAM",
+        user: req.user,
+        isAuthenticated: req.user != undefined,
+    });
+});
+
+router.post("/change-password", userController.updatePassword);
+
+router.get("/questions", userController.getQuestions);
+
+router.get("/shopping", (req, res) => {
+    res.render("user/shopping", {
+        title: "Mis compras | Mujeres CTIAM",
+        user: req.user,
+        isAuthenticated: req.user != undefined,
+    });
+});
+
+router.post("/update", userController.updateAUser);
+
+router.post("/create-direction", userController.createDirection)
+
+router.get("/favorites", userController.getFavorites);
+
+router.get("/favorites/:id", userController.setFavorites);
+
+router.get("/deleteFavorites/:id", userController.deleteFavorites);
+
+router.get("/cart", userController.getCart);
+
+router.get("/cart/:id", userController.setCart);
+
+router.post("/cart/setAmount", cartController.changeAmountProduct);
+
+router.get("/cart/delete/:id", cartController.deleteAItem);
+
+module.exports = router;

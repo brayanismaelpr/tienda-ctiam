@@ -1,0 +1,48 @@
+<div class="cont-options-profile">
+    <div class="cont-options-profile__content">
+        <li class="li-active">
+            <a class="a-active" href="/user/home">
+                <i class="fas fa-edit i-active"></i>
+                <p>Perfil</p>
+            </a>
+        </li>
+        <li>
+            <a class="" href="/user/change-password">
+                <i class="fas fa-lock"></i>
+                <p>Contraseña</p>
+            </a>
+        </li>
+        <li>
+            <a class="" href="/user/shopping">
+                <i class="fas fa-shopping-bag"></i>
+                <p>Compras</p>
+            </a>
+        </li>
+        <li>
+            <a class="" href="/user/favorites">
+                <i class="fas fa-star"></i>
+                <p>Favoritos</p>
+            </a>
+        </li>
+        <li>
+            <a class="" href="/user/questions">
+                <i class="far fa-question-circle"></i>
+                <p>Preguntas</p>
+            </a>
+        </li>
+        <li>
+            <a class="" href="/user/cart">
+                <i class="fas fa-shopping-cart"></i>
+                <p>Carrito</p>
+            </a>
+        </li>
+        {{#if user.is_seller}}
+        <li>
+            <a href="/seller/store">
+                <i class="fas fa-store"></i>
+                <p>Mi Tienda</p>
+            </a>
+        </li>
+        {{/if}}
+    </div>
+</div>

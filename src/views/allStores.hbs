@@ -1,0 +1,36 @@
+{{> header_principal}}
+
+<section class="c-stores">
+    <article class="c-stores__content">
+        <p class="c-stores--title">Tiendas destacadas</p>
+        <div class="c-stores__grid">
+            {{#each stores}}
+            <div class="c-stores__store">
+                <a href="/store/{{this.dataValues.id}}">
+                    <div class="c-stores__store-info">
+                        <figure class="c-stores__fig">
+                            <img class="c-stores__fig--img" src="{{imageStore this.dataValues.imagen}}">
+                        </figure>
+                        <div class="c-stores__text">
+                            <p class="c-stores__text--name">{{this.dataValues.nombre}}</p>
+                            <p class="c-stores__text--description">
+                                {{this.dataValues.descripcion}}
+                            </p>
+                        </div>
+                    </div>
+                </a>
+                <div class="c-stores__store-imgs">
+                    {{#each this.products}}
+                    <a class="c-stores__store-fig" href="/product/{{this.dataValues.id}}">
+                        <img class="c-stores__store--img" src="{{this.dataValues.imagen}}">
+                    </a>
+                    {{/each}}
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </article>
+</section>
+
+<script src="js/modal-category.js"></script>
+{{> footer}}

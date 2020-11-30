@@ -1,0 +1,17 @@
+<div class="m">
+    <div class="m__content">
+        <button onclick="deletemEditcategoria()" class="m__cerrar"><i class="fas fa-times" aria-hidden="true"></i></button>
+        <div class="m-login">
+            <form class="m-login__content" action="/admin/frecuent-questions" method="POST" name="edit">
+                <p class="m-login--p">Editar pregunta</p>
+                <label class="m-login__c-fist">
+                    <input type="text" class="m-login__c--input no-icon-input" id="question" placeholder="Pregunta" name="pregunta" required="">
+                </label>
+                <label class="m-login__c-last textarea-modal">
+                    <textarea  class="m-login__c--input no-icon-input" id="answer" name="respuesta" placeholder="Respuesta"></textarea>
+                </label>
+                <button type="submit" class="m-login--send">Editar</button>
+            </form>
+        </div>
+    </div>
+</div>
