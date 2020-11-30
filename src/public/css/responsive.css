@@ -22,21 +22,17 @@ textarea { resize: none; }
     .c-slider__c-img img,
     .c-slider-fondo-rojo,
     .c-slider__txt { height: 400px; }
-
     .fa-chevron-circle-left, .fa-chevron-circle-right { font-size: 20px; }
     .flowers-1 { width: 200px; }
     .flowers-2 { width: 100px; }
     .c-slider__info, .c-profile-admin__imgs { width: 100%; }
     .c-slider__logo { width: 250px; }
-    .c-slider__info--h1
-    {
+    .c-slider__info--h1 {
         font-size: 45px;
         line-height: 45px;
         padding: 15px 0 7px 0;
     }
-
-    .container__content
-    {
+    .container__content {
         padding-left: calc(1024px * (1 / 24));
         padding-right: calc(1024px * (1 / 24));
     }
@@ -45,14 +41,14 @@ textarea { resize: none; }
     .h-list__ul { width: 45%; }
     .h-list__li { line-height: 12px; }
     .h-list__li--a { font-weight: normal; }
-
     .c-profile-admin { flex-direction: column; }
     .c-profile-admin__options { padding-top: 4em; width: 100%; }
     .c-list-admin { padding: calc(1024px * (1 / 24)); }
 }
 
-@media (max-width: 768px)
-{
+@media (max-width: 768px) {
+    .h { display: none; }
+    .h-list__logo-search .fa-bars { display: block; }
     .container-sliders, 
     .c-slider__c-imgs, 
     .c-slider__c-img img,
@@ -63,14 +59,12 @@ textarea { resize: none; }
     .flowers-2 { width: 100px; }
     .c-slider__logo { width: 150px; }
     .c-slider__info { width: 100%; }
-    .c-slider__info--h1
-    {
+    .c-slider__info--h1 {
         font-size: 30px;
         line-height: 30px;
         padding: 15px 0 7px 0;
     }
     .c-slider__info--p { font-size: 16px; }
-
     .c-grid-four__box { height: 200px; }
     .c-promo-index, .h-list__content { flex-direction: column; }
     .c-promo-index__info, .c-promo-index__fig { width: 100%; }
@@ -84,22 +78,19 @@ textarea { resize: none; }
     .f__subscribe__content { padding-top: 30px; }
     .h-list__logo-search { justify-content: space-between; width: 100%; }
     .h__search { width: 170px; }
-    .h-list__ul
-    {
+    .h-list__ul {
         display: none;
         flex-direction: column;
         width: 100%;
     }
-    .h-list__li, .h__ico-show
-    {
+    .h-list__li, .h__ico-show {
         text-align: center;
         border-bottom: 1px solid #b8b8b8;
         padding: 10px 0;
         width: 100%;
     }
     .h__ico-show { border: 0; }
-    .fa-bars
-    {
+    .fa-bars {
         position: relative;
         color: var(--purple);
         cursor: pointer;
@@ -108,12 +99,9 @@ textarea { resize: none; }
     }
     .h__search { display: none; }
     .div-profile__label label { width: 100%; }
-    .c-filter {
-        display: none;
-    }
+    .c-filter { display: none; }
 }
-@media (max-width: 638px)
-{
+@media (max-width: 638px) {
     .cont-options-profile { padding: 5px 0; width: 100%; }
     .cont-options-profile__content {
         align-items: center;
@@ -134,8 +122,7 @@ textarea { resize: none; }
     .cont-options-profile__content li a i { padding: 0; }
     .cont-options-profile__content li:last-child { padding: 0; }
 }
-@media (max-width: 425px)
-{
+@media (max-width: 425px) {
     .container-sliders, 
     .c-slider__c-imgs, 
     .c-slider__c-img img,
@@ -146,16 +133,13 @@ textarea { resize: none; }
     .flowers-2 { width: 100px; }
     .c-slider__logo { width: 150px; }
     .c-slider__info { width: 100%; }
-    .c-slider__info--h1
-    {
+    .c-slider__info--h1 {
         font-size: 25px;
         line-height: 25px;
         padding: 15px 0 7px 0;
     }
     .c-slider__info--p { font-size: 14px; }
-
-    .container__content
-    {
+    .container__content {
         padding-left: calc(425px * (1 / 24));
         padding-right: calc(425px * (1 / 24));
     }
@@ -164,21 +148,15 @@ textarea { resize: none; }
    .f__category-help { min-width: 100%; }
    .f__category { padding-bottom: 30px; }
 }
-
-@media (max-width: 375px)
-{
-    .container__content
-    {
+@media (max-width: 375px) {
+    .container__content {
         padding-left: calc(375px * (1 / 24));
         padding-right: calc(375px * (1 / 24));
     }
     .form-login-admin { width: 95%; }
 }
-
-@media (max-width: 320px)
-{
-    .container__content
-    {
+@media (max-width: 320px) {
+    .container__content {
         padding-left: calc(320px * (1 / 24));
         padding-right: calc(320px * (1 / 24));
     }
