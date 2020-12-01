@@ -26,16 +26,8 @@ areaFile.forEach((el) => {
 });
 
 areaFile.forEach((el) => {
-    el.addEventListener("dragover", (e) => {
-        e.preventDefault();
-        if (el.dataset.drag !== "off") el.style.border = "1px dashed #C50084";
-    });
-});
-
-areaFile.forEach((el) => {
     el.addEventListener("drop", (e) => {
         e.preventDefault();
-        el.style.border = "1px dashed #C50084";
         const selectedFile = e.dataTransfer.files[0];
         const idStore = document.querySelector("[data-store-id]").dataset
             .storeId;
@@ -52,8 +44,12 @@ areaFile.forEach((el) => {
             );
             if (input) {
                 input.value = url;
-                el.dataset.drag = "off";
-                el.style.backgroundColor = "#5f2";
+                el.querySelector(
+                    "div"
+                ).innerHTML += `<i class="fas fa-times icono-x-imagen"></i>
+                <img class="imagen-carga" src="${url}">`;
+                el.classList.remove("border-4");
+                el.classList.remove("border-pink-400");
             }
         };
         task.on("state_changed", onProgress, onError, onComplete);
