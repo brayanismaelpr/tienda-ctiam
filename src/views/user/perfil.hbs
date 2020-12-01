@@ -53,10 +53,6 @@
                                     type="file" multiple="" autocomplete="off" style="display: none;">
                             </div>
                         </label>
-                        <label class="flex mb-3 items-center justify-between" for="direccion">
-                            <a class="flex text-white bg-red-600 hover:bg-red-800 items-center rounded justify-center px-4 py-2"
-                                onclick="addresModal()">Agregar dirección</a>
-                        </label>
                         {{#each directions}}
                         <label class="flex mb-3 items-center justify-between">
                             <span>Direccion</span>
@@ -67,7 +63,13 @@
                         {{/each}}
                         <input id="avatarUser" type="text" style="display: none;" name="avatar" value="{{user.avatar}}">
                     </div>
-                    <input class="div-profile__info--input rounded" type="submit" value="Guardar">
+                    <div class="flex">
+                        <input class="div-profile__info--input rounded mr-4" type="submit" value="Guardar">
+                        <label class="flex mb-3 items-center justify-between" for="direccion">
+                            <a class="flex text-white bg-red-500 cursor-pointer hover:bg-red-800 items-center rounded justify-center px-4 py-2"
+                                onclick="addresModal()">Agregar dirección</a>
+                        </label>
+                    </div> 
                 </form>
             </div>
         </div>
