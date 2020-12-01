@@ -1,6 +1,5 @@
 {{> header_principal}}
 <div id="modal"></div>
-
 <section class="c-profile">
     <article class="c-profile__content">
         {{> user/options_user }}
@@ -10,9 +9,9 @@
                 {{#each questions}}
                 <div class="c-user-shopping__div">
                     <div class="c-user-shopping__box">
-                        <div class="c-user-shopping__info">
-                            <a href="/product/{{this.id_producto}}">
-                                <img class="c-user-shopping__img" src="{{this.imagen_producto}}">
+                        <div class="flex w-full">
+                            <a class="w-20 h-30 rounded mr-4" href="/product/{{this.id_producto}}">
+                                <img class="w-full h-full object-center object-cover" src="{{this.imagen_producto}}">
                             </a>
                             <div class="c-user-shopping__text">
                                 <a href="/product/{{this.id_producto}}"></a>
@@ -21,30 +20,36 @@
                                 <p class="c-user-shopping__text--price">$ {{this.precio}} x 1 unidad</p>
                             </div>
                         </div>
-                        <div class="c-user-question-answer">
+                        <div class="c-user-question-answer bg-gray-100">
                             <div class="c-user-question-answer__answer">
                                 <p class="c-user-question-answer__answer--p">
                                     <b>Pregunta</b><br><br>
                                 </p>
-                                <img class="c-user-shopping__img" src="{{avatar this.imagen_usuario}}">
-                                <p class="c-user-question-answer__answer--p">{{this.pregunta}}</p>
-                                {{#if this.respuesta}}
-                                <div class="c-user-question-answer__seller">
-                                    <p class="c-user-question-answer__seller--p">{{this.respuesta}}</p>
-                                </div>
-                                {{else}}
-                                <form action="/product/response-question" method="POST">
-                                    <div class="w-4/5 m-login__c__content">
-                                        <input
-                                            class="w-11/12 border-gray-600 rounded py-2 px-4 border-4 border-black border-opacity-25"
-                                            name="respuesta">
-                                        <input type="hidden" value="{{this.id_pregunta}}" name="id_pregunta">
+                                {{!-- aqui --}}
+                                <div class="flex justify-between">
+                                    <img class="rounded-full w-10 h-10 object-center object-cover" src="{{avatar this.imagen_usuario}}">
+                                    <div class="bg-gray-200 rounded p-4 w-11/12">
+                                        <p class="c-user-question-answer__answer--p">{{this.pregunta}}</p>
+                                        {{#if this.respuesta}}
+                                        <div class="c-user-question-answer__seller">
+                                            <p class="c-user-question-answer__seller--p">{{this.respuesta}}</p>
+                                        </div>
+                                        {{else}}
+                                        <form class="flex items-center" action="/product/response-question" method="POST">
+                                            <div class="w-4/5 m-login__c__content">
+                                                <input
+                                                    class="w-11/12 border-gray-600 rounded py-2 px-4 border-4 border-black border-opacity-25"
+                                                    name="respuesta">
+                                                <input type="hidden" value="{{this.id_pregunta}}" name="id_pregunta">
+                                            </div>
+                                            <button
+                                                class="font-medium flex items-center justify-center h-12 w-1/5 bg-pink-300 rounded"
+                                                type="submit" href="">Responder</button>
+                                        </form>
+                                        {{/if}}
                                     </div>
-                                    <button
-                                        class="font-medium flex items-center justify-center h-12 w-1/5 bg-pink-300 rounded"
-                                        type="submit" href="">Responder</button>
-                                </form>
-                                {{/if}}
+                                </div>
+                                
                             </div>
                         </div>
                     </div>
