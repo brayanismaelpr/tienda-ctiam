@@ -1,81 +1,113 @@
 {{> header_principal}}
 
-<section class="c-profile-seller">
-    <article class="c-profile-seller__content">
-        <figure class="c-profile-seller__fig">
-            <img class="c-profile-seller__fig--img" src="{{imageStore store.dataValues.imagen}}">
-        </figure>
-        <div class="c-profile-seller__form-actions">
-            <div class="c-profile-seller__form-actions--content">
-                <p class="c-profile-seller__form-actions--title">{{store.dataValues.nombre}}</p>
-                <div class="c-profile-seller__form">
-                    <form class="c-profile-seller__form--content" action="/seller/products/delete" method="POST">
-                        <p class="c-profile-seller__form--title">Eliminar producto</p>
-                        <div class="c-profile-seller__input">
-                            <select name="id_producto">
-                                {{#each products}}
-                                <option value="{{this.dataValues.id}}">{{this.dataValues.titulo}}</option>
-                                {{/each}}
-                            </select>
+<section class="c-profile">
+    <article class="c-profile__content">
+        {{> seller/options_seller }}
+        <div class="div-profile py-10">
+            <div class="c-list__t w-11/12 mx-auto">
+                <div class="c-list__t-body grid grid-cols-5 gap-2" style="border-bottom: 1px solid rgb(194, 194, 194);">
+                    <div class="c-list__column">
+                        <p class="c-list__column--p"><b>#</b></p>
+                    </div>
+                    <div class="c-list__column">
+                        <p class="c-list__column--p"><b>Titulo</b></p>
+                    </div>
+                    <div class="c-list__column">
+                        <p class="c-list__column--p"><b>Stock</b></p>
+                    </div>
+                    <div class="c-list__column">
+                        <p class="c-list__column--p"><b>Precio</b></p>
+                    </div>
+                    <div class="c-list__column">
+                        <p class="c-list__column--p"><b>Acciones</b></p>
+                    </div>
+                </div>
+                <div class="c-list__t-body grid grid-cols-5 gap-2" style="border-bottom: 1px solid rgb(194, 194, 194);">
+                    <div class="c-list__column">
+                        <p class="c-list__column--p"><b>1</b></p>
+                    </div>
+                    <div class="c-list__column">
+                        <p class="c-list__column--p">Frank Jean Pierre Gómez Salazar</p>
+                    </div>
+                    <div class="c-list__column">
+                        <p class="c-list__column--p">1151593</p>
+                    </div>
+                    <div class="c-list__column">
+                        <p class="c-list__column--p">frankjeanpierregs@ufps.edu.co</p>
+                    </div>
+                    <div class="c-list__column">
+                        <div class="c-list__actions">
+                            <a class="c-list__actions--a" href=""><i class="fas fa-eye"></i></a>
+                            <a class="c-list__actions--a" href=""><i class="fas fa-eye-slash"></i></a>
+                            <a class="c-list__actions--a" href=""><i class="fas fa-edit"></i></a>
+                            <a class="c-list__actions--a" href=""><i class="fas fa-trash"></i></a>
                         </div>
-                        <button class="c-profile-seller--button" type="submit">Eliminar</button>
-                    </form>
-                    <div class="c-profile-seller__actions">
-                        <div class="c-profile-seller__buttons">
-                            <div class="c-profile-seller__buttons--btn">
-                                <a class="c-profile-seller__buttons--a" href="">
-                                    <i class="fas fa-box"></i>
-                                </a>
-                            </div>
-                            <div class="c-profile-seller__buttons--btn">
-                                <a class="c-profile-seller__buttons--a" href="">
-                                    <i class="fas fa-chart-line"></i>
-                                </a>
-                            </div>
-                            <div class="c-profile-seller__buttons--btn">
-                                <a class="c-profile-seller__buttons--a" href="">
-                                    <i class="fas fa-question-circle"></i>
-                                </a>
-                            </div>
+                    </div>
+                </div>
+                <div class="c-list__t-body grid grid-cols-5 gap-2" style="border-bottom: 1px solid rgb(194, 194, 194);">
+                    <div class="c-list__column">
+                        <p class="c-list__column--p"><b>2</b></p>
+                    </div>
+                    <div class="c-list__column">
+                        <p class="c-list__column--p">Frank Jean Pierre Gómez Salazar</p>
+                    </div>
+                    <div class="c-list__column">
+                        <p class="c-list__column--p">1151593</p>
+                    </div>
+                    <div class="c-list__column">
+                        <p class="c-list__column--p">frankjeanpierregs@ufps.edu.co</p>
+                    </div>
+                    <div class="c-list__column">
+                        <div class="c-list__actions">
+                            <a class="c-list__actions--a" href=""><i class="fas fa-eye"></i></a>
+                            <a class="c-list__actions--a" href=""><i class="fas fa-eye-slash"></i></a>
+                            <a class="c-list__actions--a" href=""><i class="fas fa-edit"></i></a>
+                            <a class="c-list__actions--a" href=""><i class="fas fa-trash"></i></a>
                         </div>
-                        <ul class="c-profile-seller__options">
-                            <li class="c-profile-seller__options--li">
-                                <a class="c-profile-seller__options--a" href="">
-                                    <i class="far fa-edit"></i>
-                                    Editar perfil
-                                </a>
-                            </li>
-                            <li class="c-profile-seller__options--li">
-                                <a class="c-profile-seller__options--a" href="">
-                                    <i class="fas fa-store"></i>
-                                    Compras
-                                </a>
-                            </li>
-                            <li class="c-profile-seller__options--li">
-                                <a class="c-profile-seller__options--a" href="">
-                                    <i class="fas fa-money-bill-wave"></i>
-                                    Devoluciones
-                                </a>
-                            </li>
-                            <li class="c-profile-seller__options--li">
-                                <a class="c-profile-seller__options--a" href="">
-                                    <i class="fas fa-box-open"></i>
-                                    Cambios
-                                </a>
-                            </li>
-                            <li class="c-profile-seller__options--li">
-                                <a class="c-profile-seller__options--a" href="">
-                                    <i class="fas fa-star"></i>
-                                    Favoritos
-                                </a>
-                            </li>
-                            <li class="c-profile-seller__options--li">
-                                <a class="c-profile-seller__options--a" href="">
-                                    <i class="fas fa-shopping-cart"></i>
-                                    Carrito
-                                </a>
-                            </li>
-                        </ul>
+                    </div>
+                </div>
+                <div class="c-list__t-body grid grid-cols-5 gap-2" style="border-bottom: 1px solid rgb(194, 194, 194);">
+                    <div class="c-list__column">
+                        <p class="c-list__column--p"><b>3</b></p>
+                    </div>
+                    <div class="c-list__column">
+                        <p class="c-list__column--p">Frank Jean Pierre Gómez Salazar</p>
+                    </div>
+                    <div class="c-list__column">
+                        <p class="c-list__column--p">1151593</p>
+                    </div>
+                    <div class="c-list__column">
+                        <p class="c-list__column--p">frankjeanpierregs@ufps.edu.co</p>
+                    </div>
+                    <div class="c-list__column">
+                        <div class="c-list__actions">
+                            <a class="c-list__actions--a" href=""><i class="fas fa-eye"></i></a>
+                            <a class="c-list__actions--a" href=""><i class="fas fa-eye-slash"></i></a>
+                            <a class="c-list__actions--a" href=""><i class="fas fa-edit"></i></a>
+                            <a class="c-list__actions--a" href=""><i class="fas fa-trash"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="c-list__t-body grid grid-cols-5 gap-2" style="border-bottom: 1px solid rgb(194, 194, 194);">
+                    <div class="c-list__column">
+                        <p class="c-list__column--p"><b>3</b></p>
+                    </div>
+                    <div class="c-list__column">
+                        <p class="c-list__column--p">Frank Jean Pierre Gómez Salazar</p>
+                    </div>
+                    <div class="c-list__column">
+                        <p class="c-list__column--p">1151593</p>
+                    </div>
+                    <div class="c-list__column">
+                        <p class="c-list__column--p">frankjeanpierregs@ufps.edu.co</p>
+                    </div>
+                    <div class="c-list__column">
+                        <div class="c-list__actions">
+                            <a class="c-list__actions--a" href=""><i class="fas fa-eye"></i></a>
+                            <a class="c-list__actions--a" href=""><i class="fas fa-eye-slash"></i></a>
+                            <a class="c-list__actions--a" href=""><i class="fas fa-edit"></i></a>
+                            <a class="c-list__actions--a" href=""><i class="fas fa-trash"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
