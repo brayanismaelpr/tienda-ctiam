@@ -43,6 +43,17 @@ router.get("/my-products", async (req, res) => {
     });
 });
 
+router.get("/sales", async (req, res) => {
+    const user = req.user;
+    const store = await Store.findByPk(user.id);
+    res.render("seller/sales", {
+        title: `Mis ventas | Mujeres CTIAM`,
+        user,
+        store: store.dataValues,
+        isAuthenticated: true,
+    });
+});
+
 router.post("/products", sellerController.createProduct);
 
 router.post("/products/delete", sellerController.deleteProduct);
