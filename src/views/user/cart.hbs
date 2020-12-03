@@ -1,8 +1,8 @@
 {{> header_principal}}
 <section class="c-profile">
-    <article class="c-profile__content">
+    <article class="container mx-auto sm:flex sm:justify-between">
         {{> user/options_user }}
-        <div class="c-profile__info">
+        <div class="py-14 mx-auto sm:mx-0 w-11/12 sm:w-9/12">
             <div class="c-shopping-cart__title">
                 <p class="c-shopping-cart__title--p">Carrito</p>
                 <p class="c-shopping-cart__title--p" id="totalvaluecart">{{cart.dataValues.valor_total}}</p>

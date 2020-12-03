@@ -1,9 +1,7 @@
 <div class="c-shopping-cart__product" id="hbs-{{item.id_producto}}">
-    <figure class="c-shopping-cart__fig">
-        <a href="/product/{{item.id_producto}}">
-        <img class="c-shopping-cart__fig--img" src="{{item.imagen}}">
-        </a>
-    </figure>
+    <a style="height: 300px; width:25%;" href="/product/{{item.id_producto}}">
+        <img class="w-full h-full object-center object-cover" src="{{item.imagen}}">
+    </a>
     <div class="c-shopping-cart__p-info">
         <div class="c-shopping-cart__p-info--content">
             <p class="c-shopping-cart--description">
