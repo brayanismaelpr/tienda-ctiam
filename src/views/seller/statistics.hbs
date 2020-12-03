@@ -1,0 +1,59 @@
+{{> header_principal}}
+<div id="modal"></div>
+<section class="c-profile">
+    <article class="container mx-auto sm:flex justify-between">
+        {{> seller/options_seller }}
+        <div class="py-14 mx-auto sm:mx-0 w-11/12 sm:w-9/12">
+            <div class="c-favorito__grid">
+                <h2>Mis Estadisticas</h2>
+                <select id="estadisticas" onchange="cambio()">
+                    {{#each products}}
+                    <option value="{{this.dataValues.id}}">{{this.dataValues.titulo}}</option>
+                    {{/each}}
+                </select>
+            </div>
+        </div>
+        <div id="columnchart_values" style="width: 900px; height: 300px;"></div>
+    </article>
+</section>
+<script>
+    function cambio() {
+        fetch(`${location.origin}/getVisitas/${document.getElementById("estadisticas").value}`)
+            .then(res => res.json())
+            .then(lista => {
+                array = [["Dia", "Numero De visitas", { role: "style" }]]
+                lista.lista.visitas.map(item => {
+                    array.push([item.fecha, item.contador, "#f00"]);
+                });
+                grafico(array);
+            });
+    }
+    function grafico(array) {
+        google.charts.load("current", { packages: ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable(array);
+
+            var view = new google.visualization.DataView(data);
+            view.setColumns([0, 1,
+                {
+                    calc: "stringify",
+                    sourceColumn: 1,
+                    type: "string",
+                    role: "annotation"
+                },
+                2]);
+
+            var options = {
+                title: `Estadisticas del numero de visitas de un producto`,
+                width: 600,
+                height: 400,
+                bar: { groupWidth: "95%" },
+                legend: { position: "none" },
+            };
+            var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+            chart.draw(view, options);
+        }
+    }
+</script>
+{{> footer }}

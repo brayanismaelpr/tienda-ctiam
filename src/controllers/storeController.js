@@ -1,3 +1,5 @@
+const Product = require("../repository/models/Producto");
+
 const { Store } = require("../repository/database").models;
 
 module.exports = {
@@ -22,6 +24,20 @@ module.exports = {
             store,
             isAuthenticated: true,
             questions,
+        });
+    },
+    getStatistics: async (req, res) => {
+        const id_tienda = req.user.id;
+        const products = await Product.findAll({
+            where:{
+                id_tienda 
+            }
+        })
+        res.render("seller/statistics", {
+            title: "Mis estadisticas | Mujeres CTIAM",
+            user: req.user,
+            isAuthenticated: true,
+            products,
         });
     },
 };
