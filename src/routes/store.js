@@ -56,6 +56,13 @@ router.get(
     storeController.getQuestions
 );
 
+router.get(
+    "/statistics",
+    isAuthenticated,
+    isSeller,
+    storeController.getStatistics
+);
+
 router.get("/:id", async (req, res) => {
     const user = req.user;
     const store = await Store.findByPk(req.params.id);

@@ -124,6 +124,37 @@ router.post("/getProductoByLastVisit", async (req, res) => {
     }
 });
 
+router.get("/getVisita/:id", async (req, res) => {
+    const id_producto = req.params.id;
+    const product = await Product.findByPk(id_producto);
+    if (req.user) {
+        if (req.user.id !== product.id_tienda) {
+            const lista = JSON.parse(product.visitas);
+            let f = new Date();
+            let day = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
+            if (lista.visitas.find(find => find.fecha === day) !== undefined) {
+                lista.visitas.find(find => find.fecha === day).contador++;
+            } else {
+                lista.visitas.push({
+                    "fecha": day,
+                    "contador": 1
+                });
+            }
+            product['visitas'] = lista;
+            await product.save();
+        }
+    }
+});
+
+router.get("/getVisitas/:id", async (req, res) => {
+    const id_producto = req.params.id;
+    const product = await Product.findByPk(id_producto);
+    const lista = JSON.parse(product.visitas);
+    return res.json({
+        lista,
+    });
+});
+
 router.use("/store", store);
 
 router.use("/login", login);

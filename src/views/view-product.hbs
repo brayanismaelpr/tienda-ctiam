@@ -121,6 +121,7 @@
     window.onload = main;
     function main(){
         localStorage.setItem('ultima_visita','{{product.dataValues.id_categoria}}');
+        fetch(`${location.origin}/getVisita/{{product.dataValues.id}}`).then()
     }
 </script>
 {{> footer}}
