@@ -1,16 +1,16 @@
 {{> header_principal}}
 
 <section class="c-profile">
-    <article class="c-profile__content">
+    <article class="container mx-auto sm:flex">
         {{> seller/options_seller }}
-        <div class="div-profile">
+        <div class="div-profile mx-auto w-full">
             <figure class="div-profile__slider">
                 <img src="../images/banner-store/1.jpg">
             </figure>
             <img class="div-profile--img" src="{{imageStore store.imagen}}">
-            <div class="div-profile__info">
-                <form class="div-profile__info-content" action="/seller/store/update" method="POST">
-                    <h1 class="div-profile__info--h1">{{store.nombre}}</h1>
+            <div class="container">
+                <form class="div-profile__info-content pb-10" action="/seller/store/update" method="POST">
+                    <h1 class="div-profile__info--h1 font-bold">{{store.nombre}}</h1>
                     <div class="div-profile__label md:flex">
                         <label for="usuario" class="justify-between flex mb-3 items-center justify-between">
                             <span>Usuario</span>
