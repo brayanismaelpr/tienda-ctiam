@@ -349,7 +349,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 .c-profile-admin__figure--hat {
     position: absolute;
-    top: 0;
+    top: 20px;
     right: 0;
     width: 90px;
 }
