@@ -70,6 +70,13 @@ const Product = sequelize.define(
             type: DataTypes.STRING(255),
             allowNull: true,
         },
+        visitas: {
+            type: DataTypes.JSON,
+            allowNull: true,
+            defaultValue: {
+                visitas: [],
+            },
+        },
     },
     {
         freezeTableName: true,
