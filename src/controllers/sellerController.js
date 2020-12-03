@@ -1,4 +1,10 @@
-const { Product, Photography } = require("../repository/database").models;
+const {
+    Product,
+    Photography,
+    State,
+    Store,
+} = require("../repository/database").models;
+const { Op } = require("sequelize");
 
 module.exports = {
     createProduct: async (req, res) => {
@@ -49,5 +55,23 @@ module.exports = {
             "No se ha encontrado el producto que desea eliminar"
         );
         return res.redirect("/seller/my-products");
+    },
+    getProducts: async (req, res) => {
+        const user = req.user;
+        const store = await Store.findByPk(user.id);
+        const products = await Store.getProducts(user.id);
+        const states = await State.findAll({
+            where: {
+                [Op.not]: [{ id: [2, 3] }],
+            },
+        });
+        res.render("seller/manageProduct", {
+            title: `Mis productos | Mujeres CTIAM`,
+            user,
+            products,
+            states,
+            store: store.dataValues,
+            isAuthenticated: true,
+        });
     },
 };

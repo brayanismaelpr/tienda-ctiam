@@ -26,22 +26,7 @@ router.get("/products", async (req, res) => {
     });
 });
 
-router.get("/my-products", async (req, res) => {
-    const user = req.user;
-    const store = await Store.findByPk(user.id);
-    const products = await Product.findAll({
-        where: {
-            id_tienda: store.id,
-        },
-    });
-    res.render("seller/manageProduct", {
-        title: `Mis productos | Mujeres CTIAM`,
-        user,
-        products,
-        store: store.dataValues,
-        isAuthenticated: true,
-    });
-});
+router.get("/my-products", sellerController.getProducts);
 
 router.get("/sales", async (req, res) => {
     const user = req.user;
