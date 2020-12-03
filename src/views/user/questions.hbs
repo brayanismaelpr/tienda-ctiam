@@ -22,22 +22,19 @@
                             </div>
                         </div>
                         <div class="c-user-question-answer">
-                            <div class="c-user-question-answer__answer">
-                                <p class="c-user-question-answer__answer--p">
-                                    <b>Pregunta</b><br><br>
-                                </p>
-                                <p class="c-user-question-answer__answer--p">{{this.pregunta}}</p>
+                            <div class="w-full">
+                                <p class="font-bold">Pregunta</p>
+                                <p class="pt-4">{{this.pregunta}}</p>
                                 {{#if this.respuesta}}
-                                <div class="c-user-question-answer__seller">
+                                <div class="pt-4 flex">
                                     <a href="/store/{{this.id_tienda}}">
-                                        <img class="c-user-shopping__img" src="{{imageStore this.imagen_tienda}}">
+                                        <img class="w-10 h-10 rounded-full" src="{{imageStore this.imagen_tienda}}">
                                     </a>
-                                    <p class="c-user-question-answer__seller--p">{{this.respuesta}}</p>
+                                    <p class="font-semibold pl-4 w-11/12">{{this.respuesta}}</p>
                                 </div>
                                 {{else}}
                                 <h2>Esperando respuesta!</h2>
                                 {{/if}}
-
                             </div>
                         </div>
                     </div>
