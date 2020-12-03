@@ -16,6 +16,8 @@ const {
     landMarkController,
     frequentQuestionController,
 } = require("../controllers");
+const Category = require("../repository/models/Categoria");
+const LandMark = require("../repository/models/Marca");
 
 router.get("/", (req, res) => {
     res.render("index", {
@@ -85,6 +87,26 @@ router.get("/list-product", (req, res) => {
     res.render("list-product", {
         title: "Lista productos | Mujeres CTIAM",
         isAuthenticated: req.user != undefined,
+    });
+});
+
+router.get("/list-product-c/:id", async(req, res) => {
+    const id_categoria = req.params.id;
+    const categorys = await Category.findAll();
+    const products = await Product.findAll({
+        where:{
+            id_categoria
+        }
+    });
+    products.map(async item => {
+        const marcaDB = await LandMark.findByPk(item.id_marca);
+        item.marca = marcaDB.dataValues.nombre;
+    });
+    res.render("list-product", {
+        title: "Lista productos | Mujeres CTIAM",
+        isAuthenticated: req.user != undefined,
+        categorys,
+        products
     });
 });
 
