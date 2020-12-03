@@ -4,9 +4,14 @@
         {{> seller/options_seller }}
         <div class="div-profile py-10">
             <div class="c-list__t w-11/12 mx-auto">
-                <div class="c-list__t-body grid grid-cols-5 gap-2" style="border-bottom: 1px solid rgb(194, 194, 194);">
+                <select class="w-55 h-10 border-2 px-2 border-black rounded ml-4 mt-5 mb-10" name="">
+                    {{#each states}}
+                    <option value="{{this.dataValues.id}}">{{this.dataValues.estado}}</option>
+                    {{/each}}
+                </select>
+                <div class="c-list__t-body grid grid-cols-7 gap-2" style="border-bottom: 1px solid rgb(194, 194, 194);">
                     <div class="c-list__column">
-                        <p class="c-list__column--p"><b>#</b></p>
+                        <p class="c-list__column--p"><b></b></p>
                     </div>
                     <div class="c-list__column">
                         <p class="c-list__column--p"><b>Titulo</b></p>
@@ -18,97 +23,40 @@
                         <p class="c-list__column--p"><b>Precio</b></p>
                     </div>
                     <div class="c-list__column">
-                        <p class="c-list__column--p"><b>Acciones</b></p>
+                        <p class="c-list__column--p"><b>Categoría</b></p>
+                    </div>
+                    <div class="c-list__column">
+                        <p class="c-list__column--p"><b>Marca</b></p>
+                    </div>
+                    <div class="c-list__column">
+                        <p class="c-list__column--p"><b>Estado</b></p>
                     </div>
                 </div>
-                <div class="c-list__t-body grid grid-cols-5 gap-2" style="border-bottom: 1px solid rgb(194, 194, 194);">
+                {{#each products}}
+                <div class="c-list__t-body grid grid-cols-7 gap-2" style="border-bottom: 1px solid rgb(194, 194, 194);">
                     <div class="c-list__column">
-                        <p class="c-list__column--p"><b>1</b></p>
+                        <input type="checkbox" name="" id="">
                     </div>
                     <div class="c-list__column">
-                        <p class="c-list__column--p">Frank Jean Pierre Gómez Salazar</p>
+                        <p class="c-list__column--p">{{this.titulo}}</p>
                     </div>
                     <div class="c-list__column">
-                        <p class="c-list__column--p">1151593</p>
+                        <p class="c-list__column--p">{{this.stock}}</p>
                     </div>
                     <div class="c-list__column">
-                        <p class="c-list__column--p">frankjeanpierregs@ufps.edu.co</p>
+                        <p class="c-list__column--p">{{this.precio}}</p>
                     </div>
                     <div class="c-list__column">
-                        <div class="c-list__actions">
-                            <a class="c-list__actions--a" href=""><i class="fas fa-eye"></i></a>
-                            <a class="c-list__actions--a" href=""><i class="fas fa-eye-slash"></i></a>
-                            <a class="c-list__actions--a" href=""><i class="fas fa-edit"></i></a>
-                            <a class="c-list__actions--a" href=""><i class="fas fa-trash"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="c-list__t-body grid grid-cols-5 gap-2" style="border-bottom: 1px solid rgb(194, 194, 194);">
-                    <div class="c-list__column">
-                        <p class="c-list__column--p"><b>2</b></p>
+                        <p class="c-list__column--p">{{this.categoria}}</p>
                     </div>
                     <div class="c-list__column">
-                        <p class="c-list__column--p">Frank Jean Pierre Gómez Salazar</p>
+                        <p class="c-list__column--p">{{this.marca}}</p>
                     </div>
                     <div class="c-list__column">
-                        <p class="c-list__column--p">1151593</p>
-                    </div>
-                    <div class="c-list__column">
-                        <p class="c-list__column--p">frankjeanpierregs@ufps.edu.co</p>
-                    </div>
-                    <div class="c-list__column">
-                        <div class="c-list__actions">
-                            <a class="c-list__actions--a" href=""><i class="fas fa-eye"></i></a>
-                            <a class="c-list__actions--a" href=""><i class="fas fa-eye-slash"></i></a>
-                            <a class="c-list__actions--a" href=""><i class="fas fa-edit"></i></a>
-                            <a class="c-list__actions--a" href=""><i class="fas fa-trash"></i></a>
-                        </div>
+                        <p class="c-list__column--p">{{this.estado}}</p>
                     </div>
                 </div>
-                <div class="c-list__t-body grid grid-cols-5 gap-2" style="border-bottom: 1px solid rgb(194, 194, 194);">
-                    <div class="c-list__column">
-                        <p class="c-list__column--p"><b>3</b></p>
-                    </div>
-                    <div class="c-list__column">
-                        <p class="c-list__column--p">Frank Jean Pierre Gómez Salazar</p>
-                    </div>
-                    <div class="c-list__column">
-                        <p class="c-list__column--p">1151593</p>
-                    </div>
-                    <div class="c-list__column">
-                        <p class="c-list__column--p">frankjeanpierregs@ufps.edu.co</p>
-                    </div>
-                    <div class="c-list__column">
-                        <div class="c-list__actions">
-                            <a class="c-list__actions--a" href=""><i class="fas fa-eye"></i></a>
-                            <a class="c-list__actions--a" href=""><i class="fas fa-eye-slash"></i></a>
-                            <a class="c-list__actions--a" href=""><i class="fas fa-edit"></i></a>
-                            <a class="c-list__actions--a" href=""><i class="fas fa-trash"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="c-list__t-body grid grid-cols-5 gap-2" style="border-bottom: 1px solid rgb(194, 194, 194);">
-                    <div class="c-list__column">
-                        <p class="c-list__column--p"><b>3</b></p>
-                    </div>
-                    <div class="c-list__column">
-                        <p class="c-list__column--p">Frank Jean Pierre Gómez Salazar</p>
-                    </div>
-                    <div class="c-list__column">
-                        <p class="c-list__column--p">1151593</p>
-                    </div>
-                    <div class="c-list__column">
-                        <p class="c-list__column--p">frankjeanpierregs@ufps.edu.co</p>
-                    </div>
-                    <div class="c-list__column">
-                        <div class="c-list__actions">
-                            <a class="c-list__actions--a" href=""><i class="fas fa-eye"></i></a>
-                            <a class="c-list__actions--a" href=""><i class="fas fa-eye-slash"></i></a>
-                            <a class="c-list__actions--a" href=""><i class="fas fa-edit"></i></a>
-                            <a class="c-list__actions--a" href=""><i class="fas fa-trash"></i></a>
-                        </div>
-                    </div>
-                </div>
+                {{/each}}
             </div>
         </div>
     </article>
