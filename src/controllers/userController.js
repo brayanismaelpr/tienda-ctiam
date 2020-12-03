@@ -141,9 +141,11 @@ module.exports = {
                descripcion
             });
             if (direction) {
+                req.flash("success", "Dirección agregada correctamente");
                 return res.redirect('/user/home');
             }
         }
+        req.flash("error", "Ha ocurrido un error inesperado");
         return res.redirect('/user/home');
     },
 };
