@@ -91,20 +91,28 @@ router.get("/questions", async (req, res) => {
 });
 
 router.post("/list-product-c/:id", async (req, res) => {
+    const { Op } = require("sequelize");
     const id_categoria = req.params.id;
     const { body } = req.body;
+    const id_marca = body.id_marca;
     let products;
-    if (body.length) {
+    if (id_marca.length) {
         products = await Product.findAll({
             where:{
                 id_categoria,
-                id_marca:body
+                id_marca,
+                precio:{
+                    [Op.gte]:body.precio
+                }
             }
         });
     } else {
         products = await Product.findAll({
             where:{
-                id_categoria
+                id_categoria,
+                precio:{
+                    [Op.gte]:body.precio
+                }
             }
         });
     }

@@ -2,25 +2,28 @@
 
 <div class="c-list-product flex justify-center w-full mx-auto">
     <section class="c-list-products md:flex justify-between py-8">
-      <aside class="c-filter shadow-2xl w-3/12 mr-4">
+        <aside class="c-filter shadow-2xl w-3/12 mr-4">
             <h2 class="c-filter--h2">Filtros</h2>
             <ul class="c-filter__ul">
                 <p class="c-filter--brand">Marca</p>
                 {{#each Marks}}
                 <li class="c-filter__li">
-                    <input class="c-filter__li--input" type="checkbox" onclick="filtrar();" name="cboxname" id="cbox1" value="{{this.dataValues.id}}">
+                    <input class="c-filter__li--input" type="checkbox" onclick="filtrar();" name="cboxname" id="cbox1"
+                        value="{{this.dataValues.id}}">
                     <p>{{this.dataValues.nombre}}</p>
                 </li>
                 {{/each}}
             </ul>
             <ul class="c-filter__ul">
                 <p class="c-filter--brand">Precio</p>
-                <input type="range" min="5" max="10" step="0.01">
+                <input onclick="filtrar();" type="range" name="price" id="price" min="0" max="1500000" value="0" step="100">
+                <output class="price-output" for="price"></output>
             </ul>
         </aside>
-    {{#if products}}
+        {{#if products}}
         {{!-- c-list-products__grid --}}
-        <article class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-10/12 mx-auto md:w-9/12" id="productosJSON">
+        <article class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-10/12 mx-auto md:w-9/12"
+            id="productosJSON">
             {{#each products}}
             <a class="c-list-products__grid--a shadow-lg" href="/product/{{this.dataValues.id}}">
                 <div class="c-list-products__grid-content">
@@ -41,28 +44,43 @@
             {{/each}}
         </article>
         {{else}}
-            <img src="{{URL}}/images/vacio.png" class="w-10/12 mx-auto md:w-9/12" alt="No se encontraron productos">
+        <img src="{{URL}}/images/vacio.png" class="w-10/12 mx-auto md:w-9/12" alt="No se encontraron productos">
         {{/if}}
     </section>
 </div>
 <script>
-    function filtrar(){
-        let body = []
+    //Slider precios
+        const price = document.querySelector('#price')
+        const output = document.querySelector('.price-output')
+        output.textContent = price.value
+        price.addEventListener('input', function () {
+            output.textContent = price.value
+            document.getElementById('price').value = price.value
+            filtrar();
+        });
+
+    function filtrar() {
+        //Checkbox marcas
+        let id_marca = []
         Array.from(document.getElementsByName('cboxname')).map(item => {
-            if(item.checked){
-                body.push(Number(item.value));
+            if (item.checked) {
+                id_marca.push(Number(item.value));
             }
         })
+        //BODY
+        let precio = Number((document.getElementById('price').value))
+        let body = {id_marca, precio}
+        //AJAX
         fetch(`${location.origin}/list-product-c/{{id_categoria}}`, {
-        method: "post",
-        body: JSON.stringify({ body }),
-        headers: {
-            "Content-Type": "application/json",
-        },
-    }).then(res => res.json()).then( data => {
+            method: "post",
+            body: JSON.stringify({ body }),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }).then(res => res.json()).then(data => {
             let articleHtml = ""
             data.products.map(item => {
-            articleHtml += `
+                articleHtml += `
                 <a class="c-list-products__grid--a shadow-lg" href="/product/${item.id}">
                 <div class="c-list-products__grid-content">
                     <figure class="c-list-products__figure">
@@ -80,9 +98,9 @@
                 </div>
             </a>
             `;
-        })
-        document.getElementById('productosJSON').innerHTML = articleHtml;
-    });
+            })
+            document.getElementById('productosJSON').innerHTML = articleHtml;
+        });
     }
 </script>
 <script src="js/modal-category.js"></script>
