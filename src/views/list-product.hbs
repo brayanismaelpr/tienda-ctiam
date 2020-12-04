@@ -55,15 +55,15 @@
                 body.push(Number(item.value));
             }
         })
-        fetch(`${location.origin}/list-product/{{id_categoria}}`, {
+        fetch(`${location.origin}/list-product-c/{{id_categoria}}`, {
         method: "post",
         body: JSON.stringify({ body }),
         headers: {
             "Content-Type": "application/json",
         },
     }).then(res => res.json()).then( data => {
-        let articleHtml = ""
-        data.products.map(item => {
+            let articleHtml = ""
+            data.products.map(item => {
             articleHtml += `
                 <a class="c-list-products__grid--a shadow-lg" href="/product/${item.id}">
                 <div class="c-list-products__grid-content">
@@ -85,7 +85,6 @@
         })
         document.getElementById('productosJSON').innerHTML = articleHtml;
     });
-
     }
 </script>
 <script src="js/modal-category.js"></script>
