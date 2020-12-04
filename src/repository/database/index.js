@@ -28,11 +28,10 @@ const Question = require("../models/Pregunta");
 const Sale = require("../models/Venta");
 const Store = require("../models/Tienda");
 const User = require("../models/Usuario");
-
-(async () => {
-    sequelize
-        .sync()
-        .then(() => console.log("database connected"));
+// {alter:true}
+// {force:true}
+(async () => { 
+    sequelize.sync({force:true}).then(() => console.log("database connected"));
 })();
 
 require("../asociation")({
