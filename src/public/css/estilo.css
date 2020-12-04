@@ -1789,7 +1789,7 @@ footer {
     display: flex;
     justify-content: center;
     position: absolute;
-    top:90px;
+    /* top:90px; */
     left: 48px;
     width: 180px;
     z-index: 1000;
@@ -2933,4 +2933,10 @@ footer {
     position:absolute; 
     z-index: 1; top: 0; 
     left: 0;
+}
+#c-category, #ventana-cuenta {
+    position: relative;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1440px;
 }

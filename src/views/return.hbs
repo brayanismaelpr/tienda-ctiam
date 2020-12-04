@@ -1,0 +1,37 @@
+{{> header_principal}}
+
+<section class="c-profile">
+    <article class="container mx-auto sm:flex">
+        {{> seller/options_seller }}
+        <form class="c-profile-seller__form--content py-10 w-11/12 md:w-2/4" name="createProduct">
+            <div class=" w-full">
+                <h1 class="font-medium text-2xl">Realizar devolución de producto</h1>
+                <div class="pt-10">
+                    <div class="c-profile-seller__input">
+                        <input placeholder="Código producto:" id="codigo_producto" type="text" name="codigo" required>
+                    </div>
+                    <div class="c-profile-seller__input">
+                        <input placeholder="Tienda o vendedor:" id="tienda_producto" type="text" name="tienda" required>
+                    </div>
+                    <div class="c-profile-seller__input">
+                        <textarea name="" id="" cols="30" rows="10" placeholder="Motivo o razón del cambio."></textarea>
+                    </div>
+                    <div class="border-4 border-pink-400 flex items-center justify-center w-full rounded mb-4"
+                        aria-disabled="false" id="areafileproducts" data-id-image="1">
+                        <div class="sc-ui-image-uploader__container" style="position:relative" role="button"
+                            tabindex="0">
+                            {{> svgs/icon-dragImage}}
+                            <a class="sc-ui-image-uploader__link">Agrega o arrastrar</a>
+                        </div>
+                        <input
+                            accept="image/jpg, image/jpeg, image/png, image/webp, image/JPG, image/JPEG, image/PNG, image/WEBP"
+                            type="file" multiple="" autocomplete="off" style="display: none;">
+                    </div>
+                    <button class="c-profile-seller--button hover:bg-black duration-300" type="button" data-type-button="form">Cambiar producto</button>
+                </div>
+            </div>
+        </form>
+    </article>
+</section>
+
+{{> footer}}
