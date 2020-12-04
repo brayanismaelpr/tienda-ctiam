@@ -11,8 +11,10 @@ module.exports = {
                 storeDB[field] = store[field];
             }
             await storeDB.save();
+            req.flash("success", "Tienda actualizada correctamente");
             return res.redirect("/seller/store");
         }
+        req.flash("error", "Ha ocurrido un error inesperado");
         return res.redirect("/seller/store");
     },
     getQuestions: async (req, res) => {

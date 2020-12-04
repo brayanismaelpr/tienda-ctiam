@@ -44,14 +44,37 @@ button.addEventListener("click", async () => {
         }
     }
     if (bool) {
-        fetch(`${location.origin}/seller/products/`, {
+        const data = await fetch(`${location.origin}/seller/products/`, {
             method: "post",
             body: JSON.stringify(producto),
             headers: {
                 "Content-Type": "application/json",
             },
         });
-        window.location.replace(`${location.origin}/seller/`);
+        const res = await data.json();
+        if (res.ok){
+            Swal.fire({
+                icon: "success",
+                title: "ok!",
+                confirmButtonText: "Ok",
+                text: "Producto registrado correctamente",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.replace(`${location.origin}/seller/`);
+                }
+            });    
+        }else {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                confirmButtonText: "Ok",
+                text: "Ha ocurrido un error inesperado",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.replace(`${location.origin}/seller/`);
+                }
+            });
+        }
     } else {
         Swal.fire({
             icon: "error",
