@@ -6,38 +6,12 @@
             <h2 class="c-filter--h2">Filtros</h2>
             <ul class="c-filter__ul">
                 <p class="c-filter--brand">Marca</p>
+                {{#each Marks}}
                 <li class="c-filter__li">
-                    <input class="c-filter__li--input" type="checkbox" id="cbox1" value="first_checkbox">
-                    <p>Louis</p>
+                    <input class="c-filter__li--input" type="checkbox" onclick="filtrar();" name="cboxname" id="cbox1" value="{{this.dataValues.id}}">
+                    <p>{{this.dataValues.nombre}}</p>
                 </li>
-                <li class="c-filter__li">
-                    <input class="c-filter__li--input" type="checkbox" id="cbox1" value="first_checkbox">
-                    <p>Louis</p>
-                </li>
-                <li class="c-filter__li">
-                    <input class="c-filter__li--input" type="checkbox" id="cbox1" value="first_checkbox">
-                    <p>Louis</p>
-                </li>
-                <li class="c-filter__li">
-                    <input class="c-filter__li--input" type="checkbox" id="cbox1" value="first_checkbox">
-                    <p>Louis</p>
-                </li>
-                <li class="c-filter__li">
-                    <input class="c-filter__li--input" type="checkbox" id="cbox1" value="first_checkbox">
-                    <p>Louis</p>
-                </li>
-                <li class="c-filter__li">
-                    <input class="c-filter__li--input" type="checkbox" id="cbox1" value="first_checkbox">
-                    <p>Louis</p>
-                </li>
-                <li class="c-filter__li">
-                    <input class="c-filter__li--input" type="checkbox" id="cbox1" value="first_checkbox">
-                    <p>Louis</p>
-                </li>
-                <li class="c-filter__li">
-                    <input class="c-filter__li--input" type="checkbox" id="cbox1" value="first_checkbox">
-                    <p>Louis</p>
-                </li>
+                {{/each}}
             </ul>
             <ul class="c-filter__ul">
                 <p class="c-filter--brand">Precio</p>
@@ -46,7 +20,7 @@
         </aside>
     {{#if products}}
         {{!-- c-list-products__grid --}}
-        <article class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-10/12 mx-auto md:w-9/12">
+        <article class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-10/12 mx-auto md:w-9/12" id="productosJSON">
             {{#each products}}
             <a class="c-list-products__grid--a shadow-lg" href="/product/{{this.dataValues.id}}">
                 <div class="c-list-products__grid-content">
@@ -73,6 +47,46 @@
     {{/if}}
     </section>
 </div>
+<script>
+    function filtrar(){
+        let body = []
+        Array.from(document.getElementsByName('cboxname')).map(item => {
+            if(item.checked){
+                body.push(Number(item.value));
+            }
+        })
+        fetch(`${location.origin}/list-product/{{id_categoria}}`, {
+        method: "post",
+        body: JSON.stringify({ body }),
+        headers: {
+            "Content-Type": "application/json",
+        },
+    }).then(res => res.json()).then( data => {
+        let articleHtml = ""
+        data.products.map(item => {
+            articleHtml += `
+                <a class="c-list-products__grid--a shadow-lg" href="/product/${item.id}">
+                <div class="c-list-products__grid-content">
+                    <figure class="c-list-products__figure">
+                        <img class="w-full h-full object-center object-cover" src="${item.imagen}">
+                    </figure>
+                    <div class="c-list-products__info">
+                        <div class="c-list-products__info-content">
+                            <p class="c-list-products--price">$${item.precio}</p>
+                            <p class="c-list-products--brand">${item.marca}</p>
+                            <p class="c-list-products--name">
+                                ${item.titulo} - ${item.descripcion}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            `;
+        })
+        document.getElementById('productosJSON').innerHTML = articleHtml;
+    });
 
+    }
+</script>
 <script src="js/modal-category.js"></script>
 {{> footer}}

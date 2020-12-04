@@ -1,5 +1,4 @@
-window.onload = main;
-function main(){
+function getCategorysFooter(){
     fetch(`${location.origin}/categories`)
         .then(res => res.json())
         .then(data => {
@@ -14,3 +13,4 @@ function main(){
             document.getElementById('ulCategorias').innerHTML = ul;
         });
 }
+getCategorysFooter();

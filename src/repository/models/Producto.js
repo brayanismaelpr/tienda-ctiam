@@ -73,9 +73,9 @@ const Product = sequelize.define(
         visitas: {
             type: DataTypes.JSON,
             allowNull: true,
-            defaultValue: {
-                visitas: [],
-            },
+            defaultValue: `{
+                "visitas": [],
+            }`,
         },
     },
     {
