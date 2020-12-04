@@ -201,18 +201,6 @@
     <article class="c__content container__content">
         <p class="c--title">Descubre</p>
         <div class="c-grid-four" id="gridProducts">
-            <a class="c-grid-four__box" href="">
-                <img class="w-full h-full object-center object-cover" src="images/search/3.jpg">
-            </a>
-            <a class="c-grid-four__box" href="">
-                <img class="w-full h-full object-center object-cover" src="images/search/13.jpg">
-            </a>
-            <a class="c-grid-four__box" href="">
-                <img class="w-full h-full object-center object-cover" src="images/search/17.jpg">
-            </a>
-            <a class="c-grid-four__box" href="">
-                <img class="w-full h-full object-center object-cover" src="images/search/7.jpg">
-            </a>
         </div>
         <div class="c-promo-index">
             <div class="c-promo-index__info">
@@ -237,30 +225,11 @@
     </article>
 </section>
 <script>
-    window.onload = main;
-    function main() {
-        let idCategory = localStorage.getItem('ultima_visita');
-        fetch(`${location.origin}/getProductoByLastVisit`, {
-            method: "post",
-            body: JSON.stringify({idCategory}),
-            headers: {
-                "Content-Type": "application/json",
-            },
-        }).then(res => res.json()).then(products => {
-            let gridProducts = ""
-            products.products.forEach(item =>{
-                gridProducts+=`
-                    <a class="c-grid-four__box" href="/product/${item.id}">
-                        <img class="w-full h-full object-center object-cover" src="${item.imagen}">
-                    </a>
-                `;
-            });
-            document.getElementById("gridProducts").innerHTML = gridProducts;
-        });
-    }
+    
 </script>
 {{!-- <script src="js/main.js"></script> --}}
 {{!-- <script src="js/login-modal.js"></script> --}}
+<script src="js/index-products.js"></script>
 <script src="js/modal-category.js"></script>
 <script src="js/slider-ctiam.js"></script>
 {{> footer}}

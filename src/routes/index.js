@@ -83,16 +83,28 @@ router.get("/questions", async (req, res) => {
     });
 });
 
-router.get("/list-product", (req, res) => {
-    res.render("list-product", {
-        title: "Lista productos | Mujeres CTIAM",
-        isAuthenticated: req.user != undefined,
+router.post("/list-product/:id", async (req, res) => {
+    const id_categoria = req.params.id;
+    const { body } = req.body;
+    const products = await Product.findAll({
+        where:{
+            id_categoria,
+            id_marca:body
+        }
+    });
+    products.map(async item => {
+        const marcaDB = await LandMark.findByPk(item.id_marca);
+        item.marca = marcaDB.dataValues.nombre;
+    });
+    return res.json({
+        products,
     });
 });
 
 router.get("/list-product-c/:id", async(req, res) => {
     const id_categoria = req.params.id;
-    const categorys = await Category.findAll();
+    // const categorys = await Category.findAll();
+    const Marks = await LandMark.findAll();
     const products = await Product.findAll({
         where:{
             id_categoria
@@ -105,8 +117,9 @@ router.get("/list-product-c/:id", async(req, res) => {
     res.render("list-product", {
         title: "Lista productos | Mujeres CTIAM",
         isAuthenticated: req.user != undefined,
-        categorys,
-        products
+        Marks,
+        products,
+        id_categoria
     });
 });
 
