@@ -1,7 +1,7 @@
 {{> header_principal}}
 
 <div class="c-list-product flex justify-center w-full mx-auto">
-    <section class="c-list-products md:flex justify-between py-8"></section>
+    <section class="c-list-products md:flex justify-between py-8">
       <aside class="c-filter shadow-2xl w-3/12 mr-4">
             <h2 class="c-filter--h2">Filtros</h2>
             <ul class="c-filter__ul">
@@ -40,11 +40,9 @@
             </a>
             {{/each}}
         </article>
-    {{else}}
-    <article class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-10/12 mx-auto md:w-9/12">
-        <img src="{{URL}}/images/vacio.png" class="w-10/12 mx-auto md:w-9/12" alt="No se encontraron productos">
-    </article>
-    {{/if}}
+        {{else}}
+            <img src="{{URL}}/images/vacio.png" class="w-10/12 mx-auto md:w-9/12" alt="No se encontraron productos">
+        {{/if}}
     </section>
 </div>
 <script>
