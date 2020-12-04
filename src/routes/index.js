@@ -90,20 +90,29 @@ router.get("/questions", async (req, res) => {
     });
 });
 
-router.post("/list-product/:id", async (req, res) => {
+router.post("/list-product-c/:id", async (req, res) => {
     const id_categoria = req.params.id;
     const { body } = req.body;
-    const products = await Product.findAll({
-        where:{
-            id_categoria,
-            id_marca:body
-        }
-    });
+    let products;
+    if (body.length) {
+        products = await Product.findAll({
+            where:{
+                id_categoria,
+                id_marca:body
+            }
+        });
+    } else {
+        products = await Product.findAll({
+            where:{
+                id_categoria
+            }
+        });
+    }
     products.map(async item => {
         const marcaDB = await LandMark.findByPk(item.id_marca);
         item.marca = marcaDB.dataValues.nombre;
-    });
-    return res.json({
+    })
+    res.json({
         products,
     });
 });
