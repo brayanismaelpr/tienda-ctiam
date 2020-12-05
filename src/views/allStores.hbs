@@ -1,14 +1,13 @@
 {{> header_principal}}
-
 <section class="c-stores">
     <article class="c-stores__content">
         <p class="c-stores--title">Tiendas destacadas</p>
         <div class="c-stores__grid">
             {{#each stores}}
-            <div class="c-stores__store">
+            <div class="c-stores__store shadow-xl">
                 <a href="/store/{{this.dataValues.id}}">
                     <div class="c-stores__store-info">
-                        <figure class="c-stores__fig">
+                        <figure class="c-stores__fig shadow-md">
                             <img class="c-stores__fig--img" src="{{imageStore this.dataValues.imagen}}">
                         </figure>
                         <div class="c-stores__text">
