@@ -58,6 +58,13 @@ router.get("/return", (req, res) => {
     });
 });
 
+router.get("/notifications", (req, res) => {
+    res.render("notifications", {
+        title: "Notificaciones | Mujeres CTIAM",
+        isAuthenticated: req.user != undefined,
+    });
+});
+
 router.get("/change", (req, res) => {
     res.render("change", {
         title: "Cambiar | Mujeres CTIAM",
