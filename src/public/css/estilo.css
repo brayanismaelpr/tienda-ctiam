@@ -1773,11 +1773,12 @@ footer {
 .c-cuenta__li--a { 
     align-items: center;
     color: #000000;
+    font-weight: bold;
     font-size: 14px;
     display: flex;
     transition: .5s;
 }
-.c-cuenta__li--a:hover { font-weight: bold; font-size: 13px; }
+.c-cuenta__li--a:hover { color: var(--purple); }
 .c-cuenta__li--a i {
     font-size: 20px;
     padding-right: 7px;
@@ -2680,7 +2681,7 @@ footer {
     text-align: center;
 }
 .c-stores {
-    background-color: #f1f1f1;
+    background-color: #fafafa;
     border-bottom: 2px solid #000000;
     display: flex;
     justify-content: space-between;
@@ -2712,9 +2713,6 @@ footer {
     height: 100px;
     overflow: hidden;
     width: 25%;
-    -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
-    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
 }
 .c-stores__fig--img,
 .c-stores__store--img {
