@@ -125,7 +125,7 @@ router.post("/list-product-c/:id", async (req, res) => {
     }
     products.map(async item => {
         const marcaDB = await LandMark.findByPk(item.id_marca);
-        item.marca = marcaDB.dataValues.nombre;
+        item.dataValues.marca = marcaDB.dataValues.nombre;
     })
     res.json({
         products,
@@ -218,6 +218,18 @@ router.get("/getVisitas/:id", async (req, res) => {
     const lista = JSON.parse(product.visitas);
     return res.json({
         lista,
+    });
+});
+
+router.get("/getDestacados", async (req, res) =>{
+    const products = await Product.findAll();
+    products.map( item => {
+        const data = JSON.parse(item.visitas);
+        item.dataValues.total = data.visitas.map(item => item.contador).reduce((acc, valor) => acc + valor)
+    });
+    products.sort((a, b) => b.dataValues.total - a.dataValues.total);
+    return res.json({
+        products,
     });
 });
 
