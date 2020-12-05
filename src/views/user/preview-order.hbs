@@ -1,0 +1,42 @@
+{{> header_principal}}
+
+<div>
+    {{#if addresses}}
+    <select name="direccion">
+        {{#each addresses}}
+        <option value="{{this.id_direccion}}">{{this.nombre}} {{this.avenida}} {{this.this.calle}} {{this.numero}}
+            {{this.barrio}}</option>
+        {{/each}}
+    </select>
+    {{else}}
+    <h2>Crear dirección</h2>
+    {{/if}}
+    <div>
+        <img src="{{product.dataValues.imagen}}" alt="imagen producto"
+            style="border-radius: 50%; height: 150px; width: 150px;">
+        <h3>{{product.dataValues.titulo}}</h3>
+        <div>
+            <p>cantidad: <span>{{amount}}</span></p>
+        </div>
+        <div>
+            <h4>Pagas: <span>{{total_value}}</span></h4>
+        </div>
+    </div>
+
+    <div>
+        <h4>Opciones de envío</h4>
+        <input type="radio" name="option" id="option">
+        <p>A acordar con el vendedor</p>
+    </div>
+    <div>
+        <h4>Opciones de retiro</h4>
+        <input type="radio" name="option" id="option">
+        <p>El domicilio del vendedor</p>
+        <h5>En Cúcuta Norte de santander</h5>
+    </div>
+    <div>
+        <button>Continuar con la compra</button>
+    </div>
+</div>
+
+{{> footer}}

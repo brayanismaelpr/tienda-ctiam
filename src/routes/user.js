@@ -1,10 +1,7 @@
 const { Router } = require("express");
 const router = Router();
 const { cartController, userController } = require("../controllers");
-const {
-    Address,
-    City,
-} = require("../repository/database").models;
+const { Address, City } = require("../repository/database").models;
 
 router.get("/", (req, res) => {
     res.redirect("/user/home");
@@ -14,17 +11,17 @@ router.get("/home", async (req, res) => {
     const user = req.user;
     const directionsDB = await Address.findAll({
         where: {
-            id_usuario: user.id
-        }
-    }).then(data => {
-        data.forEach(async item => {
+            id_usuario: user.id,
+        },
+    }).then((data) => {
+        data.forEach(async (item) => {
             cityDB = await City.findOne({
                 where: {
-                    id: item.id_ciudad
-                }
+                    id: item.id_ciudad,
+                },
             });
-            item.city = cityDB.nombre
-        })
+            item.city = cityDB.nombre;
+        });
         res.render("user/perfil", {
             title: "Perfil | Mujeres CTIAM",
             user,
@@ -55,7 +52,7 @@ router.get("/shopping", (req, res) => {
 
 router.post("/update", userController.updateAUser);
 
-router.post("/create-direction", userController.createDirection)
+router.post("/create-direction", userController.createDirection);
 
 router.get("/favorites", userController.getFavorites);
 
@@ -70,5 +67,7 @@ router.get("/cart/:id", userController.setCart);
 router.post("/cart/setAmount", cartController.changeAmountProduct);
 
 router.get("/cart/delete/:id", cartController.deleteAItem);
+
+router.post("/checkout", userController.makeOrder);
 
 module.exports = router;

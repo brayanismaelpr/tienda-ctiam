@@ -20,7 +20,7 @@
                 <ul class="c-view-product__details">
                     <li class="c-view-product__details__li">
                         <i class="fas fa-store"></i>
-                        <p class="c-view-product__details__li--p">Vendido por 
+                        <p class="c-view-product__details__li--p">Vendido por
                             <a href="/store/{{store.dataValues.id}}"><b>{{store.dataValues.nombre}}</b></a></p>
                     </li>
                     <li class="c-view-product__details__li">
@@ -33,26 +33,32 @@
                     </li>
                 </ul>
                 <div class="c-view-product__colours">
-                    <p class="c-view-product__colours--p">Color</p>
-                    <div class="flex">
-                        <select class="w-14 h-10 border-2 px-2 border-black rounded mr-4" name="" id="">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="6">Otra</option>
-                        </select>
-                        <button class="flex items-center justify-center w-44 h-10 bg-pink-300 rounded" type="">Comprar</button>
-                    </div>
+                    <form action="/user/checkout" method="post">
+                        <p class="c-view-product__colours--p">Color</p>
+                        <div class="flex">
+                            <select class="w-14 h-10 border-2 px-2 border-black rounded mr-4" name="amount" id="">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="6">Otra</option>
+                            </select>
+                            <input type="hidden" name="id_product" value="{{product.dataValues.id}}">
+                            <button class="flex items-center justify-center w-44 h-10 bg-pink-300 rounded"
+                                type="">Comprar</button>
+                        </div>
+                    </form>
                 </div>
                 <br>
                 <div class="flex">
-                    <a class="mr-4 flex items-center justify-center w-44 h-10 bg-gray-300 rounded" href="/user/favorites/{{product.dataValues.id}}">
+                    <a class="mr-4 flex items-center justify-center w-44 h-10 bg-gray-300 rounded"
+                        href="/user/favorites/{{product.dataValues.id}}">
                         Agregar Favoritos
                     </a><br>
-                    <a class="text-white flex items-center justify-center w-44 h-10 bg-pink-800 rounded" href="/user/cart/{{product.dataValues.id}}">
+                    <a class="text-white flex items-center justify-center w-44 h-10 bg-pink-800 rounded"
+                        href="/user/cart/{{product.dataValues.id}}">
                         Agregar Carrito
                     </a>
                 </div>
@@ -85,17 +91,20 @@
                 {{/each}}
             </div>
         </div>
-        <div class="w-full bg-white rounded-bl-lg rounded-br-lg py-16">        
+        <div class="w-full bg-white rounded-bl-lg rounded-br-lg py-16">
             {{#unless isown}}
             {{#if isAuthenticated}}
-                <form class="w-9/12 mx-auto flex items-center justify-between mb-5" action="/product/make-question" method="POST">
-                    <input class="w-10/12 border-gray-600 rounded py-2 px-4 border-4 border-black border-opacity-25"
-                        name="pregunta" placeholder="Haz una pregunta!">
-                    <input type="hidden" value="{{product.dataValues.id}}" name="id_producto">
-                    <button class="rounded flex items-center justify-center text-white w-1/6 h-12 duration-300 bg-pink-500 hover:bg-pink-800" type="submit">Preguntar</button>
-                </form>
-                {{else}}
-                <h2>Regístrate para hacer una pregunta!</h2>
+            <form class="w-9/12 mx-auto flex items-center justify-between mb-5" action="/product/make-question"
+                method="POST">
+                <input class="w-10/12 border-gray-600 rounded py-2 px-4 border-4 border-black border-opacity-25"
+                    name="pregunta" placeholder="Haz una pregunta!">
+                <input type="hidden" value="{{product.dataValues.id}}" name="id_producto">
+                <button
+                    class="rounded flex items-center justify-center text-white w-1/6 h-12 duration-300 bg-pink-500 hover:bg-pink-800"
+                    type="submit">Preguntar</button>
+            </form>
+            {{else}}
+            <h2>Regístrate para hacer una pregunta!</h2>
             {{/if}}
             {{/unless}}
             {{#each questions}}
@@ -119,8 +128,8 @@
 </section>
 <script>
     window.onload = main;
-    function main(){
-        localStorage.setItem('ultima_visita','{{product.dataValues.id_categoria}}');
+    function main() {
+        localStorage.setItem('ultima_visita', '{{product.dataValues.id_categoria}}');
         fetch(`${location.origin}/getVisita/{{product.dataValues.id}}`).then()
     }
 </script>

@@ -88,4 +88,10 @@ User.getQuestions = async (userID) =>
         `SELECT t.imagen as imagen_tienda, t.id as id_tienda, p.titulo, p.imagen, p.precio, p.id as id_producto, pre.pregunta, pre.respuesta FROM producto p INNER JOIN pregunta pre ON p.id = pre.id_producto INNER JOIN tienda t ON t.id = p.id_tienda WHERE pre.id_usuario = ${userID}`,
         { type: QueryTypes.SELECT }
     );
+User.getAddresses = async (userID) =>
+    await sequelize.query(
+        `SELECT d.id as id_direccion, d.barrio, d.avenida, d.calle, d.numero, c.nombre FROM direccion d INNER JOIN usuario u ON d.id_usuario = u.id INNER JOIN ciudad c ON d.id_ciudad = c.id WHERE u.id = ${userID}`,
+        { type: QueryTypes.SELECT }
+    );
+
 module.exports = User;

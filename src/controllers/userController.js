@@ -123,29 +123,63 @@ module.exports = {
         );
         return res.redirect("/user/change-password");
     },
-    createDirection: async (req, res) =>{
-        const {ciudad, barrio, calle, avenida, numero, descripcion} = req.body;
+    createDirection: async (req, res) => {
+        const {
+            ciudad,
+            barrio,
+            calle,
+            avenida,
+            numero,
+            descripcion,
+        } = req.body;
         const city = await City.findOne({
             where: {
-                nombre:ciudad
-            }
+                nombre: ciudad,
+            },
         });
         if (city) {
             const direction = await Address.create({
-               id_usuario: req.user.id,
-               id_ciudad: city.id,
-               barrio,
-               avenida,
-               calle,
-               numero,
-               descripcion
+                id_usuario: req.user.id,
+                id_ciudad: city.id,
+                barrio,
+                avenida,
+                calle,
+                numero,
+                descripcion,
             });
             if (direction) {
                 req.flash("success", "Dirección agregada correctamente");
-                return res.redirect('/user/home');
+                return res.redirect("/user/home");
             }
         }
         req.flash("error", "Ha ocurrido un error inesperado");
-        return res.redirect('/user/home');
+        return res.redirect("/user/home");
+    },
+    makeOrder: async (req, res) => {
+        const { id_product, amount } = req.body;
+        const user = req.user;
+        if (id_product && typeof id_product == "string") {
+            const product = await Product.findByPk(id_product, {
+                attributes: ["id", "titulo", "precio", "imagen"],
+            });
+            console.log(product);
+            if (product) {
+                const addresses = await User.getAddresses(req.user.id);
+                return res.render("user/preview-order", {
+                    title: "Pedido | Mujeres CTIAM",
+                    user: req.user,
+                    isAuthenticated: req.user != undefined,
+                    amount,
+                    product,
+                    addresses,
+                    total_value: Number(product.precio) * Number(amount),
+                });
+            }
+            return res.render("error", {
+                title: "Página no encontrada | Mujeres CTIAM",
+                user: req.user,
+                isAuthenticated: req.user != undefined,
+            });
+        }
     },
 };
