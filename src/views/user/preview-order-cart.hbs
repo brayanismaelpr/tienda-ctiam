@@ -1,0 +1,41 @@
+{{> header_principal}}
+
+<div>
+    {{#if addresses}}
+    <select name="direccion">
+        {{#each addresses}}
+        <option value="{{this.id_direccion}}">{{this.nombre}} {{this.avenida}} {{this.this.calle}} {{this.numero}}
+            {{this.barrio}}</option>
+        {{/each}}
+    </select>
+    {{else}}
+    <h2>Crear dirección</h2>
+    {{/if}}
+
+    {{#each pack}}
+    <h3>Paquete {{@index}}</h3>
+    {{#each this}}
+    <div>
+        <img src="{{this.imagen}}" alt="imagen producto" style="border-radius: 50%; height: 150px; width: 150px;">
+        <h3>{{this.titulo}}</h3>
+        <div>
+            <p>cantidad: <span>{{this.cantidad}}</span></p>
+        </div>
+        <div>
+            <h4>Precio: <span>{{this.precio}}</span></h4>
+        </div>
+    </div>
+    <div>
+        <h4>Opciones de envío</h4>
+        <p>A acordar con el vendedor</p>
+    </div>
+    <br><br><br><br>
+    {{/each}}
+    {{/each}}
+
+    <div>
+        <button>Continuar con la compra</button>
+    </div>
+</div>
+
+{{> footer}}
