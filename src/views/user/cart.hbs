@@ -6,11 +6,13 @@
             <div class="c-shopping-cart__title">
                 <p class="c-shopping-cart__title--p">Carrito</p>
                 <p class="c-shopping-cart__title--p" id="totalvaluecart">{{cart.dataValues.valor_total}}</p>
-                <button class="c-shopping-cart__title--button" type="submit">Comprar todo</button>
+                <form action="/user/checkout/cart" method="POST">
+                    <button class="c-shopping-cart__title--button" type="submit">Comprar todo</button>
+                </form>
             </div>
             {{#if itemsCart}}
             {{#each itemsCart}}
-                {{> user/product_cart item=this}}
+            {{> user/product_cart item=this}}
             {{/each}}
             {{else}}
             <img src="{{URL}}/images/vacio.png" alt="No se encontraron productos">

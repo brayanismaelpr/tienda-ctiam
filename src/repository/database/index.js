@@ -29,7 +29,7 @@ const Sale = require("../models/Venta");
 const Store = require("../models/Tienda");
 const User = require("../models/Usuario");
 // {alter:true}
-(async () => { 
+(async () => {
     sequelize.sync().then(() => console.log("database connected"));
 })();
 

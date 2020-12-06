@@ -157,7 +157,6 @@ module.exports = {
     },
     makeOrder: async (req, res) => {
         const { id_product, amount } = req.body;
-        const user = req.user;
         if (id_product && typeof id_product == "string") {
             const product = await Product.findByPk(id_product, {
                 attributes: ["id", "titulo", "precio", "imagen"],
@@ -181,5 +180,32 @@ module.exports = {
                 isAuthenticated: req.user != undefined,
             });
         }
+    },
+    makeCartOrder: async (req, res) => {
+        const cartItems = await User.getCartItems(req.user.id);
+        if (cartItems) {
+            const addresses = await User.getAddresses(req.user.id);
+            let pack = {};
+            cartItems.forEach((item) => {
+                if (pack[item.id_tienda]) {
+                    pack[item.id_tienda].append(item);
+                } else {
+                    pack[item.id_tienda] = [item];
+                }
+            });
+            return res.render("user/preview-order-cart", {
+                title: "Pedido | Mujeres CTIAM",
+                user: req.user,
+                isAuthenticated: req.user != undefined,
+                pack,
+                addresses,
+                // total_value: Number(product.precio) * Number(amount),
+            });
+        }
+        return res.render("error", {
+            title: "Página no encontrada | Mujeres CTIAM",
+            user: req.user,
+            isAuthenticated: req.user != undefined,
+        });
     },
 };

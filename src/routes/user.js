@@ -70,4 +70,6 @@ router.get("/cart/delete/:id", cartController.deleteAItem);
 
 router.post("/checkout", userController.makeOrder);
 
+router.post("/checkout/cart", userController.makeCartOrder);
+
 module.exports = router;

@@ -93,5 +93,9 @@ User.getAddresses = async (userID) =>
         `SELECT d.id as id_direccion, d.barrio, d.avenida, d.calle, d.numero, c.nombre FROM direccion d INNER JOIN usuario u ON d.id_usuario = u.id INNER JOIN ciudad c ON d.id_ciudad = c.id WHERE u.id = ${userID}`,
         { type: QueryTypes.SELECT }
     );
-
+User.getCartItems = async (userID) =>
+    await sequelize.query(
+        `SELECT p.id, p.titulo, p.imagen, p.id_tienda, ic.cantidad, ic.precio FROM producto p INNER JOIN item_cart ic ON ic.id_producto = p.id INNER JOIN usuario u ON u.id = ic.id_carrito WHERE u.id = ${userID}`,
+        { type: QueryTypes.SELECT }
+    );
 module.exports = User;
