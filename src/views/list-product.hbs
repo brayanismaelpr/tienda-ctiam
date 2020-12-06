@@ -2,8 +2,14 @@
 
 <div class="c-list-product flex justify-center w-full mx-auto">
     <section class="c-list-products md:flex justify-between py-8">
-        <aside class="c-filter shadow-2xl w-3/12 mr-4">
-            <h2 class="c-filter--h2">Filtros</h2>
+        <div class="c-filter-title-h2 mx-auto" style="width: 83.2%">
+            <h2 onclick="filter()" class="c-filter--h2">Filtros</h2>
+        </div>
+        <aside class="c-filter shadow-2xl mr-4">
+            <div class="flex items-center justify-between mx-auto w-3/4 pt-10 pb-4">
+                <h2 class="text-2xl">Filtros</h2>
+                <i onclick="filter()" class="cursor-pointer fas fa-times text-2xl bg-red-500 hover:bg-black duration-300 text-white py-1 px-2 rounded"></i>
+            </div>
             <ul class="c-filter__ul">
                 <p class="c-filter--brand">Marca</p>
                 {{#each Marks}}
@@ -103,5 +109,5 @@
         });
     }
 </script>
-<script src="js/modal-category.js"></script>
+<script src="../js/filter.js"></script>
 {{> footer}}
