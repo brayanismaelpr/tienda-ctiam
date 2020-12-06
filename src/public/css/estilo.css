@@ -1668,17 +1668,51 @@ footer {
 .c-list__actions--a:hover { color: #000000 }
 .c-list__actions--a i { font-size: 20px; }
 .c-list-product { background-color: #fafafa; }
-.c-list-products { width: 1212px; }
+.c-list-products { position: relative; width: 1212px; }
 .c-filter {
     background-color: #ffffff;
     width: 245px;
+    transition: .3s;
+}
+@media (max-width: 768px) {
+    .c-filter {
+        top: 0;
+        left: 0;
+        height: 100vh;
+        position: fixed;
+        /* width: 83.2%; */
+        width: 100%;
+        z-index: 9;
+        visibility: hidden;
+        opacity: 0;
+    }
+}
+.c-filter-active {
+    opacity: 1;
+    visibility: visible;
+}
+.c-filter-title-h2 {
+    display: none;
+    padding-bottom: 40px;
 }
 .c-filter--h2 {
-    font-size: 20px;
-    margin: 0 auto;
-    padding-top: 35px;
-    padding-bottom: 15px;
-    width: 75%;
+    align-items: center;
+    background-color: var(--purple);
+    border-radius: 5px;
+    color: #ffffff;
+    cursor: pointer;
+    display: flex;
+    font-size: 18px;
+    justify-content: center;
+    height: 35px;
+    transition: .4s;
+    width: 100px;
+}
+.c-filter--h2:hover {
+    background-color: var(--dark_pink);
+}
+.c-filter .fa-times {
+    display: none;
 }
 .c-filter__ul {
     border-top: 1px solid gray;
