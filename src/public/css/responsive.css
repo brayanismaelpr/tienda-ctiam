@@ -98,9 +98,10 @@ textarea { resize: none; }
         font-size: 24px;
     }
     .h__search { display: none; }
-    .div-profile__label label { width: 100%; }
+    .div-profile__label label { width: 100%; }n
     .c-filter-title-h2 { display: block; }
     .c-filter .fa-times { display: block; }
+    .c-filter-title-h2 {display: block;}
 }
 @media (max-width: 638px) {
     .cont-options-profile { padding: 5px 0; width: 100%; }
