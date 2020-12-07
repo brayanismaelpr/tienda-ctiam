@@ -80,7 +80,6 @@ module.exports = {
         // const categorys = await Category.findAll();
         const Marks = await LandMark.findAll();
         const products = await Product.getSearch(data);
-
         // products.map(async item => {
         //     const marcaDB = await LandMark.findByPk(item.id_marca);
         //     item.marca = marcaDB.dataValues.nombre;

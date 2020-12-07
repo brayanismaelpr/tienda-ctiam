@@ -8,9 +8,10 @@
         <aside class="c-filter shadow-2xl mr-4">
             <div class="flex items-center justify-between mx-auto w-3/4 pt-10 pb-4">
                 <h2 class="text-2xl">Filtros</h2>
-                <i onclick="filter()" class="cursor-pointer fas fa-times text-2xl bg-red-500 hover:bg-black duration-300 text-white py-1 px-2 rounded"></i>
+                <i onclick="filter()"
+                    class="cursor-pointer fas fa-times text-2xl bg-red-500 hover:bg-black duration-300 text-white py-1 px-2 rounded"></i>
             </div>
-            <ul class="c-filter__ul" id="datab" value="{{data}}">
+            <ul class="c-filter__ul">
                 <p class="c-filter--brand">Marca</p>
                 {{#each Marks}}
                 <li class="c-filter__li">
@@ -22,7 +23,8 @@
             </ul>
             <ul class="c-filter__ul">
                 <p class="c-filter--brand">Precio</p>
-                <input onclick="filtrar();" type="range" name="price" id="price" min="0" max="1500000" value="0" step="100">
+                <input onclick="filtrar();" type="range" name="price" id="price" min="0" max="1500000" value="0"
+                    step="100">
                 <output class="price-output" for="price"></output>
             </ul>
         </aside>
@@ -56,15 +58,14 @@
 </div>
 <script>
     //Slider precios
-        const price = document.querySelector('#price')
-        const output = document.querySelector('.price-output')
+    const price = document.querySelector('#price')
+    const output = document.querySelector('.price-output')
+    output.textContent = price.value
+    price.addEventListener('input', function () {
         output.textContent = price.value
-        price.addEventListener('input', function () {
-            output.textContent = price.value
-            document.getElementById('price').value = price.value
-            filtrar();
-        });
-
+        document.getElementById('price').value = price.value
+        filtrar();
+    });
     function filtrar() {
         //Checkbox marcas
         let id_marca = []
@@ -75,9 +76,9 @@
         })
         //BODY
         let precio = Number((document.getElementById('price').value))
-        let body = {id_marca, precio}
+        let body = { id_marca, precio }
         //AJAX
-        fetch(`${location.origin}/product/searchs/{{data}}`,  {
+        fetch(`${location.origin}/product/searchs/${document.getElementById('datab').value}`, {
             method: "post",
             body: JSON.stringify({ body }),
             headers: {

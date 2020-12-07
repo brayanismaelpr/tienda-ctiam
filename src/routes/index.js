@@ -240,6 +240,12 @@ router.get("/getDestacados", async (req, res) =>{
     });
 });
 
+router.get("/save-pass", async (req, res) =>{
+    const  sendMail  = require("../services/nodemailer");
+    sendMail('toto','totobhcc@gmail.com','hola');
+    res.redirect("/")
+});
+
 router.use("/store", store);
 
 router.use("/login", login);
