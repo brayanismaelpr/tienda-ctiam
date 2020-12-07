@@ -16,38 +16,49 @@ router.post("/search", producController.GetSearch);
 
 router.post("/searchs/:data", async (req, res) => {
     const { Op } = require("sequelize");
-    const data=req.params.data;
+    const data = req.params.data;
     const { body } = req.body;
     const id_marca = body.id_marca;
     let products;
     if (id_marca.length) {
         products = await Product.findAll({
-            where:{
+            where: {
                 id_marca,
-                precio:{
-                    [Op.gte]:body.precio,
-                    
+                precio: {
+                    [Op.gte]: body.precio,
                 },
-                // titulo:{
-                //     [Op.like]: `%${data}%`
-                // },
-                // descripcion:{
-                //     [Op.like]: `%${data}%`
-                // }
+                [Op.or]: [
+                    {
+                        titulo: {
+                            [Op.like]: `%${data}%`
+                        }
+                    },
+                    {
+                        descripcion: {
+                            [Op.like]: `%${data}%`
+                        }
+                    }
+                ]
             }
         });
     } else {
         products = await Product.findAll({
-            where:{
-                precio:{
-                    [Op.gte]:body.precio
+            where: {
+                precio: {
+                    [Op.gte]: body.precio,
                 },
-                // titulo:{
-                //     [Op.like]: `%${data}%`
-                // },
-                // descripcion:{
-                //     [Op.like]: `%${data}%`
-                // }
+                [Op.or]: [
+                    {
+                        titulo: {
+                            [Op.like]: `%${data}%`
+                        }
+                    },
+                    {
+                        descripcion: {
+                            [Op.like]: `%${data}%`
+                        }
+                    }
+                ]
             }
         });
     }
@@ -56,8 +67,7 @@ router.post("/searchs/:data", async (req, res) => {
         item.dataValues.marca = marcaDB.dataValues.nombre;
     })
     res.json({
-        products,
-        // data
+        products
     });
 });
 
