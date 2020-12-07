@@ -3,9 +3,7 @@ const router = Router();
 const { cartController, userController } = require("../controllers");
 const { Address, City } = require("../repository/database").models;
 
-router.get("/", (req, res) => {
-    res.redirect("/user/home");
-});
+
 
 router.get("/home", async (req, res) => {
     const user = req.user;

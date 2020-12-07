@@ -7,6 +7,9 @@ const {
     Question,
 } = require("../repository/database").models;
 const { Op } = require("sequelize");
+const { producController } = require(".");
+const Category = require("../repository/models/Categoria");
+const LandMark = require("../repository/models/Marca");
 
 module.exports = {
     getProduct: async (req, res) => {
@@ -71,5 +74,24 @@ module.exports = {
             res.redirect(`/store/questions`);
         }
         res.redirect(`/product/${id_producto}`);
+    },
+    GetSearch: async (req, res) => {
+        const { data } = req.body;
+        // const categorys = await Category.findAll();
+        const Marks = await LandMark.findAll();
+        const products = await Product.getSearch(data);
+
+        // products.map(async item => {
+        //     const marcaDB = await LandMark.findByPk(item.id_marca);
+        //     item.marca = marcaDB.dataValues.nombre;
+        // });
+        res.render("list-product-search", {
+            title: "Lista productos | Mujeres CTIAM",
+            isAuthenticated: req.user != undefined,
+            Marks,
+            products,
+            data,
+        });
+
     },
 };

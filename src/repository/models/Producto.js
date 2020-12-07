@@ -4,6 +4,7 @@ const Tienda = require("./Tienda");
 const Categoria = require("./Categoria");
 const Marca = require("./Marca");
 const Estado = require("./Estado");
+const { query } = require("express");
 
 const Product = sequelize.define(
     "producto",
@@ -89,6 +90,14 @@ Product.getQuestion = async (id_product) =>
         {
             type: QueryTypes.SELECT,
         }
+    );
+
+Product.getSearch = async (search)=>
+    await sequelize.query(
+        `SELECT p.id,p.titulo,p.descripcion,p.detalle,p.precio,p.imagen,p.stock FROM producto p WHERE p.titulo LIKE '%${search}%' OR p.descripcion LIKE '%${search}%'`,
+        {
+            type: QueryTypes.SELECT,
+        } 
     );
 
 module.exports = Product;
