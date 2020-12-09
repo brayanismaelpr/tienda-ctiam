@@ -3,8 +3,7 @@
 <section class="c-profile">
     <article class="container mx-auto sm:flex justify-between">
         {{> seller/options_seller }}
-
-        <div class="w-full md:w-4/5 px-0 md:px-20">
+        <div class="w-11/12 mx-auto sm:w-4/5 px-0 md:px-20 pb-14 md:pb-0">
             <div class=" w-full py-14 mx-auto">
                 <div class="w-full">
                     <h2 class="text-2xl font-medium pb-10">Mis Estadisticas</h2>
@@ -20,9 +19,9 @@
                     </div>
                 </div>
             </div>
-            <div class="grid grid-cols-2 gap-4">
-                <div class="rounded p-6 border-2 shadow-lg flex justify-center items-center" id="columnchart_values"></div>
-                <div class="rounded p-6 border-2 shadow-lg flex justify-center items-center bg-pink-100">
+            <div class="grid md:grid-cols-1 gap-4">
+                <div class="rounded p-6 border-2 shadow-lg flex justify-center items-center overflow-hidden" id="columnchart_values"></div>
+                <div class="h-80 rounded p-6 border-2 shadow-lg flex justify-center items-center overflow-hidden bg-pink-100">
                     <i class="text-7xl text-pink-500 fas fa-ban"></i>
                 </div>
             </div>
@@ -37,7 +36,7 @@
             .then(lista => {
                 array = [["Dia", "visitas", { role: "style" }]]
                 lista.lista.visitas.map(item => {
-                    array.push([item.fecha, item.contador, "#f00"]);
+                    array.push([item.fecha, item.contador, "#C50084"]);
                 });
                 grafico(array);
             });
@@ -60,7 +59,7 @@
 
             var options = {
                 title: `Estadisticas del numero de visitas de un producto`,
-                width: 300,
+                width: "90%",
                 height: 300,
                 bar: { groupWidth: "95%" },
                 legend: { position: "none" },
