@@ -30,6 +30,7 @@
     </article>
 </section>
 <script>
+    cambio();
     function cambio() {
         fetch(`${location.origin}/getVisitas/${document.getElementById("estadisticas").value}`)
             .then(res => res.json())
@@ -67,7 +68,6 @@
             var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
             chart.draw(view, options);
         }
-        cambio();
     }
 </script>
 {{> footer }}
