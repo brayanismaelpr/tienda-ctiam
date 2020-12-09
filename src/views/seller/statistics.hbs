@@ -6,7 +6,7 @@
         <div class="py-14 mx-auto sm:mx-0 w-11/12 sm:w-9/12">
             <div class="c-favorito__grid">
                 <h2>Mis Estadisticas</h2>
-                <select id="estadisticas" onchange="cambio()">
+                <select id="estadisticas" onclick="cambio()">
                     {{#each products}}
                     <option value="{{this.dataValues.id}}">{{this.dataValues.titulo}}</option>
                     {{/each}}
@@ -21,7 +21,7 @@
         fetch(`${location.origin}/getVisitas/${document.getElementById("estadisticas").value}`)
             .then(res => res.json())
             .then(lista => {
-                array = [["Dia", "Numero De visitas", { role: "style" }]]
+                array = [["Dia", "visitas", { role: "style" }]]
                 lista.lista.visitas.map(item => {
                     array.push([item.fecha, item.contador, "#f00"]);
                 });
