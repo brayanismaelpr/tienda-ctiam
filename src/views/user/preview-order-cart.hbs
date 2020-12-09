@@ -1,6 +1,6 @@
 {{> header_principal}}
 
-<div>
+<div class="w-6/12 mx-auto border-4 my-10 p-10">
     {{#if addresses}}
     <select name="direccion">
         {{#each addresses}}
@@ -9,32 +9,26 @@
         {{/each}}
     </select>
     {{else}}
-    <h2>Crear dirección</h2>
+    <a class="underline text-blue-500 font-medium" href="">Crear dirección</a>
     {{/if}}
 
     {{#each pack}}
-    <h3>Paquete {{@index}}</h3>
+    <h3 class="pt-10 font-normal">Paquete: <b>{{@index}}</b></h3>
     {{#each this}}
-    <div>
-        <img src="{{this.imagen}}" alt="imagen producto" style="border-radius: 50%; height: 150px; width: 150px;">
-        <h3>{{this.titulo}}</h3>
-        <div>
+    <div class="md:flex mt-2 p-6 rounded w-full bg-gray-100">
+        <img class="rounded-full shadow-xl" src="{{this.imagen}}" alt="imagen producto" style="height: 150px; width: 150px;">
+        <div class="pl-8">
+            <h3 class="text-2xl">{{this.titulo}}</h3>
             <p>cantidad: <span>{{this.cantidad}}</span></p>
-        </div>
-        <div>
-            <h4>Precio: <span>{{this.precio}}</span></h4>
+            <h4 class="font-normal text-red-500 text-xl">Precio: {{this.precio}}</h4>
+            <h4 class="pt-4">Opciones de envío</h4>
+            <p>A acordar con el vendedor</p>
         </div>
     </div>
-    <div>
-        <h4>Opciones de envío</h4>
-        <p>A acordar con el vendedor</p>
-    </div>
-    <br><br><br><br>
     {{/each}}
     {{/each}}
-
-    <div>
-        <button>Continuar con la compra</button>
+    <div class="w-full flex justify-center pt-8">
+        <button class="py-2 px-6 rounded text-white bg-pink-500 hover:bg-pink-800">Continuar con la compra</button>
     </div>
 </div>
 

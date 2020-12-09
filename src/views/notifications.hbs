@@ -1,10 +1,24 @@
 {{> header_principal}}
 
 <section class="w-full py-10">
-    <article class="p-8 w-9/12 mx-auto rounded border-4">
+    <article class="p-8 w-full md:w-9/12 lg:container mx-auto rounded border-4">
         <h1 class="font-bold text-2xl mb-8">Notificaciones</h1>
-        <div class="w-full bg-gray-100 rounded p-4"></div>
+        <div class="w-full bg-gray-100 rounded p-4 md:flex justify-between">
+            <img class="md:h-60 lg:h-96 w-full md:w-2/4 object-cover object-cente" src="https://images.unsplash.com/photo-1590344195841-761a9afb706e?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=750&q=80" alt="">
+            <div class="w-full md:w-2/4 pl-0 md:pl-4 pt-8 md:pt-0">
+                <h2 class="font-bold text-2xl mb-8 text-green-500">Venta exitosa</h2>
+                <h2 class="font-medium text-xl pb-2">Nombre del producto</h2>
+                <p class="text-justify pb-2">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat corporis alias in necessitatibus dicta enim, obcaecati nihil ducimus possimus praesentium sequi hic 
+                </p>
+                <p class="text-red-500 pt-4 text-3xl">$300.000</p>
+                <div class="flex items-center pt-4">
+                    <button class="flex items-center justify-center w-40 h-10 rounded text-white bg-red-500 hover:bg-red-800 duration-300 mr-2">Botón 1</button>
+                    <a class="flex items-center justify-center w-40 h-10 rounded text-white bg-red-500 hover:bg-red-800 duration-300" href="">Botón 2</a>
+                </div>
+            </div>
+        </div>
     </article>
 </section>
-
+ 
 {{> footer}}
