@@ -20,7 +20,7 @@
     <title>...</title>
 </head>
 
-<body>
+<body class="relative">
     <div class="header-responsive p-8">
         <figure class="flex items-center justify-between pb-8">
             <img class="w-36" src="../images/logo.png">
@@ -52,6 +52,55 @@
     </div>
     <div id="c-register" style="display: none;">
         {{> modals/register-modal}}
+    </div>
+
+    <div class="h-c-notifications container mx-auto absolute flex items-end flex-col" style="z-index: 99999; top: 92px">
+        <div class="shadow-2xl w-80 overflow-y-scroll p-8 bg-white relative" style="height: 400px;">
+            <h1 class="pb-4">Notificaciones</h1>
+            <div class="w-full flex mb-4">
+                <div class="bg-red-500 rounded-full w-1/5" style="height: 46px"></div>
+                <div class="pl-4 w-4/5">
+                    <h1 class="text-xs font-bold">Nombre producto</h1>
+                    <p class="text-xs py-2">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis a
+                    </p>
+                    <a class="text-sm underline text-blue-500" href="">Enlace</a>
+                </div>
+            </div>
+            <div class="w-full flex mb-4">
+                <div class="bg-red-500 rounded-full w-1/5" style="height: 46px"></div>
+                <div class="pl-4 w-4/5">
+                    <h1 class="text-xs font-bold">Nombre producto</h1>
+                    <p class="text-xs py-2">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis a
+                    </p>
+                    <a class="text-sm underline text-blue-500" href="">Enlace</a>
+                </div>
+            </div>
+            <div class="w-full flex mb-4">
+                <div class="bg-red-500 rounded-full w-1/5" style="height: 46px"></div>
+                <div class="pl-4 w-4/5">
+                    <h1 class="text-xs font-bold">Nombre producto</h1>
+                    <p class="text-xs py-2">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis a
+                    </p>
+                    <a class="text-sm underline text-blue-500" href="">Enlace</a>
+                </div>
+            </div>
+            <div class="w-full flex mb-4">
+                <div class="bg-red-500 rounded-full w-1/5" style="height: 46px"></div>
+                <div class="pl-4 w-4/5">
+                    <h1 class="text-xs font-bold">Nombre producto</h1>
+                    <p class="text-xs py-2">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis a
+                    </p>
+                    <a class="text-sm underline text-blue-500" href="">Enlace</a>
+                </div>
+            </div>
+        </div>
+        <div class="shadow-2xl py-2 w-80 bg-white text-center bg-pink-500" style="z-index: 99999;">
+            <a class="text-white underline font-medium" href="">Ver más</a>
+        </div>
     </div>
 
     <div class="c-container">
@@ -112,7 +161,7 @@
                 <button onclick="modal_profile()" class="h__menu-account--ico"><i
                         class="fas fa-caret-down"></i></button>
                 <div class="h__ico-show">
-                    <i class="fas fa-bell h__ico-show--i2"></i>
+                    <i onclick="notifications()" class="fas fa-bell h__ico-show--i2"></i>
                 </div>
             </ul>
             {{/if}}

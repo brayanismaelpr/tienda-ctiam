@@ -5,10 +5,12 @@
         <div class="py-14 mx-auto sm:mx-0 w-11/12 sm:w-9/12">
             <div class="c-shopping-cart__title">
                 <p class="c-shopping-cart__title--p">Carrito</p>
-                <p class="c-shopping-cart__title--p" id="totalvaluecart">{{cart.dataValues.valor_total}}</p>
-                <form action="/user/checkout/cart" method="POST">
-                    <button class="c-shopping-cart__title--button" type="submit">Comprar todo</button>
-                </form>
+                <div class="flex items-center">
+                    <p class="c-shopping-cart__title--p pr-4" id="totalvaluecart">$ {{cart.dataValues.valor_total}}</p>
+                    <form action="/user/checkout/cart" method="POST">
+                        <button class="c-shopping-cart__title--button" type="submit">Comprar todo</button>
+                    </form>
+                </div>
             </div>
             {{#if itemsCart}}
             {{#each itemsCart}}
