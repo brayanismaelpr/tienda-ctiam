@@ -89,20 +89,29 @@
                             return item;
                         }
                     });
-                    let time = 1;
-                    let lista = [['Enero', 0, "#C50084"],['Febrero', 0, "#C50084"],['Marzo', 0, "#C50084"],['Abril', 0, "#C50084"],['Mayo', 0, "#C50084"],['Junio', 0, "#C50084"],['Julio', 0, "#C50084"],['Agosto', 0, "#C50084"],['Septiembre', 0, "#C50084"],['Octubre', 0, "#C50084"],['Noviembre', 0, "#C50084"],['Diciembre', 0, "#C50084"],];
+                    let listMonths = [];
                     months.map(item => {
-                        if (item.fecha.split('/')[1] == time) {
-                            lista[time - 1][1] += item.contador;
-                        }else{
-                            time++;
+                        if (listMonths.find(find => find.mes === item.fecha.split('/')[1]) !== undefined) {
+                            listMonths.find(find => find.mes === item.fecha.split('/')[1]).total += item.contador;
+                        } else {
+                            listMonths.push({
+                                "mes": item.fecha.split('/')[1],
+                                "total": item.contador
+                            });
                         }
+                    })
+                    let array = [["Mes", "visitas", { role: "style" }]]
+                    listMonths.map(item => {
+                        array.push([toMonth(Number(item.mes)), item.total, "#C50084"]);
                     });
-                    let root = [["Mes", "visitas", { role: "style" }]]
-                    let array = root.concat(list);
                     grafico(array);
                 }
             });
+    }
+
+    function toMonth(n) {
+        const months = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+        return months[n - 1];
     }
 
     function todos() {
