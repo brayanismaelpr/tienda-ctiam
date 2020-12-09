@@ -19,6 +19,30 @@ const {
 const Category = require("../repository/models/Categoria");
 const LandMark = require("../repository/models/Marca");
 
+//
+async function demon() {
+    const productDemon = await Product.findAll({ limit: 1 });
+    const listaDemon = JSON.parse(productDemon[0].visitas);
+    let f = new Date();
+    let day = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
+    if (listaDemon.visitas.find(find => find.fecha === day) === undefined) {
+        console.log('entre')
+        let products = await Product.findAll();
+        products.map(product => {
+            const lista = JSON.parse(product.visitas);
+            if (lista.visitas.find(find => find.fecha === day) === undefined) {
+                lista.visitas.push({
+                    "fecha": day,
+                    "contador": 0
+                });
+            }
+            product['visitas'] = lista;
+            product.save();
+        })
+    }
+}
+demon();
+//
 router.get("/", (req, res) => {
     res.render("index", {
         title: "Tienda CTIAM",
@@ -112,20 +136,20 @@ router.post("/list-product-c/:id", async (req, res) => {
     let products;
     if (id_marca.length) {
         products = await Product.findAll({
-            where:{
+            where: {
                 id_categoria,
                 id_marca,
-                precio:{
-                    [Op.gte]:body.precio
+                precio: {
+                    [Op.gte]: body.precio
                 }
             }
         });
     } else {
         products = await Product.findAll({
-            where:{
+            where: {
                 id_categoria,
-                precio:{
-                    [Op.gte]:body.precio
+                precio: {
+                    [Op.gte]: body.precio
                 }
             }
         });
@@ -139,12 +163,12 @@ router.post("/list-product-c/:id", async (req, res) => {
     });
 });
 
-router.get("/list-product-c/:id", async(req, res) => {
+router.get("/list-product-c/:id", async (req, res) => {
     const id_categoria = req.params.id;
     // const categorys = await Category.findAll();
     const Marks = await LandMark.findAll();
     const products = await Product.findAll({
-        where:{
+        where: {
             id_categoria
         }
     });
@@ -222,15 +246,35 @@ router.get("/getVisita/:id", async (req, res) => {
 router.get("/getVisitas/:id", async (req, res) => {
     const id_producto = req.params.id;
     const product = await Product.findByPk(id_producto);
-    const lista = JSON.parse(product.visitas);
+    const visitas = JSON.parse(product.visitas);
     return res.json({
-        lista,
+        visitas,
     });
 });
 
-router.get("/getDestacados", async (req, res) =>{
+router.get("/getAllVisitas", async (req, res) => {
+    const id_tienda = req.user.id;
+    const products = await Product.findAll({
+        where:{
+            id_tienda
+        }
+    });
+    let todos = [['productos','total']];
+    products.map(item => {
+        const data = JSON.parse(item.visitas);
+        const titulo = item.dataValues.titulo;
+        const total = data.visitas.map(item => item.contador).reduce((acc, valor) => acc + valor)
+        todos.push([titulo,total])
+    });
+    console.log(todos);
+    return res.json({
+        todos,
+    });
+});
+
+router.get("/getDestacados", async (req, res) => {
     const products = await Product.findAll();
-    products.map( item => {
+    products.map(item => {
         const data = JSON.parse(item.visitas);
         item.dataValues.total = data.visitas.map(item => item.contador).reduce((acc, valor) => acc + valor)
     });
@@ -240,9 +284,9 @@ router.get("/getDestacados", async (req, res) =>{
     });
 });
 
-router.get("/save-pass", async (req, res) =>{
-    const  sendMail  = require("../services/nodemailer");
-    sendMail('toto','totobhcc@gmail.com','hola');
+router.get("/save-pass", async (req, res) => {
+    const sendMail = require("../services/nodemailer");
+    sendMail('toto', 'totobhcc@gmail.com', 'hola');
     res.redirect("/")
 });
 

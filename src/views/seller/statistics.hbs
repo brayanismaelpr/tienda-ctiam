@@ -8,20 +8,34 @@
                 <div class="w-full">
                     <h2 class="text-2xl font-medium pb-10">Mis Estadisticas</h2>
                     <div class="flex items-center justify-between">
-                        <select class="w-60 h-10 border-2 px-2 border-black rounded mr-4" id="estadisticas" onclick="cambio()">
-                            {{#each products}}
-                            <option value="{{this.dataValues.id}}">{{this.dataValues.titulo}}</option>
-                            {{/each}}
-                        </select>
-                        <a class="px-4 h-10 flex items-center justify-center rounded text-white bg-pink-500 hover:bg-pink-800 duration-300 font-medium" href="">
+                        <div class="flex">
+                            <select class="w-60 h-10 border-2 px-2 border-black rounded mr-4" id="estadisticas"
+                                onclick="cambio()">
+                                {{#each products}}
+                                <option value="{{this.dataValues.id}}">{{this.dataValues.titulo}}</option>
+                                {{/each}}
+                            </select>
+                            <select class="w-40 h-10 border-2 px-2 border-black rounded mr-4 pl-2" id="interval"
+                                onclick="cambio()">
+                                <option value="week">Semana</option>
+                                <option value="month">Mes</option>
+                                <option value="year">Año</option>
+                            </select>
+                        </div>
+                        <a class="px-4 h-10 flex items-center justify-center rounded text-white bg-pink-500 hover:bg-pink-800 duration-300 font-medium"
+                            href="">
                             Descargar reporte
                         </a>
                     </div>
                 </div>
             </div>
             <div class="grid md:grid-cols-1 gap-4">
-                <div class="rounded p-6 border-2 shadow-lg flex justify-center items-center overflow-hidden" id="columnchart_values"></div>
-                <div class="h-80 rounded p-6 border-2 shadow-lg flex justify-center items-center overflow-hidden bg-pink-100">
+                <div class="rounded p-6 border-2 shadow-lg flex justify-center items-center overflow-hidden"
+                    id="columnchart_values"></div>
+                <div class="rounded p-6 border-2 shadow-lg flex justify-center items-center overflow-hidden"
+                    id="piechart_3d" style="width: 900px; height: 500px;"></div>
+                <div
+                    class="h-80 rounded p-6 border-2 shadow-lg flex justify-center items-center overflow-hidden bg-pink-100">
                     <i class="text-7xl text-pink-500 fas fa-ban"></i>
                 </div>
             </div>
@@ -30,17 +44,73 @@
 </section>
 <script>
     cambio();
+    todos();
+
     function cambio() {
         fetch(`${location.origin}/getVisitas/${document.getElementById("estadisticas").value}`)
             .then(res => res.json())
-            .then(lista => {
-                array = [["Dia", "visitas", { role: "style" }]]
-                lista.lista.visitas.map(item => {
-                    array.push([item.fecha, item.contador, "#C50084"]);
-                });
-                grafico(array);
+            .then(data => {
+                if (document.getElementById('interval').value === 'week') {
+                    data.visitas.visitas.splice(0, (data.visitas.visitas.length - 7));
+                    let array = [["Dia", "visitas", { role: "style" }]]
+                    data.visitas.visitas.map(item => {
+                        array.push([item.fecha, item.contador, "#C50084"]);
+                    });
+                    grafico(array);
+                } else if (document.getElementById('interval').value === 'month') {
+                    let f = new Date();
+                    let month = f.getMonth() + 1;
+                    const weeks = data.visitas.visitas.filter(item => {
+                        if (item.fecha.split('/')[1] == month) {
+                            return item;
+                        }
+                    });
+                    let list = [];
+                    let time = 1;
+                    let i = 1;
+                    let acc = 0;
+                    weeks.map(item => {
+                        acc += item.contador
+                        if (time % 7 === 0 || time === weeks.length) {
+                            list.push([`semana ${i}`, acc, "#C50084"]);
+                            acc = 0;
+                            i++;
+                        }
+                        time++;
+                    });
+                    let root = [["Semana", "visitas", { role: "style" }]]
+                    let array = root.concat(list);
+                    grafico(array);
+                } else if (document.getElementById('interval').value === 'year') {
+                    let f = new Date();
+                    let year = f.getFullYear();
+                    const months = data.visitas.visitas.filter(item => {
+                        if (item.fecha.split('/')[2] == year) {
+                            return item;
+                        }
+                    });
+                    let time = 1;
+                    let lista = [['Enero', 0, "#C50084"],['Febrero', 0, "#C50084"],['Marzo', 0, "#C50084"],['Abril', 0, "#C50084"],['Mayo', 0, "#C50084"],['Junio', 0, "#C50084"],['Julio', 0, "#C50084"],['Agosto', 0, "#C50084"],['Septiembre', 0, "#C50084"],['Octubre', 0, "#C50084"],['Noviembre', 0, "#C50084"],['Diciembre', 0, "#C50084"],];
+                    months.map(item => {
+                        if (item.fecha.split('/')[1] == time) {
+                            lista[time - 1][1] += item.contador;
+                        }else{
+                            time++;
+                        }
+                    });
+                    let root = [["Mes", "visitas", { role: "style" }]]
+                    let array = root.concat(list);
+                    grafico(array);
+                }
             });
     }
+
+    function todos() {
+        fetch(`${location.origin}/getAllVisitas`)
+            .then(res => res.json())
+            .then(data => graficoTodos(data.todos));
+    }
+
     function grafico(array) {
         google.charts.load("current", { packages: ['corechart'] });
         google.charts.setOnLoadCallback(drawChart);
@@ -66,6 +136,22 @@
             };
             var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
             chart.draw(view, options);
+        }
+    }
+
+    function graficoTodos(array) {
+        google.charts.load("current", { packages: ["corechart"] });
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable(array);
+
+            var options = {
+                title: 'Porcentaje de todas las visitas',
+                is3D: true,
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+            chart.draw(data, options);
         }
     }
 </script>
