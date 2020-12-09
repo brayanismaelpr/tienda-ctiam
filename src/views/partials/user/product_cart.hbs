@@ -1,8 +1,8 @@
-<div class="c-shopping-cart__product block md:flex" id="hbs-{{item.id_producto}}">
-    <a class="flex md:w-4/12" style="height: 300px;" href="/product/{{item.id_producto}}">
+<div class="c-shopping-cart__product block md:flex p-8" id="hbs-{{item.id_producto}}">
+    <a class="flex md:w-3/12 rounded-md overflow-hidden" style="height: 200px;" href="/product/{{item.id_producto}}">
         <img class="w-full h-full object-center object-cover" src="{{item.imagen}}">
     </a>
-    <div class="c-shopping-cart__p-info">
+    <div class="c-shopping-cart__p-info w-full md:w-9/12">
         <div class="c-shopping-cart__p-info--content">
             <p class="c-shopping-cart--description">
                 {{item.titulo}}
@@ -16,7 +16,7 @@
                 </div>
             </div>
             <p class="c-shopping-cart--brand">{{item.marca}}</p>
-            <p class="c-shopping-cart--price" id="itemcartId{{item.id_item}}">Precio: $ <span>{{item.precio}}</span></p>
+            <p class="c-shopping-cart--price text-red-500" id="itemcartId{{item.id_item}}">Precio: $ <b class="text-red-500">{{item.precio}}</b></p>
             <div class="c-shopping-cart__options">
                 <button class="c-shopping-cart--buy" type="submit">Comprar</button>
                 <a class="c-shopping-cart--delete" href="/user/cart/delete/{{item.id_item}}">Eliminar</a>
