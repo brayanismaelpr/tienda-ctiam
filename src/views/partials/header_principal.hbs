@@ -59,16 +59,16 @@
             <div class="h-list__logo-search">
                 <div class="flex w-full items-center">
                     <a class="h__menu__a-img" href="/"><img class="h__content--img" src="{{URL}}/images/logo.png"></a>
-                        <div class="h__search">
-                        <form action="/product/search" method="post" class="h__search__c">
+                    <form action="/product/search" method="post" class="h__search">
+                        <div class="h__search__c">
                             <input class="h__search--input" type="text" name="data" id="datab" value="{{data}}" placeholder="Buscar">
-                        </form>
+                        </div>
                         <a href="/product/search">
                             <button type="submit" onclick="" class="h__search--ico">
                                 <i class="fas fa-search"></i>
                             </button>
                         </a>
-                    </div>
+                    </form>
                 </div>
                 <i onclick="menuToggle()" class="fas fa-bars"></i>
             </div>

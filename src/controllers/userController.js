@@ -188,7 +188,7 @@ module.exports = {
             let pack = {};
             cartItems.forEach((item) => {
                 if (pack[item.id_tienda]) {
-                    pack[item.id_tienda].append(item);
+                    pack[item.id_tienda].push(item);
                 } else {
                     pack[item.id_tienda] = [item];
                 }
