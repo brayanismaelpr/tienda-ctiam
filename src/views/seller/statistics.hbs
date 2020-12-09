@@ -3,17 +3,30 @@
 <section class="c-profile">
     <article class="container mx-auto sm:flex justify-between">
         {{> seller/options_seller }}
-        <div class="py-14 mx-auto sm:mx-0 w-11/12 sm:w-9/12">
-            <div class="c-favorito__grid">
-                <h2>Mis Estadisticas</h2>
-                <select id="estadisticas" onclick="cambio()">
-                    {{#each products}}
-                    <option value="{{this.dataValues.id}}">{{this.dataValues.titulo}}</option>
-                    {{/each}}
-                </select>
+
+        <div class="w-full md:w-4/5 px-0 md:px-20">
+            <div class=" w-full py-14 mx-auto">
+                <div class="w-full">
+                    <h2 class="text-2xl font-medium pb-10">Mis Estadisticas</h2>
+                    <div class="flex items-center justify-between">
+                        <select class="w-60 h-10 border-2 px-2 border-black rounded mr-4" id="estadisticas" onclick="cambio()">
+                            {{#each products}}
+                            <option value="{{this.dataValues.id}}">{{this.dataValues.titulo}}</option>
+                            {{/each}}
+                        </select>
+                        <a class="px-4 h-10 flex items-center justify-center rounded text-white bg-pink-500 hover:bg-pink-800 duration-300 font-medium" href="">
+                            Descargar reporte
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="rounded p-6 border-2 shadow-lg flex justify-center items-center" id="columnchart_values"></div>
+                <div class="rounded p-6 border-2 shadow-lg flex justify-center items-center bg-pink-100">
+                    <i class="text-7xl text-pink-500 fas fa-ban"></i>
+                </div>
             </div>
         </div>
-        <div id="columnchart_values" style="width: 800px; height: 300px;"></div>
     </article>
 </section>
 <script>
