@@ -6,6 +6,9 @@ const {
     City,
     Favorite,
     ItemCart,
+    ItemSale,
+    Order,
+    Sale,
     User,
 } = require("../repository/database").models;
 
@@ -208,4 +211,57 @@ module.exports = {
             isAuthenticated: req.user != undefined,
         });
     },
+    createOrder: async (req, res) => {
+
+    },
+    createOrderCart: async (req, res) => {
+        const cartItems = await User.getCartItems(req.user.id);
+        if (cartItems) {
+            let pack = {};
+            var totalOrderCart = 0;
+            const order = await Order.create({
+                id_usuario: req.user.id,
+                total: 0,
+            });
+            cartItems.forEach((item) => {
+                if (pack[item.id_tienda]) {
+                    pack[item.id_tienda].push(item);
+                } else {
+                    pack[item.id_tienda] = [item];
+                }
+            });
+            var totalSaleCart = 0;
+            for (const store in pack) {
+                await Sale.create({
+                    id_tienda: store,
+                    id_pedido: order.id,
+                    total: 0,
+                }).then(async sale => {
+                    pack[store].forEach(async item => {
+                        ItemSale.create({
+                            id_pedido: order.id,
+                            id_producto: item.id,
+                            id_venta: sale.id,
+                            cantidad: item.cantidad,
+                            precio: item.precio,
+                        });
+                        totalSaleCart += Number(item.precio);
+                    });
+                    totalOrderCart += totalSaleCart
+                    sale.total = totalSaleCart;
+                    await sale.save();
+                    totalSaleCart = 0;
+                });
+            }
+            order.total = totalOrderCart;
+            await order.save();
+            await ItemCart.destroy({
+                where: {
+                    id_carrito: req.user.id
+                }
+            });
+            return res.redirect("/user/cart")
+        }
+        return res.json({ok:true})
+    }, 
 };

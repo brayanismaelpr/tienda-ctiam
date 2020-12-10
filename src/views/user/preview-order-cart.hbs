@@ -27,9 +27,9 @@
     </div>
     {{/each}}
     {{/each}}
-    <div class="w-full flex justify-center pt-8">
-        <button class="py-2 px-6 rounded text-white bg-pink-500 hover:bg-pink-800">Continuar con la compra</button>
-    </div>
+    <form class="w-full flex justify-center pt-8" action="/user/order/cart" method="POST">
+        <button class="py-2 px-6 rounded text-white bg-pink-500 hover:bg-pink-800" type="submit">Continuar con la compra</button>
+    </form>
 </div>
 
 {{> footer}}

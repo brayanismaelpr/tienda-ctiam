@@ -28,7 +28,7 @@ const Sale = sequelize.define(
         },
         total : {
             type: DataTypes.DOUBLE,
-            allowNull: false,
+            allowNull: true,
         },
         fecha : {
             type : DataTypes.DATE,

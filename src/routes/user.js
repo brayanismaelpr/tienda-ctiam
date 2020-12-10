@@ -70,4 +70,8 @@ router.post("/checkout", userController.makeOrder);
 
 router.post("/checkout/cart", userController.makeCartOrder);
 
+router.post("/order", userController.createOrder);
+
+router.post("/order/cart", userController.createOrderCart);
+
 module.exports = router;
