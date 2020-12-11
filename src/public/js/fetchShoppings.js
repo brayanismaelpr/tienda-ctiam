@@ -8,7 +8,8 @@ async function fetchShoppings() {
         for (const sale in data[shopping]) {
             str += `<div class="c-user-shopping__box">`;
             data[shopping][sale].forEach((itemSale) => {
-                str += `<h3>${(itemSale.fecha).getDate()+"/"+((itemSale.fecha).getMonth()+1)+"/"+(itemSale.fecha).getFullYear()}</h3>
+                let fecha = new Date(itemSale.fecha);
+                str += `<h3>${fecha.getDate()+"/"+(fecha.getMonth()+1)+"/"+fecha.getFullYear()}</h3>
                     <div class="c-user-shopping__info block md:flex">
                         <img class="c-user-shopping__img w-full md:w-1/5" src="${itemSale.imagen}">
                         <div class="c-user-shopping__text pt-4">
