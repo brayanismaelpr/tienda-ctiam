@@ -1,9 +1,7 @@
 const { Router } = require("express");
 const router = Router();
 const { cartController, userController } = require("../controllers");
-const { Address, City } = require("../repository/database").models;
-
-
+const { Address, City, User } = require("../repository/database").models;
 
 router.get("/home", async (req, res) => {
     const user = req.user;
@@ -40,12 +38,37 @@ router.post("/change-password", userController.updatePassword);
 
 router.get("/questions", userController.getQuestions);
 
-router.get("/shopping", (req, res) => {
+router.get("/shopping", async (req, res) => {
     res.render("user/shopping", {
         title: "Mis compras | Mujeres CTIAM",
         user: req.user,
         isAuthenticated: req.user != undefined,
     });
+});
+
+router.get("/getShoppings", async (req, res) => {
+    const prepareShoppings = (order, data) => {
+        if (order[data.id_venta]) {
+            prepareItemSale(order[data.id_venta], data);
+        } else {
+            order[data.id_venta] = [];
+            prepareItemSale(order[data.id_venta], data);
+        }
+    };
+    const prepareItemSale = (itemSale, data) => {
+        itemSale.push(data);
+    };
+    const shoppings = await User.getShoppings(req.user.id);
+    let pack = {};
+    shoppings.forEach((item) => {
+        if (pack[item.id_pedido]) {
+            prepareShoppings(pack[item.id_pedido], item);
+        } else {
+            pack[item.id_pedido] = {};
+            prepareShoppings(pack[item.id_pedido], item);
+        }
+    });
+    return res.json(pack);
 });
 
 router.post("/update", userController.updateAUser);
