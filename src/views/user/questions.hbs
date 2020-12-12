@@ -7,6 +7,7 @@
         <div class="py-14 mx-auto sm:mx-0 w-11/12 sm:w-9/12">
             <div class="c-favorito__grid">
                 <h2>Mis preguntas</h2>
+                {{#if questions}}
                 {{#each questions}}
                 <div class="c-user-shopping__div">
                     <div class="c-user-shopping__box">
@@ -40,6 +41,9 @@
                     </div>
                 </div>
                 {{/each}}
+                {{else}}
+                <img src="{{URL}}/images/vacio.png" alt="No se encontraron productos">
+                {{/if}}
             </div>
         </div>
     </article>

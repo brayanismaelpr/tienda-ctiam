@@ -26,7 +26,6 @@ async function demon() {
     let f = new Date();
     let day = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
     if (listaDemon.visitas.find(find => find.fecha === day) === undefined) {
-        console.log('entre')
         let products = await Product.findAll();
         products.map(product => {
             const lista = JSON.parse(product.visitas);
@@ -129,13 +128,23 @@ router.get("/questions", async (req, res) => {
 });
 
 router.post("/list-product-c/:id", async (req, res) => {
+    function limitDesc(desc){
+        list = desc.split(' ');
+        str="";
+        for(let i = 0; i<4; i++){
+            if(list[i] !== undefined){
+                str+=list[i]+" ";
+            }
+        }
+        return str
+    }
+
     const { Op } = require("sequelize");
     const id_categoria = req.params.id;
     const { body } = req.body;
     const id_marca = body.id_marca;
-    let products;
     if (id_marca.length) {
-        products = await Product.findAll({
+        await Product.findAll({
             where: {
                 id_categoria,
                 id_marca,
@@ -143,29 +152,44 @@ router.post("/list-product-c/:id", async (req, res) => {
                     [Op.gte]: body.precio
                 }
             }
-        });
+        }).then(sendResponse);
     } else {
-        products = await Product.findAll({
+        await Product.findAll({
             where: {
                 id_categoria,
                 precio: {
                     [Op.gte]: body.precio
                 }
             }
+        }).then(sendResponse);
+    }
+    function sendResponse(products){
+        products.map(async item => {
+            item.dataValues.descripcion = limitDesc(item.dataValues.descripcion);
+            await LandMark.findByPk(item.id_marca)
+                .then( mark => {
+                    item.marca = mark.dataValues.nombre
+                })
+        });
+        res.json({
+            products,
         });
     }
-    products.map(async item => {
-        const marcaDB = await LandMark.findByPk(item.id_marca);
-        item.dataValues.marca = marcaDB.dataValues.nombre;
-    })
-    res.json({
-        products,
-    });
 });
 
 router.get("/list-product-c/:id", async (req, res) => {
+    function limitDesc(desc){
+        list = desc.split(' ');
+        str="";
+        for(let i = 0; i<4; i++){
+            if(list[i] !== undefined){
+                str+=list[i]+" ";
+            }
+        }
+        return str
+    }
+
     const id_categoria = req.params.id;
-    // const categorys = await Category.findAll();
     const Marks = await LandMark.findAll();
     const products = await Product.findAll({
         where: {
@@ -173,6 +197,7 @@ router.get("/list-product-c/:id", async (req, res) => {
         }
     });
     products.map(async item => {
+        item.dataValues.descripcion = limitDesc(item.dataValues.descripcion);
         const marcaDB = await LandMark.findByPk(item.id_marca);
         item.marca = marcaDB.dataValues.nombre;
     });
