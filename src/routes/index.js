@@ -18,6 +18,7 @@ const {
 } = require("../controllers");
 const Category = require("../repository/models/Categoria");
 const LandMark = require("../repository/models/Marca");
+const Subscription = require("../repository/models/Subscripcion");
 
 //
 async function demon() {
@@ -129,12 +130,12 @@ router.get("/questions", async (req, res) => {
 });
 
 router.post("/list-product-c/:id", async (req, res) => {
-    function limitDesc(desc){
+    function limitDesc(desc) {
         list = desc.split(' ');
-        str="";
-        for(let i = 0; i<4; i++){
-            if(list[i] !== undefined){
-                str+=list[i]+" ";
+        str = "";
+        for (let i = 0; i < 4; i++) {
+            if (list[i] !== undefined) {
+                str += list[i] + " ";
             }
         }
         return str
@@ -164,11 +165,11 @@ router.post("/list-product-c/:id", async (req, res) => {
             }
         }).then(sendResponse);
     }
-    function sendResponse(products){
+    function sendResponse(products) {
         products.map(async item => {
             item.dataValues.descripcion = limitDesc(item.dataValues.descripcion);
             await LandMark.findByPk(item.id_marca)
-                .then( mark => {
+                .then(mark => {
                     item.marca = mark.dataValues.nombre
                 })
         });
@@ -179,12 +180,12 @@ router.post("/list-product-c/:id", async (req, res) => {
 });
 
 router.get("/list-product-c/:id", async (req, res) => {
-    function limitDesc(desc){
+    function limitDesc(desc) {
         list = desc.split(' ');
-        str="";
-        for(let i = 0; i<4; i++){
-            if(list[i] !== undefined){
-                str+=list[i]+" ";
+        str = "";
+        for (let i = 0; i < 4; i++) {
+            if (list[i] !== undefined) {
+                str += list[i] + " ";
             }
         }
         return str
@@ -281,18 +282,18 @@ router.get("/getVisitas/:id", async (req, res) => {
 router.get("/getAllVisitas", async (req, res) => {
     const id_tienda = req.user.id;
     const products = await Product.findAll({
-        where:{
+        where: {
             id_tienda
         }
     });
 
-    let todos = [['productos','total']];
+    let todos = [['productos', 'total']];
     let i = 0;
     products.map(item => {
         const data = JSON.parse(item.visitas);
         const titulo = item.dataValues.titulo;
         const total = data.visitas.map(item => item.contador).reduce((acc, valor) => acc + valor)
-        todos.push([titulo,total])
+        todos.push([titulo, total])
         i++;
     });
     return res.json({
@@ -316,6 +317,20 @@ router.get("/save-pass", async (req, res) => {
     const sendMail = require("../services/nodemailer");
     sendMail('toto', 'totobhcc@gmail.com', 'hola');
     res.redirect("/")
+});
+
+router.post("/subscription", async (req, res) => {
+    try {
+        const { correo } = req.body;
+        if (!await Subscription.findByPk(correo)) {
+            Subscription.create({ correo });
+            res.redirect("/");
+        } else {
+            res.redirect("/");
+        }
+    } catch (error) {
+        console.log(error)
+    }
 });
 
 router.use("/store", store);
