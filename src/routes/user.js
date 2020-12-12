@@ -39,26 +39,22 @@ router.post("/change-password", userController.updatePassword);
 router.get("/questions", userController.getQuestions);
 
 router.get("/shopping", async (req, res) => {
-    res.render("user/shopping", {
-        title: "Mis compras | Mujeres CTIAM",
-        user: req.user,
-        isAuthenticated: req.user != undefined,
-    });
-});
-
-router.get("/getShoppings", async (req, res) => {
     const shoppings = await User.getShoppings(req.user.id);
     if (shoppings) {
+        shoppings.forEach(shopping => {
+            let fecha = new Date(shopping.fecha_pedido);
+            shopping.fecha_pedido = `${fecha.getDate()}/${(fecha.getMonth()+1)}/${fecha.getFullYear()}`
+        });
         return res.render("user/shopping",{
             title: "Mis compras | Mujeres CTIAM",
-            user,
+            user: req.user,
             shoppings,
             isAuthenticated: true,
         });
     }
     return res.render("user/shopping",{
         title: "Mis compras | Mujeres CTIAM",
-        user,
+        user: req.user,
         shoppings,
         isAuthenticated: true,
     });
