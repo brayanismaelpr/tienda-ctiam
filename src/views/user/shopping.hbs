@@ -10,22 +10,21 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2">
                     {{#each shoppings}}
                     <div class="border border-gray-500 rounded p-8">
-                        <p class="">Pedido: <b>#0018a</b></p>
-                        <p class="">Fecha: <b>05/12/2020</b></p>
-                        <p class="">Total: <b>598.999</b></p>
-                        <p class="font-bold pb-6">4 productos</p>
+                        <p class="">Pedido: <b>#{{this.id_pedido}}</b></p>
+                        <p class="">Fecha: <b>{{this.fecha_pedido}}</b></p>
+                        <p class="">Total: <b>{{this.total}}</b></p>
+                        <p class="font-bold pb-6">{{this.numero_items}} productos</p>
                         <a class="rounded mt-4 w-100 p-2 bg-pink-300 duration-300 hover:bg-pink-400" href="/user/details-shopping">Ver
                             detalles</a>
                     </div>
                     {{/each}}
-                </div>
-                <div id="content">
                 </div>
             </form>
         </div>
     </article>
 </section>
 
-<script src="{{URL}}/js/fetchShoppings.js"></script>
-
+<script>
+    console.log({{shoppings}})
+</script>
 {{> footer }}
