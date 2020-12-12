@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const router = Router();
 const { cartController, userController } = require("../controllers");
-const { Address, City, User } = require("../repository/database").models;
+const { Address, City, ItemSale, Order, Sale, Store, User } = require("../repository/database").models;
 
 router.get("/home", async (req, res) => {
     const user = req.user;
@@ -60,12 +60,35 @@ router.get("/shopping", async (req, res) => {
     });
 });
 
-router.get("/details-shopping", async (req, res) => {
-    return res.render("user/details-shopping", {
-        title: "Detalles compra | Mujeres CTIAM",
-        user: req.user,
-        isAuthenticated: true,
-    });
+router.get("/details-shopping/:id", async (req, res) => {
+    const id_order = req.params.id;
+    if (id_order) {
+        const order = await Order.findByPk(id_order, {
+            attributes: ["id", "total", "createdAt"],
+        });
+        let date = new Date(order.dataValues.createdAt);
+        order.fecha = `${date.getDate()}/${(date.getMonth()+1)}/${date.getFullYear()}`;
+        const sales = await Sale.findAll({
+            where: {
+                id_pedido: id_order,
+            }
+        });
+        if (sales) {
+            sales.forEach(async sale => {
+                sale.tienda = await Store.findByPk(sale.id_tienda, {
+                    attributes: ["nombre", "telefono", "email"],
+                });
+                sale.items = await ItemSale.getBySale(sale.id);
+            });
+        }
+        return res.render("user/details-shopping", {
+            title: "Detalles compra | Mujeres CTIAM",
+            user: req.user,
+            sales,
+            order,
+            isAuthenticated: true,
+        });
+    }
 });
 
 router.post("/update", userController.updateAUser);

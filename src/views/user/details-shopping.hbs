@@ -8,82 +8,40 @@
                 <h2 class="pb-8 text-xl">Detalles de producto</h2>
                 <div class="w-full">
                     <div class="pb-10 flex">
-                        <p class="pr-4">Pedido: <b>#09878h</b></p>
-                        <p class="pr-4">Fecha: <b>04/12/2020</b></p>
-                        <p>Total: <b>$ 653.222</b></p>
+                        <p class="pr-4">Pedido: <b>#{{order.dataValues.id}}</b></p>
+                        <p class="pr-4">Fecha: <b>{{order.fecha}}</b></p>
+                        <p>Total: <b>$ {{order.dataValues.total}}</b></p>
                     </div>
+                    {{#each sales}}
                     <div class="border-2 rounded-sm p-8 bg-gray-100 mb-8">
-                        <p class="text-xl pb-6 font-bold">Compra #1</p>
-                        <div class="w-full rounded shadow-2xl p-6 bg-white mb-8">
-                            <div class="sm:flex flex-wrap pb-4 border-b-2">
-                                <div class="w-full sm:w-6/12">
-                                    <p>Tienda: <b>María store jeans</b></p>
-                                    <p>Total: <b>283.999</b></p>
-                                    <p class="pr-4">Estado: <b>Pedido entregado</b></p>
-                                </div>
-                                <div class="w-full sm:w-6/12">
-                                    <p>Teléfono de contacto: <b>323466544</b></p>
-                                    <p>Correo electrónico: <b>ejeded@gmail.com</b></p>
-                                </div>
+                        <p class="text-xl pb-6 font-bold">Compra #{{@index}}</p>
+                        <div class="sm:flex w-full bg-white shadow-2xl flex-wrap p-6 mb-8 border-b-2">
+                            <div class="w-full sm:w-6/12">
+                                <p>Tienda: <b>{{this.tienda.dataValues.nombre}}</b></p>
+                                <p>Total: <b>{{this.dataValues.total}}</b></p>
+                                <p class="pr-4">Estado: <b>Pedido entregado</b></p>
                             </div>
-                            <figure class="md:flex pt-4">
-                                <img class="rounded overflow-hidden w-full md:w-1/4 h-40 object-cover object-fit" src="https://images.unsplash.com/photo-1607722890244-7eb2d194e944?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80">
+                            <div class="w-full sm:w-6/12">
+                                <p>Teléfono de contacto: <b>{{this.tienda.dataValues.telefono}}</b></p>
+                                <p>Correo electrónico: <b>{{this.tienda.dataValues.email}}</b></p>
+                            </div>
+                        </div>
+                        {{#each this.items}}
+                        <div class="w-full rounded shadow-2xl p-6 bg-white mb-2">
+                            <figure class="md:flex">
+                                <img class="rounded overflow-hidden w-full md:w-1/4 h-40 object-cover object-fit"
+                                    src="{{this.imagen}}">
                                 <figcaption class="w-full md:w-9/12 pl-0 md:pl-4 pt-4 md:pt-0">
-                                    <p class="pb-2 font-bold text-xl">Jean azul para mujer</p>
-                                    <p>Precio x unidad: <b>$ 444.444</b></p>
-                                    <p>Cantidad: <b>44</b></p>
-                                    <p class="font-bold">Total: 4945.000</p>
+                                    <p class="pb-2 font-bold text-xl">{{this.titulo}}</p>
+                                    <p>Precio x unidad: <b>$ {{this.precio}}</b></p>
+                                    <p>Cantidad: <b>{{this.cantidad}}</b></p>
+                                    <p class="font-bold">Total: {{this.total_item}}</p>
                                 </figcaption>
                             </figure>
                         </div>
-                        <div class="w-full rounded shadow-2xl p-6 bg-white mb-8">
-                            <div class="sm:flex flex-wrap pb-4 border-b-2">
-                                <div class="w-full sm:w-6/12">
-                                    <p>Tienda: <b>María store jeans</b></p>
-                                    <p>Total: <b>283.999</b></p>
-                                    <p class="pr-4">Estado: <b>Pedido entregado</b></p>
-                                </div>
-                                <div class="w-full sm:w-6/12">
-                                    <p>Teléfono de contacto: <b>323466544</b></p>
-                                    <p>Correo electrónico: <b>ejeded@gmail.com</b></p>
-                                </div>
-                            </div>
-                            <figure class="md:flex pt-4">
-                                <img class="rounded overflow-hidden w-full md:w-1/4 h-40 object-cover object-fit" src="https://images.unsplash.com/photo-1607722890244-7eb2d194e944?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80">
-                                <figcaption class="w-full md:w-9/12 pl-0 md:pl-4 pt-4 md:pt-0">
-                                    <p class="pb-2 font-bold text-xl">Jean azul para mujer</p>
-                                    <p>Precio x unidad: <b>$ 444.444</b></p>
-                                    <p>Cantidad: <b>44</b></p>
-                                    <p class="font-bold">Total: 4945.000</p>
-                                </figcaption>
-                            </figure>
-                        </div>
+                        {{/each}}
                     </div>
-                    <div class="border-2 rounded-sm p-8 bg-gray-100 mb-8">
-                        <p class="text-xl pb-6 font-bold">Compra #2</p>
-                        <div class="w-full rounded shadow-2xl p-6 bg-white mb-8">
-                            <div class="sm:flex flex-wrap pb-4 border-b-2">
-                                <div class="w-full sm:w-6/12">
-                                    <p>Tienda: <b>María store jeans</b></p>
-                                    <p>Total: <b>283.999</b></p>
-                                    <p class="pr-4">Estado: <b>Pedido entregado</b></p>
-                                </div>
-                                <div class="w-full sm:w-6/12">
-                                    <p>Teléfono de contacto: <b>323466544</b></p>
-                                    <p>Correo electrónico: <b>ejeded@gmail.com</b></p>
-                                </div>
-                            </div>
-                            <figure class="md:flex pt-4">
-                                <img class="rounded overflow-hidden w-full md:w-1/4 h-40 object-cover object-fit" src="https://images.unsplash.com/photo-1607722890244-7eb2d194e944?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80">
-                                <figcaption class="w-full md:w-9/12 pl-0 md:pl-4 pt-4 md:pt-0">
-                                    <p class="pb-2 font-bold text-xl">Jean azul para mujer</p>
-                                    <p>Precio x unidad: <b>$ 444.444</b></p>
-                                    <p>Cantidad: <b>44</b></p>
-                                    <p class="font-bold">Total: 4945.000</p>
-                                </figcaption>
-                            </figure>
-                        </div>
-                    </div>
+                    {{/each}}
                 </div>
             </form>
         </div>
