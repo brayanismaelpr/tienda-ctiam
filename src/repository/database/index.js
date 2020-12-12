@@ -26,8 +26,10 @@ const Photography = require("../models/Fotografia");
 const Product = require("../models/Producto");
 const Question = require("../models/Pregunta");
 const Sale = require("../models/Venta");
+const Subscription = require("../models/Subscripcion");
 const Store = require("../models/Tienda");
 const User = require("../models/Usuario");
+
 // {alter:true}
 (async () => {
     sequelize.sync().then(() => console.log("database connected"));
@@ -72,6 +74,7 @@ exports.models = {
     Product,
     Question,
     Sale,
+    Subscription,
     Store,
     User,
 };
