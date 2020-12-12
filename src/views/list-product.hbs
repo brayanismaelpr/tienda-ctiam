@@ -7,7 +7,8 @@
         <aside class="c-filter shadow-2xl mr-4">
             <div class="flex items-center justify-between mx-auto w-3/4 pt-10 pb-4">
                 <h2 class="text-2xl">Filtros</h2>
-                <i onclick="filter()" class="cursor-pointer fas fa-times text-2xl bg-red-500 hover:bg-black duration-300 text-white py-1 px-2 rounded"></i>
+                <i onclick="filter()"
+                    class="cursor-pointer fas fa-times text-2xl bg-red-500 hover:bg-black duration-300 text-white py-1 px-2 rounded"></i>
             </div>
             <ul class="c-filter__ul">
                 <p class="c-filter--brand">Marca</p>
@@ -21,7 +22,8 @@
             </ul>
             <ul class="c-filter__ul">
                 <p class="c-filter--brand">Precio</p>
-                <input onclick="filtrar();" type="range" name="price" id="price" min="0" max="1500000" value="0" step="100">
+                <input onclick="filtrar();" type="range" name="price" id="price" min="0" max="1500000" value="0"
+                    step="100">
                 <output class="price-output" for="price"></output>
             </ul>
         </aside>
@@ -55,14 +57,14 @@
 </div>
 <script>
     //Slider precios
-        const price = document.querySelector('#price')
-        const output = document.querySelector('.price-output')
+    const price = document.querySelector('#price')
+    const output = document.querySelector('.price-output')
+    output.textContent = price.value
+    price.addEventListener('input', function () {
         output.textContent = price.value
-        price.addEventListener('input', function () {
-            output.textContent = price.value
-            document.getElementById('price').value = price.value
-            filtrar();
-        });
+        document.getElementById('price').value = price.value
+        filtrar();
+    });
 
     function filtrar() {
         //Checkbox marcas
@@ -74,7 +76,7 @@
         })
         //BODY
         let precio = Number((document.getElementById('price').value))
-        let body = {id_marca, precio}
+        let body = { id_marca, precio }
         //AJAX
         fetch(`${location.origin}/list-product-c/{{id_categoria}}`, {
             method: "post",
@@ -84,8 +86,9 @@
             },
         }).then(res => res.json()).then(data => {
             let articleHtml = ""
-            data.products.map(item => {
-                articleHtml += `
+            if (data.products.length) {
+                data.products.map(item => {
+                    articleHtml += `
                 <a class="c-list-products__grid--a shadow-lg" href="/product/${item.id}">
                 <div class="c-list-products__grid-content">
                     <figure class="c-list-products__figure">
@@ -103,8 +106,15 @@
                 </div>
             </a>
             `;
-            })
+            document.getElementById('productosJSON').classList.add('grid');
             document.getElementById('productosJSON').innerHTML = articleHtml;
+                })
+            } else {
+                articleHtml = `<img src="${location.origin}/images/vacio.png" alt="No se encontraron productos">`;
+                document.getElementById('productosJSON').classList.remove('grid');
+                document.getElementById('productosJSON').innerHTML = articleHtml;
+            }
+            
         });
     }
 </script>

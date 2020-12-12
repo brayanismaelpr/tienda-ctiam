@@ -7,21 +7,27 @@
         <div class="py-14 mx-auto sm:mx-0 w-11/12 sm:w-9/12">
             <form class="c-favorito__grid" action="" method="">
                 <p class="c-profile-seller__form--title">Favoritos</p>
+                {{#if favourites}}
                 <div class="favoritos-grid">
                     {{#each favourites}}
-                        <div class="c-profile-store__product">
-                            <a style="background-color: #f00; height: 30px; width: 30px; display: flex; align-items: center; justify-content: center" href="/user/deleteFavorites/{{this.id_favorito}}">
-                                <i style="color: #ffffff" class="fas fa-times"></i>
-                            </a>
-                            <a style="border:1px solid #f00; height: 300px; width: 100%; display: flex;" href="/product/{{this.id}}">
-                                <img class="c-profile-store__product--img" src="{{this.imagen}}">
-                                <div class="c-profile-store__info-product">
-                                    <p class="c-profile-store__info-product--p">{{this.titulo}}</p>
-                                    <p class="c-profile-store__info-product--price">$ {{this.precio}}</p>
-                                </div>
-                            </a>
-                        </div>
+                    <div class="c-profile-store__product">
+                        <a style="background-color: #f00; height: 30px; width: 30px; display: flex; align-items: center; justify-content: center"
+                            href="/user/deleteFavorites/{{this.id_favorito}}">
+                            <i style="color: #ffffff" class="fas fa-times"></i>
+                        </a>
+                        <a style="border:1px solid #f00; height: 300px; width: 100%; display: flex;"
+                            href="/product/{{this.id}}">
+                            <img class="c-profile-store__product--img" src="{{this.imagen}}">
+                            <div class="c-profile-store__info-product">
+                                <p class="c-profile-store__info-product--p">{{this.titulo}}</p>
+                                <p class="c-profile-store__info-product--price">$ {{this.precio}}</p>
+                            </div>
+                        </a>
+                    </div>
                     {{/each}}
+                    {{else}}
+                    <img src="{{URL}}/images/vacio.png" alt="No se encontraron productos">
+                    {{/if}}
                 </div>
             </form>
         </div>
