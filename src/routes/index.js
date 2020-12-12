@@ -285,13 +285,14 @@ router.get("/getAllVisitas", async (req, res) => {
         }
     });
     let todos = [['productos','total']];
+    let i = 0;
     products.map(item => {
         const data = JSON.parse(item.visitas);
         const titulo = item.dataValues.titulo;
         const total = data.visitas.map(item => item.contador).reduce((acc, valor) => acc + valor)
         todos.push([titulo,total])
+        i++;
     });
-    console.log(todos);
     return res.json({
         todos,
     });
