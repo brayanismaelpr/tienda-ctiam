@@ -56,7 +56,16 @@ router.get("/getShoppings", async (req, res) => {
             isAuthenticated: true,
         });
     }
-    return res.render();
+    return res.render("user/shopping",{
+        title: "Mis compras | Mujeres CTIAM",
+        user,
+        shoppings,
+        isAuthenticated: true,
+    });
+});
+
+router.get("/details-shopping", async (req, res) => {
+    return res.render("user/details-shopping");
 });
 
 router.post("/update", userController.updateAUser);
