@@ -3,7 +3,7 @@ async function fetchShoppings() {
         `${location.origin}/user/getShoppings`
     ).then((res) => res.json());
     let str = ``;
-    if (data.objectKeys) {
+    if (Object.keys(data)) {
         for (const shopping in data) {
             str += `<div class="c-user-shopping__div">`;
             for (const sale in data[shopping]) {
