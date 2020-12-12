@@ -39,36 +39,29 @@ router.post("/change-password", userController.updatePassword);
 router.get("/questions", userController.getQuestions);
 
 router.get("/shopping", async (req, res) => {
-    res.render("user/shopping", {
+    const shoppings = await User.getShoppings(req.user.id);
+    if (shoppings) {
+        shoppings.forEach(shopping => {
+            let fecha = new Date(shopping.fecha_pedido);
+            shopping.fecha_pedido = `${fecha.getDate()}/${(fecha.getMonth()+1)}/${fecha.getFullYear()}`
+        });
+        return res.render("user/shopping",{
+            title: "Mis compras | Mujeres CTIAM",
+            user: req.user,
+            shoppings,
+            isAuthenticated: true,
+        });
+    }
+    return res.render("user/shopping",{
         title: "Mis compras | Mujeres CTIAM",
         user: req.user,
-        isAuthenticated: req.user != undefined,
+        shoppings,
+        isAuthenticated: true,
     });
 });
 
-router.get("/getShoppings", async (req, res) => {
-    const prepareShoppings = (order, data) => {
-        if (order[data.id_venta]) {
-            prepareItemSale(order[data.id_venta], data);
-        } else {
-            order[data.id_venta] = [];
-            prepareItemSale(order[data.id_venta], data);
-        }
-    };
-    const prepareItemSale = (itemSale, data) => {
-        itemSale.push(data);
-    };
-    const shoppings = await User.getShoppings(req.user.id);
-    let pack = {};
-    shoppings.forEach((item) => {
-        if (pack[item.id_pedido]) {
-            prepareShoppings(pack[item.id_pedido], item);
-        } else {
-            pack[item.id_pedido] = {};
-            prepareShoppings(pack[item.id_pedido], item);
-        }
-    });
-    return res.json(pack);
+router.get("/details-shopping", async (req, res) => {
+    return res.render("user/details-shopping");
 });
 
 router.post("/update", userController.updateAUser);
