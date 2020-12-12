@@ -17,7 +17,7 @@
             </div>
             <p class="c-shopping-cart--brand">{{item.marca}}</p>
             <p class="c-shopping-cart--price text-red-500" id="itemcartId{{item.id_item}}">Precio: $ <b class="text-red-500">{{item.precio}}</b></p>
-            <div class="c-shopping-cart__options">
+            <div class="sm:flex flex-wrap items-center">
                 <button class="c-shopping-cart--buy" type="submit">Comprar</button>
                 <a class="c-shopping-cart--delete" href="/user/cart/delete/{{item.id_item}}">Eliminar</a>
                 <a class="c-shopping-cart--favourite" href="/user/favorites/{{item.id_producto}}">Guardar en favoritos</a>
