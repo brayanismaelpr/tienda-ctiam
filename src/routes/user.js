@@ -47,28 +47,16 @@ router.get("/shopping", async (req, res) => {
 });
 
 router.get("/getShoppings", async (req, res) => {
-    const prepareShoppings = (order, data) => {
-        if (order[data.id_venta]) {
-            prepareItemSale(order[data.id_venta], data);
-        } else {
-            order[data.id_venta] = [];
-            prepareItemSale(order[data.id_venta], data);
-        }
-    };
-    const prepareItemSale = (itemSale, data) => {
-        itemSale.push(data);
-    };
     const shoppings = await User.getShoppings(req.user.id);
-    let pack = {};
-    shoppings.forEach((item) => {
-        if (pack[item.id_pedido]) {
-            prepareShoppings(pack[item.id_pedido], item);
-        } else {
-            pack[item.id_pedido] = {};
-            prepareShoppings(pack[item.id_pedido], item);
-        }
-    });
-    return res.json(pack);
+    if (shoppings) {
+        return res.render("user/shopping",{
+            title: "Mis compras | Mujeres CTIAM",
+            user,
+            shoppings,
+            isAuthenticated: true,
+        });
+    }
+    return res.render();
 });
 
 router.post("/update", userController.updateAUser);

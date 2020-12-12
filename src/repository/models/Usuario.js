@@ -100,7 +100,8 @@ User.getCartItems = async (userID) =>
     );
 User.getShoppings = async (userID) =>
     await sequelize.query(
-        `SELECT its.fecha, its.cantidad, its.precio, p.id as id_producto, p.titulo, p.descripcion, p.imagen, t.nombre, v.total as total_venta, v.id as id_venta, ped.id as id_pedido FROM item_sale its INNER JOIN venta v ON v.id = its.id_venta INNER JOIN producto p ON its.id_producto = p.id INNER JOIN tienda t ON p.id_tienda = t.id INNER JOIN pedido ped ON ped.id = v.id_pedido INNER JOIN usuario u ON u.id = ped.id_usuario WHERE u.id = ${userID}`,
+        `SELECT COUNT(its.id_pedido) numero_items, p.id id_pedido, p.total, p.createdAt fecha_pedido FROM item_sale its INNER JOIN pedido p ON p.id = its.id_pedido INNER JOIN usuario u ON u.id = p.id_usuario WHERE u.id = ${userID} GROUP BY its.id_pedido
+        `,
         { type: QueryTypes.SELECT }
     );
 module.exports = User;
