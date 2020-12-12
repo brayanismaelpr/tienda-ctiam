@@ -1,48 +1,54 @@
-<div class="cont-options-profile">
-    <div class="cont-options-profile__content">
-        <li class="li-active">
-            <a class="a-active" href="/user/home">
-                <i class="fas fa-edit i-active"></i>
-                <p>Perfil</p>
-            </a>
-        </li>
-        <li>
-            <a class="" href="/user/change-password">
-                <i class="fas fa-lock"></i>
-                <p>Contraseña</p>
-            </a>
-        </li>
-        <li>
-            <a class="" href="/user/shopping">
-                <i class="fas fa-shopping-bag"></i>
-                <p>Compras</p>
-            </a>
-        </li>
-        <li>
-            <a class="" href="/user/favorites">
-                <i class="fas fa-star"></i>
-                <p>Favoritos</p>
-            </a>
-        </li>
-        <li>
-            <a class="" href="/user/questions">
-                <i class="far fa-question-circle"></i>
-                <p>Preguntas</p>
-            </a>
-        </li>
-        <li>
-            <a class="" href="/user/cart">
-                <i class="fas fa-shopping-cart"></i>
-                <p>Carrito</p>
-            </a>
-        </li>
-        {{#if user.is_seller}}
-        <li>
-            <a href="/seller/store">
-                <i class="fas fa-store"></i>
-                <p>Mi Tienda</p>
-            </a>
-        </li>
-        {{/if}}
+<div class="realtive flex flex-col md:w-1/12 lg:w-1/5 border-0 md:border-r-2 border-gray-400">
+    <div onclick="options_menu_profile()" class="options-menu-user w-full bg-pink-300 duration-300 hover:bg-pink-400 font-bold py-4 color text-center">
+        Menu opciones
+    </div>
+    <div class="cont-options-profile">
+        <div class="cont-options-profile__content">
+            <li class="li-active">
+                <a class="a-active" href="/user/home">
+                    <i class="fas fa-edit i-active"></i>
+                    <p>Perfil</p>
+                </a>
+            </li>
+            <li>
+                <a class="" href="/user/change-password">
+                    <i class="fas fa-lock"></i>
+                    <p>Contraseña</p>
+                </a>
+            </li>
+            <li>
+                <a class="" href="/user/shopping">
+                    <i class="fas fa-shopping-bag"></i>
+                    <p>Compras</p>
+                </a>
+            </li>
+            <li>
+                <a class="" href="/user/favorites">
+                    <i class="fas fa-star"></i>
+                    <p>Favoritos</p>
+                </a>
+            </li>
+            <li>
+                <a class="" href="/user/questions">
+                    <i class="far fa-question-circle"></i>
+                    <p>Preguntas</p>
+                </a>
+            </li>
+            <li>
+                <a class="" href="/user/cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <p>Carrito</p>
+                </a>
+            </li>            
+            {{#if user.is_seller}}
+            <li>
+                <a href="/seller/store">
+                    <i class="fas fa-store"></i>
+                    <p>Tienda</p>
+                </a>
+            </li>
+            {{/if}}
+            <li onclick="options_menu_profile()"><a class="cursor-pointer"><i class="fas fa-times"></i><p>Cerrar</p></a></li>
+        </div>
     </div>
 </div>
