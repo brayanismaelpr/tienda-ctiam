@@ -53,6 +53,7 @@ router.get("/", (req, res) => {
 router.get("/contact", (req, res) => {
     res.render("contact", {
         title: "Contacto | Mujeres CTIAM",
+        user: req.user,
         isAuthenticated: req.user != undefined,
     });
 });

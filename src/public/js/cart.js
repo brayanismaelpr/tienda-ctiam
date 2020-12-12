@@ -44,7 +44,7 @@ async function fetchFunction() {
             }
         ).then((response) => response.json());
         document.querySelector(
-            `#itemcartId${idItem} span`
+            `#itemcartId${idItem} b`
         ).innerText = `${dataFetch.precio}`;
         document.querySelector(
             `#totalvaluecart`
