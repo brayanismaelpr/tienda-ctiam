@@ -39,16 +39,16 @@
                 </div>
             </div>
             <div class="f__subscribe">
-                <div class="f__subscribe__content">
+                <form class="f__subscribe__content" method="POST" action="/subscription">
                     <p class="f--title">Únete ahora</p>
                     <div class="f__subscribe__input">
-                        <input class="f__subscribe--input" placeholder="ejemplo@ctiam.com" type="text" required>
+                        <input class="f__subscribe--input" name="correo" placeholder="ejemplo@ctiam.com" type="text" required>
                     </div>
                     <div class="c-promo-index__btn">
-                        <a class="c-promo-index__btn--a" href="">Enviar</a>
+                        <button class="c-promo-index__btn--a" >Enviar</button>
                     </div>
                     <p class="f__subscribe--p">Al suscribirte aceptas nuestas politicas de tratamiento de datos.</p>
-                </div>
+                </form>
                 <div class="f__subscribe__icos">
                     <a href=""><i class="fab fa-facebook-f"></i></a>
                     <a href=""><i class="fab fa-instagram"></i></a>
