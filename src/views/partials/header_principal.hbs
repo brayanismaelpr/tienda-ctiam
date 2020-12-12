@@ -165,22 +165,6 @@
                 </div>
             </ul>
             {{/if}}
-            {{!-- Administrador --}}
-            {{#if isAuthenticated}}
-            <ul class="h__menu-account">
-                <figure class="h__menu-account__fig">
-                    {{!-- Colocar imagen de admin que esta en la carpeta imagenes --}}
-                    <img class="h__menu-account__fig--img" src="{{avatar user.avatar}}">
-                </figure>
-                <p class="h__menu-account--name-user">{{user.nombres}}</p>
-                <button onclick="modal_profile()" class="h__menu-account--ico"><i
-                        class="fas fa-caret-down"></i></button>
-            </ul>
-            {{/if}}
-            <a class="flex items-cetner" href="/login/logout">
-                <i class="text-white pr-2 text-xl fas fa-door-open"></i>
-                <b class="text-white">Salir</b>
-            </a>
         </nav>
     </header>
 

@@ -284,6 +284,7 @@ router.get("/getAllVisitas", async (req, res) => {
             id_tienda
         }
     });
+
     let todos = [['productos','total']];
     let i = 0;
     products.map(item => {
