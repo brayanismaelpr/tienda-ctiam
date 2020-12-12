@@ -1,5 +1,4 @@
 var content = document.getElementById("modal").innerHTML;
-
 function modal() {
     var html = document.getElementById("modal").innerHTML = 
     "<div class=\"c-modal\">" +
@@ -17,14 +16,11 @@ function modal() {
                 "</form>" +
             "</div>" +  
         "</div>";
-
     if (content.length === 0) {
-        return html;
-        
+        return html;  
     } else { content = ""; }
     return content;
 }
-
 function cerrar() {
     if (content.length >= 0) {
         return document.getElementById("modal").innerHTML = "";

@@ -262,7 +262,13 @@ input[type=number]::-webkit-outer-spin-button {
 .c-list-admin__table i:hover { background-color: #f1f1f1; }
 .c-list-admin__table i.fa-store { color: var(--purple); }
 .c-login-admin {
-    background-color: #f1f1f1;
+    background: rgba(255,255,255,1);
+background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,217,237,1) 100%);
+background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,255,255,1)), color-stop(100%, rgba(255,217,237,1)));
+background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,217,237,1) 100%);
+background: -o-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,217,237,1) 100%);
+background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,217,237,1) 100%);
+background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,217,237,1) 100%);
     padding-bottom: calc(1440px * (1 / 24));
     padding-top: calc(1440px * (1 / 24));
 }
@@ -272,9 +278,6 @@ input[type=number]::-webkit-outer-spin-button {
     margin: 0 auto;
     padding: calc(1440px * (1 / 48));
     width: 400px;
-    -webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.16);
-    -moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.16);
-    box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.16);
 }
 .form-login-admin label input {
     width: 100%;
@@ -314,6 +317,14 @@ input[type=number]::-webkit-outer-spin-button {
     display: flex;
     padding-bottom: calc(1440px * (1 / 24));
     padding-top: calc(1440px * (1 / 24));
+
+    background: rgba(255,255,255,1);
+    background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,217,237,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,255,255,1)), color-stop(100%, rgba(255,217,237,1)));
+    background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,217,237,1) 100%);
+    background: -o-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,217,237,1) 100%);
+    background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,217,237,1) 100%);
+    background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,217,237,1) 100%);
 }
 .c-profile-admin__imgs,
 .c-profile-admin__options {
@@ -384,6 +395,7 @@ input[type=number]::-webkit-outer-spin-button {
     transition: .3s;
     width: 300px;
 }
+.c-profile-admin__options a:last-child { color: #ffffff; background-color: #ff1540; }
 .c-profile-admin__options a:hover {
     background-color: var(--purple);
     color: #ffffff;
@@ -1323,7 +1335,7 @@ footer {
     align-items: center;
     display: flex;
     justify-content: center;
-    background-color: rgb(148, 5, 5);
+    background-color: var(--dark_pink);
     height: 35px;
     padding-left: 15px;
     padding-right: 15px;
@@ -1332,8 +1344,7 @@ footer {
 }
 .h__menu-account--ico i { color: #ffffff; }
 .h__menu--li-btn:hover {
-    /* background-color: #5d003e; */
-    background-color: rgb(98, 5, 5);
+    background-color: black;
 }
 .h__menu--a {
     align-items: center;
@@ -1912,6 +1923,14 @@ footer {
     align-items: center;
     border: 1px solid var(--purple);
     border-bottom: 0;
+    display: flex;
+    height: 40px;
+    justify-content: center;
+    width: 100%;
+}
+.input-recover-password {
+    align-items: center;
+    border: 1px solid var(--purple);
     display: flex;
     height: 40px;
     justify-content: center;
