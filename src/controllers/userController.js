@@ -90,23 +90,36 @@ module.exports = {
         let cart = await Cart.findByPk(id_cart);
         const product = await Product.findByPk(id_product);
         if (product) {
-            const value = product.precio;
-            const amount = 1;
-            const cartCreate = await ItemCart.create({
-                id_producto: id_product,
-                id_carrito: cart
-                    ? cart.id
-                    : await Cart.create({
-                          id: req.user.id,
-                          valor_total: value,
-                      }).then((res) => res.id),
-                cantidad: amount,
-                precio: value,
+            const itemCart = await ItemCart.findOne({
+                where: {
+                    id_producto: id_product,
+                    id_carrito: cart.id,
+                }
             });
+            if (!itemCart) {
+                const value = product.precio;
+                const amount = 1;
+                await ItemCart.create({
+                    id_producto: id_product,
+                    id_carrito: cart
+                        ? cart.id
+                        : await Cart.create({
+                              id: req.user.id,
+                              valor_total: value,
+                          }).then((res) => res.id),
+                    cantidad: amount,
+                    precio: value,
+                }).then(async () => {
+                    await Cart.findByPk(id_cart).then(async cart => {
+                        cart.valor_total += value;
+                        await cart.save();
+                    });
+                    return res.redirect("/user/cart");
+                });
+            }
             return res.redirect("/user/cart");
         }
     },
-
     updatePassword: async (req, res) => {
         const { oldPassword, newPassword } = req.body;
         if (oldPassword !== newPassword) {
@@ -202,7 +215,6 @@ module.exports = {
                 isAuthenticated: req.user != undefined,
                 pack,
                 addresses,
-                // total_value: Number(product.precio) * Number(amount),
             });
         }
         return res.render("error", {
@@ -260,6 +272,11 @@ module.exports = {
                     id_carrito: req.user.id
                 }
             });
+            const cart = await Cart.findByPk(req.user.id);
+            if (cart) {
+                cart.valor_total = 0;
+                await cart.save();
+            }
             return res.redirect("/user/cart")
         }
         return res.json({ok:true})
