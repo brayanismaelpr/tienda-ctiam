@@ -7,6 +7,7 @@
             <div class=" w-full py-14 mx-auto">
                 <div class="w-full">
                     <h2 class="text-2xl font-medium pb-8">Mis Estadisticas</h2>
+                    {{#if products}}
                     <div class="flex items-center justify-between flex-wrap">
                         <div class="flex mt-4">
                             <select class="w-60 h-10 border-2 px-2 border-black rounded mr-4" id="estadisticas"
@@ -34,10 +35,12 @@
                     id="columnchart_values" style="width: 100%; height: 500px;"></div>
                 <div class="rounded p-6 border-2 shadow-lg flex justify-center items-center overflow-hidden"
                     id="piechart_3d" style="width: 100%; height: 500px;"></div>
+                {{else}}
                 <div
                     class="h-80 rounded p-6 border-2 shadow-lg flex justify-center items-center overflow-hidden bg-pink-100">
                     <i class="text-7xl text-pink-500 fas fa-ban"></i>
                 </div>
+                {{/if}}
             </div>
         </div>
     </article>
@@ -117,7 +120,9 @@
     function todos() {
         fetch(`${location.origin}/getAllVisitas`)
             .then(res => res.json())
-            .then(data => graficoTodos(data.todos));
+            .then(data => {
+                graficoTodos(data.todos)
+                });
     }
 
     function grafico(array) {
@@ -141,7 +146,7 @@
                 width: "90%",
                 height: 300,
                 bar: { groupWidth: "95%" },
-                legend: { position: "none" },
+                legend: { position: "none" }
             };
             var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
             chart.draw(view, options);
@@ -157,6 +162,7 @@
             var options = {
                 title: 'Porcentaje de todas las visitas',
                 is3D: true,
+                colors: ['#e00068','#EA5299','#D57CA5']
             };
 
             var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));

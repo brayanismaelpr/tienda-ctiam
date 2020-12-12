@@ -6,6 +6,7 @@
         <div class="py-14 mx-auto md:mx-0 w-11/12 md:w-9/12">
             <div class="c-favorito__grid">
                 <h2>Mis preguntas</h2>
+                {{#if questions}}
                 {{#each questions}}
                 <div class="c-user-shopping__div">
                     <div class="c-user-shopping__box">
@@ -27,7 +28,8 @@
                                 </p>
                                 {{!-- aqui --}}
                                 <div class="flex justify-between">
-                                    <img class="rounded-full w-10 h-10 object-center object-cover" src="{{avatar this.imagen_usuario}}">
+                                    <img class="rounded-full w-10 h-10 object-center object-cover"
+                                        src="{{avatar this.imagen_usuario}}">
                                     <div class="bg-gray-200 rounded p-4 w-11/12">
                                         <p class="c-user-question-answer__answer--p">{{this.pregunta}}</p>
                                         {{#if this.respuesta}}
@@ -35,7 +37,8 @@
                                             <p class="c-user-question-answer__seller--p">{{this.respuesta}}</p>
                                         </div>
                                         {{else}}
-                                        <form class="flex items-center" action="/product/response-question" method="POST">
+                                        <form class="flex items-center" action="/product/response-question"
+                                            method="POST">
                                             <div class="w-4/5 m-login__c__content">
                                                 <input
                                                     class="w-11/12 border-gray-600 rounded py-2 px-4 border-4 border-black border-opacity-25"
@@ -49,12 +52,15 @@
                                         {{/if}}
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
                 </div>
                 {{/each}}
+                {{else}}
+                <img src="{{URL}}/images/vacio.png" alt="No se encontraron productos">
+                {{/if}}
             </div>
         </div>
     </article>
