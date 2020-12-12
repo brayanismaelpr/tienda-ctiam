@@ -7,3 +7,7 @@ function notifications() {
     const toggleFilter = document.querySelector('.h-c-notifications');
     toggleFilter.classList.toggle('h-c-notifications-active');
 }
+function options_menu_profile() {
+    const toggleFilter = document.querySelector('.cont-options-profile');
+    toggleFilter.classList.toggle('cont-options-profile-acitve');
+}

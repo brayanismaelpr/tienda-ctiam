@@ -2134,7 +2134,7 @@ footer {
     width: 100%;
 }
 .cont-options-profile {
-    border-right: 1px solid gray;
+    transition: .3s;
     padding-top: 3rem;
     padding-bottom: 3rem;
     width: 20%;
@@ -2152,7 +2152,6 @@ footer {
     font-size: 20px;
     padding-right: 15px;
 }
-.cont-options-profile__content li .i-active { color: #29abe2; }
 .cont-options-profile__content li a {
     display: flex;
     color: black;
@@ -2166,7 +2165,7 @@ footer {
 }
 .cont-options-profile__content li:last-child { padding-bottom: 12px; }
 .cont-options-profile__content li:hover { 
-    background-color: #f2f2f2;
+    background-color: var(--rosa_claro);
     font-weight: bold; 
     transition: .5s; 
 }
@@ -2988,4 +2987,8 @@ footer {
 .h-c-notifications-active {
     visibility: visible;
     opacity: 1;
+}
+.options-menu-user {
+    cursor: pointer;
+    display: none;
 }
