@@ -112,4 +112,30 @@ router.get("/revision-products/:id", async (req, res) => {
     });
 });
 
+router.get("/statistics", (req, res)=>{
+    res.render("admin/statistics");
+});
+
+router.get("/getStatistics", async (req, res)=>{
+    const products = await Product.findAll();
+    let pie = [['tiendas','total']];
+    products.map( item => {
+        const data = JSON.parse(item.visitas);
+        const tienda = item.dataValues.id_tienda;
+        const total = data.visitas.map(item => item.contador).reduce((acc, valor) => acc + valor)
+        if (pie.find( find => find[0] == tienda) !== undefined) {
+            pie.find( find => find[0] == tienda)[1]+=total;
+        } else {
+            pie.push([tienda+"", total]) 
+        }
+    });
+    for (let i = 1; i < pie.length; i++) {
+        tienda = await Store.findByPk(Number(pie[i][0]));
+        pie[i][0] = tienda.dataValues.nombre;
+    }
+    return res.json({
+        pie
+    });
+});
+
 module.exports = router;
