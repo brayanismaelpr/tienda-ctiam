@@ -7,7 +7,7 @@
         {{> user/options_user }}
         <div class="div-profile mx-auto w-full">
             <figure class="div-profile__slider">
-                <img src="../images/slide.jpg">
+                <img src="{{coverStore user.imagenPortada}}" id="coverUser">
             </figure>
             <img class="div-profile--img" src="{{avatar user.avatar}}">
             <div class="container">
@@ -52,6 +52,18 @@
                                     accept="image/jpg, image/jpeg, image/png, image/webp, image/JPG, image/JPEG, image/PNG, image/WEBP"
                                     type="file" multiple="" autocomplete="off" style="display: none;">
                             </div>
+                        </label><label class="flex mb-3 items-center justify-between" for="" style="align-items: flex-start;">
+                            <span>Foto de portada</span>
+                            <div class="sc-ui-image-uploader sc-ui-image-uploader--default" aria-disabled="false"
+                                id="areafileCover">
+                                <div class="sc-ui-image-uploader__container" role="button" tabindex="0">
+                                    {{> svgs/icon-dragImage}}
+                                    <a class="sc-ui-image-uploader__link">Agrega o arrastra tus fotos aquí</a>
+                                </div>
+                                <input
+                                    accept="image/jpg, image/jpeg, image/png, image/webp, image/JPG, image/JPEG, image/PNG, image/WEBP"
+                                    type="file" multiple="" autocomplete="off" style="display: none;">
+                            </div>
                         </label>
                         {{#each directions}}
                         <label class="flex mb-3 items-center justify-between">
@@ -62,6 +74,7 @@
                         </label>
                         {{/each}}
                         <input id="avatarUser" type="text" style="display: none;" name="avatar" value="{{user.avatar}}">
+                        <input id="coverUserForm" type="text" style="display: none;" name="imagenPortada" value="{{user.imagenPortada}}">
                     </div>
                     <div class="flex">
                         <input class="div-profile__info--input rounded mr-4" type="submit" value="Guardar">
@@ -80,6 +93,7 @@
 
 <script src="{{URL}}/js/home.js"></script>
 <script src="../js/dragImage.js"></script>
+<script src="../js/dragCoverUser.js"></script>
 <script src="../js/uploadImage.js"></script>
 
 {{> footer }}

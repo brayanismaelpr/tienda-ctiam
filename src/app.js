@@ -30,6 +30,10 @@ app.engine(
                 if (imageStore) return imageStore;
                 return "../images/photo-store/default-store.jpeg";
             },
+            coverStore: (imageStore) => {
+                if (imageStore) return imageStore;
+                return "../images/photo-store/cover.jpg";
+            },
             times: (n, block) => {
                 var accum = "";
                 for (var i = 0; i < n; ++i) accum += block.fn(i);
