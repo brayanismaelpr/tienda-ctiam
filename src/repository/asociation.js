@@ -3,6 +3,7 @@ module.exports = function ({
     Category,
     Cart,
     City,
+    Change,
     Comentary,
     State,
     Favorite,
@@ -11,8 +12,9 @@ module.exports = function ({
     LandMark,
     Order,
     Photography,
-    Question,
     Product,
+    Question,
+    Return,
     Sale,
     Store,
     User,
@@ -201,5 +203,35 @@ module.exports = function ({
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
         foreignKey: { name: "id_producto" },
+    });
+    Product.hasMany(Change, {
+        onDelete: "RESTRICT",
+        onUpdate: "CASCADE",
+        foreignKey: { name: "id_producto" },
+    });
+    Product.hasMany(Return, {
+        onDelete: "RESTRICT",
+        onUpdate: "CASCADE",
+        foreignKey: { name: "id_producto" },
+    });
+    ItemSale.hasMany(Change, {
+        onDelete: "RESTRICT",
+        onUpdate: "CASCADE",
+        foreignKey: { name: "id_item" },
+    });
+    ItemSale.hasMany(Return, {
+        onDelete: "RESTRICT",
+        onUpdate: "CASCADE",
+        foreignKey: { name: "id_item" },
+    });
+    User.hasMany(Change, {
+        onDelete: "RESTRICT",
+        onUpdate: "CASCADE",
+        foreignKey: { name: "id_usuario" },
+    });
+    User.hasMany(Return, {
+        onDelete: "RESTRICT",
+        onUpdate: "CASCADE",
+        foreignKey: { name: "id_usuario" },
     });
 };

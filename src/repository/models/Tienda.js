@@ -38,6 +38,10 @@ const Store = sequelize.define(
             type: DataTypes.STRING,
             allowNull: true,
         },
+        imagenPortada: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
     },
     { freezeTableName: true }
 );
