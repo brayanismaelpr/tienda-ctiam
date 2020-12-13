@@ -6,6 +6,8 @@ const {
     City,
     ItemSale,
     Order,
+    Product,
+    Return,
     Sale,
     Store,
     User,
@@ -103,28 +105,51 @@ router.get("/details-shopping/:id", async (req, res) => {
     }
 });
 
-router.get("/return", async (req, res) => {
-    const { id_item } = req.body;
-    const item = await ItemSale.findByPk(id_item, {
-        attributes: ["id", "id_producto"],
+router.post("/return/create", async (req, res) => {
+    const { id_item, id_producto, motivo, evidencia } = req.body;
+    const ret = await Return.findOne({
+        where: {
+            id_item,
+        }
     });
-    if (item) {
-        return res.render("user/return", {
-            title: "Devoluciones | Mujeres CTIAM",
-            user: req.user,
-            item,
-            isAuthenticated: true,
+    if (!ret) {
+        await Return.create({
+            id_item,
+            id_producto,
+            motivo,
+            evidencia,
+            id_usuario: req.user.id
         });
+        res.redirect("/")
     }
 });
 
 router.post("/return", async (req, res) => {
-    
+    const { id_item } = req.body;
+    const item = await ItemSale.findByPk(id_item, {
+        attributes: ["id", "id_producto", "cantidad", "precio"],
+    });
+    if (item) {
+        const product = await Product.findByPk(item.id_producto, {
+            attributes: ["titulo", "precio", "imagen", "id", "id_tienda"],
+        });
+        if (product) {
+            const store = await Store.findByPk(product.id_tienda, {
+                attributes: ["nombre", "email", "telefono", "id"],
+            });
+            return res.render("user/return", {
+                title: "Devoluciones | Mujeres CTIAM",
+                user: req.user,
+                item,
+                product,
+                store,
+                isAuthenticated: true,
+            });
+        }
+    }
 });
 
-router.post("/change", async (req, res) => {
-
-});
+router.post("/change", async (req, res) => {});
 
 router.post("/update", userController.updateAUser);
 

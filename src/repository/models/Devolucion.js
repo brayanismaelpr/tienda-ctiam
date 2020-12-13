@@ -33,9 +33,12 @@ const Return = sequelize.define(
             },
         },
         motivo: {
-            type: DataTypes.DATE,
+            type: DataTypes.STRING,
             allowNull: false,
-            defaultValue: DataTypes.NOW,
+        },
+        evidencia: {
+            type: DataTypes.STRING,
+            allowNull: true,
         },
     },
     {
