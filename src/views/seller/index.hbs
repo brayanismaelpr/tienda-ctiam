@@ -1,13 +1,14 @@
 {{> header_principal}}
+<link rel="stylesheet" href="../css/dragImage/index.css">
 
 <section class="c-profile">
     <article class="container mx-auto md:flex">
         {{> seller/options_seller }}
         <div class="div-profile mx-auto w-full">
             <figure class="div-profile__slider">
-                <img src="../images/banner-store/1.jpg">
+                <img src="{{coverStore store.imagenPortada}}" id="coverStore">
             </figure>
-            <img class="div-profile--img" src="{{imageStore store.imagen}}">
+            <img class="div-profile--img" src="{{imageStore store.imagen}}" id="avatarStore">
             <div class="container">
                 <form class="div-profile__info-content pb-10" action="/seller/store/update" method="POST">
                     <h1 class="div-profile__info--h1 font-bold">{{store.nombre}}</h1>
@@ -18,19 +19,23 @@
                         </label>
                         <label for="nombre" class="justify-between flex mb-3 items-center justify-between">
                             <span>Nombre</span>
-                            <input class="" type="text" id="nombre" value="{{store.nombre}}" name="nombre" type="text" required>
+                            <input class="" type="text" id="nombre" value="{{store.nombre}}" name="nombre" type="text"
+                                required>
                         </label>
                         <label for="descripcion" class="justify-between flex mb-3 items-center justify-between">
                             <span>Descripción</span>
-                            <input class="" id="descripcion" type="text" value="{{store.descripcion}}" name="descripcion" required>
+                            <input class="" id="descripcion" type="text" value="{{store.descripcion}}"
+                                name="descripcion" required>
                         </label>
                         <label for="telefono" class="justify-between flex mb-3 items-center justify-between">
                             <span>Télefono</span>
-                            <input class="" id="telefono" type="text" value="{{store.telefono}}" name="telefono" required>
+                            <input class="" id="telefono" type="text" value="{{store.telefono}}" name="telefono"
+                                required>
                         </label>
                         <label for="email" class="justify-between flex mb-3 items-center justify-between">
                             <span>Correo</span>
-                            <input class="" id="email" type="email" value="{{store.email}}" name="email" type="email" required>
+                            <input class="" id="email" type="email" value="{{store.email}}" name="email" type="email"
+                                required>
                         </label>
                         <label for="telefono" class="justify-between flex mb-3 items-center justify-between">
                             <span>Télefono alternativo</span>
@@ -46,38 +51,45 @@
                         </label>
                         <label for="" class="items:start justify-between flex mb-3 justify-between">
                             <span>Foto de perfil</span>
-                            <div class="sc-ui-image-uploader sc-ui-image-uploader--default" aria-disabled="false" id="areafile">
+                            <div class="sc-ui-image-uploader sc-ui-image-uploader--default" aria-disabled="false"
+                                id="areafile">
                                 <div class="sc-ui-image-uploader__container" role="button" tabindex="0">
-                                    <svg class="ui-icon sc-ui-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 31 24">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <path d="M26.7704335,2.83988084 L21.8837953,2.83988084 L20.1805259,0 L10.6766169,0 L8.97334755,2.83988084 L4.08670931,2.83988084 C1.83333333,2.83988084 0,4.56352145 0,6.68207256 L0,20.1578083 C0,22.2763594 1.83333333,24 4.08670931,24 L26.7704335,24 C29.0238095,24 30.8571429,22.2763594 30.8571429,20.1578083 L30.8571429,6.68207256 C30.8571429,4.56352145 29.0238095,2.83988084 26.7704335,2.83988084 Z M15.4285714,20.8695652 C11.3324111,20.8695652 8,17.5924657 8,13.5650482 C8,9.53796907 11.3324111,6.26086957 15.4285714,6.26086957 C19.5247318,6.26086957 22.8571429,9.53796907 22.8571429,13.5650482 C22.8571429,17.5924657 19.5247318,20.8695652 15.4285714,20.8695652 Z M16.6699507,9.39130435 L14.1871921,9.39130435 L14.1871921,12.9535232 L10.2857143,12.9535232 L10.2857143,15.2203898 L14.1871921,15.2203898 L14.1871921,18.7826087 L16.6699507,18.7826087 L16.6699507,15.2203898 L20.5714286,15.2203898 L20.5714286,12.9535232 L16.6699507,12.9535232 L16.6699507,9.39130435 Z" id="Shape" fill="#C50084" fill-rule="nonzero"></path>
-                                        </g>
-                                    </svg>                                    <a class="sc-ui-image-uploader__link">Agrega o arrastra tus fotos aquí</a>
+                                    {{> svgs/icon-dragImage}}
+                                    <a class="sc-ui-image-uploader__link">Agrega o arrastra tus fotos aquí</a>
                                 </div>
-                                <input accept="image/jpg, image/jpeg, image/png, image/webp, image/JPG, image/JPEG, image/PNG, image/WEBP" type="file" multiple="" autocomplete="off" style="display: none;">
+                                <input
+                                    accept="image/jpg, image/jpeg, image/png, image/webp, image/JPG, image/JPEG, image/PNG, image/WEBP"
+                                    type="file" multiple="" autocomplete="off" style="display: none;">
                             </div>
                         </label>
+                        <input id="avatarStoreForm" type="text" style="display: none;" name="imagen" value="{{store.imagen}}">
+                        <input id="coverStoreForm" type="text" style="display: none;" name="imagenPortada" value="{{store.portada}}">
                         <label for="" class="items:start justify-between flex mb-3 justify-between">
                             <span>Foto de portada</span>
-                            <div class="sc-ui-image-uploader sc-ui-image-uploader--default" aria-disabled="false" id="areafile">
+                            <div class="sc-ui-image-uploader sc-ui-image-uploader--default" aria-disabled="false"
+                                id="areafileportada">
                                 <div class="sc-ui-image-uploader__container" role="button" tabindex="0">
-                                    <svg class="ui-icon sc-ui-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 31 24">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <path d="M26.7704335,2.83988084 L21.8837953,2.83988084 L20.1805259,0 L10.6766169,0 L8.97334755,2.83988084 L4.08670931,2.83988084 C1.83333333,2.83988084 0,4.56352145 0,6.68207256 L0,20.1578083 C0,22.2763594 1.83333333,24 4.08670931,24 L26.7704335,24 C29.0238095,24 30.8571429,22.2763594 30.8571429,20.1578083 L30.8571429,6.68207256 C30.8571429,4.56352145 29.0238095,2.83988084 26.7704335,2.83988084 Z M15.4285714,20.8695652 C11.3324111,20.8695652 8,17.5924657 8,13.5650482 C8,9.53796907 11.3324111,6.26086957 15.4285714,6.26086957 C19.5247318,6.26086957 22.8571429,9.53796907 22.8571429,13.5650482 C22.8571429,17.5924657 19.5247318,20.8695652 15.4285714,20.8695652 Z M16.6699507,9.39130435 L14.1871921,9.39130435 L14.1871921,12.9535232 L10.2857143,12.9535232 L10.2857143,15.2203898 L14.1871921,15.2203898 L14.1871921,18.7826087 L16.6699507,18.7826087 L16.6699507,15.2203898 L20.5714286,15.2203898 L20.5714286,12.9535232 L16.6699507,12.9535232 L16.6699507,9.39130435 Z" id="Shape" fill="#C50084" fill-rule="nonzero"></path>
-                                        </g>
-                                    </svg>                                    <a class="sc-ui-image-uploader__link">Agrega o arrastra tus fotos aquí</a>
+                                    {{> svgs/icon-dragImage}}
+                                    <a class="sc-ui-image-uploader__link">Agrega o arrastra tus fotos aquí</a>
                                 </div>
-                                <input accept="image/jpg, image/jpeg, image/png, image/webp, image/JPG, image/JPEG, image/PNG, image/WEBP" type="file" multiple="" autocomplete="off" style="display: none;">
+                                <input
+                                    accept="image/jpg, image/jpeg, image/png, image/webp, image/JPG, image/JPEG, image/PNG, image/WEBP"
+                                    type="file" multiple="" autocomplete="off" style="display: none;">
                             </div>
                         </label>
-                        
                     </div>
                     <input class="div-profile__info--input" type="submit" value="Guardar">
                 </form>
             </div>
         </div>
-        
+
     </article>
 </section>
+<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-storage.js"></script>
+
+<script src="{{URL}}/js/dragImageStore.js"></script>
+<script src="{{URL}}/js/dragCoverStore.js"></script>
+<script src="{{URL}}/js/uploadImage.js"></script>
 
 {{> footer}}
