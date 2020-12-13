@@ -3,9 +3,9 @@
 <head>
     <script src="{{URL}}/js/messagesAlerts.js"></script>
     <meta charset="UTF-8">
-    {{!-- <link rel="stylesheet" href="{{URL}}/css/style.css"> --}}
     <link rel="stylesheet" href="{{URL}}/css/estilo.css">
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    {{!-- <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet"> --}}
+    <link href="{{URL}}/css/tailwind.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.js"
         integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/0dc3b1d201.js" crossorigin="anonymous"></script>
@@ -50,7 +50,7 @@
     <div id="c-login" style="display: {{showModal modal}};">
         {{> modals/login-modal}}
     </div>
-    <div id="c-recover-password" style="display: {{showModal modal}};">
+    <div id="c-recover-password" style="display: none;">
         {{> modals/recover-password}}
     </div>
     <div id="c-register" style="display: none;">
