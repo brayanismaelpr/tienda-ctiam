@@ -21,7 +21,7 @@ module.exports = async function sendEmail(name, email, callback) {
             html: `<div style="background-color: #f4f4f4; width: 100%; padding-top: 50px; padding-bottom: 50px;">
             <div style="background-color: #ffffff; margin-left: auto; margin-right: auto; text-align: center; width: 512px;">
                 <div style="margin-left: auto; margin-right: auto; padding-bottom: 40px; padding-top: 40px; width: 100%;">
-                    <img style="margin-left: auto; margin-right: auto; padding-bottom: 20px; width: 200px;" style="" src="http://siaweb.ufps.edu.co/assets/imagen/logoAsteroide.png">
+                    <img style="margin-left: auto; margin-right: auto; padding-bottom: 20px; width: 200px;" style="" src="http://siaweb.ufps.edu.co/assets/imagen/logo-original.png">
                     <div style="background-color: #8600DF; text-align: center; width: 100%;">
                         <p style="color: white; font-size: 22px; font-family: Arial, Helvetica, sans-serif; padding-bottom: 10px; padding-top: 10px;">Cordial saludo ${name} </p>
                     </div>
