@@ -3,6 +3,7 @@ const router = Router();
 const login = require("./login");
 const isAuthenticated = require("../middlewares/isAuthenticated");
 const nodeMailer = require("../services/nodemailer");
+const nodeMailer_sub = require("../services/nodemailer-unete");
 const admin = require("./admin");
 const product = require("./product");
 const seller = require("./seller");
@@ -314,8 +315,8 @@ router.get("/getDestacados", async (req, res) => {
 });
 
 router.get("/save-pass", async (req, res) => {
-    const sendMail = require("../services/nodemailer");
-    sendMail('toto', 'totobhcc@gmail.com', 'hola');
+    // const sendMail = require("../services/nodemailer");
+    // sendMail('toto', 'totobhcc@gmail.com', 'hola');
     res.redirect("/")
 });
 
@@ -324,7 +325,10 @@ router.post("/subscription", async (req, res) => {
         const { correo } = req.body;
         if (!await Subscription.findByPk(correo)) {
             Subscription.create({ correo });
-            res.redirect("/");
+            nodeMailer_sub(correo, (err) => {
+                if (err) console.log(err);
+                res.redirect("/");
+            });
         } else {
             res.redirect("/");
         }
