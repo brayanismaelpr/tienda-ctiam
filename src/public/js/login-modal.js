@@ -30,8 +30,10 @@ function deletemadress() {
 function recoverpasswordModal() {
     document.getElementById("body").style.overflow = "hidden";
     document.getElementById("c-recover-password").style.display = "block";
+    document.getElementById("c-login").style.display = "none";
 }
 function deleterecoverpassword() {
     document.getElementById("body").style.overflow = "scroll";
     document.getElementById("c-recover-password").style.display = "none";
+    document.getElementById("c-login").style.display = "block";
 }
