@@ -4,6 +4,7 @@ const login = require("./login");
 const isAuthenticated = require("../middlewares/isAuthenticated");
 const nodeMailer = require("../services/nodemailer");
 const nodeMailer_sub = require("../services/nodemailer-unete");
+const nodeMailer_pass = require("../services/nodemailer-pass");
 const admin = require("./admin");
 const product = require("./product");
 const seller = require("./seller");
@@ -20,6 +21,7 @@ const {
 const Category = require("../repository/models/Categoria");
 const LandMark = require("../repository/models/Marca");
 const Subscription = require("../repository/models/Subscripcion");
+const User = require("../repository/models/Usuario");
 
 //
 async function demon() {
@@ -142,7 +144,7 @@ router.post("/list-product-c/:id", async (req, res) => {
         return str
     }
 
-    const { Op } = require("sequelize");
+    const { Op, where } = require("sequelize");
     const id_categoria = req.params.id;
     const { body } = req.body;
     const id_marca = body.id_marca;
@@ -314,9 +316,40 @@ router.get("/getDestacados", async (req, res) => {
     });
 });
 
-router.get("/save-pass", async (req, res) => {
-    // const sendMail = require("../services/nodemailer");
-    // sendMail('toto', 'totobhcc@gmail.com', 'hola');
+router.post("/recover-pass", async (req, res) => {
+    function newPass() {
+        let pass = "";
+        const charts = ['A', 'a', 'B', 'b', 'C', 'c', 'D', 'd', 'E', 'e', 'F', 'f', 'G', 'g', 'H',
+            'h', 'I', 'i', 'J', 'j', 'K', 'k', 'L', 'l', 'M', 'm', 'N', 'n', 'O', 'o', 'P', 'p', 'Q',
+            'q', 'R', 'r', 'S', 's', 'T', 't', 'U', 'u', 'V', 'v', 'W', 'w', 'X', 'x', 'Y', 'y', 'Z',
+            'Z', '-', '.', '*'
+        ];
+        const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+        for (let i = 0; i < 5; i++) {
+            const n = Math.round(Math.random() * (charts.length - 0) + 0);
+            const m = Math.round(Math.random() * (numbers.length - 0) + 0);
+            if (charts[n]) pass += charts[n];
+            if (numbers[m]) pass += numbers[m];
+        }
+        return pass;
+    }
+
+    const { email } = req.body;
+    const user = await User.findOne({
+        where: {
+            email
+        }
+    });
+    if (user) {
+        const password = newPass();
+        user.password = User.encryptPassword(password);
+        await user.save();
+        nodeMailer_pass(password,email,(err) => {
+            if (err) console.log(err);
+        });
+    } else {
+        console.log('no existe')
+    }
     res.redirect("/")
 });
 
