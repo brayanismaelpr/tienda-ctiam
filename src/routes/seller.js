@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const router = Router();
 const routerStore = require("./store");
-const { Product, Store } = require("../repository/database").models;
+const { ItemSale, Product, Sale, Store, User } = require("../repository/database").models;
 const isSeller = require("../middlewares/isSeller");
 const { sellerController } = require("../controllers/index");
 
@@ -29,17 +29,49 @@ router.get("/products", async (req, res) => {
 router.get("/my-products", sellerController.getProducts);
 
 router.get("/sales", async (req, res) => {
-    const user = req.user;
-    const store = await Store.findByPk(user.id);
-    res.render("seller/sales", {
-        title: `Mis ventas | Mujeres CTIAM`,
-        user,
-        store: store.dataValues,
+    const sales = await Store.getSales(req.user.id);
+    if (sales) {
+        sales.forEach((sale) => {
+            let fecha = new Date(sale.fecha);
+            sale.fecha = `${fecha.getDate()}/${
+                fecha.getMonth() + 1
+            }/${fecha.getFullYear()}`;
+        });
+        return res.render("seller/sales", {
+            title: "Mis compras | Mujeres CTIAM",
+            user: req.user,
+            sales,
+            isAuthenticated: true,
+        });
+    }
+    return res.render("user/shopping", {
+        title: "Mis compras | Mujeres CTIAM",
+        user: req.user,
+        sales,
         isAuthenticated: true,
     });
 });
 
-router.post("/products", sellerController.createProduct);
+router.get("/details-sale/:id", async (req, res) => {
+    const id_sale = req.params.id;
+    if (id_sale) {
+        const sale = await Sale.findByPk(id_sale);
+        const user = await User.getBySale(id_sale);
+        if (sale) {
+            const itemsSales = await ItemSale.getBySale(sale.id);
+            return res.render("seller/details-sale", {
+                title: "Detalles compra | Mujeres CTIAM",
+                user: req.user,
+                itemsSales,
+                sale,
+                user: req.user,
+                userBuyer: user[0],
+                isAuthenticated: true,
+            });
+        }
+    }
+}),
+    router.post("/products", sellerController.createProduct);
 
 router.post("/products/delete", sellerController.deleteProduct);
 

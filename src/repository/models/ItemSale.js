@@ -54,7 +54,7 @@ const Item = sequelize.define(
 );
 Item.getBySale = async (idSale) =>
     await sequelize.query(
-        `SELECT p.titulo, p.precio, p.imagen, its.cantidad, its.precio FROM producto p JOIN item_sale its ON its.id_producto = p.id JOIN venta v on V.id = its.id_venta WHERE v.id = ${idSale}
+        `SELECT p.titulo, p.precio, p.imagen, its.cantidad, its.precio total_item FROM producto p JOIN item_sale its ON its.id_producto = p.id JOIN venta v on V.id = its.id_venta WHERE v.id = ${idSale}
         `,
         { type: QueryTypes.SELECT }
     );

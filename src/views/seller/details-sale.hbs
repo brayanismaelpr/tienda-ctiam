@@ -1,0 +1,47 @@
+{{> header_principal}}
+<div id="modal"></div>
+<section class="c-profile">
+    <article class="container mx-auto md:flex justify-between">
+        {{> seller/options_seller }}
+        <div class="py-14 mx-auto md:mx-0 w-11/12 md:w-9/12">
+            <form action="" method="">
+                <h2 class="pb-8 text-xl">Detalles de la venta</h2>
+                <div class="w-full">
+                    <div class="pb-10 flex">
+                        <p class="pr-4">Pedido: <b>#{{sale.dataValues.id}}</b></p>
+                        <p class="pr-4">Fecha: <b>{{sale.fecha}}</b></p>
+                        <p>Total: <b>$ {{sale.dataValues.total}}</b></p>
+                    </div>
+                    <div class="border-2 rounded-sm p-8 bg-gray-100 mb-8">
+                        <div class="sm:flex w-full bg-white shadow-2xl flex-wrap p-6 mb-8 border-b-2">
+                            <div class="w-full sm:w-6/12">
+                                <p>Usuario: <b>{{userBuyer.nombres}}</b></p>
+                                <p class="pr-4">Estado: <b>Pedido entregado</b></p>
+                            </div>
+                            <div class="w-full sm:w-6/12">
+                                <p>Teléfono de contacto: <b>{{userBuyer.telefono}}</b></p>
+                                <p>Correo electrónico: <b>{{userBuyer.email}}</b></p>
+                            </div>
+                        </div>
+                        {{#each itemsSales}}
+                        <div class="w-full rounded shadow-2xl p-6 bg-white mb-2">
+                            <figure class="md:flex">
+                                <img class="rounded overflow-hidden w-full md:w-1/4 h-40 object-cover object-fit"
+                                    src="{{this.imagen}}">
+                                <figcaption class="w-full md:w-9/12 pl-0 md:pl-4 pt-4 md:pt-0">
+                                    <p class="pb-2 font-bold text-xl">{{this.titulo}}</p>
+                                    <p>Precio x unidad: <b>$ {{this.precio}}</b></p>
+                                    <p>Cantidad: <b>{{this.cantidad}}</b></p>
+                                    <p class="font-bold">Total: {{this.total_item}}</p>
+                                </figcaption>
+                            </figure>
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </article>
+</section>
+
+{{> footer }}

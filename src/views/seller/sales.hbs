@@ -7,65 +7,18 @@
             <div class="c-profile__info__content">
                 <form class="c-user-shopping" action="">
                     <h2>Mis ventas</h2>
-                    <div class="c-user-shopping__div">
-                        <div class="c-user-shopping__box">
-                            <h3>Fecha de compra: 25 de Septiembre</h3>
-                            <div class="c-user-shopping__info block md:flex">
-                                <img class="c-user-shopping__img w-full md:w-1/5" src="https://images.unsplash.com/photo-1606768045110-fb1ff9a814a1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80">
-                                <div class="c-user-shopping__text pt-4 pl-4">
-                                    <p class="c-user-shopping__text--name">Bolso Mochila Morral Antirobo Con Puerto Usb (Mochila antirrobo inteligente.)</p>
-                                    <p class="c-user-shopping__text--description">Viaja tranquilo en el metro, tren o colectivo.</p>
-                                    <p class="c-user-shopping__text--price">$ 65.000 x 1 unidad</p>
-                                    <p class="font-medium pt-4">Comprador: Frank Jean Pierre</p>
-                                    <p class="font-bold">Contacto: 3176463387</p>
-                                </div>
-                            </div>
-                            <div class="c-user-shopping__info block md:flex">
-                                <img class="c-user-shopping__img w-full md:w-1/5" src="https://images.unsplash.com/photo-1606768045110-fb1ff9a814a1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80">
-                                <div class="c-user-shopping__text pt-4 pl-4">
-                                    <p class="c-user-shopping__text--name">Bolso Mochila Morral Antirobo Con Puerto Usb (Mochila antirrobo inteligente.)</p>
-                                    <p class="c-user-shopping__text--description">Viaja tranquilo en el metro, tren o colectivo.</p>
-                                    <p class="c-user-shopping__text--price">$ 65.000 x 1 unidad</p>
-                                    <p class="font-medium pt-4">Comprador: Frank Jean Pierre</p>
-                                    <p class="font-bold">Contacto: 3176463387</p>
-                                </div>
-                            </div>
-                            <div class="c-user-shopping__info block md:flex">
-                                <img class="c-user-shopping__img w-full md:w-1/5" src="https://images.unsplash.com/photo-1606768045110-fb1ff9a814a1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80">
-                                <div class="c-user-shopping__text pt-4 pl-4">
-                                    <p class="c-user-shopping__text--name">Bolso Mochila Morral Antirobo Con Puerto Usb (Mochila antirrobo inteligente.)</p>
-                                    <p class="c-user-shopping__text--description">Viaja tranquilo en el metro, tren o colectivo.</p>
-                                    <p class="c-user-shopping__text--price">$ 65.000 x 1 unidad</p>
-                                    <p class="font-medium pt-4">Comprador: Frank Jean Pierre</p>
-                                    <p class="font-bold">Contacto: 3176463387</p>
-                                </div>
-                            </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2">
+                        {{#each sales}}
+                        <div class="border border-gray-500 rounded p-8">
+                            <p class="">Pedido: <b>#{{this.id_venta}}</b></p>
+                            <p class="">Fecha: <b>{{this.fecha}}</b></p>
+                            <p class="">Total: <b>{{this.total}}</b></p>
+                            <p class="font-bold pb-6">{{this.numero_items}} productos</p>
+                            <a class="rounded mt-4 w-100 p-2 bg-pink-300 duration-300 hover:bg-pink-400"
+                                href="/seller/details-sale/{{this.id_venta}}">Ver
+                                detalles</a>
                         </div>
-                    </div>
-                    <div class="c-user-shopping__div">
-                        <div class="c-user-shopping__box">
-                            <h3>Fecha de compra: 25 de Septiembre</h3>
-                            <div class="c-user-shopping__info block md:flex">
-                                <img class="c-user-shopping__img w-full md:w-1/5" src="https://images.unsplash.com/photo-1606768045110-fb1ff9a814a1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80">
-                                <div class="c-user-shopping__text pt-4 pl-4">
-                                    <p class="c-user-shopping__text--name">Bolso Mochila Morral Antirobo Con Puerto Usb (Mochila antirrobo inteligente.)</p>
-                                    <p class="c-user-shopping__text--description">Viaja tranquilo en el metro, tren o colectivo.</p>
-                                    <p class="c-user-shopping__text--price">$ 65.000 x 1 unidad</p>
-                                    <p class="font-medium pt-4">Comprador: Frank Jean Pierre</p>
-                                    <p class="font-bold">Contacto: 3176463387</p>
-                                </div>
-                            </div>
-                            <div class="c-user-shopping__info block md:flex">
-                                <img class="c-user-shopping__img w-full md:w-1/5" src="https://images.unsplash.com/photo-1606768045110-fb1ff9a814a1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80">
-                                <div class="c-user-shopping__text pt-4 pl-4">
-                                    <p class="c-user-shopping__text--name">Bolso Mochila Morral Antirobo Con Puerto Usb (Mochila antirrobo inteligente.)</p>
-                                    <p class="c-user-shopping__text--description">Viaja tranquilo en el metro, tren o colectivo.</p>
-                                    <p class="c-user-shopping__text--price">$ 65.000 x 1 unidad</p>
-                                    <p class="font-medium pt-4">Comprador: Frank Jean Pierre</p>
-                                    <p class="font-bold">Contacto: 3176463387</p>
-                                </div>
-                            </div>
-                        </div>
+                        {{/each}}
                     </div>
                 </form>
             </div>
