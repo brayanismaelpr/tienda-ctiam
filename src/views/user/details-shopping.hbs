@@ -4,7 +4,7 @@
     <article class="container mx-auto md:flex sm:justify-between">
         {{> user/options_user }}
         <div class="py-14 mx-auto md:mx-0 w-11/12 md:w-9/12">
-            <form action="" method="">
+            {{!-- <form action="" method=""> --}}
                 <h2 class="pb-8 text-xl">Detalles de producto</h2>
                 <div class="w-full">
                     <div class="pb-10 flex">
@@ -37,13 +37,22 @@
                                     <p>Cantidad: <b>{{this.cantidad}}</b></p>
                                     <p class="font-bold">Total: {{this.total_item}}</p>
                                 </figcaption>
+                                <form action="/user/return" method="post">
+                                    <input type="hidden" name="id_item" value="{{this.id_item}}">
+                                    <button type="submit">Solicitar devolución</button>
+                                </form>
+                                <form action="/user/change" method="post">
+                                    <input type="hidden" name="id_item" value="{{this.id_item}}">
+                                    <button type="submit">Solicitar cambio</button>
+                                </form>
                             </figure>
                         </div>
                         {{/each}}
                     </div>
                     {{/each}}
                 </div>
-            </form>
+                {{!--
+            </form> --}}
         </div>
     </article>
 </section>

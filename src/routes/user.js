@@ -1,7 +1,15 @@
 const { Router } = require("express");
 const router = Router();
 const { cartController, userController } = require("../controllers");
-const { Address, City, ItemSale, Order, Sale, Store, User } = require("../repository/database").models;
+const {
+    Address,
+    City,
+    ItemSale,
+    Order,
+    Sale,
+    Store,
+    User,
+} = require("../repository/database").models;
 
 router.get("/home", async (req, res) => {
     const user = req.user;
@@ -41,18 +49,20 @@ router.get("/questions", userController.getQuestions);
 router.get("/shopping", async (req, res) => {
     const shoppings = await User.getShoppings(req.user.id);
     if (shoppings) {
-        shoppings.forEach(shopping => {
+        shoppings.forEach((shopping) => {
             let fecha = new Date(shopping.fecha_pedido);
-            shopping.fecha_pedido = `${fecha.getDate()}/${(fecha.getMonth()+1)}/${fecha.getFullYear()}`
+            shopping.fecha_pedido = `${fecha.getDate()}/${
+                fecha.getMonth() + 1
+            }/${fecha.getFullYear()}`;
         });
-        return res.render("user/shopping",{
+        return res.render("user/shopping", {
             title: "Mis compras | Mujeres CTIAM",
             user: req.user,
             shoppings,
             isAuthenticated: true,
         });
     }
-    return res.render("user/shopping",{
+    return res.render("user/shopping", {
         title: "Mis compras | Mujeres CTIAM",
         user: req.user,
         shoppings,
@@ -67,28 +77,53 @@ router.get("/details-shopping/:id", async (req, res) => {
             attributes: ["id", "total", "createdAt"],
         });
         let date = new Date(order.dataValues.createdAt);
-        order.fecha = `${date.getDate()}/${(date.getMonth()+1)}/${date.getFullYear()}`;
+        order.fecha = `${date.getDate()}/${
+            date.getMonth() + 1
+        }/${date.getFullYear()}`;
         const sales = await Sale.findAll({
             where: {
                 id_pedido: id_order,
-            }
+            },
         });
         if (sales) {
-            sales.forEach(async sale => {
+            sales.forEach(async (sale) => {
                 sale.tienda = await Store.findByPk(sale.id_tienda, {
                     attributes: ["nombre", "telefono", "email"],
                 });
                 sale.items = await ItemSale.getBySale(sale.id);
             });
+            return res.render("user/details-shopping", {
+                title: "Detalles compra | Mujeres CTIAM",
+                user: req.user,
+                sales,
+                order,
+                isAuthenticated: true,
+            });
         }
-        return res.render("user/details-shopping", {
-            title: "Detalles compra | Mujeres CTIAM",
+    }
+});
+
+router.get("/return", async (req, res) => {
+    const { id_item } = req.body;
+    const item = await ItemSale.findByPk(id_item, {
+        attributes: ["id", "id_producto"],
+    });
+    if (item) {
+        return res.render("user/return", {
+            title: "Devoluciones | Mujeres CTIAM",
             user: req.user,
-            sales,
-            order,
+            item,
             isAuthenticated: true,
         });
     }
+});
+
+router.post("/return", async (req, res) => {
+    
+});
+
+router.post("/change", async (req, res) => {
+
 });
 
 router.post("/update", userController.updateAUser);

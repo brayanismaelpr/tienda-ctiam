@@ -22,6 +22,10 @@ const User = sequelize.define(
             type: DataTypes.STRING,
             allowNull: true,
         },
+        imagenPortada: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
         dni: {
             type: DataTypes.STRING(12),
             allowNull: false,
@@ -110,4 +114,10 @@ User.getBySale = async (saleID) =>
         `,
         { type: QueryTypes.SELECT }
     );
+User.getPurchasedProducts = async (userID) =>
+    await sequelize.query(
+        `SELECT p.id, p.titulo FROM producto p JOIN item_sale its ON its.id_producto = p.id JOIN pedido ped ON ped.id = its.id_pedido JOIN usuario u ON u.id = ped.id_usuario WHERE u.id = ${userID}`,
+        { type: QueryTypes.SELECT }
+    );
+
 module.exports = User;

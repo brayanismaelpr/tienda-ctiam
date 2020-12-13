@@ -13,6 +13,7 @@ const Admin = require("../models/Admin");
 const Banner = require("../models/Banner");
 const Category = require("../models/Categoria");
 const Cart = require("../models/Carrito");
+const Change = require("../models/Cambio");
 const City = require("../models/Ciudad");
 const Comentary = require("../models/Comentario");
 const Favorite = require("../models/Favorito");
@@ -25,6 +26,7 @@ const Order = require("../models/Pedido");
 const Photography = require("../models/Fotografia");
 const Product = require("../models/Producto");
 const Question = require("../models/Pregunta");
+const Return = require("../models/Devolucion");
 const Sale = require("../models/Venta");
 const Subscription = require("../models/Subscripcion");
 const Store = require("../models/Tienda");
@@ -32,7 +34,9 @@ const User = require("../models/Usuario");
 
 // {alter:true}
 (async () => {
-    sequelize.sync().then(() => console.log("database connected"));
+    sequelize
+        .sync()
+        .then(() => console.log("database connected"));
 })();
 
 require("../asociation")({
@@ -40,6 +44,7 @@ require("../asociation")({
     Category,
     Cart,
     City,
+    Change,
     Comentary,
     State,
     Favorite,
@@ -50,6 +55,7 @@ require("../asociation")({
     Photography,
     Product,
     Question,
+    Return,
     Sale,
     Store,
     User,
@@ -61,6 +67,7 @@ exports.models = {
     Banner,
     Category,
     Cart,
+    Change,
     City,
     Comentary,
     State,
@@ -73,6 +80,7 @@ exports.models = {
     Photography,
     Product,
     Question,
+    Return,
     Sale,
     Subscription,
     Store,

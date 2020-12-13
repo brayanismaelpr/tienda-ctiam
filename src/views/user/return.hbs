@@ -3,18 +3,16 @@
 <section class="c-profile">
     <article class="container mx-auto md:flex">
         {{> seller/options_seller }}
-        <form class="c-profile-seller__form--content py-10 w-11/12 md:w-2/4" name="createProduct">
+        <form class="c-profile-seller__form--content py-10 w-11/12 md:w-2/4" name="">
             <div class=" w-full">
                 <h1 class="font-medium text-2xl">Realizar devolución de producto</h1>
                 <div class="pt-10">
                     <div class="c-profile-seller__input">
-                        <input placeholder="Código producto:" id="codigo_producto" type="text" name="codigo" required>
+                        <input placeholder="Tienda o vendedor:" id="tienda_producto" type="hidden" name="id_tienda" required>
+                        <input placeholder="Tienda o vendedor:" id="tienda" type="text" required>
                     </div>
                     <div class="c-profile-seller__input">
-                        <input placeholder="Tienda o vendedor:" id="tienda_producto" type="text" name="tienda" required>
-                    </div>
-                    <div class="c-profile-seller__input">
-                        <textarea name="" id="" cols="30" rows="10" placeholder="Motivo o razón del cambio."></textarea>
+                        <textarea name="motivo" id="" cols="30" rows="10" placeholder="Motivo o razón del cambio."></textarea>
                     </div>
                     <div style="width: 50%; height:100px" class="border-4 border-pink-400 flex items-center justify-center rounded mb-4"
                         aria-disabled="false" id="areafileproducts" data-id-image="1">
