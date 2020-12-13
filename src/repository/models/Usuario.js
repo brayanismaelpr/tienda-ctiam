@@ -104,4 +104,10 @@ User.getShoppings = async (userID) =>
         `,
         { type: QueryTypes.SELECT }
     );
+User.getBySale = async (saleID) =>
+    await sequelize.query(
+        `SELECT u.nombres, u.telefono, u.email FROM usuario u JOIN pedido p ON p.id_usuario = u.id JOIN venta v ON v.id_pedido = p.id WHERE v.id = ${saleID}
+        `,
+        { type: QueryTypes.SELECT }
+    );
 module.exports = User;

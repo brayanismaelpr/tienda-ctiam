@@ -51,5 +51,10 @@ Store.getProducts = async (storeID) =>
         `SELECT p.id, p.titulo, p.precio, p.stock, m.nombre as marca, c.nombre as categoria, e.estado FROM producto p INNER JOIN categoria c ON c.id = p.id_categoria INNER JOIN estado e ON e.id = p.id_estado INNER JOIN marca m ON m.id = p.id_marca WHERE p.id_tienda = ${storeID}`,
         { type: QueryTypes.SELECT }
     );
-
+Store.getSales = async (storeID) =>
+    await sequelize.query(
+        `SELECT COUNT(its.id_venta) numero_items, v.id id_venta, v.total, v.fecha FROM item_sale its INNER JOIN venta v ON v.id = its.id_venta INNER JOIN tienda t ON t.id = v.id_tienda WHERE t.id = ${storeID} GROUP BY its.id_venta
+        `,
+        { type: QueryTypes.SELECT }
+    );
 module.exports = Store;

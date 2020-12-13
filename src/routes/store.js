@@ -71,7 +71,6 @@ router.get("/:id", async (req, res) => {
             id_tienda: req.params.id,
         },
     });
-    console.log(products);
     if (store) {
         return res.render("store-index", {
             title: `${store.nombre} | Mujeres CTIAM`,
