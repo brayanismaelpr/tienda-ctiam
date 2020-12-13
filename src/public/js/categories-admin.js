@@ -1,5 +1,6 @@
 async function modalEdit(e) {
     const idCategory = e.dataset.idCategory;
+    console.log(idCategory)
     const category = await getCategory(idCategory);
     showModal("modalEdit");
     document.querySelector(

@@ -1,0 +1,44 @@
+{{> header_principal}}
+
+<div class="c-list-admin c-container">
+    <button class="btn-option-admin" onclick="modalAdd(this)">Agregar Marca</button>
+    <table class="c-list-admin__table container__content">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each landMarks}}
+                <tr>
+                    <td>{{this.dataValues.nombre}}</td>
+                    <td>
+                        
+                        <a href="#" data-id-category="{{this.dataValues.id}}" onclick="modalEdit(this)">
+                            <i class="far fa-edit"></i>
+                        </a>
+                        <a href="/admin/delete-landMarks/{{this.dataValues.id}}" data-id-landMark="{{this.dataValues.id}}" onclick="modalDelete(this)">
+                            <i class="far fa-trash-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+    <div id="modalAdd" style="display: {{showModal modal}};">
+        {{> modals/add-landMark-modal}}
+    </div>
+
+    <div id="modalEdit" style="display: {{showModal modal}};">
+        {{> modals/edit-landMark-modal}}
+    </div>
+
+    <div id="modalDelete" style="display: {{showModal modal}};">
+        {{> modals/delete-category-modal}}
+    </div>
+</div>
+<script src="../js/login-modal.js"></script>
+<script src="../js/landMark-admin.js"></script>
+{{> footer}}

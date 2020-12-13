@@ -6,6 +6,7 @@ const {
     adminController,
     frequentQuestionController,
     categoryController,
+    landMarkController,
 } = require("../controllers");
 const {
     Category,
@@ -14,6 +15,7 @@ const {
     State,
     Store,
     Product,
+    LandMark
 } = require("../repository/database").models;
 
 router.use(isAdmin);
@@ -40,9 +42,19 @@ router.get("/categorys", async (req, res) => {
     });
 });
 
+router.get("/landMarks", async (req, res) => {
+    const landMarks = await landMarkController.getLandMark();
+    res.render("admin/landMark", {
+        landMarks,
+    });
+});
+
 router.post("/frecuent-questions", frequentQuestionController.createAQuestion);
 
 router.post("/categorys", categoryController.createACategory);
+
+router.post("/landMarks", landMarkController.createLandMark);
+
 
 router.get("/frecuent-questions/:id", async (req, res) => {
     const frequentQuestion = await FrequentQuestions.findByPk(req.params.id);
@@ -59,7 +71,14 @@ router.get("/categorys/:id", async (req, res) => {
         category: category.dataValues,
     });
 });
-
+router.get("/landMarks/:id", async (req, res) => {
+    const landMark = await LandMark.findByPk(req.params.id);
+    console.log(req.params.id)
+    res.json({
+        status:true,
+        landMark: landMark.dataValues,
+    })
+});
 router.post(
     "/frecuent-questions/:id",
     frequentQuestionController.updateAQuestion
@@ -67,12 +86,17 @@ router.post(
 
 router.post("/categorys/:id", categoryController.updateACategory);
 
+router.post("/landMarks/:id", landMarkController.updateALandMark);
+
 router.post(
     "/delete-frecuent-questions/:id",
     frequentQuestionController.deleteAQuestion
 );
 
 router.post("/delete-categorys/:id", categoryController.deleteACategory);
+
+router.get("/delete-landMarks/:id", landMarkController.deleteALandMark);
+
 
 router.get("/revision-products", async (req, res) => {
     const products = await Product.findAll({
