@@ -11,3 +11,8 @@ function options_menu_profile() {
     const toggleFilter = document.querySelector('.cont-options-profile');
     toggleFilter.classList.toggle('cont-options-profile-acitve');
 }
+function categoryToggle() {
+    const toggleMenu = document.querySelector('.responsive-category');
+    toggleMenu.classList.toggle('r-category-active');
+    document.body.style.overflow = 'hidden';
+}

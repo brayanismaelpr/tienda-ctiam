@@ -21,8 +21,16 @@
 </head>
 
 <body class="relative">
-    <div class="responsive-category">
-        
+    <div class="responsive-category p-8">
+        <figure class="flex items-center justify-between pb-8">
+            <img class="w-36" src="../images/logo.png">
+            <i onclick="categoryToggle()" class="p-4 text-xl fas fa-times"></i>
+        </figure>
+        <ol class="overflow-y-scroll w-full  grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <li class="p-2 rounded"><a class="items-center justify-start flex font-semibold" onclick="showCategory()">Categorias</a></li>
+            <li class="p-2 rounded"><a class="items-center justify-start flex font-semibold" href="/store/all">Tiendas</a></li>
+            <li class="p-2 rounded"><a class="items-center justify-start flex font-semibold" onclick="loginModal()">Ingresar</a></li>
+        </ol>
     </div>
     <div class="header-responsive p-8">
         <figure class="flex items-center justify-between pb-8">
@@ -44,7 +52,7 @@
             <li class="pb-4"><a class="opacity-75 font-semibold" href="/user/cart">Carrito</a></li>
         </ul>
         <ol class="w-full grid grid-cols-1 sm:grid-cols-2 gap-2">
-            <li class="p-2 rounded"><a class="items-center justify-start flex text-white font-semibold" onclick="showCategory()">Categorias</a></li>
+            <li class="p-2 rounded"><a class="items-center justify-start flex text-white font-semibold" onclick="categoryToggle()">Categorias</a></li>
             <li class="p-2 rounded"><a class="items-center justify-start flex text-white font-semibold" href="/store/all">Tiendas</a></li>
             <li class="p-2 rounded"><a class="items-center justify-start flex text-white font-semibold" onclick="loginModal()">Ingresar</a></li>
         </ol>
