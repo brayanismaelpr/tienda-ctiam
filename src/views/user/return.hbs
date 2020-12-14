@@ -4,6 +4,8 @@
 <section class="c-profile">
     <article class="container mx-auto md:flex">
         {{> seller/options_seller }}
+
+        <h1>{{URL}}</h1>
         <form class="c-profile-seller__form--content py-10 w-11/12 md:w-2/4" action="/user/return/create" method="POST">
             <div class=" w-full">
                 <h1 class="font-medium text-2xl">Realizar solicitud de devolución de producto</h1>
@@ -57,7 +59,7 @@
 <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-storage.js"></script>
 
-<script src="{{URl}}/js/dragImageReturnChange.js"></script>
+<script src="/js/dragImageReturnChange.js"></script>
 <script src="../js/uploadImage.js"></script>
 
 {{> footer}}
