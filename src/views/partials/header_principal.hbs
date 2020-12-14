@@ -21,27 +21,40 @@
 </head>
 
 <body class="relative">
+    <div class="responsive-category p-8">
+        <figure class="flex items-center justify-between pb-8">
+            <img class="w-36" src="../images/logo.png">
+            <i onclick="categoryToggle()" class="p-4 text-xl fas fa-times"></i>
+        </figure>
+        <ol class="overflow-y-scroll w-full  grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <li class="p-2 rounded"><a class="items-center justify-start flex font-semibold" onclick="showCategory()">Categorias</a></li>
+            <li class="p-2 rounded"><a class="items-center justify-start flex font-semibold" href="/store/all">Tiendas</a></li>
+            <li class="p-2 rounded"><a class="items-center justify-start flex font-semibold" onclick="loginModal()">Ingresar</a></li>
+        </ol>
+    </div>
     <div class="header-responsive p-8">
         <figure class="flex items-center justify-between pb-8">
             <img class="w-36" src="../images/logo.png">
             <i onclick="menuToggle()" class="p-4 text-xl fas fa-times"></i>
         </figure>
-        <form class="w-full" action="">
+        <form action="/product/search" method="post" class="w-full">
             <label class="mb-10 bg-white w-full flex items-center justify-between rounded p-2" for="">
-                <input type="text" required>
-                <i class="fas fa-search"></i>
+                <input class="h__search--input" type="text" name="data" id="datab" value="{{data}}" placeholder="Buscar">
+                <button type="submit" onclick="" class="h__search--ico">
+                    <i class="fas fa-search"></i>
+                </button>
             </label>
         </form> 
         <ul class="w-full">
-            <li class="pb-2"><a class="opacity-75 font-semibold" href="">¿Necesitas ayuda?</a></li>
-            <li class="pb-2"><a class="opacity-75 font-semibold" href="">Preguntas frecuentes</a></li>
+            <li class="pb-2"><a class="opacity-75 font-semibold" href="/contact">¿Necesitas ayuda?</a></li>
+            <li class="pb-2"><a class="opacity-75 font-semibold" href="/questions">Preguntas frecuentes</a></li>
             <li class="pb-2"><a class="opacity-75 font-semibold" href="">Como comprar</a></li>
-            <li class="pb-4"><a class="opacity-75 font-semibold" href="">Carrito</a></li>
+            <li class="pb-4"><a class="opacity-75 font-semibold" href="/user/cart">Carrito</a></li>
         </ul>
         <ol class="w-full grid grid-cols-1 sm:grid-cols-2 gap-2">
-            <li class="p-2 rounded"><a class="items-center justify-start flex text-white font-semibold" href="">Categorias</a></li>
-            <li class="p-2 rounded"><a class="items-center justify-start flex text-white font-semibold" href="">Tiendas</a></li>
-            <li class="p-2 rounded"><a class="items-center justify-start flex text-white font-semibold" href="">Ingresar</a></li>
+            <li class="p-2 rounded"><a class="items-center justify-start flex text-white font-semibold" onclick="categoryToggle()">Categorias</a></li>
+            <li class="p-2 rounded"><a class="items-center justify-start flex text-white font-semibold" href="/store/all">Tiendas</a></li>
+            <li class="p-2 rounded"><a class="items-center justify-start flex text-white font-semibold" onclick="loginModal()">Ingresar</a></li>
         </ol>
     </div>
     <div id="ventana-cuenta" style="display: none;">
