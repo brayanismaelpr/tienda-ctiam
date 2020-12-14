@@ -29,10 +29,12 @@
             <img class="w-36" src="../images/logo.png">
             <i onclick="menuToggle()" class="p-4 text-xl fas fa-times"></i>
         </figure>
-        <form class="w-full" action="">
+        <form action="/product/search" method="post" class="w-full">
             <label class="mb-10 bg-white w-full flex items-center justify-between rounded p-2" for="">
-                <input type="text" required>
-                <i class="fas fa-search"></i>
+                <input class="h__search--input" type="text" name="data" id="datab" value="{{data}}" placeholder="Buscar">
+                <button type="submit" onclick="" class="h__search--ico">
+                    <i class="fas fa-search"></i>
+                </button>
             </label>
         </form> 
         <ul class="w-full">
