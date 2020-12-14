@@ -77,16 +77,12 @@ module.exports = {
     },
     GetSearch: async (req, res) => {
         const { data } = req.body;
-        // const categorys = await Category.findAll();
         const Marks = await LandMark.findAll();
         const products = await Product.getSearch(data);
-        // products.map(async item => {
-        //     const marcaDB = await LandMark.findByPk(item.id_marca);
-        //     item.marca = marcaDB.dataValues.nombre;
-        // });
         res.render("list-product-search", {
             title: "Lista productos | Mujeres CTIAM",
             isAuthenticated: req.user != undefined,
+            user: req.user,
             Marks,
             products,
             data,

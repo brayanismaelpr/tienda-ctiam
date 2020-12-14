@@ -208,6 +208,7 @@ router.get("/list-product-c/:id", async (req, res) => {
     });
     res.render("list-product", {
         title: "Lista productos | Mujeres CTIAM",
+        user: req.user,
         isAuthenticated: req.user != undefined,
         Marks,
         products,
@@ -223,7 +224,7 @@ router.get("/categories", async (req, res) => {
 });
 
 router.get("/marks", async (req, res) => {
-    const marks = await landMarkController.getCategorys();
+    const marks = await landMarkController.getLandMark();
     return res.json({
         marcas: marks,
     });
