@@ -28,6 +28,9 @@ router.get("/products", async (req, res) => {
 
 router.get("/my-products", sellerController.getProducts);
 
+router.post("/my-products", sellerController.updateProducts);
+
+
 router.get("/sales", async (req, res) => {
     const sales = await Store.getSales(req.user.id);
     if (sales) {
