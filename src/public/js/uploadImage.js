@@ -10,7 +10,7 @@ firebase.initializeApp({
 });
 
 function uploadImage(file, folder) {
-    const ref = firebase.storage().ref(`/${folder}/${file.name}`);
+    const ref = firebase.storage().ref(`/${folder}/${file.name}-${new Date().getTime()}`);
     const task = ref.put(file);
     return task;
 }
