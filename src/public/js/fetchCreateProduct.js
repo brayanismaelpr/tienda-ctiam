@@ -1,5 +1,8 @@
+var boolIni = false;
+
 const button = document.querySelector(`[data-type-button="form"]`);
 button.addEventListener("click", async () => {
+    boolIni = !boolIni;
     const form = document.forms.createProduct;
     const id_categoria = form.querySelector("input[name='id_categoria']")
         .dataset.idValue;
@@ -31,7 +34,6 @@ button.addEventListener("click", async () => {
         imagen,
         images,
     };
-    console.log("----------------------", images);
     let bool = true;
     for (const field in producto) {
         if (
@@ -43,7 +45,7 @@ button.addEventListener("click", async () => {
             break;
         }
     }
-    if (bool) {
+    if (bool && boolIni) {
         const data = await fetch(`${location.origin}/seller/products/`, {
             method: "post",
             body: JSON.stringify(producto),

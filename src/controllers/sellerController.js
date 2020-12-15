@@ -33,15 +33,10 @@ module.exports = {
         });
         if (product) {
             images.forEach(async (element) => {
-                Photography.create({ id_producto: product.id, url: element });
+                await Photography.create({ id_producto: product.id, url: element });
             });
-            //req.flash("success", "Producto creado correctamente!");
-            //return res.redirect("/seller/store");
             return res.json({ok:true});
         }
-        console.log("No producto");
-        //req.flash("error", "Error al crear el producto, pruebe más tarde");
-        //return res.redirect("/seller/store");
         return res.json({ok:false});
     },
     deleteProduct: async (req, res) => {

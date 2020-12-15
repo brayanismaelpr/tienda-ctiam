@@ -4,28 +4,34 @@ const passport = require("passport");
 const { Admin, User } = require("../repository/database").models;
 
 passport.serializeUser((user, done) => {
-    done(null, user.id);
+    const { id, nombre_usuario } = user;
+    done(null, { id, nombre_usuario });
 });
 
-passport.deserializeUser(async (id, done) => {
-    const user = await User.findOne({
-        where: {
-            id,
-        },
-    });
-    if (!user) {
-        const admin = await Admin.findOne({
+passport.deserializeUser(async (user, done) => {
+    if (user.nombre_usuario) {
+        const adminDB = await Admin.findOne({
             where: {
-                id,
+                id: user.id,
+                nombre_usuario: user.nombre_usuario,
             },
         });
-        if (!admin) {
+        if (!adminDB) {
             return done(null, false);
         } else {
-            return done(null, admin.dataValues);
+            return done(null, adminDB.dataValues);
         }
+    } else {
+        const userDB = await User.findOne({
+            where: {
+                id: user.id,
+            },
+        });
+        if (!userDB) {
+            return done(null, false);
+        }
+        return done(null, userDB.dataValues);
     }
-    return done(null, user.dataValues);
 });
 
 passport.use(

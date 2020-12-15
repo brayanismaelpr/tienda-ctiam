@@ -2,6 +2,7 @@ const { Router } = require("express");
 const router = Router();
 const login = require("./login");
 const isAuthenticated = require("../middlewares/isAuthenticated");
+const isNotAdmin = require("../middlewares/isNotAdmin");
 const nodeMailer = require("../services/nodemailer");
 const nodeMailer_sub = require("../services/nodemailer-unete");
 const nodeMailer_pass = require("../services/nodemailer-pass");
@@ -18,12 +19,12 @@ const {
     landMarkController,
     frequentQuestionController,
 } = require("../controllers");
+
 const Category = require("../repository/models/Categoria");
 const LandMark = require("../repository/models/Marca");
 const Subscription = require("../repository/models/Subscripcion");
 const User = require("../repository/models/Usuario");
 
-//
 async function demon() {
     const productDemon = await Product.findAll({ limit: 1 });
     const listaDemon = JSON.parse(productDemon[0].visitas);
@@ -45,14 +46,26 @@ async function demon() {
     }
 }
 demon();
-//
+
 router.get("/", (req, res) => {
+    if (req.user) {
+        const { nombre_usuario } = req.user;
+        if (nombre_usuario) {
+            res.redirect("/admin");
+        }
+    }
     res.render("index", {
         title: "Tienda CTIAM",
         user: req.user,
         isAuthenticated: req.user != undefined,
     });
 });
+
+router.use("/login", login);
+
+router.use("/admin", admin);
+
+router.use(isNotAdmin);
 
 router.get("/contact", (req, res) => {
     res.render("contact", {
@@ -372,10 +385,6 @@ router.post("/subscription", async (req, res) => {
 });
 
 router.use("/store", store);
-
-router.use("/login", login);
-
-router.use("/admin", admin);
 
 router.use("/product", product);
 
