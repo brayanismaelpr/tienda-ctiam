@@ -2729,8 +2729,7 @@ footer {
     text-align: center;
 }
 .c-stores {
-    background-color: #fafafa;
-    border-bottom: 2px solid #000000;
+    background-color: #ffffff;
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -2751,10 +2750,14 @@ footer {
 .c-stores__store-info {
     align-items: center;
     display: flex;
-    justify-content: space-between;
     margin: 0 auto;
     padding: 25px 0;
     width: 90%;
+}
+@media (max-width: 425px) {
+    .c-stores__store-info {
+        flex-direction: column;
+    }
 }
 .c-stores__fig {
     border-radius: 8px;
