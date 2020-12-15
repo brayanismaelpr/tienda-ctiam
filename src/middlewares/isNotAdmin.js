@@ -10,10 +10,10 @@ module.exports = async (req, res, next) => {
                 }
             );
             if (admin) {
-                return next();
+                return res.redirect("/admin");
             }
-            return res.redirect("/login/admin");
+            return next();
         }
     }
-    res.redirect("/login/admin");
+    return next();
 };
