@@ -35,7 +35,7 @@ const User = require("../models/Usuario");
 // {alter:true}
 (async () => {
     sequelize
-        .sync()
+        .sync({alter: true})
         .then(() => console.log("database connected"));
 })();
 

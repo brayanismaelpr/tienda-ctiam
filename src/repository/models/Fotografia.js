@@ -18,7 +18,7 @@ const Photography = sequelize.define(
             },
         },
         url: {
-            type: DataTypes.STRING(100),
+            type: DataTypes.STRING(500),
             allowNull: false,
         },
     },
