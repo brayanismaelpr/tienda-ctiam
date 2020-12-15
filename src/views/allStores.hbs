@@ -1,16 +1,16 @@
 {{> header_principal}}
 <section class="c-stores">
-    <article class="c-stores__content">
+    <article class="mx-auto w-11/12 py-8">
         <p class="c-stores--title">Tiendas destacadas</p>
-        <div class="c-stores__grid">
+        <div class="rounded-lg grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 bg-gray-100 p-8 gap-4">
             {{#each stores}}
             <div class="c-stores__store shadow-xl">
                 <a href="/store/{{this.dataValues.id}}">
                     <div class="c-stores__store-info">
-                        <figure class="c-stores__fig shadow-md">
+                        <figure class="c-stores__fig mr-0 sm:mr-6 shadow-md w-6/12 lg:w-4/12">
                             <img class="c-stores__fig--img" src="{{imageStore this.dataValues.imagen}}">
                         </figure>
-                        <div class="c-stores__text">
+                        <div class="c-stores__text pt-8 sm:pt-0 sm:w-full lg:w-4/6">
                             <p class="c-stores__text--name">{{this.dataValues.nombre}}</p>
                             <p class="c-stores__text--description">
                                 {{this.dataValues.descripcion}}
