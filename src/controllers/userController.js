@@ -90,12 +90,15 @@ module.exports = {
         let cart = await Cart.findByPk(id_cart);
         const product = await Product.findByPk(id_product);
         if (product) {
-            const itemCart = await ItemCart.findOne({
-                where: {
-                    id_producto: id_product,
-                    id_carrito: cart.id,
-                }
-            });
+            let itemCart = undefined;
+            if (cart) {
+                itemCart = await ItemCart.findOne({
+                    where: {
+                        id_producto: id_product,
+                        id_carrito: cart.id,
+                    }
+                });
+            }
             if (!itemCart) {
                 const value = product.precio;
                 const amount = 1;
