@@ -57,7 +57,15 @@ Store.getProducts = async (storeID) =>
     );
 Store.getSales = async (storeID) =>
     await sequelize.query(
-        `SELECT COUNT(its.id_venta) numero_items, v.id id_venta, v.total, v.fecha FROM item_sale its INNER JOIN venta v ON v.id = its.id_venta INNER JOIN tienda t ON t.id = v.id_tienda WHERE t.id = ${storeID} GROUP BY its.id_venta
+        `SELECT COUNT(its.id_venta) numero_items, v.id id_venta, v.total, v.fecha FROM item_sale its INNER JOIN venta v ON v.id = its.id_venta INNER JOIN tienda t ON t.id = v.id_tienda WHERE t.id = ${storeID} GROUP BY its.id_venta  
+        ORDER BY v.fecha DESC
+        `,
+        { type: QueryTypes.SELECT }
+    );
+Store.getSaleslimit = async (storeID) =>
+    await sequelize.query(
+        `SELECT COUNT(its.id_venta) numero_items, v.id id_venta, v.total, v.fecha FROM item_sale its INNER JOIN venta v ON v.id = its.id_venta INNER JOIN tienda t ON t.id = v.id_tienda WHERE t.id = ${storeID} GROUP BY its.id_venta  
+        ORDER BY v.fecha DESC LIMIT 6
         `,
         { type: QueryTypes.SELECT }
     );

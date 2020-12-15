@@ -29,7 +29,7 @@ router.get("/products", async (req, res) => {
 router.get("/my-products", sellerController.getProducts);
 
 router.post("/sales", async (req, res) => {
-    const sales = await Store.getSales(req.user.id);
+    const sales = await Store.getSaleslimit(req.user.id);
     if (sales) {
         sales.forEach(sale => {
             let fecha = new Date(sale.fecha);
