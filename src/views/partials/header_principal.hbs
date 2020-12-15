@@ -107,7 +107,6 @@
                 },
             }).then(res => res.json())
                 .then(data => {
-                    console.log(data.sales)
                     let div = '<h1 class="pb-4">Notificaciones</h1>';
                     data.sales.map(item => {
                         div += `
