@@ -88,19 +88,26 @@ router.get("/details-shopping/:id", async (req, res) => {
             },
         });
         if (sales) {
-            sales.forEach(async (sale) => {
-                sale.tienda = await Store.findByPk(sale.id_tienda, {
-                    attributes: ["nombre", "telefono", "email"],
+            const promise = new Promise((resolve, reject) => {
+                sales.forEach(async (sale, index) => {
+                    sale.tienda = await Store.findByPk(sale.id_tienda, {
+                        attributes: ["nombre", "telefono", "email"],
+                    });
+                    sale.items = await ItemSale.getBySale(sale.id);
+                    if (index == sales.length-1) {
+                        resolve();
+                    }
                 });
-                sale.items = await ItemSale.getBySale(sale.id);
             });
-            return res.render("user/details-shopping", {
-                title: "Detalles compra | Mujeres CTIAM",
-                user: req.user,
-                sales,
-                order,
-                isAuthenticated: true,
-            });
+            promise.then(() => {
+                return res.render("user/details-shopping", {
+                    title: "Detalles compra | Mujeres CTIAM",
+                    user: req.user,
+                    sales,
+                    order,
+                    isAuthenticated: true,
+                });
+            })
         }
     }
 });
