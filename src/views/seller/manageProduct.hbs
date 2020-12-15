@@ -4,11 +4,14 @@
         {{> seller/options_seller }}
         <div class="div-profile py-10">
             <div class="c-list__t w-11/12 mx-auto">
-                <select class="w-55 h-10 border-2 px-2 border-black rounded ml-4 mt-5 mb-10" name="">
+                
+                <form action="" method="POST">
+                <select id="selectIdProduct" class="w-55 h-10 border-2 px-2 border-black rounded ml-4 mt-5 mb-10"        name="id_estado">
                     {{#each states}}
                     <option value="{{this.dataValues.id}}">{{this.dataValues.estado}}</option>
                     {{/each}}
                 </select>
+                <button id="butAplicar" onclick="selectProduct()">Aplicar</button>
                 <div class="c-list__t-body grid grid-cols-7 gap-2" style="border-bottom: 1px solid rgb(194, 194, 194);">
                     <div class="c-list__column">
                         <p class="c-list__column--p"><b></b></p>
@@ -35,9 +38,9 @@
                 {{#each products}}
                 <div class="c-list__t-body grid grid-cols-7 gap-2" style="border-bottom: 1px solid rgb(194, 194, 194);">
                     <div class="c-list__column">
-                        <input type="checkbox" name="" id="">
+                        <input class="products-check" type="checkbox" name="idProduct" value="{{this.id}}" id="">
                     </div>
-                    <div class="c-list__column">
+                    <div class="c-list__column checkId">
                         <p class="c-list__column--p">{{this.titulo}}</p>
                     </div>
                     <div class="c-list__column">
@@ -57,20 +60,11 @@
                     </div>
                 </div>
                 {{/each}}
+                </form>
             </div>
         </div>
     </article>
 </section>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<script src="../js/messagesAlerts.js"></script>
-{{#if error}}
-<script>
-    error("{{error}}")
-</script>
-{{/if}}
-{{#if success}}
-<script>
-    success("{{success}}")
-</script>
-{{/if}}
+
+<script src="../js/manageProduct.js"></script>
 {{> footer}}

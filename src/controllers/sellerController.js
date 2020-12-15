@@ -71,4 +71,13 @@ module.exports = {
             isAuthenticated: true,
         });
     },
+    updateProducts: async (req, res)=>{
+        const data = req.body;
+        data.idProduct.map( async item=>{
+            let product  = await  Product.findByPk(item)
+            product.id_estado=Number(data.id_estado)
+            await product.save();
+        })
+        return  res.redirect("/seller/my-products");
+    }
 };

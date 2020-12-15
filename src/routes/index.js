@@ -45,6 +45,29 @@ router.use("/login", login);
 
 router.use("/admin", admin);
 
+router.get("/categories", async (req, res) => {
+    const categories = await categoryController.getCategorys();
+    return res.json({
+        categorias: categories,
+    });
+});
+
+router.get("/marks", async (req, res) => {
+    const marks = await landMarkController.getLandMark();
+    return res.json({
+        marcas: marks,
+    });
+});
+router.get("/questions", async (req, res) => {
+    const frequentQuestions = await frequentQuestionController.getFrequentQuestions();
+    res.render("questions", {
+        user: req.user,
+        title: "Preguntas frecuentes | Mujeres CTIAM",
+        isAuthenticated: req.user != undefined,
+        frequentQuestions,
+    });
+});
+
 router.use(isNotAdmin);
 
 router.get("/contact", (req, res) => {
@@ -114,15 +137,7 @@ router.get("/profile-store", (req, res) => {
     });
 });
 
-router.get("/questions", async (req, res) => {
-    const frequentQuestions = await frequentQuestionController.getFrequentQuestions();
-    res.render("questions", {
-        user: req.user,
-        title: "Preguntas frecuentes | Mujeres CTIAM",
-        isAuthenticated: req.user != undefined,
-        frequentQuestions,
-    });
-});
+
 
 router.post("/list-product-c/:id", async (req, res) => {
     function limitDesc(desc) {
@@ -208,19 +223,7 @@ router.get("/list-product-c/:id", async (req, res) => {
     });
 });
 
-router.get("/categories", async (req, res) => {
-    const categories = await categoryController.getCategorys();
-    return res.json({
-        categorias: categories,
-    });
-});
 
-router.get("/marks", async (req, res) => {
-    const marks = await landMarkController.getLandMark();
-    return res.json({
-        marcas: marks,
-    });
-});
 
 router.get("/cities", async (req, res) => {
     const cities = await City.findAll();
