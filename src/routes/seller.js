@@ -28,6 +28,29 @@ router.get("/products", async (req, res) => {
 
 router.get("/my-products", sellerController.getProducts);
 
+router.post("/sales", async (req, res) => {
+    const sales = await Store.getSales(req.user.id);
+    if (sales) {
+        sales.forEach(sale => {
+            let fecha = new Date(sale.fecha);
+            sale.fecha = `${fecha.getDate()}/${
+                fecha.getMonth() + 1
+            }/${fecha.getFullYear()}`;
+        });
+        // sales.forEach(async(sale)=>{
+        //     const find = await Sale.findByPk(sale.id_venta);
+        //     const itemsSales = await ItemSale.getBySale(find.id);
+        //     sale.url = itemsSales[0].imagen;
+        // });
+        return res.json({
+            sales,
+        });
+    }
+    return res.json({
+        sales,
+    });
+});
+
 router.get("/sales", async (req, res) => {
     const sales = await Store.getSales(req.user.id);
     if (sales) {
@@ -71,7 +94,8 @@ router.get("/details-sale/:id", async (req, res) => {
         }
     }
 }),
-    router.post("/products", sellerController.createProduct);
+
+router.post("/products", sellerController.createProduct);
 
 router.post("/products/delete", sellerController.deleteProduct);
 
