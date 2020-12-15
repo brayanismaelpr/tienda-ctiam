@@ -1,0 +1,38 @@
+{{> header_principal}}
+<link rel="stylesheet" href="../css/dragImage/index.css">
+
+<section class="c-profile">
+    <article class="container mx-auto md:flex">
+        {{> user/options_user }}
+
+        <div class="c-profile-seller__form--content py-10 w-11/12 md:w-2/4">
+            <div class=" w-full">
+                <h1 class="font-medium text-2xl">Detalle devolución de producto</h1>
+                <div class="pt-10">
+                    <div class="c-profile-seller__input">
+                        <input placeholder="Tienda o vendedor:" type="text" value="{{store.dataValues.nombre}}"
+                            required>
+                    </div>
+                    <div class="c-profile-seller__input">
+                        <input placeholder="Producto:" type="text" value="{{product.dataValues.titulo}}" required>
+                        <p>Precio x un: <b>{{product.dataValues.precio}}</b></p>
+                    </div>
+                    <div class="c-profile-seller__input">
+                        <p>Cantidad: <b>{{item.dataValues.cantidad}}</b></p>
+                    </div>
+
+                    <div class="c-profile-seller__input">
+                        <p>Total: <b>{{item.dataValues.precio}}</b></p>
+                    </div>
+                    <div class="c-profile-seller__input">
+                        <textarea name="motivo" id="" cols="30" rows="10" placeholder="Motivo o razón del cambio."
+                            required>{{return.dataValues.motivo}}</textarea>
+                    </div>
+                    <img src="{{return.dataValues.evidencia}}" width="100" height="100" id="imageEvidence">
+                </div>
+            </div>
+        </div>
+    </article>
+</section>
+
+{{> footer}}

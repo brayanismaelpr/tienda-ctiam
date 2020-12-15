@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <script src="{{URL}}/js/messagesAlerts.js"></script>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{{URL}}/css/estilo.css">
-    {{!-- <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet"> --}}
+    {{!--
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet"> --}}
     <link href="{{URL}}/css/tailwind.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.js"
         integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
@@ -27,9 +29,12 @@
             <i onclick="categoryToggle()" class="p-4 text-xl fas fa-times"></i>
         </figure>
         <ol class="overflow-y-scroll w-full  grid grid-cols-1 sm:grid-cols-2 gap-2">
-            <li class="p-2 rounded"><a class="items-center justify-start flex font-semibold" onclick="showCategory()">Categorias</a></li>
-            <li class="p-2 rounded"><a class="items-center justify-start flex font-semibold" href="/store/all">Tiendas</a></li>
-            <li class="p-2 rounded"><a class="items-center justify-start flex font-semibold" onclick="loginModal()">Ingresar</a></li>
+            <li class="p-2 rounded"><a class="items-center justify-start flex font-semibold"
+                    onclick="showCategory()">Categorias</a></li>
+            <li class="p-2 rounded"><a class="items-center justify-start flex font-semibold"
+                    href="/store/all">Tiendas</a></li>
+            <li class="p-2 rounded"><a class="items-center justify-start flex font-semibold"
+                    onclick="loginModal()">Ingresar</a></li>
         </ol>
     </div>
     <div class="header-responsive p-8">
@@ -39,12 +44,13 @@
         </figure>
         <form action="/product/search" method="post" class="w-full">
             <label class="mb-10 bg-white w-full flex items-center justify-between rounded p-2" for="">
-                <input class="h__search--input" type="text" name="data" id="datab" value="{{data}}" placeholder="Buscar">
+                <input class="h__search--input" type="text" name="data" id="datab" value="{{data}}"
+                    placeholder="Buscar">
                 <button type="submit" onclick="" class="h__search--ico">
                     <i class="fas fa-search"></i>
                 </button>
             </label>
-        </form> 
+        </form>
         <ul class="w-full">
             <li class="pb-2"><a class="opacity-75 font-semibold" href="/contact">¿Necesitas ayuda?</a></li>
             <li class="pb-2"><a class="opacity-75 font-semibold" href="/questions">Preguntas frecuentes</a></li>
@@ -52,9 +58,12 @@
             <li class="pb-4"><a class="opacity-75 font-semibold" href="/user/cart">Carrito</a></li>
         </ul>
         <ol class="w-full grid grid-cols-1 sm:grid-cols-2 gap-2">
-            <li class="p-2 rounded"><a class="items-center justify-start flex text-white font-semibold" onclick="categoryToggle()">Categorias</a></li>
-            <li class="p-2 rounded"><a class="items-center justify-start flex text-white font-semibold" href="/store/all">Tiendas</a></li>
-            <li class="p-2 rounded"><a class="items-center justify-start flex text-white font-semibold" onclick="loginModal()">Ingresar</a></li>
+            <li class="p-2 rounded"><a class="items-center justify-start flex text-white font-semibold"
+                    onclick="categoryToggle()">Categorias</a></li>
+            <li class="p-2 rounded"><a class="items-center justify-start flex text-white font-semibold"
+                    href="/store/all">Tiendas</a></li>
+            <li class="p-2 rounded"><a class="items-center justify-start flex text-white font-semibold"
+                    onclick="loginModal()">Ingresar</a></li>
         </ol>
     </div>
     <div id="ventana-cuenta" style="display: none;">
@@ -71,38 +80,8 @@
     </div>
 
     <div class="h-c-notifications container mx-auto absolute flex items-end flex-col" style="z-index: 99999; top: 92px">
-        <div class="shadow-2xl w-80 overflow-y-scroll p-8 bg-white relative" style="height: 400px;">
+        <div class="shadow-2xl w-80 overflow-y-scroll p-8 bg-white relative" style="height: 400px;" id="notificaciones">
             <h1 class="pb-4">Notificaciones</h1>
-            <div class="w-full flex mb-4">
-                <div class="bg-red-500 rounded-full w-1/5" style="height: 46px"></div>
-                <div class="pl-4 w-4/5">
-                    <h1 class="text-xs font-bold">Nombre producto</h1>
-                    <p class="text-xs py-2">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis a
-                    </p>
-                    <a class="text-sm underline text-blue-500" href="">Enlace</a>
-                </div>
-            </div>
-            <div class="w-full flex mb-4">
-                <div class="bg-red-500 rounded-full w-1/5" style="height: 46px"></div>
-                <div class="pl-4 w-4/5">
-                    <h1 class="text-xs font-bold">Nombre producto</h1>
-                    <p class="text-xs py-2">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis a
-                    </p>
-                    <a class="text-sm underline text-blue-500" href="">Enlace</a>
-                </div>
-            </div>
-            <div class="w-full flex mb-4">
-                <div class="bg-red-500 rounded-full w-1/5" style="height: 46px"></div>
-                <div class="pl-4 w-4/5">
-                    <h1 class="text-xs font-bold">Nombre producto</h1>
-                    <p class="text-xs py-2">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis a
-                    </p>
-                    <a class="text-sm underline text-blue-500" href="">Enlace</a>
-                </div>
-            </div>
             <div class="w-full flex mb-4">
                 <div class="bg-red-500 rounded-full w-1/5" style="height: 46px"></div>
                 <div class="pl-4 w-4/5">
@@ -115,9 +94,44 @@
             </div>
         </div>
         <div class="shadow-2xl py-2 w-80 bg-white text-center bg-pink-500" style="z-index: 99999;">
-            <a class="text-white underline font-medium" href="">Ver más</a>
+            <a class="text-white underline font-medium" href="/seller/sales">Ver más</a>
         </div>
     </div>
+    <script>
+        main();
+        function main() {
+            fetch(`${location.origin}/seller/sales`, {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }).then(res => res.json())
+                .then(data => {
+                    let div = '<h1 class="pb-4">Notificaciones</h1>';
+                    data.sales.map(item => {
+                        div += `
+                        <div class="w-full flex mb-4">
+                <img class="bg-red-500 rounded-full w-1/5" style="height: 46px" src="https://w7.pngwing.com/pngs/72/118/png-transparent-invoice-computer-icons-bill-icon-text-logo-payment.png">
+                <div class="pl-4 w-4/5">
+                    <h1 class="text-xs font-bold">Venta: ${item.id_venta}</h1>
+                    <p class="text-xs pt-2">
+                        Fecha: <b>${item.fecha}</b>
+                    </p>
+                    <p class="text-xs">
+                        Total: <b>$${item.total}</b>
+                    </p>
+                    <p class="text-xs">
+                        Productos: <b>${item.numero_items}</b>
+                    </p>
+                    <a class="text-sm underline text-blue-500" href="${location.origin}/seller/details-sale/${item.id_venta}">Ver notificación</a>
+                </div>
+            </div>
+                    `;
+                    });
+                    document.getElementById('notificaciones').innerHTML = div;
+                })
+        }
+    </script>
 
     <div class="c-container">
         <div class="h-list__content container__content">
@@ -126,7 +140,8 @@
                     <a class="h__menu__a-img" href="/"><img class="h__content--img" src="{{URL}}/images/logo.png"></a>
                     <form action="/product/search" method="post" class="h__search">
                         <div class="h__search__c">
-                            <input class="h__search--input" type="text" name="data" id="datab" value="{{data}}" placeholder="Buscar">
+                            <input class="h__search--input" type="text" name="data" id="datab" value="{{data}}"
+                                placeholder="Buscar">
                         </div>
                         <a href="/product/search">
                             <button type="submit" onclick="" class="h__search--ico">

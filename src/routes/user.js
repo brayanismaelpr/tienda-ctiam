@@ -88,19 +88,26 @@ router.get("/details-shopping/:id", async (req, res) => {
             },
         });
         if (sales) {
-            sales.forEach(async (sale) => {
-                sale.tienda = await Store.findByPk(sale.id_tienda, {
-                    attributes: ["nombre", "telefono", "email"],
+            const promise = new Promise((resolve, reject) => {
+                sales.forEach(async (sale, index) => {
+                    sale.tienda = await Store.findByPk(sale.id_tienda, {
+                        attributes: ["nombre", "telefono", "email"],
+                    });
+                    sale.items = await ItemSale.getBySale(sale.id);
+                    if (index == sales.length-1) {
+                        resolve();
+                    }
                 });
-                sale.items = await ItemSale.getBySale(sale.id);
             });
-            return res.render("user/details-shopping", {
-                title: "Detalles compra | Mujeres CTIAM",
-                user: req.user,
-                sales,
-                order,
-                isAuthenticated: true,
-            });
+            promise.then(() => {
+                return res.render("user/details-shopping", {
+                    title: "Detalles compra | Mujeres CTIAM",
+                    user: req.user,
+                    sales,
+                    order,
+                    isAuthenticated: true,
+                });
+            })
         }
     }
 });
@@ -110,7 +117,7 @@ router.post("/return/create", async (req, res) => {
     const ret = await Return.findOne({
         where: {
             id_item,
-        }
+        },
     });
     if (!ret) {
         await Return.create({
@@ -118,10 +125,22 @@ router.post("/return/create", async (req, res) => {
             id_producto,
             motivo,
             evidencia,
-            id_usuario: req.user.id
+            id_usuario: req.user.id,
         });
-        res.redirect("/")
+        res.redirect("/user/return");
     }
+    res.redirect("/user/return");
+});
+
+router.get("/return", async (req, res) => {
+    const returns = await User.getReturns(req.user.id);
+    console.log(returns);
+    res.render("user/list-returns", {
+        title: "Mis devoluciones | Mujeres CTIAM",
+        user: req.user,
+        returns,
+        isAuthenticated: true,
+    });
 });
 
 router.post("/return", async (req, res) => {
@@ -137,9 +156,25 @@ router.post("/return", async (req, res) => {
             const store = await Store.findByPk(product.id_tienda, {
                 attributes: ["nombre", "email", "telefono", "id"],
             });
-            return res.render("user/return", {
+            const ret = await Return.findOne({
+                where: {
+                    id_item,
+                },
+            });
+            if (!ret) {
+                return res.render("user/return", {
+                    title: "Devoluciones | Mujeres CTIAM",
+                    user: req.user,
+                    item,
+                    product,
+                    store,
+                    isAuthenticated: true,
+                });
+            }
+            return res.render("user/detail-return", {
                 title: "Devoluciones | Mujeres CTIAM",
                 user: req.user,
+                return: ret,
                 item,
                 product,
                 store,

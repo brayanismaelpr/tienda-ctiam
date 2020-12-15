@@ -119,5 +119,10 @@ User.getPurchasedProducts = async (userID) =>
         `SELECT p.id, p.titulo FROM producto p JOIN item_sale its ON its.id_producto = p.id JOIN pedido ped ON ped.id = its.id_pedido JOIN usuario u ON u.id = ped.id_usuario WHERE u.id = ${userID}`,
         { type: QueryTypes.SELECT }
     );
+User.getReturns = async (userID) =>
+    await sequelize.query(
+        `SELECT t.nombre tienda, p.titulo producto, dev.id_item FROM devolucion dev JOIN producto p ON p.id = dev.id_producto JOIN tienda t ON t.id = p.id_tienda WHERE dev.id_usuario = ${userID}`,
+        { type: QueryTypes.SELECT }
+    );
 
 module.exports = User;

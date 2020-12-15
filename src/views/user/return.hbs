@@ -5,7 +5,6 @@
     <article class="container mx-auto md:flex">
         {{> seller/options_seller }}
 
-        <h1>{{URL}}</h1>
         <form class="c-profile-seller__form--content py-10 w-11/12 md:w-2/4" action="/user/return/create" method="POST">
             <div class=" w-full">
                 <h1 class="font-medium text-2xl">Realizar solicitud de devolución de producto</h1>
@@ -32,7 +31,7 @@
                         <textarea name="motivo" id="" cols="30" rows="10" placeholder="Motivo o razón del cambio."
                             required></textarea>
                     </div>
-                    <label for<label for="" class="items:start justify-between flex mb-3 justify-between">
+                    <label for="" class="items:start justify-between flex mb-3 justify-between">
                         <span>Foto de la evidencia (Recibo)</span>
                         <div class="sc-ui-image-uploader sc-ui-image-uploader--default" aria-disabled="false"
                             id="areafile">
