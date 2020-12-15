@@ -31,6 +31,8 @@ function deletemDeletemarca() {
     document.getElementById("body").style.overflow = "scroll";
     document.getElementById("modalDelete").style.display = "none";
 }
+
+// Modal para agregar direcciones
 function addresModal() {
     document.getElementById("body").style.overflow = "hidden";
     document.getElementById("modalAdress").style.display = "block";
@@ -39,6 +41,9 @@ function deletemadress() {
     document.getElementById("body").style.overflow = "scroll";
     document.getElementById("modalAdress").style.display = "none";
 }
+
+// Modal para cambiar password
+
 function recoverpasswordModal() {
     document.getElementById("body").style.overflow = "hidden";
     document.getElementById("c-recover-password").style.display = "block";
