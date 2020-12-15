@@ -6,6 +6,7 @@ const isNotAdmin = require("../middlewares/isNotAdmin");
 const nodeMailer = require("../services/nodemailer");
 const nodeMailer_sub = require("../services/nodemailer-unete");
 const nodeMailer_pass = require("../services/nodemailer-pass");
+const daemon = require("../middlewares/daemonVisits");
 const admin = require("./admin");
 const product = require("./product");
 const seller = require("./seller");
@@ -20,32 +21,11 @@ const {
     frequentQuestionController,
 } = require("../controllers");
 
-const Category = require("../repository/models/Categoria");
 const LandMark = require("../repository/models/Marca");
 const Subscription = require("../repository/models/Subscripcion");
 const User = require("../repository/models/Usuario");
 
-async function demon() {
-    const productDemon = await Product.findAll({ limit: 1 });
-    const listaDemon = JSON.parse(productDemon[0].visitas);
-    let f = new Date();
-    let day = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
-    if (listaDemon.visitas.find(find => find.fecha === day) === undefined) {
-        let products = await Product.findAll();
-        products.map(product => {
-            const lista = JSON.parse(product.visitas);
-            if (lista.visitas.find(find => find.fecha === day) === undefined) {
-                lista.visitas.push({
-                    "fecha": day,
-                    "contador": 0
-                });
-            }
-            product['visitas'] = lista;
-            product.save();
-        })
-    }
-}
-demon();
+daemon();
 
 router.get("/", (req, res) => {
     if (req.user) {
@@ -136,7 +116,6 @@ router.get("/profile-store", (req, res) => {
 
 router.get("/questions", async (req, res) => {
     const frequentQuestions = await frequentQuestionController.getFrequentQuestions();
-    console.log(frequentQuestions);
     res.render("questions", {
         user: req.user,
         title: "Preguntas frecuentes | Mujeres CTIAM",
@@ -322,7 +301,12 @@ router.get("/getDestacados", async (req, res) => {
     const products = await Product.findAll();
     products.map(item => {
         const data = JSON.parse(item.visitas);
-        item.dataValues.total = data.visitas.map(item => item.contador).reduce((acc, valor) => acc + valor)
+        if (data) {
+            const visitas = data.visitas.map(item => item.contador);
+            if (visitas.length > 0) {
+                item.dataValues.total = visitas.reduce((acc, valor) => acc + valor)
+            }
+        }
     });
     products.sort((a, b) => b.dataValues.total - a.dataValues.total);
     return res.json({
