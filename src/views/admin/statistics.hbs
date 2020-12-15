@@ -1,19 +1,14 @@
-{{> header_principal}}
+{{> header_admin}}
 <div id="modal"></div>
+<div class="flex items-center justify-between w-8/12 mx-auto pt-8">
+    <h2>Mis Estadisticas</h2>
+    <a class="flex items-center justify-center py-2 px-4 bg-pink-300 duration-300 hover:bg-pink-500 rounded" href="/admin">
+        <i class="fas fa-arrow-left pr-2"></i><b> Ir atras</b>
+    </a>
+</div>
 <section class="c-profile">
     <article class="container mx-auto md:flex justify-between">
-        <div class="w-11/12 mx-auto md:w-4/5 px-0 lg:px-20 pb-14">
-            <div class=" w-full py-14 mx-auto">
-                <div class="w-full">
-                    <h2 class="text-2xl font-medium pb-8">Mis Estadisticas</h2>
-                    <div class="flex items-center justify-between flex-wrap">
-                        <a class="px-4 mt-4 h-10 flex items-center justify-center rounded text-white bg-pink-500 hover:bg-pink-800 duration-300 font-medium"
-                            href="">
-                            Descargar reporte
-                        </a>
-                    </div>
-                </div>
-            </div>
+        <div class="w-11/12 mx-auto md:w-4/5 px-0 lg:px-20 pb-14 pt-10">
             <div class="grid md:grid-cols-1 gap-4">
                 <div class="rounded p-6 border-2 shadow-lg flex justify-center items-center overflow-hidden"
                     id="piechart_3d" style="width: 100%; height: 500px;"></div>
@@ -47,4 +42,4 @@
         }
     }
 </script>
-{{> footer }}
+{{> footer_admin }}
