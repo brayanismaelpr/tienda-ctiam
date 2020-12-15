@@ -1,8 +1,8 @@
 :root {
     --purple: #C50084;
-    --purple: #f00;
+    /* --purple: #f00; */
     --dark_pink: #920061;
-    --dark_pink: rgb(155, 0, 0);
+    /* --dark_pink: rgb(155, 0, 0); */
     --pink: #d6939e;
     --rosa_claro: #FEBFFF;
 }
@@ -1450,15 +1450,15 @@ footer {
     height: 500px;
     width: 60%;
     z-index: 1;
-    background: rgba(194,0,0,1);
+    /* background: rgba(194,0,0,1);
     background: -moz-linear-gradient(left, rgba(194,0,0,1) 0%, rgba(194,0,0,1) 79%, rgba(194,0,0,0) 100%);
     background: -webkit-gradient(left top, right top, color-stop(0%, rgba(194,0,0,1)), color-stop(79%, rgba(194,0,0,1)), color-stop(100%, rgba(194,0,0,0)));
     background: -webkit-linear-gradient(left, rgba(194,0,0,1) 0%, rgba(194,0,0,1) 79%, rgba(194,0,0,0) 100%);
     background: -o-linear-gradient(left, rgba(194,0,0,1) 0%, rgba(194,0,0,1) 79%, rgba(194,0,0,0) 100%);
     background: -ms-linear-gradient(left, rgba(194,0,0,1) 0%, rgba(194,0,0,1) 79%, rgba(194,0,0,0) 100%);
-    background: linear-gradient(to right, rgba(194,0,0,1) 0%, rgba(194,0,0,1) 79%, rgba(194,0,0,0) 100%);
+    background: linear-gradient(to right, rgba(194,0,0,1) 0%, rgba(194,0,0,1) 79%, rgba(194,0,0,0) 100%); */
 }
-/* .color-slider-one {
+.color-slider-one {
     background: rgba(255,93,177,1);
     background: -moz-linear-gradient(left, rgba(255,93,177,1) 0%, rgba(244,32,142,1) 66%, rgba(239,1,124,0) 100%); 
     background: -webkit-gradient(left top, right top, color-stop(0%, rgba(255,93,177,1)), color-stop(66%, rgba(244,32,142,1)), color-stop(100%, rgba(239,1,124,0))); 
@@ -1484,7 +1484,7 @@ footer {
      background: -o-linear-gradient(left, rgba(214,19,152,1) 0%, rgba(214,19,152,1) 70%, rgba(214,19,152,0.63) 81%, rgba(214,19,152,0.53) 84%, rgba(247,22,176,0.23) 93%, rgba(247,22,176,0) 100%); 
      background: -ms-linear-gradient(left, rgba(214,19,152,1) 0%, rgba(214,19,152,1) 70%, rgba(214,19,152,0.63) 81%, rgba(214,19,152,0.53) 84%, rgba(247,22,176,0.23) 93%, rgba(247,22,176,0) 100%); 
      background: linear-gradient(to right, rgba(214,19,152,1) 0%, rgba(214,19,152,1) 70%, rgba(214,19,152,0.63) 81%, rgba(214,19,152,0.53) 84%, rgba(247,22,176,0.23) 93%, rgba(247,22,176,0) 100%); 
-} */
+}
 .c-slider__c-img:nth-child(2) {
     position: absolute;
     top: 0;
