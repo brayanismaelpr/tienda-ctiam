@@ -295,7 +295,8 @@ router.get("/getAllVisitas", async (req, res) => {
         },
     });
 
-    let todos = [["productos", "total"]];
+    const root = ["productos", "total"];
+    let todos = []
     let i = 0;
     products.map((item) => {
         let data = JSON.parse(item.visitas);
@@ -309,7 +310,13 @@ router.get("/getAllVisitas", async (req, res) => {
         todos.push([titulo, total]);
         i++;
     });
-    console.log(todos);
+    todos.sort((a, b) => b[1] - a[1]);
+    if (todos.length > 5) {
+        for (let i = 0; i < todos.length - 5; i++) {
+            todos.pop();
+        }
+    }
+    todos.splice(0, 0, root);
     return res.json({
         todos,
     });
@@ -340,63 +347,10 @@ router.get("/getDestacados", async (req, res) => {
 router.post("/recover-pass", async (req, res) => {
     function newPass() {
         let pass = "";
-        const charts = [
-            "A",
-            "a",
-            "B",
-            "b",
-            "C",
-            "c",
-            "D",
-            "d",
-            "E",
-            "e",
-            "F",
-            "f",
-            "G",
-            "g",
-            "H",
-            "h",
-            "I",
-            "i",
-            "J",
-            "j",
-            "K",
-            "k",
-            "L",
-            "l",
-            "M",
-            "m",
-            "N",
-            "n",
-            "O",
-            "o",
-            "P",
-            "p",
-            "Q",
-            "q",
-            "R",
-            "r",
-            "S",
-            "s",
-            "T",
-            "t",
-            "U",
-            "u",
-            "V",
-            "v",
-            "W",
-            "w",
-            "X",
-            "x",
-            "Y",
-            "y",
-            "Z",
-            "Z",
-            "-",
-            ".",
-            "*",
-        ];
+        const charts = ["A","a","B","b","C","c","D","d","E","e","F","f","G",
+        "g","H","h","I","i","J","j","K","k","L","l","M","m","N","n","O","o",
+        "P","p","Q","q","R","r","S","s","T","t","U","u","V","v","W","w","X",
+        "x","Y","y","Z","Z","-",".","*",];
         const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
         for (let i = 0; i < 5; i++) {
             const n = Math.round(Math.random() * (charts.length - 0) + 0);

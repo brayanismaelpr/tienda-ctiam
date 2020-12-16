@@ -15,7 +15,7 @@ const {
     State,
     Store,
     Product,
-    LandMark
+    LandMark,
 } = require("../repository/database").models;
 
 router.use(isAdmin);
@@ -55,7 +55,6 @@ router.post("/categorys", categoryController.createACategory);
 
 router.post("/landMarks", landMarkController.createLandMark);
 
-
 router.get("/frecuent-questions/:id", async (req, res) => {
     const frequentQuestion = await FrequentQuestions.findByPk(req.params.id);
     res.json({
@@ -73,11 +72,11 @@ router.get("/categorys/:id", async (req, res) => {
 });
 router.get("/landMarks/:id", async (req, res) => {
     const landMark = await LandMark.findByPk(req.params.id);
-    console.log(req.params.id)
+    console.log(req.params.id);
     res.json({
-        status:true,
+        status: true,
         landMark: landMark.dataValues,
-    })
+    });
 });
 router.post(
     "/frecuent-questions/:id",
@@ -96,7 +95,6 @@ router.post(
 router.post("/delete-categorys/:id", categoryController.deleteACategory);
 
 router.get("/delete-landMarks/:id", landMarkController.deleteALandMark);
-
 
 router.get("/revision-products", async (req, res) => {
     const products = await Product.findAll({
@@ -136,29 +134,42 @@ router.get("/revision-products/:id", async (req, res) => {
     });
 });
 
-router.get("/statistics", (req, res)=>{
+router.get("/statistics", (req, res) => {
     res.render("admin/statistics");
 });
 
-router.get("/getStatistics", async (req, res)=>{
+router.get("/getStatistics", async (req, res) => {
     const products = await Product.findAll();
-    let pie = [['tiendas','total']];
-    products.map( item => {
-        const data = JSON.parse(item.visitas);
+    const root = ["tiendas", "total"];
+    let pie = [];
+    products.map((item) => {
+        let data = JSON.parse(item.visitas);
+        if (typeof data == "string") {
+            data = JSON.parse(data);
+        }
         const tienda = item.dataValues.id_tienda;
-        const total = data.visitas.map(item => item.contador).reduce((acc, valor) => acc + valor)
-        if (pie.find( find => find[0] == tienda) !== undefined) {
-            pie.find( find => find[0] == tienda)[1]+=total;
+        const total = data.visitas
+            .map((item) => item.contador)
+            .reduce((acc, valor) => acc + valor);
+        if (pie.find((find) => find[0] == tienda) !== undefined) {
+            pie.find((find) => find[0] == tienda)[1] += total;
         } else {
-            pie.push([tienda+"", total]) 
+            pie.push([tienda + "", total]);
         }
     });
-    for (let i = 1; i < pie.length; i++) {
+    for (let i = 0; i < pie.length; i++) {
         tienda = await Store.findByPk(Number(pie[i][0]));
         pie[i][0] = tienda.dataValues.nombre;
     }
+    pie.sort((a, b) => b[1] - a[1]);
+    if (pie.length > 5) {
+        for (let i = 0; i < pie.length - 5; i++) {
+            pie.pop();
+        }
+    }
+    pie.splice(0, 0, root);
     return res.json({
-        pie
+        pie,
     });
 });
 
