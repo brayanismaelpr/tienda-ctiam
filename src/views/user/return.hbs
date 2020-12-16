@@ -3,7 +3,7 @@
 <section class="c-profile">
     <article class="container mx-auto md:flex">
         {{> seller/options_seller }}
-        <form class="c-profile-seller__form--content py-10 w-11/12 md:w-2/4" action="/user/return/create" method="POST">
+        <form class="c-profile-seller__form--content py-10 w-11/12 md:w-2/3 lg:w-2/4" action="/user/return/create" method="POST">
             <div class=" w-full">
                 <h1 class="font-medium text-2xl">Realizar solicitud de devolución de producto</h1>
                 <div class="pt-10">
@@ -12,37 +12,40 @@
                         <input placeholder="Tienda o vendedor:" type="text" value="{{store.dataValues.nombre}}"
                             required>
                     </div>
-                    <div class="c-profile-seller__input">
+                    <div class="c-profile-seller__input justify-start pl-4">
                         <input type="hidden" name="id_producto" value="{{product.dataValues.id}}" required>
                         <input placeholder="Producto:" type="text" value="{{product.dataValues.titulo}}" required>
-                        <p>Precio x un: <b>{{product.dataValues.precio}}</b></p>
                     </div>
-                    <div class="c-profile-seller__input">
+                    <div class="c-profile-seller__input justify-start pl-4">
+                        <p class="py-2">Precio x un: <b>{{product.dataValues.precio}}</b></p>
+                    </div>
+                    <div class="c-profile-seller__input justify-start pl-4">
                         <input type="hidden" name="id_item" value="{{item.dataValues.id}}" required>
-                        <p>Cantidad: <b>{{item.dataValues.cantidad}}</b></p>
+                        <p class="py-2">Cantidad: <b>{{item.dataValues.cantidad}}</b></p>
                     </div>
-
-                    <div class="c-profile-seller__input">
-                        <p>Total: <b>{{item.dataValues.precio}}</b></p>
+                    <div class="c-profile-seller__input justify-start pl-4">
+                        <p class="py-2">Total: <b>{{item.dataValues.precio}}</b></p>
                     </div>
                     <div class="c-profile-seller__input">
                         <textarea name="motivo" id="" cols="30" rows="10" placeholder="Motivo o razón del cambio."
                             required></textarea>
                     </div>
-                    <label for="" class="items:start justify-between flex mb-3 justify-between">
-                        <span>Foto de la evidencia (Recibo)</span>
-                        <div class="sc-ui-image-uploader sc-ui-image-uploader--default" aria-disabled="false"
-                            id="areafile">
-                            <div class="sc-ui-image-uploader__container" role="button" tabindex="0">
-                                {{> svgs/icon-dragImage}}
-                                <a class="sc-ui-image-uploader__link">Agrega o arrastra tus fotos aquí</a>
+                    <div class="md:flex">
+                        <label for="" class="w-full md:w-3/6">
+                            <span class="mb-8">Foto de la evidencia (Recibo)</span>
+                            <div class="sc-ui-image-uploader sc-ui-image-uploader--default" style="margin-top: 15px; width: 100%; height: 150px" aria-disabled="false"
+                                id="areafile">
+                                <div class="sc-ui-image-uploader__container" role="button" tabindex="0">
+                                    {{> svgs/icon-dragImage}}
+                                    <a class="sc-ui-image-uploader__link">Agrega o arrastra tus fotos aquí</a>
+                                </div>
+                                <input 
+                                    accept="image/jpg, image/jpeg, image/png, image/webp, image/JPG, image/JPEG, image/PNG, image/WEBP"
+                                    type="file" multiple="" autocomplete="off" style="display: none;">
                             </div>
-                            <input
-                                accept="image/jpg, image/jpeg, image/png, image/webp, image/JPG, image/JPEG, image/PNG, image/WEBP"
-                                type="file" multiple="" autocomplete="off" style="display: none;">
-                        </div>
-                    </label>
-                    <img src="{{URL}}/images/vacio.png" width="100" height="100" id="imageEvidence">
+                        </label>
+                        <img class="w-full md:w-3/6 ml-0 md:ml-8 mt-8 md:mt-0" src="{{URL}}/images/vacio.png" id="imageEvidence">
+                    </div>
                 </div>
                 <input type="hidden" name="evidencia" id="evidence">
                 <button class="c-profile-seller--button hover:bg-black duration-300" type="submit"
@@ -52,11 +55,8 @@
         </form>
     </article>
 </section>
-
 <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-storage.js"></script>
-
 <script src="/js/dragImageReturnChange.js"></script>
 <script src="../js/uploadImage.js"></script>
-
 {{> footer}}
