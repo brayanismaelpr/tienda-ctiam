@@ -96,7 +96,7 @@ module.exports = {
                     where: {
                         id_producto: id_product,
                         id_carrito: cart.id,
-                    }
+                    },
                 });
             }
             if (!itemCart) {
@@ -113,7 +113,7 @@ module.exports = {
                     cantidad: amount,
                     precio: value,
                 }).then(async () => {
-                    await Cart.findByPk(id_cart).then(async cart => {
+                    await Cart.findByPk(id_cart).then(async (cart) => {
                         cart.valor_total += value;
                         await cart.save();
                     });
@@ -175,30 +175,28 @@ module.exports = {
         return res.redirect("/user/home");
     },
     makeOrder: async (req, res) => {
-        const { id_product, amount } = req.body;
-        if (id_product && typeof id_product == "string") {
-            const product = await Product.findByPk(id_product, {
-                attributes: ["id", "titulo", "precio", "imagen"],
-            });
-            console.log(product);
-            if (product) {
-                const addresses = await User.getAddresses(req.user.id);
-                return res.render("user/preview-order", {
-                    title: "Pedido | Mujeres CTIAM",
-                    user: req.user,
-                    isAuthenticated: req.user != undefined,
-                    amount,
-                    product,
-                    addresses,
-                    total_value: Number(product.precio) * Number(amount),
-                });
-            }
-            return res.render("error", {
-                title: "Página no encontrada | Mujeres CTIAM",
+        const id_producto = req.body.id_producto;
+        const cantidad = Number(req.body.cantidad);
+        let product = await Product.findByPk(id_producto);
+        if (product) {
+            const addresses = await User.getAddresses(req.user.id);
+            const id_tienda = product.dataValues.id_tienda;
+            product.dataValues.cantidad = cantidad;
+            product.dataValues.precio *= cantidad;
+            let pack = { [id_tienda]: [product.dataValues] };
+            return res.render("user/preview-order-product", {
+                title: "Pedido | Mujeres CTIAM",
                 user: req.user,
                 isAuthenticated: req.user != undefined,
+                pack,
+                addresses,
             });
         }
+        return res.render("error", {
+            title: "Página no encontrada | Mujeres CTIAM",
+            user: req.user,
+            isAuthenticated: req.user != undefined,
+        });
     },
     makeCartOrder: async (req, res) => {
         const cartItems = await User.getCartItems(req.user.id);
@@ -227,7 +225,31 @@ module.exports = {
         });
     },
     createOrder: async (req, res) => {
-
+        const { id_producto, total, cantidad } = req.body;
+        id_usuario = req.user.id;
+        const tienda = await Product.findByPk(id_producto, {
+            attributes: ["id_tienda"],
+        });
+        if (tienda) {
+            const id_tienda = tienda.dataValues.id_tienda;
+            const order = await Order.create({ id_usuario, total });
+            if (order) {
+                const id_pedido = order.dataValues.id;
+                const sale = await Sale.create({ id_tienda, id_pedido, total });
+                if (sale) {
+                    const id_venta = sale.dataValues.id;
+                    await ItemSale.create({
+                        id_pedido,
+                        id_producto,
+                        id_venta,
+                        cantidad,
+                        precio: total,
+                    });
+                    return res.redirect("/user/shopping");
+                }
+            }
+        }
+        return res.redirect(`/product/${id_producto}`);
     },
     createOrderCart: async (req, res) => {
         const cartItems = await User.getCartItems(req.user.id);
@@ -251,8 +273,8 @@ module.exports = {
                     id_tienda: store,
                     id_pedido: order.id,
                     total: 0,
-                }).then(async sale => {
-                    pack[store].forEach(async item => {
+                }).then(async (sale) => {
+                    pack[store].forEach(async (item) => {
                         ItemSale.create({
                             id_pedido: order.id,
                             id_producto: item.id,
@@ -262,7 +284,7 @@ module.exports = {
                         });
                         totalSaleCart += Number(item.precio);
                     });
-                    totalOrderCart += totalSaleCart
+                    totalOrderCart += totalSaleCart;
                     sale.total = totalSaleCart;
                     await sale.save();
                     totalSaleCart = 0;
@@ -272,16 +294,16 @@ module.exports = {
             await order.save();
             await ItemCart.destroy({
                 where: {
-                    id_carrito: req.user.id
-                }
+                    id_carrito: req.user.id,
+                },
             });
             const cart = await Cart.findByPk(req.user.id);
             if (cart) {
                 cart.valor_total = 0;
                 await cart.save();
             }
-            return res.redirect("/user/cart")
+            return res.redirect("/user/cart");
         }
-        return res.json({ok:true})
-    }, 
+        return res.json({ ok: true });
+    },
 };

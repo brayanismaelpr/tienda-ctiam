@@ -277,7 +277,7 @@ router.post("/cart/setAmount", cartController.changeAmountProduct);
 
 router.get("/cart/delete/:id", cartController.deleteAItem);
 
-router.post("/checkout", userController.makeOrder);
+router.post("/checkout/product", userController.makeOrder);
 
 router.post("/checkout/cart", userController.makeCartOrder);
 

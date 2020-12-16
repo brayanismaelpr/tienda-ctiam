@@ -33,10 +33,10 @@
                     </li>
                 </ul>
                 <div class="c-view-product__colours">
-                    <form action="/user/checkout" method="post">
-                        <p class="c-view-product__colours--p">Color</p>
+                    <form action="/user/checkout/product" method="post">
+                        <p class="c-view-product__colours--p">cantidad</p>
                         <div class="flex">
-                            <select class="w-14 h-10 border-2 px-2 border-black rounded mr-4" name="amount" id="">
+                            <select class="w-14 h-10 border-2 px-2 border-black rounded mr-4" name="cantidad" id="">
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -45,9 +45,9 @@
                                 <option value="6">6</option>
                                 <option value="6">Otra</option>
                             </select>
-                            <input type="hidden" name="id_product" value="{{product.dataValues.id}}">
+                            <input type="hidden" name="id_producto" value="{{product.dataValues.id}}">
                             <button class="flex items-center justify-center w-44 h-10 bg-pink-300 rounded"
-                                type="">Comprar</button>
+                                type="subit">Comprar</button>
                         </div>
                     </form>
                 </div>
@@ -69,7 +69,7 @@
 
 <section class="c-details-product">
     <article class="w-11/12 md:w-9/12 mx-auto py-10">
-        {{!-- <div class="c-details-product__info">
+        <div class="c-details-product__info">
             <div class="c-details-product__info__content">
                 <p class="c-details-product__info--p">{{product.dataValues.detalle}}</p>
                 <button class="c-details-product__info--button" onclick="">
@@ -82,7 +82,7 @@
                 <p class="c-details-product__info--p">{{product.dataValues.descripcion}}</p>
                 <button class="c-details-product__info--button" onclick=""><i class="fas fa-plus"></i></button>
             </div>
-        </div> --}}
+        </div>
         <div class="w-full bg-white" style="border-radius: 8px;">
             <div class="w-11/12 mx-auto">
                 <p class="font-bold pt-8 pb-8 text-xl">Comentarios</p>
