@@ -278,7 +278,10 @@ router.get("/getVisita/:id", async (req, res) => {
 router.get("/getVisitas/:id", async (req, res) => {
     const id_producto = req.params.id;
     const product = await Product.findByPk(id_producto);
-    const visitas = JSON.parse(product.visitas);
+    let visitas = JSON.parse(product.visitas);
+    if (typeof visitas == "string") {
+        visitas = JSON.parse(visitas);
+    }
     return res.json({
         visitas,
     });
@@ -295,7 +298,10 @@ router.get("/getAllVisitas", async (req, res) => {
     let todos = [["productos", "total"]];
     let i = 0;
     products.map((item) => {
-        const data = JSON.parse(item.visitas);
+        let data = JSON.parse(item.visitas);
+        if (typeof data == "string") {
+            data = JSON.parse(data);
+        }
         const titulo = item.dataValues.titulo;
         const total = data.visitas
             .map((item) => item.contador)
@@ -303,6 +309,7 @@ router.get("/getAllVisitas", async (req, res) => {
         todos.push([titulo, total]);
         i++;
     });
+    console.log(todos);
     return res.json({
         todos,
     });
