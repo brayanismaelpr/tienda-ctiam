@@ -125,4 +125,10 @@ User.getReturns = async (userID) =>
         { type: QueryTypes.SELECT }
     );
 
+    User.getChanges = async (userID) =>
+    await sequelize.query(
+        `SELECT t.nombre tienda, p.titulo producto, dev.id_item FROM cambio dev JOIN producto p ON p.id = dev.id_producto JOIN tienda t ON t.id = p.id_tienda WHERE dev.id_usuario = ${userID}`,
+        { type: QueryTypes.SELECT }
+    );    
+
 module.exports = User;

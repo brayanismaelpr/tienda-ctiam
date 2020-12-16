@@ -3,6 +3,7 @@ const router = Router();
 const { cartController, userController } = require("../controllers");
 const {
     Address,
+    Change,
     City,
     ItemSale,
     Order,
@@ -132,6 +133,26 @@ router.post("/return/create", async (req, res) => {
     res.redirect("/user/return");
 });
 
+router.post("/change/create", async (req, res) => {
+    const { id_item, id_producto, motivo, evidencia } = req.body;
+    const ret = await Change.findOne({
+        where: {
+            id_item,
+        },
+    });
+    if (!ret) {
+        await Change.create({
+            id_item,
+            id_producto,
+            motivo,
+            evidencia,
+            id_usuario: req.user.id,
+        });
+        res.redirect("/user/changes");
+    }
+    res.redirect("/user/changes");
+});
+
 router.get("/return", async (req, res) => {
     const returns = await User.getReturns(req.user.id);
     console.log(returns);
@@ -139,6 +160,16 @@ router.get("/return", async (req, res) => {
         title: "Mis devoluciones | Mujeres CTIAM",
         user: req.user,
         returns,
+        isAuthenticated: true,
+    });
+});
+
+router.get("/changes", async (req, res) => {
+    const changes = await User.getChanges(req.user.id);
+    res.render("user/list-changes", {
+        title: "Mis Cambios | Mujeres CTIAM",
+        user: req.user,
+        changes,
         isAuthenticated: true,
     });
 });
@@ -183,6 +214,48 @@ router.post("/return", async (req, res) => {
         }
     }
 });
+
+router.post("/change", async (req, res) => {
+    const { id_item } = req.body;
+    const item = await ItemSale.findByPk(id_item, {
+        attributes: ["id", "id_producto", "cantidad", "precio"],
+    });
+    if (item) {
+        const product = await Product.findByPk(item.id_producto, {
+            attributes: ["titulo", "precio", "imagen", "id", "id_tienda"],
+        });
+        if (product) {
+            const store = await Store.findByPk(product.id_tienda, {
+                attributes: ["nombre", "email", "telefono", "id"],
+            });
+            const ret = await Change.findOne({
+                where: {
+                    id_item,
+                },
+            });
+            if (!ret) {
+                return res.render("user/change", {
+                    title: "Cambio | Mujeres CTIAM",
+                    user: req.user,
+                    item,
+                    product,
+                    store,
+                    isAuthenticated: true,
+                });
+            }
+            return res.render("user/detail-change", {
+                title: "Change | Mujeres CTIAM",
+                user: req.user,
+                return: ret,
+                item,
+                product,
+                store,
+                isAuthenticated: true,
+            });
+        }
+    }
+});
+
 
 router.post("/change", async (req, res) => {});
 
