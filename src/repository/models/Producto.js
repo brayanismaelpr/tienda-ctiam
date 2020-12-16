@@ -73,7 +73,16 @@ const Product = sequelize.define(
         },
         visitas: {
             type: DataTypes.JSON(),
-            defaultValue: JSON.stringify({ visitas: [] }),
+            defaultValue: JSON.stringify({
+                visitas: [
+                    {
+                        fecha: `${new Date().getDate()}/${
+                            new Date().getMonth() + 1
+                        }/${new Date().getFullYear()}`,
+                        contador: 0,
+                    },
+                ],
+            }),
         },
     },
     {
@@ -119,5 +128,3 @@ Product.getRange = async (id_categoria) =>
     );
 
 module.exports = Product;
-
-
