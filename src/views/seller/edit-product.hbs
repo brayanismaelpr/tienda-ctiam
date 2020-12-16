@@ -1,32 +1,36 @@
 {{> header_principal}}
-<link rel="stylesheet" href="../css/dragImage/index.css">
+<link rel="stylesheet" href="/css/dragImage/index.css">
 <section class="c-profile">
     <article class="container mx-auto md:flex">
         {{> seller/options_seller }}
-        <form class="c-profile-seller__form--content py-14 w-11/12 md:w-2/4" name="createProduct">
+        <form class="c-profile-seller__form--content py-14 w-11/12 md:w-2/4" name="updateProduct">
             <div id="next_reg" class="c-profile__reg-steps w-full" data-store-id="{{store.id}}">
                 <div id="reg-step-1" class="c-profile__reg-step">
                     <p class="c-profile-seller__form--title">Editar producto {{product.dataValues.titulo}}</p>
                     <div class="c-profile-seller__input">
-                        <input list="category" value="{{product.dataValues.id_categoria}}" id="categoria_producto" placeholder="Categoría" name="id_categoria">
+                        <input list="category" value="{{category.dataValues.nombre}}" id="categoria_producto"
+                            placeholder="Categoría" name="id_categoria" data-id-value="{{category.dataValues.id}}">
                         <datalist id="category"></datalist>
                     </div>
                     <div class="c-profile-seller__input">
-                        <input list="mark" id="marca_producto" value="{{product.dataValues.id_marca}}" placeholder="Marcas" name="id_marca">
+                        <input list="mark" id="marca_producto" value="{{mark.dataValues.nombre}}" placeholder="Marcas"
+                            name="id_marca" data-id-value="{{mark.dataValues.id}}">
                         <datalist id="mark"> </datalist>
                     </div>
                     <div class="c-profile-seller__input">
-                        <input placeholder="Título:" value="{{product.dataValues.titulo}}" id="titulo_producto" type="text" name="titulo" required>
+                        <input placeholder="Título:" value="{{product.dataValues.titulo}}" id="titulo_producto"
+                            type="text" name="titulo" required>
                     </div>
                     <div class="c-profile-seller__input">
-                        <input placeholder="Stock:" value="{{product.dataValues.stock}}" type="number" id="stock_producto" type="text" name="stock" required>
+                        <input placeholder="Stock:" value="{{product.dataValues.stock}}" type="number"
+                            id="stock_producto" type="text" name="stock" required>
                     </div>
                     <div class="c-profile-seller__input">
-                        <input placeholder="Precio unidad:" value="{{product.dataValues.precio}}" type="number" id="precio_producto" type="text" name="precio"
-                            required>
+                        <input placeholder="Precio unidad:" value="{{product.dataValues.precio}}" type="number"
+                            id="precio_producto" type="text" name="precio" required>
                     </div>
                     <div class="c-profile-seller__input">
-                        <textarea placeholder="Descripción"  name="descripcion" id="descripcion_producto" cols="30"
+                        <textarea placeholder="Descripción" name="descripcion" id="descripcion_producto" cols="30"
                             rows="5">{{product.dataValues.descripcion}}</textarea>
                     </div>
                     <div class="c-profile-seller__input">
@@ -34,8 +38,9 @@
                             rows="5">{{product.dataValues.detalle}}</textarea>
                     </div>
                     <div class="grid grid-cols-3 gap-4 pb-8">
+                        {{#each photography}}
                         <div class="border-4 border-pink-400 flex items-center justify-center w-full rounded"
-                            aria-disabled="false" id="areafileproducts" data-id-image="1">
+                            aria-disabled="false" id="areafileproducts" data-id-image="{{@index}}">
                             <div class="sc-ui-image-uploader__container" style="position:relative" role="button"
                                 tabindex="0">
                                 {{> svgs/icon-dragImage}}
@@ -44,58 +49,15 @@
                             </div>
                             <input
                                 accept="image/jpg, image/jpeg, image/png, image/webp, image/JPG, image/JPEG, image/PNG, image/WEBP"
-                                type="file" multiple=""  autocomplete="off" style="display: none;">
-                        </div>
-                        <div class="border-4 border-pink-400 flex items-center justify-center w-full rounded"
-                            aria-disabled="false" id="areafileproducts" data-id-image="2">
-                            <div class="sc-ui-image-uploader__container" style="position:relative" role="button"
-                                tabindex="0">
-                                {{> svgs/icon-dragImage}}
-                                <a class="sc-ui-image-uploader__link">Agrega o arrastrar</a>
-                            </div>
-                            <input
-                                accept="image/jpg, image/jpeg, image/png, image/webp, image/JPG, image/JPEG, image/PNG, image/WEBP"
                                 type="file" multiple="" autocomplete="off" style="display: none;">
                         </div>
-                        <div class="border-4 border-pink-400 flex items-center justify-center w-full rounded"
-                            aria-disabled="false" id="areafileproducts" data-id-image="3">
-                            <div class="sc-ui-image-uploader__container" style="position:relative" role="button"
-                                tabindex="0">
-                                {{> svgs/icon-dragImage}}
-                                <a class="sc-ui-image-uploader__link">Agrega o arrastrar</a>
-                            </div>
-                            <input
-                                accept="image/jpg, image/jpeg, image/png, image/webp, image/JPG, image/JPEG, image/PNG, image/WEBP"
-                                type="file" multiple="" autocomplete="off" style="display: none;">
-                        </div>
-                        <div class="border-4 border-pink-400 flex items-center justify-center w-full rounded"
-                            aria-disabled="false" id="areafileproducts" data-id-image="4">
-                            <div class="sc-ui-image-uploader__container" style="position:relative" role="button"
-                                tabindex="0">
-                                {{> svgs/icon-dragImage}}
-                                <a class="sc-ui-image-uploader__link">Agrega o arrastrar</a>
-                            </div>
-                            <input
-                                accept="image/jpg, image/jpeg, image/png, image/webp, image/JPG, image/JPEG, image/PNG, image/WEBP"
-                                type="file" multiple="" autocomplete="off" style="display: none;">
-                        </div>
-                        <div class="border-4 border-pink-400 flex items-center justify-center w-full rounded"
-                            aria-disabled="false" id="areafileproducts" data-id-image="5">
-                            <div class="sc-ui-image-uploader__container" style="position:relative" role="button" tabindex="0">
-                                {{> svgs/icon-dragImage}}
-                                <a class="sc-ui-image-uploader__link">Agrega o arrastrar</a>
-                            </div>
-                            <input
-                                accept="image/jpg, image/jpeg, image/png, image/webp, image/JPG, image/JPEG, image/PNG, image/WEBP"
-                                type="file" multiple="" autocomplete="off" style="display: none;">
-                        </div>
-                        <input type="text" style="display: none;" data-id-image="1">
-                        <input type="text" style="display: none;" data-id-image="2">
-                        <input type="text" style="display: none;" data-id-image="3">
-                        <input type="text" style="display: none;" data-id-image="4">
-                        <input type="text" style="display: none;" data-id-image="5">
+                        <input type="text" style="display: none;" data-id-image="{{@index}}"
+                            value="{{product.dataValues.imagen}}">
+                        {{/each}}
+                        <input type="hidden" name="id_producto" value="{{this.dataValues.id}}">
                     </div>
-                    <button class="c-profile-seller--button" type="button" data-type-button="form">Registrar</button>
+                    <button class="c-profile-seller--button" type="button" data-type-button="form">Actualizar
+                        producto</button>
                 </div>
             </div>
         </form>
@@ -106,10 +68,10 @@
 <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-storage.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
-<script src="../js/dragImageProduct.js"></script>
-<script src="../js/uploadImage.js"></script>
-<script src="../js/fetchData.js"></script>
-<script src="../js/fetchCreateProduct.js"></script>
+<script src="/js/dragImageProduct.js"></script>
+<script src="/js/uploadImage.js"></script>
+<script src="/js/fetchData.js"></script>
+<script src="/js/fetchUpdateProduct.js"></script>
 <script>
     document.getElementById("categoria_producto").addEventListener("blur", (e) => { getId(e, "category") });
     document.getElementById("marca_producto").addEventListener("blur", (e) => { getId(e, "mark") });
