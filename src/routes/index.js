@@ -137,18 +137,16 @@ router.get("/profile-store", (req, res) => {
     });
 });
 
-
-
 router.post("/list-product-c/:id", async (req, res) => {
     function limitDesc(desc) {
-        list = desc.split(' ');
+        list = desc.split(" ");
         str = "";
         for (let i = 0; i < 4; i++) {
             if (list[i] !== undefined) {
                 str += list[i] + " ";
             }
         }
-        return str
+        return str;
     }
 
     const { Op, where } = require("sequelize");
@@ -161,27 +159,28 @@ router.post("/list-product-c/:id", async (req, res) => {
                 id_categoria,
                 id_marca,
                 precio: {
-                    [Op.gte]: body.precio
-                }
-            }
+                    [Op.gte]: body.precio,
+                },
+            },
         }).then(sendResponse);
     } else {
         await Product.findAll({
             where: {
                 id_categoria,
                 precio: {
-                    [Op.gte]: body.precio
-                }
-            }
+                    [Op.gte]: body.precio,
+                },
+            },
         }).then(sendResponse);
     }
     function sendResponse(products) {
-        products.map(async item => {
-            item.dataValues.descripcion = limitDesc(item.dataValues.descripcion);
-            await LandMark.findByPk(item.id_marca)
-                .then(mark => {
-                    item.marca = mark.dataValues.nombre
-                })
+        products.map(async (item) => {
+            item.dataValues.descripcion = limitDesc(
+                item.dataValues.descripcion
+            );
+            await LandMark.findByPk(item.id_marca).then((mark) => {
+                item.marca = mark.dataValues.nombre;
+            });
         });
         res.json({
             products,
@@ -191,24 +190,24 @@ router.post("/list-product-c/:id", async (req, res) => {
 
 router.get("/list-product-c/:id", async (req, res) => {
     function limitDesc(desc) {
-        list = desc.split(' ');
+        list = desc.split(" ");
         str = "";
         for (let i = 0; i < 4; i++) {
             if (list[i] !== undefined) {
                 str += list[i] + " ";
             }
         }
-        return str
+        return str;
     }
 
     const id_categoria = req.params.id;
     const Marks = await LandMark.findAll();
     const products = await Product.findAll({
         where: {
-            id_categoria
-        }
+            id_categoria,
+        },
     });
-    products.map(async item => {
+    products.map(async (item) => {
         item.dataValues.descripcion = limitDesc(item.dataValues.descripcion);
         const marcaDB = await LandMark.findByPk(item.id_marca);
         item.marca = marcaDB.dataValues.nombre;
@@ -220,13 +219,11 @@ router.get("/list-product-c/:id", async (req, res) => {
         isAuthenticated: req.user != undefined,
         Marks,
         products,
-        menor:range[0].menor,
-        mayor:range[0].mayor,
-        id_categoria
+        menor: range[0].menor,
+        mayor: range[0].mayor,
+        id_categoria,
     });
 });
-
-
 
 router.get("/cities", async (req, res) => {
     const cities = await City.findAll();
@@ -255,18 +252,24 @@ router.get("/getVisita/:id", async (req, res) => {
     const product = await Product.findByPk(id_producto);
     if (req.user) {
         if (req.user.id !== product.id_tienda) {
-            const lista = JSON.parse(product.visitas);
+            let lista = JSON.parse(product.visitas);
+            if (typeof lista == "string") {
+                lista = JSON.parse(lista);
+            }
             let f = new Date();
-            let day = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
-            if (lista.visitas.find(find => find.fecha === day) !== undefined) {
-                lista.visitas.find(find => find.fecha === day).contador++;
+            let day =
+                f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
+            if (
+                lista.visitas.find((find) => find.fecha === day) !== undefined
+            ) {
+                lista.visitas.find((find) => find.fecha === day).contador++;
             } else {
                 lista.visitas.push({
-                    "fecha": day,
-                    "contador": 1
+                    fecha: day,
+                    contador: 1,
                 });
             }
-            product['visitas'] = JSON.stringify(lista);
+            product["visitas"] = JSON.stringify(lista);
             await product.save();
         }
     }
@@ -275,7 +278,10 @@ router.get("/getVisita/:id", async (req, res) => {
 router.get("/getVisitas/:id", async (req, res) => {
     const id_producto = req.params.id;
     const product = await Product.findByPk(id_producto);
-    const visitas = JSON.parse(product.visitas);
+    let visitas = JSON.parse(product.visitas);
+    if (typeof visitas == "string") {
+        visitas = JSON.parse(visitas);
+    }
     return res.json({
         visitas,
     });
@@ -285,19 +291,25 @@ router.get("/getAllVisitas", async (req, res) => {
     const id_tienda = req.user.id;
     const products = await Product.findAll({
         where: {
-            id_tienda
-        }
+            id_tienda,
+        },
     });
 
-    let todos = [['productos', 'total']];
+    let todos = [["productos", "total"]];
     let i = 0;
-    products.map(item => {
-        const data = JSON.parse(item.visitas);
+    products.map((item) => {
+        let data = JSON.parse(item.visitas);
+        if (typeof data == "string") {
+            data = JSON.parse(data);
+        }
         const titulo = item.dataValues.titulo;
-        const total = data.visitas.map(item => item.contador).reduce((acc, valor) => acc + valor)
-        todos.push([titulo, total])
+        const total = data.visitas
+            .map((item) => item.contador)
+            .reduce((acc, valor) => acc + valor);
+        todos.push([titulo, total]);
         i++;
     });
+    console.log(todos);
     return res.json({
         todos,
     });
@@ -305,12 +317,17 @@ router.get("/getAllVisitas", async (req, res) => {
 
 router.get("/getDestacados", async (req, res) => {
     const products = await Product.findAll();
-    products.map(item => {
-        const data = JSON.parse(item.visitas);
+    products.map((item) => {
+        let data = JSON.parse(item.visitas);
+        if (typeof data == "string") {
+            data = JSON.parse(data);
+        }
         if (data) {
-            const visitas = data.visitas.map(item => item.contador);
+            const visitas = data.visitas.map((item) => item.contador);
             if (visitas.length > 0) {
-                item.dataValues.total = visitas.reduce((acc, valor) => acc + valor)
+                item.dataValues.total = visitas.reduce(
+                    (acc, valor) => acc + valor
+                );
             }
         }
     });
@@ -323,12 +340,64 @@ router.get("/getDestacados", async (req, res) => {
 router.post("/recover-pass", async (req, res) => {
     function newPass() {
         let pass = "";
-        const charts = ['A', 'a', 'B', 'b', 'C', 'c', 'D', 'd', 'E', 'e', 'F', 'f', 'G', 'g', 'H',
-            'h', 'I', 'i', 'J', 'j', 'K', 'k', 'L', 'l', 'M', 'm', 'N', 'n', 'O', 'o', 'P', 'p', 'Q',
-            'q', 'R', 'r', 'S', 's', 'T', 't', 'U', 'u', 'V', 'v', 'W', 'w', 'X', 'x', 'Y', 'y', 'Z',
-            'Z', '-', '.', '*'
+        const charts = [
+            "A",
+            "a",
+            "B",
+            "b",
+            "C",
+            "c",
+            "D",
+            "d",
+            "E",
+            "e",
+            "F",
+            "f",
+            "G",
+            "g",
+            "H",
+            "h",
+            "I",
+            "i",
+            "J",
+            "j",
+            "K",
+            "k",
+            "L",
+            "l",
+            "M",
+            "m",
+            "N",
+            "n",
+            "O",
+            "o",
+            "P",
+            "p",
+            "Q",
+            "q",
+            "R",
+            "r",
+            "S",
+            "s",
+            "T",
+            "t",
+            "U",
+            "u",
+            "V",
+            "v",
+            "W",
+            "w",
+            "X",
+            "x",
+            "Y",
+            "y",
+            "Z",
+            "Z",
+            "-",
+            ".",
+            "*",
         ];
-        const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+        const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
         for (let i = 0; i < 5; i++) {
             const n = Math.round(Math.random() * (charts.length - 0) + 0);
             const m = Math.round(Math.random() * (numbers.length - 0) + 0);
@@ -341,26 +410,26 @@ router.post("/recover-pass", async (req, res) => {
     const { email } = req.body;
     const user = await User.findOne({
         where: {
-            email
-        }
+            email,
+        },
     });
     if (user) {
         const password = newPass();
         user.password = User.encryptPassword(password);
         await user.save();
-        nodeMailer_pass(password,email,(err) => {
+        nodeMailer_pass(password, email, (err) => {
             if (err) console.log(err);
         });
     } else {
-        console.log('no existe')
+        console.log("no existe");
     }
-    res.redirect("/")
+    res.redirect("/");
 });
 
 router.post("/subscription", async (req, res) => {
     try {
         const { correo } = req.body;
-        if (!await Subscription.findByPk(correo)) {
+        if (!(await Subscription.findByPk(correo))) {
             Subscription.create({ correo });
             nodeMailer_sub(correo, (err) => {
                 if (err) console.log(err);
@@ -370,7 +439,7 @@ router.post("/subscription", async (req, res) => {
             res.redirect("/");
         }
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 });
 
