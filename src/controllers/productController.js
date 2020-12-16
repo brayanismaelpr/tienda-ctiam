@@ -79,12 +79,16 @@ module.exports = {
         const { data } = req.body;
         const Marks = await LandMark.findAll();
         const products = await Product.getSearch(data);
+        const range = await Product.getRangeSearch(data);
+
         res.render("list-product-search", {
             title: "Lista productos | Mujeres CTIAM",
             isAuthenticated: req.user != undefined,
             user: req.user,
             Marks,
             products,
+            menor:range[0].menor,
+            mayor:range[0].mayor,
             data,
         });
 
