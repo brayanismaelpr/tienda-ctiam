@@ -73,7 +73,7 @@ const Product = sequelize.define(
         },
         visitas: {
             type: DataTypes.JSON(),
-            defaultValue: { visitas: [] },
+            defaultValue: JSON.stringify({ visitas: [] }),
         },
     },
     {
