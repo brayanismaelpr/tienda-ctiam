@@ -16,7 +16,7 @@ async function daemon() {
                         "contador": 0
                     });
                 }
-                product['visitas'] = lista;
+                product['visitas'] = JSON.stringify(lista);
                 product.save();
             })
         }

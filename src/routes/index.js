@@ -266,7 +266,7 @@ router.get("/getVisita/:id", async (req, res) => {
                     "contador": 1
                 });
             }
-            product['visitas'] = lista;
+            product['visitas'] = JSON.stringify(lista);
             await product.save();
         }
     }
