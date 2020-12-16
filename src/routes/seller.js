@@ -28,6 +28,8 @@ router.get("/products", async (req, res) => {
 
 router.get("/my-products", sellerController.getProducts);
 
+router.get("/edit-product/:id", sellerController.editFind);
+
 router.post("/my-products", sellerController.updateProducts);
 
 

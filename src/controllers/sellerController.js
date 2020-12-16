@@ -3,6 +3,7 @@ const {
     Photography,
     State,
     Store,
+    Category,
 } = require("../repository/database").models;
 const { Op } = require("sequelize");
 
@@ -78,6 +79,19 @@ module.exports = {
             product.id_estado=Number(data.id_estado)
             await product.save();
         })
-        return  res.redirect("/seller/my-products");
+        return res.redirect("/seller/my-products");
+    },
+    editFind: async (req,res) =>{
+        const product=  await Product.findByPk(req.params.id);
+        const categoria = await Category.findAll();
+        const photography = await Photography.findByPk(req.params.id)
+
+        res.render("seller/edit-product", {
+            title: `Editar Producto | Mujeres CTIAM`,
+            categoria,
+            product,
+            photography
+    
+        });
     }
 };

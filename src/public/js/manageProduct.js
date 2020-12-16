@@ -8,7 +8,7 @@ function obtenerCheck(){
 
 
 function selectProduct(){
-    fetch(`${location.origin}/seller/my-products/`, {
+   fetch(`${location.origin}/seller/my-products/`, {
         method: "post",
         body: JSON.stringify({ 
             
