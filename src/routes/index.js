@@ -213,12 +213,15 @@ router.get("/list-product-c/:id", async (req, res) => {
         const marcaDB = await LandMark.findByPk(item.id_marca);
         item.marca = marcaDB.dataValues.nombre;
     });
+    const range = await Product.getRange(id_categoria);
     res.render("list-product", {
         title: "Lista productos | Mujeres CTIAM",
         user: req.user,
         isAuthenticated: req.user != undefined,
         Marks,
         products,
+        menor:range[0].menor,
+        mayor:range[0].mayor,
         id_categoria
     });
 });

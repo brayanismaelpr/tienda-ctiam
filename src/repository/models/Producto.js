@@ -71,10 +71,10 @@ const Product = sequelize.define(
             type: DataTypes.STRING(255),
             allowNull: true,
         },
-        visitas:{
+        visitas: {
             type: DataTypes.JSON(),
-            defaultValue: { "visitas": [] }
-        }
+            defaultValue: { visitas: [] },
+        },
     },
     {
         freezeTableName: true,
@@ -96,12 +96,28 @@ Product.getQuestion = async (id_product) =>
         }
     );
 
-Product.getSearch = async (search)=>
+Product.getSearch = async (search) =>
     await sequelize.query(
         `SELECT p.id,p.titulo,p.descripcion,p.detalle,p.precio,p.imagen,p.stock FROM producto p WHERE p.titulo LIKE '%${search}%' OR p.descripcion LIKE '%${search}%'`,
         {
             type: QueryTypes.SELECT,
-        } 
+        }
+    );
+Product.getRangeSearch = async (search) =>
+    await sequelize.query(
+        `SELECT MIN(p.precio) as menor, MAX(p.precio) as mayor FROM producto p WHERE p.titulo LIKE '%${search}%' OR p.descripcion LIKE '%${search}%'`,
+        {
+            type: QueryTypes.SELECT,
+        }
+    );
+Product.getRange = async (id_categoria) =>
+    await sequelize.query(
+        `SELECT MIN(precio) as menor, MAX(precio) as mayor FROM producto WHERE id_categoria = ${id_categoria}`,
+        {
+            type: QueryTypes.SELECT,
+        }
     );
 
 module.exports = Product;
+
+

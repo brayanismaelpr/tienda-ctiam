@@ -4,6 +4,7 @@ const { producController } = require("../controllers");
 
 const {
     Product,
+    LandMark
 } = require("../repository/database").models;
 
 router.get("/:id", producController.getProduct);
