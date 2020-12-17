@@ -1,49 +1,51 @@
 {{> header_admin}}
-<div class="flex items-center justify-between w-11/12 mx-auto pt-8">
-    <button class="btn-option-admin" onclick="modalAdd(this)">Agregar Categoria</button>
-    <a class="flex items-center justify-center py-2 px-4 bg-pink-300 duration-300 hover:bg-pink-500 rounded" href="/admin">
-        <i class="fas fa-arrow-left pr-2"></i><b>Ir atras</b>
-    </a>
-</div>
-<div class="c-list-admin c-container">
-    <table class="c-list-admin__table container__content">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Descripción</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            {{#each categorys}}
+<main class="container mx-auto">
+    <div class="flex items-center justify-between w-11/12 mx-auto pt-8">
+        <button class="btn-option-admin" onclick="modalAdd(this)">Agregar Categoria</button>
+        <a class="flex items-center justify-center py-2 px-4 bg-pink-300 duration-300 hover:bg-pink-500 rounded" href="/admin">
+            <i class="fas fa-arrow-left pr-2"></i><b>Ir atras</b>
+        </a>
+    </div>
+    <div class="c-list-admin c-container">
+        <table class="c-list-admin__table container__content">
+            <thead>
                 <tr>
-                    <td>{{this.dataValues.nombre}}</td>
-                    <td>{{this.dataValues.descripcion}}</td>
-                    <td>
-                        <a href="#" data-id-category="{{this.dataValues.id}}" onclick="modalEdit(this)">
-                            <i class="far fa-edit"></i>
-                        </a>
-                        <a href="#" data-id-category="{{this.dataValues.id}}" onclick="modalDelete(this)">
-                            <i class="far fa-trash-alt"></i>
-                        </a>
-                    </td>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Acciones</th>
                 </tr>
-            {{/each}}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {{#each categorys}}
+                    <tr>
+                        <td>{{this.dataValues.nombre}}</td>
+                        <td>{{this.dataValues.descripcion}}</td>
+                        <td>
+                            <a href="#" data-id-category="{{this.dataValues.id}}" onclick="modalEdit(this)">
+                                <i class="far fa-edit"></i>
+                            </a>
+                            <a href="#" data-id-category="{{this.dataValues.id}}" onclick="modalDelete(this)">
+                                <i class="far fa-trash-alt"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
 
-    <div id="modalAdd" style="display: {{showModal modal}};">
-        {{> modals/add-category-modal}}
-    </div>
+        <div id="modalAdd" style="display: {{showModal modal}};">
+            {{> modals/add-category-modal}}
+        </div>
 
-    <div id="modalEdit" style="display: {{showModal modal}};">
-        {{> modals/edit-category-modal}}
-    </div>
+        <div id="modalEdit" style="display: {{showModal modal}};">
+            {{> modals/edit-category-modal}}
+        </div>
 
-    <div id="modalDelete" style="display: {{showModal modal}};">
-        {{> modals/delete-category-modal}}
+        <div id="modalDelete" style="display: {{showModal modal}};">
+            {{> modals/delete-category-modal}}
+        </div>
     </div>
-</div>
+</main>
 <script src="../js/login-modal.js"></script>
 <script src="../js/categories-admin.js"></script>
 {{> footer_admin}}

@@ -1,30 +1,32 @@
 {{> header_admin}}
-<div class="flex items-center justify-between w-11/12 mx-auto pt-8">
-    <h2>Productos en revisión</h2>
-    <a class="flex items-center justify-center py-2 px-4 bg-pink-300 duration-300 hover:bg-pink-500 rounded" href="/admin">
-        <i class="fas fa-arrow-left pr-2"></i><b>Ir atras</b>
-    </a>
-</div>
-<section class="c-list-admin c-container">
-    <table class="c-list-admin__table container__content">
-        <thead>
-            <tr>
-                <th>Producto</th>
-                <th>Tienda</th>
-                <th>Fecha de registro</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            {{#each products}}
-            <tr>
-                <td scope="row">{{this.dataValues.titulo}}</td>
-                <td>{{this.nombreTienda}}</td>
-                <td>{{this.dataValues.fecha}}</td>
-                <td><a href="/admin/revision-products/{{this.dataValues.id}}" /><i class="fas fa-eye"></i></a></td>
-            </tr>
-            {{/each}}
-        </tbody>
-    </table>
-</section>
+<main class="container mx-auto">
+    <div class="flex items-center justify-between w-11/12 mx-auto pt-8">
+        <h2>Productos en revisión</h2>
+        <a class="flex items-center justify-center py-2 px-4 bg-pink-300 duration-300 hover:bg-pink-500 rounded" href="/admin">
+            <i class="fas fa-arrow-left pr-2"></i><b>Ir atras</b>
+        </a>
+    </div>
+    <section class="c-list-admin c-container">
+        <table class="c-list-admin__table container__content">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Tienda</th>
+                    <th>Fecha de registro</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each products}}
+                <tr>
+                    <td scope="row">{{this.dataValues.titulo}}</td>
+                    <td>{{this.nombreTienda}}</td>
+                    <td>{{this.dataValues.fecha}}</td>
+                    <td><a href="/admin/revision-products/{{this.dataValues.id}}" /><i class="fas fa-eye"></i></a></td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </section>
+</main>
 {{> footer_admin}}

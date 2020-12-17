@@ -48,6 +48,8 @@ textarea { resize: none; }
 
 @media (max-width: 768px) {
     .h { display: none; }
+    .c-list-admin tr { display: flex; flex-direction: column; }
+    .c-list-admin th { width: 100%; }
     .h-list__logo-search .fa-bars { display: block; }
     .container-sliders, 
     .c-slider__c-imgs, 

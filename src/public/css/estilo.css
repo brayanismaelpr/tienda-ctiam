@@ -217,8 +217,11 @@ input[type=number]::-webkit-outer-spin-button {
 .c-list-admin {
     padding: calc(1440px * (1 / 24));
     width: 100%;
+    overflow-x: scroll;
 }
 .c-list-admin__table {
+    overflow-x: hidden;
+    width: 100%;
     border-collapse: separate;
     border-spacing: 2px; 
     border-collapse: collapse;
@@ -3029,6 +3032,11 @@ footer {
     cursor: pointer;
     display: none;
 }
-.color-purple {
-    color: var(--purple);
+.color-purple { color: var(--purple); }
+.body-admin {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-between;
+    min-height: 100vh;
 }
