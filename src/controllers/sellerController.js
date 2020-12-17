@@ -1,9 +1,10 @@
 const {
+    Category,
+    LandMark,
     Product,
     Photography,
     State,
     Store,
-    Category,
 } = require("../repository/database").models;
 const { Op } = require("sequelize");
 
@@ -34,11 +35,50 @@ module.exports = {
         });
         if (product) {
             images.forEach(async (element) => {
-                await Photography.create({ id_producto: product.id, url: element });
+                await Photography.create({
+                    id_producto: product.id,
+                    url: element,
+                });
             });
-            return res.json({ok:true});
+            return res.json({ ok: true });
         }
-        return res.json({ok:false});
+        return res.json({ ok: false });
+    },
+    updateProduct: async (req, res) => {
+        const {
+            id_producto,
+            id_categoria,
+            id_marca,
+            titulo,
+            descripcion,
+            detalle,
+            precio,
+            stock,
+            imagen,
+            images,
+        } = req.body;
+        console.log(
+            id_producto,
+            id_categoria,
+            id_marca,
+            titulo,
+            descripcion,
+            detalle,
+            precio,
+            stock,
+            imagen,
+            images
+        );
+        // if (product) {
+        //     images.forEach(async (element) => {
+        //         await Photography.create({
+        //             id_producto: product.id,
+        //             url: element,
+        //         });
+        //     });
+        //     return res.json({ ok: true });
+        // }
+        return res.json({ ok: false });
     },
     deleteProduct: async (req, res) => {
         const { id_producto } = req.body;
@@ -60,7 +100,7 @@ module.exports = {
         const products = await Store.getProducts(user.id);
         const states = await State.findAll({
             where: {
-                [Op.not]: [{ id: [2, 3] }],
+                [Op.not]: [{ id: [1, 5] }],
             },
         });
         res.render("seller/manageProduct", {
@@ -72,26 +112,57 @@ module.exports = {
             isAuthenticated: true,
         });
     },
-    updateProducts: async (req, res)=>{
+    updateProducts: async (req, res) => {
         const data = req.body;
-        data.idProduct.map( async item=>{
-            let product  = await  Product.findByPk(item)
-            product.id_estado=Number(data.id_estado)
-            await product.save();
-        })
+        if (data.idProduct) {
+            if (typeof data.idProduct != "string") {
+                data.idProduct.map(async (item) => {
+                    let product = await Product.findByPk(item);
+                    console.log(product.id_estado);
+                    if (product.id_estado != 1) {
+                        product.id_estado = Number(data.id_estado);
+                        await product.save();
+                    }
+                });
+                return res.redirect("/seller/my-products");
+            }
+            let product = await Product.findByPk(data.idProduct);
+            if (product.id_estado != 1) {
+                product.id_estado = Number(data.id_estado);
+                await product.save();
+                product.id_estado = Number(data.id_estado);
+                await product.save();
+            }
+            return res.redirect("/seller/my-products");
+        }
         return res.redirect("/seller/my-products");
     },
-    editFind: async (req,res) =>{
-        const product=  await Product.findByPk(req.params.id);
-        const categoria = await Category.findAll();
-        const photography = await Photography.findByPk(req.params.id)
-
-        res.render("seller/edit-product", {
-            title: `Editar Producto | Mujeres CTIAM`,
-            categoria,
-            product,
-            photography
-    
-        });
-    }
+    editFind: async (req, res) => {
+        const product = await Product.findByPk(req.params.id);
+        if (product) {
+            const category = await Category.findByPk(product.id_categoria, {
+                attributes: ["nombre", "id"],
+            });
+            const mark = await LandMark.findByPk(product.id_marca, {
+                attributes: ["nombre", "id"],
+            });
+            const photography = await Photography.findAll({
+                id_producto: req.params.id,
+            });
+            let restant = [];
+            for (let i = 0; i < 4 - photography.length; i++) {
+                restant.push(i + 1);
+            }
+            res.render("seller/edit-product", {
+                title: `Editar Producto | Mujeres CTIAM`,
+                product,
+                user: req.user,
+                category,
+                mark,
+                photography,
+                restant,
+                isAuthenticated: true,
+            });
+        }
+    },
 };

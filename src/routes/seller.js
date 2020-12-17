@@ -1,7 +1,13 @@
 const { Router } = require("express");
 const router = Router();
 const routerStore = require("./store");
-const { ItemSale, Product, Sale, Store, User } = require("../repository/database").models;
+const {
+    ItemSale,
+    Product,
+    Sale,
+    Store,
+    User,
+} = require("../repository/database").models;
 const isSeller = require("../middlewares/isSeller");
 const { sellerController } = require("../controllers/index");
 
@@ -32,11 +38,10 @@ router.get("/edit-product/:id", sellerController.editFind);
 
 router.post("/my-products", sellerController.updateProducts);
 
-
 router.post("/sales", async (req, res) => {
     const sales = await Store.getSaleslimit(req.user.id);
     if (sales) {
-        sales.forEach(sale => {
+        sales.forEach((sale) => {
             let fecha = new Date(sale.fecha);
             sale.fecha = `${fecha.getDate()}/${
                 fecha.getMonth() + 1
@@ -99,8 +104,9 @@ router.get("/details-sale/:id", async (req, res) => {
         }
     }
 }),
+    router.post("/products", sellerController.createProduct);
 
-router.post("/products", sellerController.createProduct);
+router.post("/update-product/", sellerController.updateProduct);
 
 router.post("/products/delete", sellerController.deleteProduct);
 

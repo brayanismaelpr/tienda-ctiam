@@ -4,72 +4,76 @@
         {{> seller/options_seller }}
         <div class="div-profile py-10">
             <div class="c-list__t w-11/12 mx-auto">
-                
+
                 <form action="" method="POST">
-                <select id="selectIdProduct" class="w-55 h-10 border-2 px-2 border-black rounded ml-4 mt-5 mb-10"        name="id_estado">
-                    {{#each states}}
-                    <option value="{{this.dataValues.id}}">{{this.dataValues.estado}}</option>
+                    <select id="selectIdProduct" class="w-55 h-10 border-2 px-2 border-black rounded ml-4 mt-5 mb-10"
+                        name="id_estado">
+                        {{#each states}}
+                        <option value="{{this.dataValues.id}}">{{this.dataValues.estado}}</option>
+                        {{/each}}
+                    </select>
+                    <button id="butAplicar" onclick="selectProduct()">Aplicar</button>
+                    <div class="c-list__t-body grid grid-cols-8 gap-2"
+                        style="border-bottom: 1px solid rgb(194, 194, 194);">
+                        <div class="c-list__column">
+                            <p class="c-list__column--p"><b></b></p>
+                        </div>
+                        <div class="c-list__column">
+                            <p class="c-list__column--p"><b>Titulo</b></p>
+                        </div>
+                        <div class="c-list__column">
+                            <p class="c-list__column--p"><b>Stock</b></p>
+                        </div>
+                        <div class="c-list__column">
+                            <p class="c-list__column--p"><b>Precio</b></p>
+                        </div>
+                        <div class="c-list__column">
+                            <p class="c-list__column--p"><b>Categoría</b></p>
+                        </div>
+                        <div class="c-list__column">
+                            <p class="c-list__column--p"><b>Marca</b></p>
+                        </div>
+                        <div class="c-list__column">
+                            <p class="c-list__column--p"><b>Estado</b></p>
+                        </div>
+                        <div class="c-list__column">
+                            <p class="c-list__column--p"><b>Acciones</b></p>
+                        </div>
+                    </div>
+                    {{#each products}}
+                    <div class="c-list__t-body grid grid-cols-8 gap-2"
+                        style="border-bottom: 1px solid rgb(194, 194, 194);">
+                        <div class="c-list__column">
+                            <input class="products-check" type="checkbox" name="idProduct" value="{{this.id}}"
+                                data-state="{{this.estado}}">
+                        </div>
+                        <div class="c-list__column checkId">
+                            <p class="c-list__column--p">{{this.titulo}}</p>
+                        </div>
+                        <div class="c-list__column">
+                            <p class="c-list__column--p">{{this.stock}}</p>
+                        </div>
+                        <div class="c-list__column">
+                            <p class="c-list__column--p">{{this.precio}}</p>
+                        </div>
+                        <div class="c-list__column">
+                            <p class="c-list__column--p">{{this.categoria}}</p>
+                        </div>
+                        <div class="c-list__column">
+                            <p class="c-list__column--p">{{this.marca}}</p>
+                        </div>
+                        <div class="c-list__column">
+                            <p class="c-list__column--p">{{this.estado}}</p>
+                        </div>
+                        <div class="c-list__column">
+
+                            <p class="c-list__column--p">
+                                <a href="/seller/edit-product/{{this.id}}">
+                                    <i class="far fa-edit"></i> </a>
+                            </p>
+                        </div>
+                    </div>
                     {{/each}}
-                </select>
-                <button id="butAplicar" onclick="selectProduct()">Aplicar</button>
-                <div class="c-list__t-body grid grid-cols-8 gap-2" style="border-bottom: 1px solid rgb(194, 194, 194);">
-                    <div class="c-list__column">
-                        <p class="c-list__column--p"><b></b></p>
-                    </div>
-                    <div class="c-list__column">
-                        <p class="c-list__column--p"><b>Titulo</b></p>
-                    </div>
-                    <div class="c-list__column">
-                        <p class="c-list__column--p"><b>Stock</b></p>
-                    </div>
-                    <div class="c-list__column">
-                        <p class="c-list__column--p"><b>Precio</b></p>
-                    </div>
-                    <div class="c-list__column">
-                        <p class="c-list__column--p"><b>Categoría</b></p>
-                    </div>
-                    <div class="c-list__column">
-                        <p class="c-list__column--p"><b>Marca</b></p>
-                    </div>
-                    <div class="c-list__column">
-                        <p class="c-list__column--p"><b>Estado</b></p>
-                    </div>
-                    <div class="c-list__column">
-                        <p class="c-list__column--p"><b>Acciones</b></p>
-                    </div>
-                </div>
-                {{#each products}}
-                <div class="c-list__t-body grid grid-cols-8 gap-2" style="border-bottom: 1px solid rgb(194, 194, 194);">
-                    <div class="c-list__column">
-                        <input class="products-check" type="checkbox" name="idProduct" value="{{this.id}}" id="">
-                    </div>
-                    <div class="c-list__column checkId">
-                        <p class="c-list__column--p">{{this.titulo}}</p>
-                    </div>
-                    <div class="c-list__column">
-                        <p class="c-list__column--p">{{this.stock}}</p>
-                    </div>
-                    <div class="c-list__column">
-                        <p class="c-list__column--p">{{this.precio}}</p>
-                    </div>
-                    <div class="c-list__column">
-                        <p class="c-list__column--p">{{this.categoria}}</p>
-                    </div>
-                    <div class="c-list__column">
-                        <p class="c-list__column--p">{{this.marca}}</p>
-                    </div>
-                    <div class="c-list__column">
-                        <p class="c-list__column--p">{{this.estado}}</p>
-                    </div>
-                    <div class="c-list__column">
-                        
-                        <p class="c-list__column--p">
-                             <a href="/seller/edit-product/{{this.id}}">
-                            <i class="far fa-edit"></i> </a>
-                        </p>
-                    </div>
-                </div>
-                {{/each}}
                 </form>
             </div>
         </div>
