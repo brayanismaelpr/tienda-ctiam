@@ -5,6 +5,8 @@ button.addEventListener("click", async () => {
     if (!boolIni) {
         button.setAttribute("disabled", "true");
         const form = document.forms.updateProduct;
+        const id_producto = form.querySelector("input[name='id_producto']")
+            .value;
         const id_categoria = form.querySelector("input[name='id_categoria']")
             .dataset.idValue;
         const id_marca = form.querySelector("input[name='id_marca']").dataset
@@ -25,6 +27,7 @@ button.addEventListener("click", async () => {
             }
         }
         const producto = {
+            id_producto,
             id_categoria,
             id_marca,
             titulo,

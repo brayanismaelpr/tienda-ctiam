@@ -149,7 +149,10 @@ module.exports = {
             const photography = await Photography.findAll({
                 id_producto: req.params.id,
             });
-
+            let restant = [];
+            for (let i = 0; i < 4 - photography.length; i++) {
+                restant.push(i + 1);
+            }
             res.render("seller/edit-product", {
                 title: `Editar Producto | Mujeres CTIAM`,
                 product,
@@ -157,6 +160,7 @@ module.exports = {
                 category,
                 mark,
                 photography,
+                restant,
                 isAuthenticated: true,
             });
         }

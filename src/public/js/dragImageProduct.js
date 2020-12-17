@@ -44,10 +44,14 @@ areaFile.forEach((el) => {
             );
             if (input) {
                 input.value = url;
-                el.querySelector(
-                    "div"
-                ).innerHTML += `<i class="fas fa-times icono-x-imagen"></i>
-                <img class="imagen-carga" src="${url}">`;
+                if (el.querySelector("div .imagen-carga")) {
+                    el.querySelector("div .imagen-carga").src = url;
+                } else {
+                    el.querySelector(
+                        "div"
+                    ).innerHTML += `<i class="fas fa-times icono-x-imagen"></i>
+                    <img class="imagen-carga" src="${url}">`;
+                }
                 el.classList.remove("border-4");
                 el.classList.remove("border-pink-400");
             }
