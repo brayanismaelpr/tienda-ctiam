@@ -1,32 +1,34 @@
 {{> header_admin}}
-<section class="c-view-product">
-    <article class="c-view-product__content">
-        <div class="c-view-product__images">
-            {{#each pictures}}
-            <figure class="c-view-product__image">
-                <img class="c-view-product__image--img" src="{{this.url}}" alt="imgctiam">
-            </figure>
-            {{/each}}
-        </div>
-        <div class="c-view-product__description">
-            <div class="c-view-product__description__content">
-                <h1 class="text-2xl">Gestionar producto</h1>
-                <p class="pt-2 font-medium text-xl">{{product.dataValues.titulo}}</p>
-                <p class="pt-2">{{product.dataValues.descripcion}}</p>
-                <p class="pt-2">{{product.dataValues.detalle}}</p>
-                <p class="c-view-product__description--price">$ {{product.dataValues.precio}}</p>
-
-                <form class="flex items-center pt-4" action="/admin/change-state-product" method="post">
-                    <input type="hidden" value="{{product.dataValues.id}}" name="id_producto">
-                    <select class="w-40 h-10 border-2 px-2 border-black rounded mr-4" name="estado">
-                        {{#each states}}
-                            <option value="{{this.dataValues.id}}">{{this.dataValues.estado}}</option>
-                        {{/each}} 
-                    </select>
-                    <button class="btn-change" type="submit">Cambiar estado!</button>
-                </form>
+<main class="container mx-auto">
+    <section class="c-view-product">
+        <article class="c-view-product__content">
+            <div class="c-view-product__images">
+                {{#each pictures}}
+                <figure class="c-view-product__image">
+                    <img class="c-view-product__image--img" src="{{this.url}}" alt="imgctiam">
+                </figure>
+                {{/each}}
             </div>
-        </div>
-    </article>
-</section>
+            <div class="c-view-product__description">
+                <div class="c-view-product__description__content">
+                    <h1 class="text-2xl">Gestionar producto</h1>
+                    <p class="pt-2 font-medium text-xl">{{product.dataValues.titulo}}</p>
+                    <p class="pt-2">{{product.dataValues.descripcion}}</p>
+                    <p class="pt-2">{{product.dataValues.detalle}}</p>
+                    <p class="c-view-product__description--price">$ {{product.dataValues.precio}}</p>
+
+                    <form class="flex items-center pt-4" action="/admin/change-state-product" method="post">
+                        <input type="hidden" value="{{product.dataValues.id}}" name="id_producto">
+                        <select class="w-40 h-10 border-2 px-2 border-black rounded mr-4" name="estado">
+                            {{#each states}}
+                                <option value="{{this.dataValues.id}}">{{this.dataValues.estado}}</option>
+                            {{/each}} 
+                        </select>
+                        <button class="btn-change" type="submit">Cambiar estado!</button>
+                    </form>
+                </div>
+            </div>
+        </article>
+    </section>
+</main>
 {{> footer_admin}}

@@ -1,48 +1,49 @@
 {{> header_admin}}
-<div class="flex items-center justify-between w-11/12 mx-auto pt-8">
-    <button class="btn-option-admin" onclick="modalAdd(this)">Agregar Pregunta</button>
-    <a class="flex items-center justify-center py-2 px-4 bg-pink-300 duration-300 hover:bg-pink-500 rounded" href="/admin">
-        <i class="fas fa-arrow-left pr-2"></i><b>Ir atras</b>
-    </a>
-</div>
-<div class="c-list-admin c-container">
-    <table class="c-list-admin__table container__content">
-        <thead>
-            <tr>
-                <th>Pregunta</th>
-                <th>Respuesta</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            {{#each frequentQuestions}}
+<main class="container mx-auto">
+    <div class="flex items-center justify-between w-11/12 mx-auto pt-8">
+        <button class="btn-option-admin" onclick="modalAdd(this)">Agregar Pregunta</button>
+        <a class="flex items-center justify-center py-2 px-4 bg-pink-300 duration-300 hover:bg-pink-500 rounded" href="/admin">
+            <i class="fas fa-arrow-left pr-2"></i><b>Ir atras</b>
+        </a>
+    </div>
+    <div class="c-list-admin c-container">
+        <table class="c-list-admin__table container__content">
+            <thead>
                 <tr>
-                    <td>{{this.dataValues.pregunta}}</td>
-                    <td>{{this.dataValues.respuesta}}</td>
-                    <td>
-                        <a href="#" data-id-question="{{this.dataValues.id}}" onclick="modalEdit(this)">
-                            <i class="far fa-edit"></i>
-                        </a>
-                        <a href="#" data-id-question="{{this.dataValues.id}}" onclick="modalDelete(this)">
-                            <i class="far fa-trash-alt"></i>
-                        </a>
-                    </td>
+                    <th>Pregunta</th>
+                    <th>Respuesta</th>
+                    <th>Acciones</th>
                 </tr>
-            {{/each}}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {{#each frequentQuestions}}
+                    <tr>
+                        <td>{{this.dataValues.pregunta}}</td>
+                        <td>{{this.dataValues.respuesta}}</td>
+                        <td>
+                            <a href="#" data-id-question="{{this.dataValues.id}}" onclick="modalEdit(this)">
+                                <i class="far fa-edit"></i>
+                            </a>
+                            <a href="#" data-id-question="{{this.dataValues.id}}" onclick="modalDelete(this)">
+                                <i class="far fa-trash-alt"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
 
-    <div id="modalAdd" style="display: {{showModal modal}};">
-        {{> modals/add-question-modal}}
+        <div id="modalAdd" style="display: {{showModal modal}};">
+            {{> modals/add-question-modal}}
+        </div>
+        <div id="modalEdit" style="display: {{showModal modal}};">
+            {{> modals/edit-question-modal}}
+        </div>
+        <div id="modalDelete" style="display: {{showModal modal}};">
+            {{> modals/delete-question-modal}}
+        </div>
     </div>
-    <div id="modalEdit" style="display: {{showModal modal}};">
-        {{> modals/edit-question-modal}}
-    </div>
-    <div id="modalDelete" style="display: {{showModal modal}};">
-        {{> modals/delete-question-modal}}
-    </div>
-    
-</div>
+</main>
 <script src="../js/questions-admin.js"></script>
 <script src="../js/login-modal.js"></script>
 

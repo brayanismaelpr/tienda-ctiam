@@ -1,21 +1,23 @@
 {{> header_admin}}
-<div id="modal"></div>
-<div class="flex items-center justify-between w-8/12 mx-auto pt-8">
-    <h2>Mis Estadisticas</h2>
-    <a class="flex items-center justify-center py-2 px-4 bg-pink-300 duration-300 hover:bg-pink-500 rounded" href="/admin">
-        <i class="fas fa-arrow-left pr-2"></i><b> Ir atras</b>
-    </a>
-</div>
-<section class="c-profile">
-    <article class="container mx-auto md:flex justify-between">
-        <div class="w-11/12 mx-auto md:w-4/5 px-0 lg:px-20 pb-14 pt-10">
-            <div class="grid md:grid-cols-1 gap-4">
-                <div class="rounded p-6 border-2 shadow-lg flex justify-center items-center overflow-hidden"
-                    id="piechart_3d" style="width: 100%; height: 500px;"></div>
+<main class="container mx-auto">
+    <div id="modal"></div>
+    <div class="flex items-center justify-between w-8/12 mx-auto pt-8">
+        <h2>Mis Estadisticas</h2>
+        <a class="flex items-center justify-center py-2 px-4 bg-pink-300 duration-300 hover:bg-pink-500 rounded" href="/admin">
+            <i class="fas fa-arrow-left pr-2"></i><b> Ir atras</b>
+        </a>
+    </div>
+    <section class="c-profile">
+        <article class="container mx-auto md:flex justify-between">
+            <div class="w-11/12 mx-auto md:w-4/5 px-0 lg:px-20 pb-14 pt-10">
+                <div class="grid md:grid-cols-1 gap-4">
+                    <div class="rounded p-6 border-2 shadow-lg flex justify-center items-center overflow-hidden"
+                        id="piechart_3d" style="width: 100%; height: 500px;"></div>
+                </div>
             </div>
-        </div>
-    </article>
-</section>
+        </article>
+    </section>
+</main>
 <script>
     getJSON();
 
