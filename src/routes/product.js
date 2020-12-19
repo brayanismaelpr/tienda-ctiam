@@ -21,6 +21,11 @@ router.post("/searchs/:data", async (req, res) => {
     const { body } = req.body;
     const id_marca = body.id_marca;
     let products;
+    const marksDB = await LandMark.findAll();
+    let marks = [];
+    marksDB.map(mark => {
+        marks.push([mark.dataValues.id,mark.dataValues.nombre]);
+    })
     if (id_marca.length) {
         products = await Product.findAll({
             where: {
@@ -68,7 +73,8 @@ router.post("/searchs/:data", async (req, res) => {
         item.dataValues.marca = marcaDB.dataValues.nombre;
     })
     res.json({
-        products
+        products,
+        marks
     });
 });
 

@@ -40,7 +40,7 @@
                     <div class="c-list-products__info">
                         <div class="c-list-products__info-content">
                             <p class="c-list-products--price">${{this.precio}}</p>
-                            <p class="c-list-products--brand">{{this.marca}}</p>
+                            <p class="c-list-products--brand">{{this.nombre}}</p>
                             <p class="c-list-products--name">
                                 {{this.titulo}} - {{this.descripcion}}
                             </p>
@@ -95,7 +95,7 @@
                     <div class="c-list-products__info">
                         <div class="c-list-products__info-content">
                             <p class="c-list-products--price">$${item.precio}</p>
-                            <p class="c-list-products--brand">${item.marca}</p>
+                            <p class="c-list-products--brand">${data.marks.find(find => find[0] == item.id_marca)[1]}</p>
                             <p class="c-list-products--name">
                                 ${item.titulo} - ${item.descripcion}
                             </p>

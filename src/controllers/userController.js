@@ -243,7 +243,7 @@ module.exports = {
                         id_producto,
                         id_venta,
                         cantidad,
-                        precio: total,
+                        precio: tota
                     });
                     return res.redirect("/user/shopping");
                 }
