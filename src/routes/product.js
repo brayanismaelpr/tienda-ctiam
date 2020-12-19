@@ -30,6 +30,9 @@ router.post("/searchs/:data", async (req, res) => {
         products = await Product.findAll({
             where: {
                 id_marca,
+                id_estado:{
+                    [Op.not]: [1,5]
+                },
                 precio: {
                     [Op.gte]: body.precio,
                 },
@@ -50,6 +53,9 @@ router.post("/searchs/:data", async (req, res) => {
     } else {
         products = await Product.findAll({
             where: {
+                id_estado:{
+                    [Op.not]: [1,5]
+                },
                 precio: {
                     [Op.gte]: body.precio,
                 },
