@@ -2594,8 +2594,7 @@ footer {
 }
 .c-user-questions--btn:hover { background-color: #000000; }
 .c-profile-store {
-    background-color: #f1f1f1;
-    border-bottom: 2px solid #000000;
+    background-color: #ffffff;
     padding: 4rem 0;
     width: 100%;
 }
