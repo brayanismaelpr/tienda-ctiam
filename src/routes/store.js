@@ -31,6 +31,7 @@ router.get("/all", async (req, res) => {
     });
     if (stores) {
         const promise = new Promise((resolve, reject) => {
+            let contador = 0;
             stores.forEach(async (store, index) => {
                 await Product.findAndCountAll({
                     where: {
@@ -39,10 +40,11 @@ router.get("/all", async (req, res) => {
                     limit: 3,
                 }).then((res) => {
                     store.products = res.rows;
+                    contador++;
+                    if (contador == stores.length - 1) {
+                        resolve();
+                    }
                 });
-                if (index == stores.length - 1) {
-                    resolve();
-                }
             });
         });
         promise.then(() => {
