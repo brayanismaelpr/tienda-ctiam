@@ -64,7 +64,9 @@ button.addEventListener("click", async () => {
                     text: "Producto registrado correctamente",
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.replace(`${location.origin}/seller/`);
+                        window.location.replace(
+                            `${location.origin}/seller/my-products`
+                        );
                     }
                 });
             } else {

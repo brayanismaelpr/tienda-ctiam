@@ -122,6 +122,8 @@ router.get("/revision-products/:id", async (req, res) => {
             id_producto: product.dataValues.id,
         },
     });
+    console.log(pictures);
+    console.log(product.imagen);
     const states = await State.findAll({
         where: {
             [Op.not]: [{ id: [1, 4] }],

@@ -73,6 +73,7 @@ module.exports = {
             for (const key in productUpdated) {
                 product[key] = productUpdated[key];
             }
+            product.id_estado = 1;
             await product.save();
             await Photography.destroy({
                 where: {
