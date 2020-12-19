@@ -63,24 +63,35 @@ passport.use(
                     firstName: nombres,
                     lastName: apellidos,
                     numberPhone: telefono,
+                    repeatPassword,
                 } = req.body;
-                const user = await User.create({
-                    nombres,
-                    apellidos,
-                    dni,
-                    telefono,
-                    email,
-                    password: User.encryptPassword(password),
-                });
-                if (user) {
-                    return done(null, user.dataValues);
+                if (repeatPassword === password) {
+                    const user = await User.create({
+                        nombres,
+                        apellidos,
+                        dni,
+                        telefono,
+                        email,
+                        password: User.encryptPassword(password),
+                    });
+                    if (user) {
+                        return done(null, user.dataValues);
+                    }
+                    return done(
+                        null,
+                        false,
+                        req.flash(
+                            "signupMessage",
+                            "No ha sido posible crear la cuenta, error inesperado"
+                        )
+                    );
                 }
                 return done(
                     null,
                     false,
                     req.flash(
                         "signupMessage",
-                        "No ha sido posible crear la cuenta, error inesperado"
+                        "Las contraseñas ingresadas no coinciden"
                     )
                 );
             }

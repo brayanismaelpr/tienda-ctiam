@@ -23,11 +23,15 @@ module.exports = {
         for (field in category) {
             categoryDB[field] = category[field];
         }
-        try{
-            await categoryDB.save();
-            req.flash("success", "Se ha actualizado la categoria correctamente");
-            return res.redirect("/admin/categorys");
-        }catch(e){
+        try {
+            await categoryDB.save().then(() => {
+                req.flash(
+                    "success",
+                    "Se ha actualizado la categoria correctamente"
+                );
+                return res.redirect("/admin/categorys");
+            });
+        } catch (e) {
             req.flash("error", "Ha ocurrido un error inesperado");
             return res.redirect("/admin/categorys");
         }
@@ -35,14 +39,19 @@ module.exports = {
     deleteACategory: async (req, res) => {
         const category = await Category.findByPk(req.params.id);
         if (category) {
-            category.destroy();
-            req.flash("success", "Se ha eliminado correctamente la categoría!");
+            await category.destroy().then(() => {
+                req.flash(
+                    "success",
+                    "Se ha eliminado correctamente la categoría!"
+                );
+                return res.redirect("/admin/categorys");
+            });
+        } else {
+            req.flash(
+                "error",
+                "La categoría que ha intentado eliminar no  existe!"
+            );
             return res.redirect("/admin/categorys");
         }
-        req.flash(
-            "error",
-            "La categoría que ha intentado eliminar no  existe!"
-        );
-        return res.redirect("/admin/categorys");
     },
 };

@@ -67,10 +67,12 @@ button.addEventListener("click", async () => {
                     icon: "success",
                     title: "ok!",
                     confirmButtonText: "Ok",
-                    text: "Producto registrado correctamente",
+                    text: "Producto actualizado correctamente",
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.replace(`${location.origin}/seller/`);
+                        window.location.replace(
+                            `${location.origin}/seller/my-products`
+                        );
                     }
                 });
             } else {

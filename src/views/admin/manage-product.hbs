@@ -2,12 +2,15 @@
 <main class="container mx-auto">
     <section class="c-view-product">
         <article class="c-view-product__content">
-            <div class="c-view-product__images">
-                {{#each pictures}}
-                <figure class="c-view-product__image">
-                    <img class="c-view-product__image--img" src="{{this.url}}" alt="imgctiam">
-                </figure>
-                {{/each}}
+            <div class="justify-between md:flex w-full md:w-1/2">
+                <div class="c-view-product__list-images">
+                    {{#each photography}}
+                    <img class="c-view-product__list-images--img" src="{{this.dataValues.url}}">
+                    {{/each}}
+                </div>
+                <div class="c-view-product__image w-full md:w-3/4">
+                    <img class="c-view-product__image--img" src="{{product.dataValues.imagen}}">
+                </div>
             </div>
             <div class="c-view-product__description">
                 <div class="c-view-product__description__content">
@@ -21,8 +24,8 @@
                         <input type="hidden" value="{{product.dataValues.id}}" name="id_producto">
                         <select class="w-40 h-10 border-2 px-2 border-black rounded mr-4" name="estado">
                             {{#each states}}
-                                <option value="{{this.dataValues.id}}">{{this.dataValues.estado}}</option>
-                            {{/each}} 
+                            <option value="{{this.dataValues.id}}">{{this.dataValues.estado}}</option>
+                            {{/each}}
                         </select>
                         <button class="btn-change" type="submit">Cambiar estado!</button>
                     </form>

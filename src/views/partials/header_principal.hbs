@@ -44,8 +44,8 @@
         </figure>
         <form action="/product/search" method="post" class="w-full">
             <label class="mb-10 bg-white w-full flex items-center justify-between rounded p-2" for="">
-                <input class="h__search--input" type="text" name="data" id="datab" value="{{data}}"
-                    placeholder="Buscar">
+                <input class="h__search--input" type="text" name="data" id="datab" value="{{data}}" placeholder="Buscar"
+                    required>
                 <button type="submit" onclick="" class="h__search--ico">
                     <i class="fas fa-search"></i>
                 </button>
@@ -140,7 +140,7 @@
                     <form action="/product/search" method="post" class="h__search">
                         <div class="h__search__c">
                             <input class="h__search--input" type="text" name="data" id="datab" value="{{data}}"
-                                placeholder="Buscar">
+                                placeholder="Buscar" required>
                         </div>
                         <a href="/product/search">
                             <button type="submit" onclick="" class="h__search--ico">
