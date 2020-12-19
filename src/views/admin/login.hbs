@@ -1,5 +1,5 @@
 {{> header_admin}}
-<main class="container mx-auto">
+<main class="c-container mx-auto">
     <div class="c-login-admin c-container" id="formLogin">
         <form class="form-login-admin shadow-2xl" action="/login/signin-admin" method="POST">
             <h4>Iniciar sesión | Administrador</h4>
@@ -9,7 +9,7 @@
             </label>
             <label for="email">
                 <span>Correo</span>
-                <input type="text" id="email" name="email" required autocomplete="email">
+                <input type="email" id="email" name="email" required autocomplete="email">
             </label>
             <label for="password">
                 <span>Contraseña</span>
@@ -23,23 +23,23 @@
     </div>
 
     <div class="c-login-admin c-container" style="display: none;" id="formRegister">
-        <form class="form-login-admin" action="/login/signup-admin" method="POST">
+        <form class="shadow-2xl form-login-admin" action="/login/signup-admin" method="POST">
             <h4>Registrar | Administrador</h4>
             <label for="nombre_usuario">
                 <span>Usuario</span>
-                <input type="text" id="nombre_usuario" name="nombre_usuario" placeholder="usuario">
+                <input type="text" id="nombre_usuario" name="nombre_usuario" placeholder="usuario" required>
             </label>
             <label for="email">
                 <span>Email</span>
-                <input type="text" id="email" name="email" placeholder="email">
+                <input type="email" id="email" name="email" placeholder="email" required>
             </label>
             <label for="password">
                 <span>Contraseña</span>
-                <input type="password" id="password" name="password" placeholder="password">
+                <input type="password" id="password" name="password" placeholder="password" required>
             </label>
             <label for="key">
                 <span>Palabra clave</span>
-                <input type="password" id="key" name="key" placeholder="palabra clave">
+                <input type="password" id="key" name="key" placeholder="palabra clave" required>
             </label>
             <label>
                 <input type="submit" value="Registrar">
