@@ -15,7 +15,10 @@ async function daemon() {
         ) {
             let products = await Product.findAll();
             products.map((product) => {
-                const lista = JSON.parse(product.visitas);
+                let lista = JSON.parse(product.visitas);
+                if (typeof lista == "string") {
+                    lista = JSON.parse(lista);
+                }
                 if (
                     lista.visitas.find((find) => find.fecha === day) ===
                     undefined
