@@ -9,12 +9,13 @@
                     <p class="c-profile-seller__form--title">Editar producto {{product.dataValues.titulo}}</p>
                     <div class="c-profile-seller__input">
                         <input list="category" value="{{category.dataValues.nombre}}" id="categoria_producto"
-                            placeholder="Categoría" name="id_categoria" data-id-value="{{category.dataValues.id}}">
+                            placeholder="Categoría" name="id_categoria" data-id-value="{{category.dataValues.id}}"
+                            required>
                         <datalist id="category"></datalist>
                     </div>
                     <div class="c-profile-seller__input">
                         <input list="mark" id="marca_producto" value="{{mark.dataValues.nombre}}" placeholder="Marcas"
-                            name="id_marca" data-id-value="{{mark.dataValues.id}}">
+                            name="id_marca" data-id-value="{{mark.dataValues.id}}" required>
                         <datalist id="mark"> </datalist>
                     </div>
                     <div class="c-profile-seller__input">
@@ -31,11 +32,11 @@
                     </div>
                     <div class="c-profile-seller__input">
                         <textarea placeholder="Descripción" name="descripcion" id="descripcion_producto" cols="30"
-                            rows="5">{{product.dataValues.descripcion}}</textarea>
+                            rows="5" required>{{product.dataValues.descripcion}}</textarea>
                     </div>
                     <div class="c-profile-seller__input">
-                        <textarea placeholder="Detalle" name="detalle" id="detalle_producto" cols="30"
-                            rows="5">{{product.dataValues.detalle}}</textarea>
+                        <textarea placeholder="Detalle" name="detalle" id="detalle_producto" cols="30" rows="5"
+                            required>{{product.dataValues.detalle}}</textarea>
                     </div>
                     <div class="grid grid-cols-3 gap-4 pb-8">
                         <div class="border-4 border-pink-400 flex items-center justify-center w-full rounded"
@@ -49,24 +50,24 @@
                             <input
                                 accept="image/jpg, image/jpeg, image/png, image/webp, image/JPG, image/JPEG, image/PNG, image/WEBP"
                                 type="file" multiple="" autocomplete="off" style="display: none;">
+                            <input type="text" style="display: none;" data-id-image="0"
+                                value="{{product.dataValues.imagen}}" required>
                         </div>
-                        <input type="text" style="display: none;" data-id-image="0"
-                            value="{{product.dataValues.imagen}}">
                         {{#each photography}}
                         <div class="border-4 border-pink-400 flex items-center justify-center w-full rounded"
-                            aria-disabled="false" id="areafileproducts" data-id-image="{{@index}}">
+                            aria-disabled="false" id="areafileproducts" data-id-image="{{inc @index}}">
                             <div class="sc-ui-image-uploader__container" style="position:relative" role="button"
                                 tabindex="0">
                                 {{> svgs/icon-dragImage}}
                                 <a class="sc-ui-image-uploader__link">Agrega o arrastrar</a>
-                                <img class="imagen-carga" src="{{product.dataValues.imagen}}">
+                                <img class="imagen-carga" src="{{this.dataValues.url}}">
                             </div>
                             <input
                                 accept="image/jpg, image/jpeg, image/png, image/webp, image/JPG, image/JPEG, image/PNG, image/WEBP"
                                 type="file" multiple="" autocomplete="off" style="display: none;">
                         </div>
-                        <input type="text" style="display: none;" data-id-image="{{@index}}"
-                            value="{{product.dataValues.imagen}}">
+                        <input type="text" style="display: none;" data-id-image="{{inc @index}}"
+                            value="{{this.dataValues.url}}">
                         {{/each}}
                         {{#each restant}}
                         <div class="border-4 border-pink-400 flex items-center justify-center w-full rounded"
@@ -79,8 +80,8 @@
                             <input
                                 accept="image/jpg, image/jpeg, image/png, image/webp, image/JPG, image/JPEG, image/PNG, image/WEBP"
                                 type="file" multiple="" autocomplete="off" style="display: none;">
+                            <input type="text" style="display: none;" data-id-image="{{this}}" value="">
                         </div>
-                        <input type="text" style="display: none;" data-id-image="{{this}}" value="">
                         {{/each}}
                         <input type="hidden" name="id_producto" value="{{product.dataValues.id}}">
                     </div>

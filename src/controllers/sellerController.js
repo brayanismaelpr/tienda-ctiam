@@ -57,7 +57,7 @@ module.exports = {
             imagen,
             images,
         } = req.body;
-        console.log(
+        const productUpdated = {
             id_producto,
             id_categoria,
             id_marca,
@@ -67,17 +67,26 @@ module.exports = {
             precio,
             stock,
             imagen,
-            images
-        );
-        // if (product) {
-        //     images.forEach(async (element) => {
-        //         await Photography.create({
-        //             id_producto: product.id,
-        //             url: element,
-        //         });
-        //     });
-        //     return res.json({ ok: true });
-        // }
+        };
+        const product = await Product.findByPk(id_producto);
+        if (product) {
+            for (const key in productUpdated) {
+                product[key] = productUpdated[key];
+            }
+            await product.save();
+            await Photography.destroy({
+                where: {
+                    id_producto: product.id,
+                },
+            });
+            images.forEach(async (element) => {
+                await Photography.create({
+                    id_producto: product.id,
+                    url: element,
+                });
+            });
+            return res.json({ ok: true });
+        }
         return res.json({ ok: false });
     },
     deleteProduct: async (req, res) => {
@@ -147,10 +156,13 @@ module.exports = {
                 attributes: ["nombre", "id"],
             });
             const photography = await Photography.findAll({
-                id_producto: req.params.id,
+                where: {
+                    id_producto: req.params.id,
+                },
+                attributes: ["url"],
             });
             let restant = [];
-            for (let i = 0; i < 4 - photography.length; i++) {
+            for (let i = photography.length; i < 4; i++) {
                 restant.push(i + 1);
             }
             res.render("seller/edit-product", {
