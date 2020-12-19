@@ -24,3 +24,27 @@
     <header class="w-full px-8 py-4" style="border-bottom: 20px solid pink">
         <a href="/admin"><img class="w-36" src="../images/logo.png"></a>
     </header>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    {{#if signingMessage}}
+    <script>
+        signingMessage("{{signingMessage}}")
+    </script>
+    {{/if}}
+
+    {{#if signupMessage}}
+    <script>
+        signupMessage("{{signupMessage}}")
+    </script>
+    {{/if}}
+
+    {{#if success}}
+    <script>
+        success("{{success}}")
+    </script>
+    {{/if}}
+
+    {{#if error}}
+    <script>
+        error("{{error}}")
+    </script>
+    {{/if}}
