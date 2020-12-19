@@ -69,4 +69,19 @@ Store.getSaleslimit = async (storeID) =>
         `,
         { type: QueryTypes.SELECT }
     );
+ Store.getChangeProduct = async (storeID)=>
+ await sequelize.query(
+    `SELECT t.nombre tienda, p.titulo producto, cam.id_item ,cam.motivo, cam.evidencia FROM cambio cam 
+    JOIN producto p ON p.id = cam.id_producto JOIN tienda t ON t.id = p.id_tienda WHERE cam.id = ${storeID}
+    `,
+    { type: QueryTypes.SELECT }
+);  
+
+Store.getReturnProduct = async (storeID)=>
+ await sequelize.query(
+    `SELECT t.nombre tienda, p.titulo producto, dev.id_item ,dev.motivo, dev.evidencia FROM devolucion dev 
+    JOIN producto p ON p.id = dev.id_producto JOIN tienda t ON t.id = p.id_tienda WHERE dev.id = ${storeID}
+    `,
+    { type: QueryTypes.SELECT }
+);  
 module.exports = Store;

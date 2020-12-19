@@ -77,6 +77,11 @@ router.get(
     storeController.getStatistics
 );
 
+router.get("/change", storeController.getChangeProduct);
+
+router.get("/return", storeController.getReturnProduct);
+
+
 router.get("/:id", async (req, res) => {
     const user = req.user;
     const store = await Store.findByPk(req.params.id);
@@ -98,5 +103,7 @@ router.get("/:id", async (req, res) => {
 });
 
 router.post("/update", isAuthenticated, isSeller, storeController.updateAStore);
+
+
 
 module.exports = router;
