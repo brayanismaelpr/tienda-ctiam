@@ -4,6 +4,7 @@ const { storeController } = require("../controllers");
 const router = Router();
 const isAuthenticated = require("../middlewares/isAuthenticated");
 const isSeller = require("../middlewares/isSeller");
+const { Op } = require("sequelize");
 
 router.get("/", isAuthenticated, isSeller, async (req, res) => {
     const user = req.user;
@@ -21,23 +22,36 @@ router.get("/", isAuthenticated, isSeller, async (req, res) => {
 
 router.get("/all", async (req, res) => {
     const user = req.user;
-    const stores = await Store.findAll();
+    const stores = await Store.findAll({
+        where: {
+            nombre: {
+                [Op.not]: ["Nombre de la tienda"],
+            },
+        },
+    });
     if (stores) {
-        stores.forEach(async (store) => {
-            await Product.findAndCountAll({
-                where: {
-                    id_tienda: store.id,
-                },
-                limit: 3,
-            }).then((res) => {
-                store.products = res.rows;
+        const promise = new Promise((resolve, reject) => {
+            stores.forEach(async (store, index) => {
+                await Product.findAndCountAll({
+                    where: {
+                        id_tienda: store.id,
+                    },
+                    limit: 3,
+                }).then((res) => {
+                    store.products = res.rows;
+                });
+                if (index == stores.length - 1) {
+                    resolve();
+                }
             });
         });
-        return res.render("allStores", {
-            title: "Tiendas | Mujeres CTIAM",
-            user,
-            stores,
-            isAuthenticated: user !== undefined,
+        promise.then(() => {
+            return res.render("allStores", {
+                title: "Tiendas | Mujeres CTIAM",
+                user,
+                stores,
+                isAuthenticated: user !== undefined,
+            });
         });
     }
     req.flash("error", "No hay tiendas para mostrar");
