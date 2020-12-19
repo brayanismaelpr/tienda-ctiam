@@ -117,21 +117,20 @@ router.post("/change-state-product", adminController.changeProductState);
 
 router.get("/revision-products/:id", async (req, res) => {
     const product = await Product.findByPk(req.params.id);
-    const pictures = await Photography.findAll({
+    const photography = await Photography.findAll({
         where: {
             id_producto: product.dataValues.id,
         },
+        attributes: ["url"],
     });
-    console.log(pictures);
-    console.log(product.imagen);
     const states = await State.findAll({
         where: {
-            [Op.not]: [{ id: [1, 4] }],
+            [Op.not]: [{ id: [2, 4] }],
         },
     });
     res.render("admin/manage-product", {
         states,
-        pictures,
+        photography,
         product,
     });
 });
