@@ -21,9 +21,10 @@ module.exports = {
             });
             if (tienda) {
                 userDB.is_seller = 1;
-                userDB.save();
-                req.flash("success", "Tienda creada correctamente");
-                return res.redirect("/admin/user-list");
+                await userDB.save().then(() => {
+                    req.flash("success", "Tienda creada correctamente");
+                    return res.redirect("/admin/user-list");
+                });
             }
             req.flash("error", "Ha ocurrido un error inesperado");
             return res.redirect("/admin/user-list");
