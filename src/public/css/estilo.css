@@ -2880,7 +2880,7 @@ footer {
     align-items: center;
     background-color: #ffffff;
     border-radius: 8px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     width: 100%;
 }
 .c-details-product__comments { margin-bottom: 0px; }
@@ -2899,7 +2899,7 @@ footer {
     color: #29abe2;
     font-size: 30px;
 }
-.c-details-product__comment { padding: 1rem 0; }
+.c-details-product__comment { padding: 1rem 0 0 0; }
 .c-details-product__comment--p { padding-bottom: 10px; }
 .c-details-product__stars { padding-bottom: 1.5rem; }
 .c-details-product__stars i {

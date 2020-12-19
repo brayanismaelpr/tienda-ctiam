@@ -34,7 +34,7 @@
                 </ul>
                 <div class="c-view-product__colours">
                     <form action="/user/checkout/product" method="post">
-                        <p class="c-view-product__colours--p">cantidad</p>
+                        <p class="c-view-product__colours--p">Cantidad</p>
                         <div class="flex">
                             <select class="w-14 h-10 border-2 px-2 border-black rounded mr-4" name="cantidad" id="">
                                 <option value="1">1</option>
@@ -43,7 +43,7 @@
                                 <option value="4">4</option>
                                 <option value="5">5</option>
                                 <option value="6">6</option>
-                                <option value="6">Otra</option>
+                                {{!-- <option value="6">Otra</option> --}}
                             </select>
                             <input type="hidden" name="id_producto" value="{{product.dataValues.id}}">
                             <button class="flex items-center justify-center w-44 h-10 bg-pink-300 rounded"
@@ -69,32 +69,33 @@
 
 <section class="c-details-product">
     <article class="w-11/12 md:w-9/12 mx-auto py-10">
-        <div class="c-details-product__info">
-            <div class="c-details-product__info__content">
+        <div class="c-details-product__info w-full md:w-9/12 mx-auto">
+            <div class="c-details-product__info__content ">
                 <p class="c-details-product__info--p">{{product.dataValues.detalle}}</p>
                 <button class="c-details-product__info--button" onclick="">
                     <i class="fas fa-plus"></i>
                 </button>
             </div>
         </div>
-        <div class="c-details-product__info">
-            <div class="c-details-product__info__content">
+        <div class="c-details-product__info w-full md:w-9/12 mx-auto">
+            <div class="c-details-product__info__content ">
                 <p class="c-details-product__info--p">{{product.dataValues.descripcion}}</p>
                 <button class="c-details-product__info--button" onclick=""><i class="fas fa-plus"></i></button>
             </div>
         </div>
-        <div class="w-full bg-white" style="border-radius: 8px;">
-            <div class="w-11/12 mx-auto">
-                <p class="font-bold pt-8 pb-8 text-xl">Comentarios</p>
+        <div class="w-full md:w-9/12 mx-auto bg-white" style="border-radius: 8px;">
+            <div class="w-12/12 mx-auto pb-4 mb-4">
+                <p class="w-11/12 mx-auto pt-8 pb-4 text-xl font-bold">Comentarios</p>    
                 {{#each comments}}
                 {{> product/comments comment=this}}
                 {{/each}}
             </div>
         </div>
-        <div class="w-full bg-white rounded-bl-lg rounded-br-lg pt-4 pb-10 px-6 md:px-10">
+        <div class="w-full md:w-9/12 mx-auto bg-white rounded-bl-lg rounded-br-lg pt-4 pb-10">
+            <p class="w-11/12 mx-auto pb-4 pt-8 text-xl font-bold">Preguntas</p>
             {{#unless isown}}
             {{#if isAuthenticated}}
-            <form class="w-9/12 mx-auto flex items-center justify-between mb-5" action="/product/make-question"
+            <form class="w-11/12 mx-auto flex items-center justify-between mb-5" action="/product/make-question"
                 method="POST">
                 <input class="w-10/12 border-gray-600 rounded py-2 px-4 border-4 border-black border-opacity-25"
                     name="pregunta" placeholder="Haz una pregunta!">

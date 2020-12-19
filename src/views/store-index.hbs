@@ -21,7 +21,7 @@
         <div class="c-profile-store__grid">
             {{#each products}}
             <a href="/product/{{this.dataValues.id}}">
-                <div class="c-profile-store__product">
+                <div class="c-profile-store__product shadow-2xl overflow-hidden rounded-md">
                     <img class="c-profile-store__product--img" src="{{this.dataValues.imagen}}">
                     <div class="c-profile-store__info-product">
                         <p class="c-profile-store__info-product--p">{{this.dataValues.titulo}}</p>
