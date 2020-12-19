@@ -6,12 +6,13 @@ const isNotAdmin = require("../middlewares/isNotAdmin");
 const nodeMailer = require("../services/nodemailer");
 const nodeMailer_sub = require("../services/nodemailer-unete");
 const nodeMailer_pass = require("../services/nodemailer-pass");
-const daemon = require("../middlewares/daemonVisits");
+const daemon = require("../middlewares/daemonVisits"); 
 const admin = require("./admin");
 const product = require("./product");
 const seller = require("./seller");
 const store = require("./store");
 const user = require("./user");
+const { Op } = require("sequelize");
 
 const { City, Product } = require("../repository/database").models;
 
@@ -148,7 +149,7 @@ router.post("/list-product-c/:id", async (req, res) => {
         }
         return str;
     }
-    const { Op, where } = require("sequelize");
+    
     const id_categoria = req.params.id;
     const { body } = req.body;
     const id_marca = body.id_marca;
@@ -165,12 +166,18 @@ router.post("/list-product-c/:id", async (req, res) => {
                 precio: {
                     [Op.gte]: body.precio,
                 },
+                id_estado:{
+                    [Op.not]: [1,5]
+                }
             },
         }).then(sendResponse);
     } else {
         await Product.findAll({
             where: {
                 id_categoria,
+                id_estado:{
+                    [Op.not]: [1,5]
+                },
                 precio: {
                     [Op.gte]: body.precio,
                 },
@@ -201,12 +208,14 @@ router.get("/list-product-c/:id", async (req, res) => {
         }
         return str;
     }
-
     const id_categoria = req.params.id;
     const Marks = await LandMark.findAll();
     const products = await Product.findAll({
         where: {
             id_categoria,
+            id_estado:{
+                [Op.not]: [1]
+            }
         },
     });
     products.map(async (item) => {
