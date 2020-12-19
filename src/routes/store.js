@@ -56,13 +56,6 @@ router.get("/all", async (req, res) => {
             });
         });
     }
-    req.flash("error", "No hay tiendas para mostrar");
-    return res.render("allStores", {
-        title: "Tiendas | Mujeres CTIAM",
-        user,
-        stores,
-        isAuthenticated: user !== undefined,
-    });
 });
 
 router.get(
