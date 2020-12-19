@@ -148,11 +148,15 @@ router.post("/list-product-c/:id", async (req, res) => {
         }
         return str;
     }
-
     const { Op, where } = require("sequelize");
     const id_categoria = req.params.id;
     const { body } = req.body;
     const id_marca = body.id_marca;
+    const marksDB = await LandMark.findAll();
+    let marks = [];
+    marksDB.map(mark => {
+        marks.push([mark.dataValues.id,mark.dataValues.nombre]);
+    })
     if (id_marca.length) {
         await Product.findAll({
             where: {
@@ -174,16 +178,14 @@ router.post("/list-product-c/:id", async (req, res) => {
         }).then(sendResponse);
     }
     function sendResponse(products) {
-        products.map(async (item) => {
+        products.map(item => {
             item.dataValues.descripcion = limitDesc(
                 item.dataValues.descripcion
             );
-            await LandMark.findByPk(item.id_marca).then((mark) => {
-                item.marca = mark.dataValues.nombre;
-            });
         });
         res.json({
             products,
+            marks
         });
     }
 });

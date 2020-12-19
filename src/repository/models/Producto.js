@@ -107,7 +107,7 @@ Product.getQuestion = async (id_product) =>
 
 Product.getSearch = async (search) =>
     await sequelize.query(
-        `SELECT p.id,p.titulo,p.descripcion,p.detalle,p.precio,p.imagen,p.stock FROM producto p WHERE p.titulo LIKE '%${search}%' OR p.descripcion LIKE '%${search}%'`,
+        `SELECT p.id,p.titulo,p.descripcion,p.detalle,p.precio,p.imagen,p.stock,m.nombre FROM producto p JOIN marca m ON p.id_marca = m.id WHERE p.titulo LIKE '%${search}%' OR p.descripcion LIKE '%${search}%'`,
         {
             type: QueryTypes.SELECT,
         }
