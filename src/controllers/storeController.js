@@ -42,4 +42,22 @@ module.exports = {
             products,
         });
     },
+    getChangeProduct: async (req,res)=>{
+            const changes = await Store.getChangeProduct(req.user.id);
+            res.render("seller/list-changes", {
+                title: " Cambios | Mujeres CTIAM",
+                user: req.user,
+                changes,
+                isAuthenticated: true,
+            });
+        },
+    getReturnProduct: async (req,res)=>{
+            const returns = await Store.getReturnProduct(req.user.id);
+            res.render("seller/list-returns", {
+                title: " Devoluciones | Mujeres CTIAM",
+                user: req.user,
+                returns,
+                isAuthenticated: true,
+            });
+    },
 };
