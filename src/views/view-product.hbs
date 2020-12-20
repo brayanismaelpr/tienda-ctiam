@@ -1,70 +1,77 @@
 {{> header_principal}}
 <section class="c-view-product">
     {{!-- <article class="c-view-product__content"> --}}
-    <article class="md:flex justify-between py-14 mx-auto container ">
-        <div class="justify-between md:flex w-full md:w-1/2">
-            <div class="c-view-product__list-images">
-                {{#each photography}}
-                <img class="c-view-product__list-images--img" src="{{this.dataValues.url}}">
-                {{/each}}
-            </div>
-            <div class="c-view-product__image w-full md:w-3/4">
-                <img class="c-view-product__image--img" src="{{product.dataValues.imagen}}">
-            </div>
-        </div>
-        <div class="w-10/12 mx-auto md:w-1/2 pl-0 md:pl-14 pt-14 md:pt-0">
-            <div class="c-view-product__description__content">
-                <p class="c-view-product__description--stock">{{product.dataValues.stock}} disponibles</p>
-                <p class="c-view-product__description--name-produc">{{product.dataValues.titulo}}</p>
-                <p class="c-view-product__description--price">$ {{product.dataValues.precio}}</p>
-                <ul class="c-view-product__details">
-                    <li class="c-view-product__details__li">
-                        <i class="fas fa-store"></i>
-                        <p class="c-view-product__details__li--p">Vendido por
-                            <a href="/store/{{store.dataValues.id}}"><b>{{store.dataValues.nombre}}</b></a></p>
-                    </li>
-                    <li class="c-view-product__details__li">
-                        <i class="fas fa-truck"></i>
-                        <p class="c-view-product__details__li--p">Precio de envio <b>Se debe acordar con el vendedor</b></p>
-                    </li>
-                    <li class="c-view-product__details__li">
-                        <i class="far fa-check-circle"></i>
-                        <p class="c-view-product__details__li--p">Garantia del producto <b>1 año</b></p>
-                    </li>
-                </ul>
-                <div class="c-view-product__colours">
-                    <form action="/user/checkout/product" method="post">
-                        <p class="c-view-product__colours--p">Cantidad</p>
-                        <div class="flex">
-                            <select class="w-14 h-10 border-2 px-2 border-black rounded mr-4" name="cantidad" id="">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                {{!-- <option value="6">Otra</option> --}}
-                            </select>
-                            <input type="hidden" name="id_producto" value="{{product.dataValues.id}}">
-                            <button class="flex items-center justify-center w-44 h-10 bg-pink-300 rounded"
-                                type="subit">Comprar</button>
-                        </div>
-                    </form>
+        <article class="md:flex justify-between py-14 mx-auto container ">
+            <div class="justify-between md:flex w-full md:w-1/2">
+                <div class="c-view-product__list-images">
+                    {{#each photography}}
+                    <img class="c-view-product__list-images--img" src="{{this.dataValues.url}}">
+                    {{/each}}
                 </div>
-                <br>
-                <div class="flex">
-                    <a class="mr-4 flex items-center justify-center w-44 h-10 bg-gray-300 rounded"
-                        href="/user/favorites/{{product.dataValues.id}}">
-                        Agregar Favoritos
-                    </a><br>
-                    <a class="text-white flex items-center justify-center w-44 h-10 bg-pink-800 rounded"
-                        href="/user/cart/{{product.dataValues.id}}">
-                        Agregar Carrito
-                    </a>
+                <div class="c-view-product__image w-full md:w-3/4">
+                    <img class="c-view-product__image--img" src="{{product.dataValues.imagen}}">
                 </div>
             </div>
-        </div>
-    </article>
+            <div class="w-10/12 mx-auto md:w-1/2 pl-0 md:pl-14 pt-14 md:pt-0">
+                <div class="c-view-product__description__content">
+                    <p class="c-view-product__description--stock">{{product.dataValues.stock}} disponibles</p>
+                    <p class="c-view-product__description--name-produc">{{product.dataValues.titulo}}</p>
+                    <p class="c-view-product__description--price">$ {{product.dataValues.precio}}</p>
+                    <ul class="c-view-product__details">
+                        <li class="c-view-product__details__li">
+                            <i class="fas fa-store"></i>
+                            <p class="c-view-product__details__li--p">Vendido por
+                                <a href="/store/{{store.dataValues.id}}"><b>{{store.dataValues.nombre}}</b></a>
+                            </p>
+                        </li>
+                        <li class="c-view-product__details__li">
+                            <i class="fas fa-truck"></i>
+                            <p class="c-view-product__details__li--p">Precio de envio <b>Se debe acordar con el
+                                    vendedor</b></p>
+                        </li>
+                        <li class="c-view-product__details__li">
+                            <i class="far fa-check-circle"></i>
+                            <p class="c-view-product__details__li--p">Garantia del producto <b>1 año</b></p>
+                        </li>
+                    </ul>
+                    {{#ifEquals user.id store.dataValues.id}}
+                    <a href="/seller/edit-product/3e0979fe-60d2-4638-a31b-baf19937b973">
+                        <i class="far fa-edit fa-lg" aria-hidden="true"></i> </a>
+                    {{else}}
+                    <div class="c-view-product__colours">
+                        <form action="/user/checkout/product" method="post">
+                            <p class="c-view-product__colours--p">Cantidad</p>
+                            <div class="flex">
+                                <select class="w-14 h-10 border-2 px-2 border-black rounded mr-4" name="cantidad" id="">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    {{!-- <option value="6">Otra</option> --}}
+                                </select>
+                                <input type="hidden" name="id_producto" value="{{product.dataValues.id}}">
+                                <button class="flex items-center justify-center w-44 h-10 bg-pink-300 rounded"
+                                    type="subit">Comprar</button>
+                            </div>
+                        </form>
+                    </div>
+                    <br>
+                    <div class="flex">
+                        <a class="mr-4 flex items-center justify-center w-44 h-10 bg-gray-300 rounded"
+                            href="/user/favorites/{{product.dataValues.id}}">
+                            Agregar Favoritos
+                        </a><br>
+                        <a class="text-white flex items-center justify-center w-44 h-10 bg-pink-800 rounded"
+                            href="/user/cart/{{product.dataValues.id}}">
+                            Agregar Carrito
+                        </a>
+                    </div>
+                    {{/ifEquals}}
+                </div>
+            </div>
+        </article>
 </section>
 
 <section class="c-details-product">
@@ -85,7 +92,7 @@
         </div>
         <div class="w-full md:w-9/12 mx-auto bg-white" style="border-radius: 8px;">
             <div class="w-12/12 mx-auto pb-4 mb-4">
-                <p class="w-11/12 mx-auto pt-8 pb-4 text-xl font-bold">Comentarios</p>    
+                <p class="w-11/12 mx-auto pt-8 pb-4 text-xl font-bold">Comentarios</p>
                 {{#each comments}}
                 {{> product/comments comment=this}}
                 {{/each}}
@@ -106,7 +113,7 @@
             </form>
             {{else}}
             <h2 class="flex flex-wrap bg-gray-100 p-4 rounded">
-                Regístrate 
+                Regístrate
                 <p class="underline px-2 text-blue-500 cursor-pointer" onclick="registerModal()">aquí</p>
                 para hacer una pregunta
             </h2>

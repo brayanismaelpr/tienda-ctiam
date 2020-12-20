@@ -40,6 +40,8 @@ app.engine(
                 return accum;
             },
             inc: (value, options) => parseInt(value) + 1,
+            ifEquals: (arg1, arg2, options) =>
+                arg1 == arg2 ? options.fn(this) : options.inverse(this),
         },
     })
 );
