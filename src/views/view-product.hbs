@@ -14,7 +14,8 @@
             </div>
             <div class="w-10/12 mx-auto md:w-1/2 pl-0 md:pl-14 pt-14 md:pt-0">
                 <div class="c-view-product__description__content">
-                    <p class="c-view-product__description--stock">{{product.dataValues.stock}} disponibles</p>
+                    <p class="c-view-product__description--stock">
+                    <p style="display: inline;" id="stock-producto">{{product.dataValues.stock}}</p> disponibles</p>
                     <p class="c-view-product__description--name-produc">{{product.dataValues.titulo}}</p>
                     <p class="c-view-product__description--price">$ {{product.dataValues.precio}}</p>
                     <ul class="c-view-product__details">
@@ -42,15 +43,18 @@
                         <form action="/user/checkout/product" method="post">
                             <p class="c-view-product__colours--p">Cantidad</p>
                             <div class="flex">
-                                <select class="w-14 h-10 border-2 px-2 border-black rounded mr-4" name="cantidad" id="">
+                                <select class="w-14 h-10 border-2 px-2 border-black rounded mr-4" name="cantidad"
+                                    id="cantidad" required>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
                                     <option value="4">4</option>
                                     <option value="5">5</option>
                                     <option value="6">6</option>
-                                    {{!-- <option value="6">Otra</option> --}}
+                                    <option value="" id="opOtraCantidad">Otra cantidad</option>
                                 </select>
+                                <input type="number" placeholder="Ingrese la cantidad" id="otraCantidad"
+                                    style="display: none;">
                                 <input type="hidden" name="id_producto" value="{{@root.product.dataValues.id}}">
                                 <button class="flex items-center justify-center w-44 h-10 bg-pink-300 rounded"
                                     type="subit">Comprar</button>
@@ -144,5 +148,28 @@
         localStorage.setItem('ultima_visita', '{{product.dataValues.id_categoria}}');
         fetch(`${location.origin}/getVisita/{{product.dataValues.id}}`).then()
     }
+</script>
+<script>
+    document.getElementById("cantidad").addEventListener("change", () => {
+        if (document.getElementById("cantidad").value == 0) {
+            document.getElementById("otraCantidad").style.display = "block";
+        } else {
+            document.getElementById("otraCantidad").style.display = "none";
+        }
+        document.getElementById("otraCantidad").addEventListener("blur", () => {
+            if (document.getElementById("otraCantidad").value) {
+                if (document.getElementById("otraCantidad").value <= document.getElementById("stock-producto").innerText) {
+                    document.getElementById("cantidad").value = document.getElementById("otraCantidad").value;
+                    if (!document.getElementById("cantidad").value) {
+                        document.getElementById("cantidad").innerHTML += `<option value="${document.getElementById("otraCantidad").value}">${document.getElementById("otraCantidad").value}</option>`
+                        document.getElementById("cantidad").value = document.getElementById("otraCantidad").value;
+                    }
+                    document.getElementById("otraCantidad").style.display = "none";
+                } else {
+                    error("No hay esta cantidad de productos en stock");
+                }
+            }
+        });
+    });
 </script>
 {{> footer}}
