@@ -17,7 +17,10 @@ document.querySelectorAll("#minus").forEach((el) =>
 
 function changeAmount(e, op) {
     countProduct = e.target.parentNode.querySelector("#countProduct");
-    if (countProduct.innerText === "1" && op === "-") {
+    if (
+        countProduct.innerText === "0" ||
+        (countProduct.innerText === "1" && op === "-")
+    ) {
         return false;
     }
     countProduct.innerHTML =
@@ -51,9 +54,7 @@ async function fetchFunction(e) {
         document.querySelector(
             `#totalvaluecart`
         ).innerText = `${dataFetch.total}`;
-        if (dataFetch.amount) {
-            e.target.parentNode.querySelector("#countProduct").innerText =
-                dataFetch.amount;
-        }
+        e.target.parentNode.querySelector("#countProduct").innerText =
+            dataFetch.amount;
     } catch (e) {}
 }

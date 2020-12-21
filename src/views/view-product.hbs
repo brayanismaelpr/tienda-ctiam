@@ -57,7 +57,7 @@
                                     style="display: none;">
                                 <input type="hidden" name="id_producto" value="{{@root.product.dataValues.id}}">
                                 <button class="flex items-center justify-center w-44 h-10 bg-pink-300 rounded"
-                                    type="subit">Comprar</button>
+                                    id="btnPurchase" type="subit">Comprar</button>
                             </div>
                         </form>
                     </div>
@@ -158,7 +158,7 @@
         }
         document.getElementById("otraCantidad").addEventListener("blur", () => {
             if (document.getElementById("otraCantidad").value) {
-                if (document.getElementById("otraCantidad").value <= document.getElementById("stock-producto").innerText) {
+                if (Number(document.getElementById("otraCantidad").value) <= Number(document.getElementById("stock-producto").innerText)) {
                     document.getElementById("cantidad").value = document.getElementById("otraCantidad").value;
                     if (!document.getElementById("cantidad").value) {
                         document.getElementById("cantidad").innerHTML += `<option value="${document.getElementById("otraCantidad").value}">${document.getElementById("otraCantidad").value}</option>`
@@ -171,5 +171,15 @@
             }
         });
     });
+</script>
+<script>
+    window.onload = () => {
+        const stock = Number(document.getElementById("stock-producto").innerText);
+        if (!stock) {
+            document.querySelector("#btnPurchase").setAttribute("disabled", "true");
+            document.querySelector("#cantidad").setAttribute("disabled", "true");
+            document.querySelector("#btnPurchase").innerText = "Producto sin stock"
+        }
+    }
 </script>
 {{> footer}}
