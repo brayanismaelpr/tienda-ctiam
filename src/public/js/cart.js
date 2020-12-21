@@ -27,10 +27,12 @@ function changeAmount(e, op) {
     clearTimeout(interval);
     idProduct = e.target.parentNode.dataset.idProduct;
     idItem = e.target.parentNode.dataset.idItem;
-    interval = setTimeout(fetchFunction, 250);
+    interval = setTimeout(() => {
+        fetchFunction(e);
+    }, 250);
 }
 
-async function fetchFunction() {
+async function fetchFunction(e) {
     try {
         const amount = Number(countProduct.innerHTML);
         const dataFetch = await fetch(
@@ -49,5 +51,9 @@ async function fetchFunction() {
         document.querySelector(
             `#totalvaluecart`
         ).innerText = `${dataFetch.total}`;
+        if (dataFetch.amount) {
+            e.target.parentNode.querySelector("#countProduct").innerText =
+                dataFetch.amount;
+        }
     } catch (e) {}
 }

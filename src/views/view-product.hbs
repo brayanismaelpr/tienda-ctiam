@@ -35,7 +35,7 @@
                         </li>
                     </ul>
                     {{#ifEquals user.id store.dataValues.id}}
-                    <a href="/seller/edit-product/3e0979fe-60d2-4638-a31b-baf19937b973">
+                    <a href="/seller/edit-product/{{@root.product.dataValues.id}}">
                         <i class="far fa-edit fa-lg" aria-hidden="true"></i> </a>
                     {{else}}
                     <div class="c-view-product__colours">
@@ -51,7 +51,7 @@
                                     <option value="6">6</option>
                                     {{!-- <option value="6">Otra</option> --}}
                                 </select>
-                                <input type="hidden" name="id_producto" value="{{product.dataValues.id}}">
+                                <input type="hidden" name="id_producto" value="{{@root.product.dataValues.id}}">
                                 <button class="flex items-center justify-center w-44 h-10 bg-pink-300 rounded"
                                     type="subit">Comprar</button>
                             </div>
@@ -60,11 +60,11 @@
                     <br>
                     <div class="flex">
                         <a class="mr-4 flex items-center justify-center w-44 h-10 bg-gray-300 rounded"
-                            href="/user/favorites/{{product.dataValues.id}}">
+                            href="/user/favorites/{{@root.product.dataValues.id}}">
                             Agregar Favoritos
                         </a><br>
                         <a class="text-white flex items-center justify-center w-44 h-10 bg-pink-800 rounded"
-                            href="/user/cart/{{product.dataValues.id}}">
+                            href="/user/cart/{{@root.product.dataValues.id}}">
                             Agregar Carrito
                         </a>
                     </div>

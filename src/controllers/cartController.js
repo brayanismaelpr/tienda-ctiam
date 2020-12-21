@@ -13,7 +13,8 @@ module.exports = {
         return res.redirect("/user/cart");
     },
     changeAmountProduct: async (req, res) => {
-        const { amount, idProduct } = req.body;
+        const { idProduct } = req.body;
+        let { amount } = req.body;
         if (idProduct) {
             const itemCart = await ItemCart.findOne({
                 where: {
@@ -23,11 +24,16 @@ module.exports = {
             });
             if (itemCart) {
                 const product = await Product.findByPk(idProduct);
+                const cart = await Cart.findByPk(req.user.id);
                 if (product) {
+                    console.log(product.stock, amount, product.stock <= amount);
+                    if (product.stock <= amount) {
+                        console.log("cambiando amount");
+                        amount = product.stock;
+                    }
                     itemCart.precio = Number(amount) * Number(product.precio);
                     itemCart.cantidad = amount;
                     await itemCart.save();
-                    const cart = await Cart.findByPk(req.user.id);
                     const items = await ItemCart.findAll({
                         where: {
                             id_carrito: cart.id,
@@ -40,6 +46,7 @@ module.exports = {
                         return res.json({
                             precio: itemCart.precio,
                             total: cart.valor_total,
+                            amount,
                         });
                     }
                     cart.valor_total = items.reduce((acc, current) => {
@@ -55,6 +62,7 @@ module.exports = {
                     return res.json({
                         precio: itemCart.precio,
                         total: cart.valor_total,
+                        amount,
                     });
                 }
             }
