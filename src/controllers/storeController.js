@@ -60,4 +60,32 @@ module.exports = {
                 isAuthenticated: true,
             });
     },
+
+    getReturnProductDetails: async (req, res)=>{
+        const returns = await Store.getReturnProductDetails(req.params.id);
+        const product = await Product.findByPk(returns[0].id_product);
+        const total= returns[0].cantidad* product.precio;
+        res.render("seller/detail-return",{
+            title: " Devoluciones | Mujeres CTIAM",
+                user: req.user,
+                returns:returns[0],
+                product,
+                total,
+                isAuthenticated: true,
+        });
+    },
+
+    getChangeProductDetails: async (req, res)=>{
+        const changes = await Store.getChangeProductDetails(req.params.id);
+        const product = await Product.findByPk(changes[0].id_product);
+        const total= changes[0].cantidad* product.precio;
+        res.render("seller/detail-change",{
+            title: " Devoluciones | Mujeres CTIAM",
+                user: req.user,
+                changes:changes[0],
+                product,
+                total,
+                isAuthenticated: true,
+        });
+    },
 };

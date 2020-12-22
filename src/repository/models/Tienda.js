@@ -71,15 +71,29 @@ Store.getSaleslimit = async (storeID) =>
     );
  Store.getChangeProduct = async (storeID)=>
  await sequelize.query(
-    `SELECT t.nombre tienda, p.titulo producto, u.nombres usuario,cam.id_item ,cam.motivo, cam.evidencia FROM cambio cam JOIN producto p ON p.id = cam.id_producto JOIN tienda t ON t.id = p.id_tienda JOIN usuario u ON u.id = cam.id_usuario WHERE t.id = ${storeID}
+    `SELECT cam.id id,t.nombre tienda, p.titulo producto, u.nombres usuario,cam.id_item ,cam.motivo, cam.evidencia FROM cambio cam JOIN producto p ON p.id = cam.id_producto JOIN tienda t ON t.id = p.id_tienda JOIN usuario u ON u.id = cam.id_usuario WHERE t.id = ${storeID}
     `,
     { type: QueryTypes.SELECT }
 );  
 
 Store.getReturnProduct = async (storeID)=>
  await sequelize.query(
-    `SELECT t.nombre tienda, p.titulo producto,u.nombres usuario, dev.id_item ,dev.motivo, dev.evidencia FROM devolucion dev JOIN producto p ON p.id = dev.id_producto JOIN tienda t ON t.id = p.id_tienda JOIN usuario u ON u.id= dev.id_usuario WHERE t.id = ${storeID}
+    `SELECT dev.id id, t.nombre tienda, p.titulo producto,u.nombres usuario, dev.id_item ,dev.motivo, dev.evidencia FROM devolucion dev JOIN producto p ON p.id = dev.id_producto JOIN tienda t ON t.id = p.id_tienda JOIN usuario u ON u.id= dev.id_usuario WHERE t.id = ${storeID}
     `,
     { type: QueryTypes.SELECT }
 );  
+
+Store.getReturnProductDetails = async (devId)=>
+ await sequelize.query(
+    `SELECT dev.id id, t.nombre tienda, p.titulo producto,p.id id_product,u.nombres usuario, dev.id_item , isale.cantidad cantidad,dev.motivo, dev.evidencia FROM devolucion dev JOIN producto p ON p.id = dev.id_producto JOIN tienda t ON t.id = p.id_tienda JOIN usuario u ON u.id= dev.id_usuario INNER JOIN item_sale isale ON dev.id_item=isale.id WHERE dev.id = ${devId}
+    `,
+    { type: QueryTypes.SELECT }
+);
+
+Store.getChangeProductDetails = async (camId)=>
+ await sequelize.query(
+    `SELECT cam.id id, t.nombre tienda, p.titulo producto,p.id id_product,u.nombres usuario, cam.id_item , isale.cantidad cantidad,cam.motivo, cam.evidencia FROM cambio cam JOIN producto p ON p.id = cam.id_producto JOIN tienda t ON t.id = p.id_tienda JOIN usuario u ON u.id= cam.id_usuario INNER JOIN item_sale isale ON cam.id_item=isale.id WHERE cam.id = ${camId}
+    `,
+    { type: QueryTypes.SELECT }
+);
 module.exports = Store;

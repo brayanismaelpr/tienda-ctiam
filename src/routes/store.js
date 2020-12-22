@@ -74,7 +74,11 @@ router.get(
 
 router.get("/change", storeController.getChangeProduct);
 
+router.get("/change/:id", storeController.getChangeProductDetails);
+
 router.get("/return", storeController.getReturnProduct);
+
+router.get("/return/:id", storeController.getReturnProductDetails);
 
 
 router.get("/:id", async (req, res) => {
