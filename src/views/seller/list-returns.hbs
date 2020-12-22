@@ -30,12 +30,9 @@
                     <div class="c-list__column">
                         <p class="c-list__column--p">{{this.producto}}</p>
                     </div>
-                    <form class="c-list__column" action="/user/return" method="POST">
-                        <input type="hidden" name="id_item" value="{{this.id_item}}">
-                        <button disabled>
-                            <i class="fas fa-eye"></i>
-                        </button>
-                    </form>
+                        
+                            <a href="/store/return/{{this.id}}"><i class="fas fa-eye"></i></a>
+                        
                 </div>
                 {{/each}}
             </div>
