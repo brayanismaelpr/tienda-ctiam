@@ -42,27 +42,43 @@
                         </label>
                         <label class="flex mb-3 items-center justify-between" for="" style="align-items: flex-start;">
                             <span>Foto de perfil</span>
-                            <div class="sc-ui-image-uploader sc-ui-image-uploader--default" aria-disabled="false"
-                                id="areafile">
-                                <div class="sc-ui-image-uploader__container" role="button" tabindex="0">
-                                    {{> svgs/icon-dragImage}}
-                                    <a class="sc-ui-image-uploader__link">Agrega o arrastra tus fotos aquí</a>
+                            <div class="w-3/5">
+                                <div class="sc-ui-image-uploader sc-ui-image-uploader--default" aria-disabled="false"
+                                    id="areafile">
+                                    <div class="sc-ui-image-uploader__container" role="button" tabindex="0">
+                                        {{> svgs/icon-dragImage}}
+                                        <a class="sc-ui-image-uploader__link">Agrega o arrastra tus fotos aquí</a>
+                                    </div>
+                                    <input
+                                        accept="image/jpg, image/jpeg, image/png, image/webp, image/JPG, image/JPEG, image/PNG, image/WEBP"
+                                        type="file" multiple="" autocomplete="off" style="display: none;">
                                 </div>
-                                <input
-                                    accept="image/jpg, image/jpeg, image/png, image/webp, image/JPG, image/JPEG, image/PNG, image/WEBP"
-                                    type="file" multiple="" autocomplete="off" style="display: none;">
+                                <div>
+                                    <p class="text-xs pt-4 pb-2 font-bold">Requerimientos de la imagen:</p>
+                                    <p class="text-xs"><b>Tamaño</b> 200px de alto por 200px de ancho.</p>
+                                    <p class="text-xs"><b>Peso</b> maximo de la imagen: 5mb.</p>
+                                    <p class="text-xs pb-4"><b>Formato</b> de imagen .PNG y .JPG</p>
+                                </div>
                             </div>
                         </label><label class="flex mb-3 items-center justify-between" for="" style="align-items: flex-start;">
                             <span>Foto de portada</span>
-                            <div class="sc-ui-image-uploader sc-ui-image-uploader--default" aria-disabled="false"
-                                id="areafileCover">
-                                <div class="sc-ui-image-uploader__container" role="button" tabindex="0">
-                                    {{> svgs/icon-dragImage}}
-                                    <a class="sc-ui-image-uploader__link">Agrega o arrastra tus fotos aquí</a>
+                            <div class="w-3/5">
+                                <div class="sc-ui-image-uploader sc-ui-image-uploader--default" aria-disabled="false"
+                                    id="areafileCover">
+                                    <div class="sc-ui-image-uploader__container" role="button" tabindex="0">
+                                        {{> svgs/icon-dragImage}}
+                                        <a class="sc-ui-image-uploader__link">Agrega o arrastra tus fotos aquí</a>
+                                    </div>
+                                    <input
+                                        accept="image/jpg, image/jpeg, image/png, image/webp, image/JPG, image/JPEG, image/PNG, image/WEBP"
+                                        type="file" multiple="" autocomplete="off" style="display: none;">
                                 </div>
-                                <input
-                                    accept="image/jpg, image/jpeg, image/png, image/webp, image/JPG, image/JPEG, image/PNG, image/WEBP"
-                                    type="file" multiple="" autocomplete="off" style="display: none;">
+                                <div>
+                                    <p class="text-xs pt-4 pb-2 font-bold">Requerimientos de la imagen:</p>
+                                    <p class="text-xs"><b>Tamaño</b> 1300px de ancho por 300px de alto.</p>
+                                    <p class="text-xs"><b>Peso</b> de maximo de la imagen 5mb.</p>
+                                    <p class="text-xs pb-4"><b>Formato</b> de imagen .PNG y .JPG</p>
+                                </div>
                             </div>
                         </label>
                         {{#each directions}}
