@@ -2,6 +2,7 @@ const LocalStrategy = require("passport-local").Strategy;
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const passport = require("passport");
 const { Admin, User } = require("../repository/database").models;
+const { Op } = require("sequelize");
 
 passport.serializeUser((user, done) => {
     const { id, nombre_usuario } = user;
@@ -45,7 +46,7 @@ passport.use(
         async (req, email, password, done) => {
             const userDB = await User.findOne({
                 where: {
-                    email,
+                    [Op.or]: [{ email }, { dni: req.body.dni }],
                 },
             });
             if (userDB) {
